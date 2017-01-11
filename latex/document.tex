@@ -1,0 +1,78 @@
+% !TeX spellcheck = en_US
+% !TeX encoding = UTF-8
+
+\documentclass[
+	paper=A4,
+	twoside=true,
+	openright,
+	parskip=full,
+	chapterprefix=true,
+	13pt,
+	headings=normal,
+	bibliography=totoc,
+	listof=totoc,
+	titlepage=on,
+%	draft
+	final
+	]{scrreprt}
+
+\usepackage{lieb}
+\graphicspath{{images/}}
+
+\title{Sensitivity Studies for the Model Unspecific Search}
+\date{XX.XX.2017}
+\author{Jonas Lieb}
+
+\makeatletter
+\let\theauthor\@author
+\let\thetitle\@title
+\makeatother
+
+\hypersetup{
+	pdftex,
+	pdfauthor={\theauthor},
+	pdftitle={\thetitle},
+	pdflang={en-US},
+	pdfcreator={},
+	pdfproducer={},
+}
+
+\begin{document}
+
+\cleardoublepage
+\pagenumbering{roman}
+\pagestyle{empty}
+
+\input{chapters/title}
+\cleardoublepage
+\input{chapters/statement-authorship}
+\cleardoublepage
+
+\input{chapters/abstract_en}
+\input{chapters/abstract_de}
+\cleardoublepage
+
+\tableofcontents
+
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{maincontentstyle}
+
+\input{chapters/introduction}
+\input{chapters/objects-events}
+\input{chapters/datasets}
+\input{chapters/music-introduction}
+\input{chapters/conclusion}
+
+\cleardoublepage
+\bibliographystyle{utphys}
+\bibliography{bibliography,images}
+
+\cleardoublepage
+\input{chapters/appendix}
+
+\cleardoublepage
+\input{chapters/acknowledgments}
+
+\end{document}
