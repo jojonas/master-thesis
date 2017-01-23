@@ -57,7 +57,7 @@ Title: Sensitivity Studies for the Model Unspecific Search
     * Kinematic Variables + Distributions
 
     * RoI-Scanning:
-        * Motivation (many classes, automated search neccessary)
+        * Motivation (many classes, automated search necessary)
         * Search Space (connected bin regions)
         * p-value (normal prior)
         * Treatment of Regions of Low MC Statistics

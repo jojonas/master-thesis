@@ -4,17 +4,213 @@
 
 \chapter{Introduction}
 
-\section{Particle Physics}
-
 
 \section{Units and Abbreviations}
+Throughout this work, we will use the natural unit system. This means that the speed of light and the Planck constant are fixed to $1$:
+\begin{equation*}
+    \hbar = c = 1
+\end{equation*}
+It follows that the only unit needed to express most other physical quantities is the unit of energy. Our choice here is electron volts. Too keep numbers in a reasonable range, we mostly use gigaelectronvolts: $\SI{1}{\giga\eV} = \SI{1.60218e-10}{\joule}$.
+Two exceptions to this are the cross section and luminosity, which are expressed in femtobarn and inverse femtobarn respectively: $\SI{1}{\femto\barn} = \SI{e-43}{\meter\squared}$.
 
+\section{Particle Physics}
+Finding the building blocks of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. As of 2017, the state of particle physics research is summed up in the so called \emph{Standard Model of Particle Physics}.
+
+In the following sections, we will give a short introduction to the Standard Model, its theoretical foundations and open questions. Motivated by these questions, we will introduce possible extensions to the Standard Model in the next chapter.
+
+This chapter is based on \cite{Hebbeker:SkriptzurElementarteilchenphysik} if not explicitly stated otherwise.
 
 \section{The Standard Model}
-\subsection{Assumptions and Symmetries}
-\subsection{The Standard Model Lagrangian}
+The Standard Model is a description of matter and its interactions, except gravity. It is based on the theoretical foundations of quantum field theory.
+
+
 \subsection{Particles and Interactions}
+According to the Standard Model, elementary particles are point-like indivisible structureless objects, much like the atoms were to the ancient Greeks. These objects are characterized by physical observables such as mass, charge and spin.
+
+\begin{figure}
+    \centering
+    \tikzset{font=\small,
+        edge from parent fork down,
+        level distance=3em,
+        sibling distance=0.3em,
+        every node/.style=
+        {
+            align=center,
+        },
+        every leaf node/.style={
+            circle,
+%            rectangle,rounded corners,
+            draw,           
+            very thick,
+            inner sep=0,
+            minimum size=1.4em,
+            text height=0.5em,
+            text depth=0,
+        }
+    }
+    \begin{tikzpicture}
+    \Tree
+    [.{Elementary Particles}
+        [.Fermions
+            [.Leptons
+                [.{charged}
+                    {\Pe}
+                    {\Pmu}
+                    {\Ptau}
+                ]
+                [.{neutrinos}
+                    {\Pnue}
+                    {\Pnum}
+                    {\Pnut}
+                ]
+            ]
+            [.Quarks
+%               [.{1st gen.}
+%                   {\Pup}
+%                   {\Pdown}
+%               ]
+%               [.{2nd gen.}
+%                   {\Pcharm}
+%                   {\Pstrange}
+%               ]
+%               [.{3rd gen.}
+%                   {\Pbottom}
+%                   {\Ptop}
+%               ]
+                [.{up-type}
+                    {\Pup}
+                    {\Pcharm}
+                    {\Pbottom}
+                ]
+                [.{down-type}
+                    {\Pdown}
+                    {\Pstrange}
+                    {\Ptop}
+                ]
+            ]
+        ]
+        [.Bosons
+            {\Pgamma}
+            {\Pgluon}
+            [.{charged}
+                {\PW}
+                {\PZ}
+            ]
+            {\PHiggs}
+        ]
+    ]
+    \end{tikzpicture}
+    \caption{Nested groups of elementary particles. The actual particle symbols are indicated by circles.}
+    \label{fig:particle_groups}
+\end{figure}
+
+Figure \ref{fig:particle_groups} shows how elementary particles can be separated into several groups. 
+At first level there are two groups: \emph{fermions} and \emph{bosons}.
+
+Fermions are elementary particles with a spin of $\nicefrac{1}{2}$. They follow Fermi-Dirac statistics and have to obey Pauli's exclusion principle which states that no more than one particle can occupy a certain state characterized by its quantum numbers.
+The group of fermions can be further divided into quarks and leptons.
+There are six quarks: up (\Pup), down (\Pdown), charm (\Pcharm), strange (\Pstrange), bottom (\Pbottom) and top (\Ptop). Quarks carry color charge and are the only objects to take part in the strong interaction.
+In addition, there are three lepton families: \emph{electron} (\Pe), \emph{muon} (\Pmu) and \emph{tau} (\Ptau). Each charged lepton has a very light, electrically neutral \emph{neutrino} associated with it.
+
+The second group of particles are called bosons. They mediate interactions (also called \emph{forces}) and posses an integer spin. Bosons follow Bose-Einstein statistics and may thus occupy the same quantum state.
+Each kind of boson is responsible for one kind of elementary force: the electrodynamic force is mediated by the \emph{photon}, the strong force by the \emph{gluon} and the weak force by the \emph{\PZ} and \emph{\PW} bosons.
+In addition, there is the \emph{Higgs boson} (\PH), which uses the Higgs mechanism to give mass to all mentioned massive elementary particles.\footnote{Note that this does not apply to composite particles (like protons) which gain mask mostly through binding energy.}
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{l r s[table-unit-alignment = left]}
+        \toprule
+        Lepton & \multicolumn{2}{l}{Mass} \\
+        \midrule
+        \Pe & 511 & \keV \\
+        \Pnue & < 2 & \eV \\
+        \Pmu & 106 & \MeV \\
+        \Pnum & < 2 & \eV \\
+        \Ptau & 1.78 & \GeV \\
+        \Pnut & < 2 & \eV \\
+        \bottomrule
+    \end{tabular}
+    \begin{tabular}{l r s[table-unit-alignment = left]}
+        \toprule
+        Quark & \multicolumn{2}{l}{Mass} \\
+        \midrule
+        \Pup & 2 & \MeV \\
+        \Pdown & 5 & \MeV \\
+        \Pstrange & 96 & \MeV \\
+        \Pcharm & 1.3 & \GeV \\
+        \Pbottom & 4.18 & \GeV \\
+        \Ptop & 173 & \GeV \\
+        \bottomrule
+    \end{tabular}
+    \begin{tabular}{l r s[table-unit-alignment = left]}
+        \toprule
+        Boson & \multicolumn{2}{l}{Mass} \\
+        \midrule
+        \Pgamma & 0 &  \\
+        \Pgluon & 0 &  \\
+        \PW & 80.4 & \GeV \\
+        \PZ & 91.2 & \GeV \\
+        \PH & 125 & \GeV \\
+        \bottomrule
+    \end{tabular}
+    \caption{Known elementary particles and their masses\cite{ParticleDataGroup:ReviewParticlePhysics}. Note that for layouting purposes, quarks and leptons have been put side-by-side, even though there is no known connection between the number of lepton and quark families.}
+\end{table}
+
+In terms of conventional matter, one can conclude that fermions make up matter and bosons bind matter together.
+
+%\begin{table}
+%   \begin{tabular}{ l l l l l }
+%       Interaction & Couples to & Mediator & Theory & Strength \\
+%       \hline
+%       Strong & Color charge & Gluon (\Pgluon) & Chromodyn. & \num{1} \\
+%       Electromagnetic & Electric charge & Photon (\Pphoton) & Electrodyn. & \num{e-3} \\
+%       Weak & Flavor charge & \PW and \PZ & Flavordyn. & \num{e-14} \\
+%       Gravitational & & & & \num{e-43} \\
+%   \end{tabular}
+%   \caption{Overview over elementary interactions. The Standard Model does not describe gravity, it is only included in the table for strength comparison.\cite{Griffiths:IntroductiontoElementaryParticles}}
+%\end{table}
+%
+\subsection{QFD}
+Weak force
+
+change flavor
+
+lightest particles are stable
+
 \subsection{Open Questions}
+Since the discovery of the Higgs boson in 2012, all particles predicted by the Standard Model have been experimentally observed. One could assume that particle physics has thus come to a halt, but this is not the case:
+Several observations have been made that contradict the Standard Model or demand an extension of the Standard Model.
+
+%Observations: gravitational waves (2016), neutrino masses
+
+\subsubsection{Astrophysical observations}
+The most compelling experimental evidences that our description of nature is incomplete are astrophysical observations:
+The measurement of galaxy rotation curves have shown to be incompatible with simulations of gravity from visible matter only. Secondly, fluctuations in gravitational lensing of distance galaxies by non-visible foreground structures have been observed.\cite{Bertone:Particledarkmatter,Peebles:Cosmologicalconstantdark}
+Furthermore, several experiments have probed the cosmic microwave background (CMB) for anisotropies. These data have subsequently been compared to the matter distributions obtained by simulations of the early universe according to the $\Uplambda$CDM model. The results were that only about \SI{5}{\percent} of the universe's matter is conventional (baryonic) matter.\cite{Planck:Planck2015results}
+% https://arxiv.org/pdf/1003.0939v2.pdf
+
+All of these findings hint that there must be a large amount of matter in the universe that only interacts gravitationally, and especially not electromagnetically. Because of its invisibility, it is called \emph{Dark Matter}.
+The Standard Model does not provide a fitting Dark Matter candidate.
+
+\subsubsection{Neutrino Masses}
+Neutrino oscillations, observed in multiple experiments, Nobel prize 2015...
+\cite{KamLAND:ReactorAntineutrinoMeasurement,DoubleChooz:Improvedmeasurementsneutrino,IceCube:Determiningneutrinooscillation,DayaBay:NewMeasurementAntineutrino}
+
+\subsubsection{Theoretical considerations}
+
+%\subsubsection{Gravity}
+Within the framework of quantum field theory, which is the theoretical foundation for the Standard Model, it is not possible to make predictions about gravity. The introduction of gravitational couplings would imply divergences which cannot be countered by additional terms. This effect is called \emph{non-renormalizability}.
+
+Missing pieces: 
+
+Spin 3/2 particles
+
+Unification (GUT)
+
+Hierarchy problem
+
+
 
 \section{Extensions of the Standard Model}
 

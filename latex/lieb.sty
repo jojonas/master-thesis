@@ -1,4 +1,4 @@
-% !TeX root = ../document.tex
+% !TeX root = document.tex
 
 % Latex-Style
 % Jonas Lieb (jonas.lieb@rwth-aachen.de)
@@ -18,6 +18,17 @@
 % encoding
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
+
+\RequirePackage[
+	figuresep=colon,
+	sansserif=false,
+	hangfigurecaption=false,
+	hangsection=true,
+	hangsubsection=true,
+	colorize=full,
+	colortheme=jonas,
+	bibsys=bibtex
+]{cleanthesis}
 
 % font for titles (from tex-gyre)
 \RequirePackage{tgheros}
@@ -45,8 +56,14 @@
 	plainpages=false,
 	colorlinks=false,
 	bookmarksnumbered=true,
-	bookmarksopen=true
+	bookmarksopen=true,
+	draft=false
 ]{hyperref}
+
+% drawings
+\RequirePackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{trees}
 
 % non-italic greek letters (for SI-prefixes)
 \RequirePackage{upgreek}
@@ -73,6 +90,9 @@
 % particle names
 \RequirePackage{hepnames}
 
+% particle physics units
+%\RequirePackage{hepunits}
+
 % Shortcuts often used in physics
 \RequirePackage{physics}
 
@@ -97,7 +117,7 @@
 \RequirePackage{booktabs}
 
 % pretty ToC
-\RequirePackage[titles]{tocloft}
+%\RequirePackage[titles]{tocloft}
 \renewcommand\cftchapfont{\thesisparagraphfont}
 
 % nagging about obsolete commands
@@ -115,17 +135,6 @@
 
 % =====================================
 % style
-
-\RequirePackage[
-	figuresep=colon,
-	sansserif=false,
-	hangfigurecaption=false,
-	hangsection=true,
-	hangsubsection=true,
-	colorize=full,
-	colortheme=jonas,
-	bibsys=bibtex
-]{utils/cleanthesis}
 
 % citations
 \RequirePackage{cite}
@@ -163,16 +172,18 @@
 	\message{TODO: #1}
 }
 
-\RequirePackage{utils/ifdraft}
+\RequirePackage{ifdraft}
 \ifdraft{
 	\RequirePackage{draftwatermark}
 	
 	\SetWatermarkText{DRAFT}
 	\SetWatermarkScale{1.5}
-	\SetWatermarkLightness{0.90}
+	\SetWatermarkLightness{0.95}
 	
 	\RequirePackage[left]{lineno}
 	\linenumbers
+	
+	\overfullrule=5pt
 }{
 	\renewcommand{\todo}[1]{\errmessage{TODO: #1}}
 }
