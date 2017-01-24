@@ -308,6 +308,7 @@
 % **************************************************
 \setstretch{1.2}					% value for line spacing, use \setstretch{} or \singlespacing or \onehalfspacing or \doublespacing
 \setlength{\parindent}{0em}			% value for paragraph indentation
+\setlength{\parskip}{1em}
 \clubpenalty = 10000				% prevent single lines at the beginning of a paragraph (Schusterjungen)
 \widowpenalty = 10000				% prevent single lines at the end of a paragraph (Hurenkinder)
 \displaywidowpenalty = 10000		% 
@@ -519,7 +520,7 @@
 % 
 % 
 % The package titlesec enables us to modify (style) the sectioning commands
-% -- usage: \titlespacing{\command}{left}{before-sep}{after-sep}[right-sep]
+% -- usage: \{\command}{left}{before-sep}{after-sep}[right-sep]
 % -- usage: \titleformat{\command}[shape]{format}{label}{sep}{before}[after]
 % -- usage: \titleclass{\command}{class}
 %    -- classes: page (single page), top (like chapters),
@@ -607,6 +608,9 @@
 			[\phantomsection]
 %	}
 \fi
+
+\titlespacing{\subsubsection}{0em}{.5em}{0em}
+
 %
 % > formats: \paragraph
 \titlespacing{\paragraph}{0pt}{\parsep}{1em}%[0pt]
