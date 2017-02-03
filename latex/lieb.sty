@@ -59,6 +59,7 @@
 	bookmarksopen=true,
 	draft=false
 ]{hyperref}
+\RequirePackage[plain]{fancyref}
 
 % drawings
 \RequirePackage{tikz}
@@ -120,6 +121,15 @@
 %\RequirePackage[titles]{tocloft}
 \renewcommand\cftchapfont{\thesisparagraphfont}
 
+% glossary entries
+\RequirePackage{acronym}
+\makeatletter
+\renewcommand*\AC@acl[1]{%
+% original: \expandafter\AC@get\csname fn@#1\endcsname\@secondoftwo{#1}}
+\emph{\expandafter\AC@get\csname fn@#1\endcsname\@secondoftwo{#1}}%
+}
+\makeatother
+
 % nagging about obsolete commands
 \RequirePackage[l2tabu, orthodox]{nag}
 
@@ -168,17 +178,17 @@
 % draft settings
 
 \newcommand{\todo}[1]{
-	{\color{color_todo}\textbf{[TODO: #1]}}
+	{\color{red}\textbf{[TODO: #1]}}
 	\message{TODO: #1}
 }
 
 \RequirePackage{ifdraft}
 \ifdraft{
-	\RequirePackage{draftwatermark}
+	%\RequirePackage{draftwatermark}
 	
-	\SetWatermarkText{DRAFT}
-	\SetWatermarkScale{1.5}
-	\SetWatermarkLightness{0.95}
+	%\SetWatermarkText{DRAFT}
+	%\SetWatermarkScale{1.5}
+	%\SetWatermarkLightness{0.95}
 	
 	\RequirePackage[left]{lineno}
 	\linenumbers
@@ -218,3 +228,6 @@
 \newcommand{\paramregions}{\ensuremath{{n_\mathrm{regions}}}\xspace}
 \newcommand{\parambinbase}{\ensuremath{{n_\mathrm{base}}}\xspace}
 \newcommand{\sigmarel}{\ensuremath{\sigma_\mathrm{rel}}\xspace}
+
+\newcommand*{\vcenteredhbox}[1]{\begingroup
+\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}

@@ -12,8 +12,8 @@
 	bibliography=totoc,
 	listof=totoc,
 	titlepage=on,
-%	draft
-	final
+	draft
+%	final
 	]{scrreprt}
 
 \usepackage{lieb}
@@ -43,6 +43,7 @@
 \pagenumbering{roman}
 \pagestyle{empty}
 
+
 \input{chapters/title}
 \cleardoublepage
 \input{chapters/statement-authorship}
@@ -68,6 +69,9 @@
 \cleardoublepage
 \bibliographystyle{CMS}
 \bibliography{bibliography,images}
+
+\cleardoublepage
+\input{chapters/acronyms}
 
 \cleardoublepage
 \input{chapters/appendix}

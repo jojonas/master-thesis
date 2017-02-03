@@ -104,7 +104,7 @@ According to the Standard Model, elementary particles are point-like indivisible
     \label{fig:particle_groups}
 \end{figure}
 
-Figure \ref{fig:particle_groups} shows how elementary particles can be separated into several groups. 
+\Fref{fig:particle_groups} shows how elementary particles can be separated into several groups. 
 At first level there are two groups: \emph{fermions} and \emph{bosons}.
 
 Fermions are elementary particles with a spin of $\nicefrac{1}{2}$. They follow Fermi-Dirac statistics and have to obey Pauli's exclusion principle which states that no more than one particle can occupy a certain state characterized by its quantum numbers.
@@ -154,7 +154,9 @@ In addition, there is the \emph{Higgs boson} (\PH), which uses the Higgs mechani
         \PH & 125 & \GeV \\
         \bottomrule
     \end{tabular}
-    \caption{Known elementary particles and their masses\cite{ParticleDataGroup:ReviewParticlePhysics}. Note that for layouting purposes, quarks and leptons have been put side-by-side, even though there is no known connection between the number of lepton and quark families.}
+    \caption{Known elementary particles and their masses\cite{ParticleDataGroup:ReviewParticlePhysics}. Note that for layout
+    purposes, quarks and leptons have been put side-by-side, even though there is no known connection between the number of lepton and quark families.}
+    \label{tab:particles}
 \end{table}
 
 In terms of conventional matter, one can conclude that fermions make up matter and bosons bind matter together.
@@ -179,7 +181,7 @@ change flavor
 lightest particles are stable
 
 \subsection{Open Questions}
-Since the discovery of the Higgs boson in 2012, all particles predicted by the Standard Model have been experimentally observed. The Standard Model has not been disproven and multiple Nobel prices have been awarded.
+Since the discovery of the Higgs boson in 2012, all particles predicted by the Standard Model have been experimentally observed. The Standard Model has not been disproved and multiple Nobel prices have been awarded.
 One could assume that our understanding of nature is now complete, but this is not the case:
 In the recent decades, several observations have been made that demand  theories beyond the Standard Model. In the following sections, we want to discuss a few of them.
 
@@ -210,19 +212,95 @@ Another theoretical motivation is the \emph{mass hierarchy problem}: One of the 
 
 
 \section{Experiments}
-Since Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
+Beginning with Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
 
-In both cases, outgoing scattered particles are registered. Because the Standard Model makes precise predictions about the rate of which certain scattering scenarios occur, counting outgoing particles with certain properties is a very efficient way of testing the theory.
+In both cases, outgoing scattered particles are registered. 
+Because of the statistical nature of quantum mechanics, the Standard Model only describes scattering processes in terms of probabilities. These probabilities depend on particle properties before and after collision. 
+Controlling the incoming particles and counting outgoing particles is thus a very efficient way of testing the theory.
 
 \section{The Large Hadron Collider}
-The to date largest particle collider experiment is located underground just below Geneva in Switzerland. It belongs to the European Organization for Nuclear Research CERN\footnote{The acronym CERN stems from research organization's original French name: \textbf{C}onseil \textbf{E}uropéen pour la \textbf{R}echerche \textbf{N}ucléaire} and is called \emph{Large Hadron Collider} (LHC). The LHC is a proton-proton collider with a total circumference of \SI{26.7}{\km}. At two of its interaction points, detectors have been constructed that serve as general purpose experiments: The \emph{Compact Muon Solenoid} (CMS) and the ATLAS experiment\cite{Evans:LHCMachine}. 
-This work will focus on the former experiment, the CMS detector.
+The to date largest particle collider experiment is located in a tunnel about \SI{100}{\m} underground just below Geneva in Switzerland. It belongs to the \ac{CERN} and is called \ac{LHC}.
+
+The Large Hadron Collider is a proton-proton collider with a circumference of \SI{26.7}{\km}. It has been built in the early 2000s within the tunnel of the former \ac{LEP}. The tunnel contains the storage ring as well as accelerator structures and experiments. Within two beam pipes, in an ultra-high vacuum (about \SI{e-11}{\milli\bar}), groups of protons circulate in opposite directions. They are accelerated using radio-frequency cavities and kept on track by \num{1232} superconducting dipole and \num{450} quadrupole magnets.
+
+The protons are then brought to collision at one of the four \emph{interaction points} along the ring. The energy of each accelerated proton before collision is \SI{6.5}{\TeV} in the rest system, resulting in a total center-of-mass energy of $\sqrt{s} = \SI{13}{\TeV}$.
+
+Around each interaction point, a detector has been constructed. The task of two of the experiments is to perform very specialized measurements at lead ions (\acsu{ALICE}) and hadrons made of \Pcharm or \Pbottom quarks (\acsu{LHCb}). 
+The other two experiments are aimed at more general measurements. These so called \emph{general purpose} experiments are the \ac{CMS} and the \acsu{ATLAS} experiment\cite{Evans:LHCMachine}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{lhc}
+    \caption{Schematic illustration of the \ac{CERN} accelerator complex. Shown are \ac{LINAC} 2, the \ac{PSB}, \ac{PS}, \ac{SPS} and the LHC with the four experiments \ac{CMS}, \ac{ATLAS}, \ac{LHCb} and \ac{ALICE}. The accelerator sizes and positions are not to scale\cite{Ley:CERNAccelerators,Caron:LHCLayout
+    ,DeMelis:CERNacceleratorcomplex}.}
+    \label{figure:LHC}
+\end{figure}
+
+This work will focus on the CMS experiment, which will be discussed in the next sections.
+
+\todo{bunches, bunch crossing, pileup?}
 
 \section{The Compact Muon Solenoid}
+The \ac{CMS} detector consists of multiple particle detector subsystems surrounding the interaction point.
+Its goal is to measure outgoing particles created at proton-proton collisions.
+The observed properties include particle type, direction, momentum, energy and charge. Each of the detector subsystems are dedicated to measuring one or more of these characteristics. The subsystems are read out electronically and the data are later analyzed on a computing grid.
 
+An overview of the detector can be seen in \fref{fig:CMS_slice}. The discussion of the detector subsystems in the following sections is based on \cite{Chatrchyan:CMSexperimentCERN} if not explicitly stated otherwise.
 
+\begin{figure}
+    \centering
+    \raisebox{0.31\height}{\includegraphics[width=0.3\textwidth]{cms_slice_context}}
+    \hspace{0.02\textwidth}
+    \includegraphics[width=0.65\textwidth]{cms_slice}
+    \caption{Slice through the CMS detector barrel. From left to right the following subsystems are drawn: the silicon tracker, the electromagnetic and hadron calorimeter, the superconducting solenoid coil, and the iron return yoke with the muon chambers. The solid lines represent charged particles which are bend due to the magnetic field\cite[modified]{Davis:CMSSlice}.}
+    \label{fig:CMS_slice}
+\end{figure}
 
-\subsection{Detector Design}
+\subsection{Detector Geometry}
+In a region starting at \SI{23}{\m} before the detector, both beam pipes are united\cite{Evans:LHCMachine}. The proton groups traveling in opposite directions share the same beam pipe, which defines the $z$-axis of the detector coordinate system. The collisions occur at $z = 0$.
+The detector forms a barrel around the beam pipe. The barrel is subdivided into seven slices: five evenly sized \emph{wheels} and one so-called \emph{endcap} on each open side of the barrel. The central wheel is centered at $z = 0$.
+Detector layers in the wheels are mostly arranged in a cylindrical manner around the beam pipes, while the layers in the endcaps are mounted orthogonally to the beam pipe.
+
 \subsection{Subsystems}
+\subsubsection{Inner Tracking System}
+The \emph{inner tracking system} is used for precise measurements of direction and curvature of charged particles. 
+It is composed of silicon semiconductor pixel layers surrounded by strip modules.
+
+Each pixel cell is $\SI{100}{\micro\meter} \times \SI{150}{\micro\meter}$ in size. It consists of a silicon semiconductor in reverse bias direction. Charged particles passing through the semiconductor induce ionization and thus allow small currents to flow. These currents are amplified and read out by dedicated electronics. There are about \num{66} million pixel cells, allowing for a very precise measurement of the direction and origin of outgoing particles. High precision is necessary for distinguishing between multiple proton-proton interactions happening within the same bunch crossing (so-called \emph{pile-up} effect), as well as for mechanisms such as \Pbottom-tagging, where an offset of a particle track is used for identifying decays of \PB-mesons (see \fref{sec:b_tagging}).
+
+The strip modules function similarly to the pixel cells. For reduced production costs, typical cell sizes are $\SI{10}{\centi\meter} \times \SI{80}{\micro\meter}$. There are \num{24244} silicon strips in the tracker.
+
+A combination of both tracking subsystems is used during particle reconstruction. 
+
+\subsubsection{Electromagnetic Calorimeter}
+\label{sec:ecal}
+The goal of the \ac{ECAL} is to measure the energy of outgoing electrons, positrons and photons. It consists of dense, transparent lead tungstate ($\textup{PbWO}_4$) crystals. Within these crystals, high energetic electrons and photons cause electromagnetic cascades: Electrons emit photons in the process of bremsstrahlung, while photons convert to electron-positron pairs in the process of pair-production.
+This leads to large numbers of lower-energy electrons and photons, until the electron energy loss is dominated by ionization losses and the photon energy is below the pair-production threshold of $\si{\electronmass} = \SI{1022}{\keV}$.
+Low energetic photons and those emitted by ionization or excitation are eventually registered using photodiodes. The initial particle energy is calculated from the light yield.\cite{ParticleDataGroup:ReviewParticlePhysics}.
+
+As long as the cascade does not leak through the photodetectors, the achieved energy resolution for photons is about \SI{1}{\percent}.\todo{electrons, quelle}
+
+\subsubsection{Hadron Calorimeter}
+The \ac{HCAL} measures the energy of hadrons produced during the collision. It is designed as a sampling calorimeter with alternating layers of brass absorbers and plastic scintillator tiles. 
+
+Hadrons passing through the calorimeter interact with the nuclei of the denser brass absorbers. During the collisions, secondary charged (\Pgppm, \Pproton, ...) as well as neutral hadrons (\Pgpz, \Peta, ...) are produced. The charged secondaries cause electromagnetic radiation via ionization while the neutral particles decay into photons, which themselves cause electromagnetic showers (see \ref{sec:ecal}).
+
+The charged particles from electromagnetic showers are detected via scintillation. In the plastic scintillators, passage of charged particles induce emission of optical photons. These are guided to photodiodes using wavelength-shifting fibers. The fiber material suppresses Cherenkov light and do not act as scintillators themselves.\cite{ParticleDataGroup:ReviewParticlePhysics}.
+
+Because of the short radiation lengths in the absorber material, sampling calorimeters are very space efficient as opposed to homogeneous calorimeters.
+However, as some of the energy is deposited within the absorber material, the total shower energy is only an estimation from the scintillation light.
+
+Similarly to the electromagnetic calorimeter, a high resolution can be achieved only as long as the showers do not leak through the calorimeter.
+
+\subsubsection{Solenoid Magnet}
+The \ac{CMS} solenoid magnet is designed to deliver a magnetic field of \SI{4}{\tesla}. This is achieved by cooling the \SI{220}{\tonne} cold mass to \SI{4.6}{\kelvin}, such that the NbTi wires become superconducting and the current can reach up to \SI{19.5}{\kilo\ampere}.
+The magnet surrounds the calorimeters and has a diameter of \SI{6}{\meter}. Within the coil, the magnetic field is approximately homogeneous with the field lines being parallel to the beam pipe. 
+Particles passing the field are subject to the Lorentz force which subsequently bends their tracks into circular curvatures.
+
+This effect is essential for identifying particles: Not only allows it to distinguish between charged and neutral particles, but also allows the direct measurement of the particles' momentum 
+
+
+\subsubsection{Muon System}
+
 \subsection{Triggering}
 \subsection{The Computing Grid}
