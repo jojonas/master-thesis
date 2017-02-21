@@ -41,7 +41,12 @@
 
 % enables graphics inclusion
 \RequirePackage[final]{graphicx}
-\setkeys{Gin}{width=\linewidth}
+%\setkeys{Gin}{width=\linewidth}
+\DeclareGraphicsRule{.1}{mps}{*}{}
+\DeclareGraphicsRule{.2}{mps}{*}{}
+\DeclareGraphicsRule{.3}{mps}{*}{}
+\DeclareGraphicsRule{.4}{mps}{*}{}
+\DeclareGraphicsRule{.5}{mps}{*}{}
 
 % floating figures (with [h])
 \RequirePackage{float}
@@ -66,6 +71,10 @@
 \usepackage{tikz-qtree}
 \usetikzlibrary{trees}
 
+% Feynman diagrams
+\RequirePackage[force]{feynmp-auto}
+\setlength{\unitlength}{1cm}
+      
 % non-italic greek letters (for SI-prefixes)
 \RequirePackage{upgreek}
 
@@ -123,12 +132,9 @@
 
 % glossary entries
 \RequirePackage{acronym}
-\makeatletter
-\renewcommand*\AC@acl[1]{%
-% original: \expandafter\AC@get\csname fn@#1\endcsname\@secondoftwo{#1}}
-\emph{\expandafter\AC@get\csname fn@#1\endcsname\@secondoftwo{#1}}%
-}
-\makeatother
+% remove space in \acfi and \acfia
+\renewcommand{\acfia}[1]{%
+{\itshape \AC@acl{#1}\nolinebreak[3]} (\ifAC@starred\acs*{#1}\else\acs{#1}\fi)}
 
 % nagging about obsolete commands
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -219,7 +225,7 @@
 \newcommand{\pxlio}{\texttt{pxlio}\xspace}
 \newcommand{\deltaptilde}{\ensuremath{\Delta \tilde{p}}\xspace}
 
-\newcommand{\eventclass}[1]{\framebox{\textsf{#1}}}
+\newcommand{\eventclass}[1]{\textsf{#1}}
 \newcommand{\Ndata}{\ensuremath{{N_\mathrm{obs}}}\xspace}
 \newcommand{\Nmc}{\ensuremath{{N_\mathrm{SM}}}\xspace}
 \newcommand{\sigmamc}{\ensuremath{{\sigma_\mathrm{SM}}}\xspace}

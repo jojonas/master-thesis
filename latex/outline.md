@@ -50,16 +50,25 @@ Title: Sensitivity Studies for the Model Unspecific Search
 
 * MUSiC (max 10 pages):
     * Motivation for MUSiC
-    * Previous MUSiC Theses
-
-    * MUSiC-Physics Objects, incl. b-jets ?
+    * Previous MUSiC Works
+    
     * Definition of Classes (incl., excl., jet incl.)
     * Kinematic Variables + Distributions
-
+        * SumPt
+        * InvMass
+        * MET
+        
+    * MUSiC-Physics Objects, incl. b-jets ?
+        * Electron
+        * Muon
+        * Photons
+        * Jets
+        * MET
+        
     * RoI-Scanning:
-        * Motivation (many classes, automated search necessary)
         * Search Space (connected bin regions)
-        * p-value (normal prior)
+        * Global Significance
+        * "extremity" estimator: p-value (normal prior)
         * Treatment of Regions of Low MC Statistics
         * Look-Elsewhere-Effects
             * Regions -> p-tilde
@@ -120,8 +129,116 @@ Title: Sensitivity Studies for the Model Unspecific Search
 BSM Models
 ==========
 
-* E-Mu QBH (Lepton Flavor Violating t-channel): EXO-16-001
-* Semi-Classical-BH (non-resonant, but high multiplicities): EXO-15-007
-* Seesaw (lll etc): EXO-16-002
-* RPV-SUSY (resonant)
+* E-Mu QBH (Lepton Flavor Violating t-channel): EXO-16-001 / AN-2015/191 
+    - Sample: QBHToEMu, RPVresonantToEMu ... LLE
+    - RPV->e mu
+        + x-secs in der Datenbank (pb!) sind richtig, AN falsch
+        + Exp Limit LQD001: 1000 GeV, LQD01 2700GeV, LQD02 3300GeV
+        + Mass/Coupling points:
+            * LQD 0.01: 200 GeV, 500 GeV, 1000 GeV, 1400 GeV
+            * LQD 0.2: 4000 GeV, 5000 GeV, 6500 GeV
+    - QBHToEMu:
+        + Exp Limit dim4-6: 4300 GeV
+        + Mass/Dim points:
+            * n4: 3000 GeV, 4000 GeV, 5000 GeV
+    
+* Semi-Classical-BH (non-resonant, but high multiplicities): EXO-15-007 / AN-2015/130 
+    - Private Samples
 
+* Seesaw (lll etc): EXO-16-002 / AN-2015/256 
+    - SeesawTypeIII_*
+    - Exp Limit at 430 GeV
+    - Mass points 220, 380, 500 GeV 
+
+* RPV-SUSY (resonant)
+   
+===
+Sample List:
+
+RPVresonantToEMu_M-200_LLE_LQD-001:
+    RPVresonantToEMu_M-200_LLE_LQD-001_13TeV_CA
+
+RPVresonantToEMu_M-500_LLE_LQD-001:
+    RPVresonantToEMu_M-500_LLE_LQD-001_13TeV_CA
+
+RPVresonantToEMu_M-1000_LLE_LQD-001:
+    RPVresonantToEMu_M-1000_LLE_LQD-001_13TeV_CA 
+
+RPVresonantToEMu_M-1400_LLE_LQD-001:  
+    RPVresonantToEMu_M-1400_LLE_LQD-001_13TeV_CA 
+
+RPVresonantToEMu_M-4000_LLE_LQD-02:
+    RPVresonantToEMu_M-4000_LLE_LQD-02_13TeV_CA 
+
+RPVresonantToEMu_M-5000_LLE_LQD-02:  
+    RPVresonantToEMu_M-5000_LLE_LQD-02_13TeV_CA
+
+RPVresonantToEMu_M-6500_LLE_LQD-02:
+    RPVresonantToEMu_M-6500_LLE_LQD-02_13TeV_CA
+
+QBHToEMu_M-3000_n4:
+    QBHToEMu_M-3000_n4_ADD-QBH_13TeV_P8 
+
+QBHToEMu_M-4000_n4:
+    QBHToEMu_M-4000_n4_ADD-QBH_13TeV_P8 
+
+QBHToEMu_M-5000_n4:
+    QBHToEMu_M-5000_n4_ADD-QBH_13TeV_P8 
+
+SeesawTypeIII_M-380:
+    SeesawTypeIII_SIGMAplusSIGMA0HH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-ZW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0ZZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0WW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-ZZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0HZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0WW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-WZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-HZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0WH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0HW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0ZH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0HW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-WW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0ZW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0WH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-HH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0WZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0ZW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0ZH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-HW_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-ZH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0HZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0WZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-WH_M-380_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0ZZ_M-380_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0HH_M-380_13TeV_MG
+
+SeesawTypeIII_M-500:
+    SeesawTypeIII_SIGMA-SIGMA0HH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0ZH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0HZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0WZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0WW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0WH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0HH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0ZW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-WH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0HW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-HW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0HW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0WH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0ZH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0ZW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-WZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-ZH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0ZZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-ZW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-HZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0ZZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-ZZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-WW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA-HH_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0WW_M-500_13TeV_MG
+    SeesawTypeIII_SIGMA-SIGMA0HZ_M-500_13TeV_MG
+    SeesawTypeIII_SIGMAplusSIGMA0WZ_M-500_13TeV_MG
