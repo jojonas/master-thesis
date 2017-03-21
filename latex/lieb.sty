@@ -75,6 +75,10 @@
 \RequirePackage[force]{feynmp-auto}
 \setlength{\unitlength}{1cm}
       
+% Pseudocode listings
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+      
 % non-italic greek letters (for SI-prefixes)
 \RequirePackage{upgreek}
 
@@ -125,6 +129,7 @@
 
 % pretty tables
 \RequirePackage{booktabs}
+\RequirePackage{longtable}
 
 % pretty ToC
 %\RequirePackage[titles]{tocloft}
@@ -210,22 +215,24 @@
 % =====================================
 % commands
 
-% definition sign
+\newcommand{\nomath}[1]{\ifmmode \text{#1} \else #1 \fi}
+
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\eqdef}{=\vcentcolon}
 
-\newcommand{\Minv}{\ensuremath{{M_\mathrm{inv}}}\xspace}
-\newcommand{\pT}{\ensuremath{{\vec{p}_\mathrm{T}}}\xspace}
-\newcommand{\sumpT}{\ensuremath{{\sum \abs{\pT}}}\xspace}
-\newcommand{\ET}{\ensuremath{{E_\mathrm{T}}}\xspace}
-\newcommand{\MET}{\ensuremath{{\slashed{E}_\mathrm{T}}}\xspace}
+\newcommand{\Minv}{\ensuremath{M_\mathrm{inv}}\xspace}
+\newcommand{\MT}{\ensuremath{M_\mathrm{T}}\xspace}
+\newcommand{\pT}{\ensuremath{\vec{p}_\mathrm{T}}\xspace}
+\newcommand{\sumpT}{\ensuremath{\Sigma p_T}\xspace}
+\newcommand{\ET}{\ensuremath{E_\mathrm{T}}\xspace}
+\newcommand{\MET}{\ensuremath{\slashed{E}_\mathrm{T}}\xspace}
 
 \newcommand{\ptilde}{\ensuremath{\tilde{p}}\xspace}
 \newcommand{\p}{\ensuremath{p}\xspace}
 \newcommand{\pxlio}{\texttt{pxlio}\xspace}
 \newcommand{\deltaptilde}{\ensuremath{\Delta \tilde{p}}\xspace}
 
-\newcommand{\eventclass}[1]{\textsf{#1}}
+\newcommand{\eventclass}[1]{\mbox{\textsf{#1}}}
 \newcommand{\Ndata}{\ensuremath{{N_\mathrm{obs}}}\xspace}
 \newcommand{\Nmc}{\ensuremath{{N_\mathrm{SM}}}\xspace}
 \newcommand{\sigmamc}{\ensuremath{{\sigma_\mathrm{SM}}}\xspace}
@@ -237,3 +244,11 @@
 
 \newcommand*{\vcenteredhbox}[1]{\begingroup
 \setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
+
+% For some reason, the Sigma particles are broken in hepnames, so I redefine them here
+\renewcommand{\PgS}{\ensuremath{\Sigma}\xspace}
+\renewcommand{\PgSpm}{\ensuremath{\Sigma^{\pm}}\xspace}
+\renewcommand{\PgSmp}{\ensuremath{\Sigma^{\mp}}\xspace}
+\renewcommand{\PgSm}{\ensuremath{\Sigma^{-}}\xspace}
+\renewcommand{\PgSp}{\ensuremath{\Sigma^{+}}\xspace}
+\renewcommand{\PgSz}{\ensuremath{\Sigma^{0}}\xspace}

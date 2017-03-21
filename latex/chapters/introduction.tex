@@ -4,6 +4,14 @@
 
 \chapter{Introduction}
 
+\section{This Thesis}
+This thesis deals with the \acf{MUSiC}, which is a particle physics analysis aiming to find new physics within data observed by the \acs{CMS} experiment.
+
+In the first chapter, we will give a short introduction to the \acl{SM} of particle physics and the \acs{CMS} experiment. 
+The second chapter is a description of the \acs{MUSiC} analysis in its current state. It will motivate and explain the different strategies and algorithms employed in the analysis.
+Afterwards, we will show the effectiveness of the existing analysis steps using statistical methods as well as simulations of new physics processes.
+Finally, we will examine multiple extensions to the search and study their impact on the analysis sensitivity for different new physics models.
+
 
 \section{Units and Abbreviations}
 Throughout this work, we will use the natural unit system. This means that the speed of light and the Planck constant are fixed to $1$:
@@ -14,18 +22,19 @@ It follows that the only unit needed to express most other physical quantities i
 Two exceptions to this are the cross section and luminosity, which are expressed in femtobarn and inverse femtobarn respectively: $\SI{1}{\femto\barn} = \SI{e-43}{\meter\squared}$.
 
 \section{Particle Physics}
-Finding the building blocks of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. As of 2017, the state of particle physics research is summed up in the so called \emph{Standard Model of Particle Physics}.
+Finding the building blocks of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. As of 2017, the state of particle physics research is summed up in the so-called \emph{\acl{SM} of Particle Physics}.
 
-In the following sections, we will give a short introduction to the Standard Model, its theoretical foundations and open questions. Motivated by these questions, we will introduce possible extensions to the Standard Model in the next chapter.
+The following sections will be a short introduction to the \acl{SM}, its theoretical foundations and open questions. Motivated by these questions, we will introduce possible extensions to the \acl{SM} in the next chapter.
 
 This chapter is based on \cite{Hebbeker:SkriptzurElementarteilchenphysik} if not explicitly stated otherwise.
 
 \section{The Standard Model}
-The Standard Model is a description of matter and its interactions, except gravity. It is based on the theoretical foundations of quantum field theory.
+The \acfi{SM} is a theoretical model describing matter and its interactions through \emph{particles} and \emph{forces}. It was once motivated by classical phenomena such as electromagnetism and particle decays and has since made important predictions about the existence of non-classical forms of matter.
 
+So far, it has not been disproved, although there are some inconsistencies, as we will see later.
 
 \subsection{Particles and Interactions}
-The Standard Model describes elementary particles as point-like indivisible structureless objects, much like the atoms were to the ancient Greeks. These objects are characterized by physical observables such as mass, charge and spin.
+Elementary particles are described as point-like indivisible structureless objects, much like the atoms were to the ancient Greeks. These objects are characterized by physical observables such as mass, charge and spin.
 
 \begin{figure}
     \centering
@@ -104,8 +113,8 @@ The Standard Model describes elementary particles as point-like indivisible stru
     \label{fig:particle_groups}
 \end{figure}
 
-\Fref{fig:particle_groups} shows how elementary particles can be separated into several groups. 
-At first level there are two groups: \emph{fermions} and \emph{bosons}.
+Elementary particles can be subdivided into several groups, as shown in \fref{fig:particle_groups}. 
+At the first level, one distinguishes between two groups: \emph{fermions} and \emph{bosons}.
 
 Fermions are elementary particles with a spin of $\nicefrac{1}{2}$. They follow Fermi-Dirac statistics and have to obey Pauli's exclusion principle which states that no more than one particle can occupy a certain state characterized by its quantum numbers.
 The group of fermions can be further divided into quarks and leptons.
@@ -113,7 +122,7 @@ There are six quarks: up (\Pup), down (\Pdown), charm (\Pcharm), strange (\Pstra
 In addition, there are three lepton families: \emph{electron} (\Pe), \emph{muon} (\Pmu) and \emph{tau} (\Ptau). Each charged lepton has a very light, electrically neutral \emph{neutrino} associated with it.
 
 The second group of particles are called bosons. They mediate interactions (also called \emph{forces}) and posses an integer spin. Bosons follow Bose-Einstein statistics and may thus occupy the same quantum state.
-Each kind of boson is responsible for one kind of elementary force: the electrodynamic force is mediated by the \emph{photon}, the strong force by the \emph{gluon} and the weak force by the \emph{\PZ} and \emph{\PW} bosons.
+Each kind of boson is responsible for one kind of elementary force: the electrodynamic force is mediated by the \emph{photon} (\Pgamma), the strong force by the \emph{gluon} (\Pg) and the weak force by the \emph{\PZ} and \emph{\PW} bosons.
 In addition, there is the \emph{Higgs boson} (\PH), which uses the Higgs mechanism to give mass to all mentioned massive elementary particles.\footnote{Note that this does not apply to composite particles (like protons) which gain mask mostly through binding energy.}
 
 \begin{table}
@@ -162,7 +171,7 @@ In terms of conventional matter, one can conclude that fermions make up matter a
 
 \subsection{Interactions}
 \subsubsection{Quantum Electrodynamics}
-The theory of electromagnetism at extremely small or extremely high energetic scales is called \acfi{QED}. \ac{QED} is a field theory that unifies classical quantum mechanics, special relativity and gauge invariance.
+The theory of electromagnetism at extremely small or extremely high energetic scales is called \acfi{QED}. It is a field theory that unifies classical quantum mechanics, special relativity and gauge invariance.
 
 Because the probability amplitude of a quantum mechanical wave function is independent of the wave's phase, two wave functions that only differ in phase are equivalent. Thus, physics processes should behave exactly the same, regardless of the phase term. This concept is called \emph{invariance under phase transformations} and is a necessary property for quantum field theories.
 
@@ -170,6 +179,8 @@ In 1928, the British physicist Paul Dirac derived an relativistic extension of t
 However, the Dirac equation is not invariant under phase transformations and thus Richard Feynman et al. developed a gauge invariant extension of Dirac's theory. This extension, quantum electrodynamics, was awarded the Nobel prize in 1965\cite{NobelMedia:NobelPrize1965}.
 
 In \ac{QED} interactions happen between exactly two charged particles and one photon, as show in \fref{fig:qed_vertices}: Two particles may annihilate into one photon, a photon may be emitted or absorbed, or a particle-antiparticle pair may be created from the photon energy. In each case, the electrical charge is conserved.
+
+\todo{running coupling constant?}
 
 \begin{figure}
     \centering
@@ -218,7 +229,7 @@ The weak interaction via the \PW boson allows changing particles' types (also ca
         \begin{fmfgraph*}(3,3)
             \fmfleft{f1}
             \fmfright{f2}
-            \fmf{fermion,label=\Pf}{f1,i}
+            \fmf{fermion,label=\Pl}{f1,i}
             \fmf{fermion,label=\Pneutrino}{i,f2}
             \fmf{dashes,label=\PW}{l,i}
             \fmfforce{(0,0)}{f1}
@@ -246,57 +257,147 @@ The weak interaction via the \PW boson allows changing particles' types (also ca
             \fmfforce{(0,0)}{f1}
             \fmfforce{(w,0)}{f2}
             \fmftop{l}
+        \end{fmfgraph*} \\
+        \vspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1}
+            \fmfright{f2}
+            \fmf{dashes,label=\PW}{f1,i}
+            \fmf{dashes,label=\PW}{i,f2}
+            \fmf{dashes,label=\PZ}{l,i}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(w,0)}{f2}
+            \fmftop{l}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1,f2}
+            \fmfright{f3,f4}
+            \fmf{dashes,label=\PW}{f1,i}
+            \fmf{dashes,label=\PW}{f2,i}
+            \fmf{dashes,label=\PW}{i,f3}          
+            \fmf{dashes,label=\PW}{i,f4}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(0,h)}{f2}
+            \fmfforce{(w,0)}{f3}
+            \fmfforce{(w,h)}{f4}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1,f2}
+            \fmfright{f3,f4}
+            \fmf{dashes,label=\PW,label.side=left}{f1,i}
+            \fmf{dashes,label=\PW,label.side=right}{f2,i}
+            \fmf{dashes,label=\PZ/\Pgamma,label.side=left}{i,f3}          
+            \fmf{dashes,label=\PZ/\Pgamma,label.side=right}{i,f4}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(0,h)}{f2}
+            \fmfforce{(w,0)}{f3}
+            \fmfforce{(w,h)}{f4}
         \end{fmfgraph*}
     \end{fmffile}
-    \caption{}
+    \caption{Basic vertices of the weak interaction: In the top row, interaction of a \PW boson with a lepton and neutrino, and with a quark pair is shown. On the right side of the top row, the flavor-conserving interaction of a fermion with a \PZ boson is displayed. The bottom row shows interactions between the bosons. Because the \PW boson is charged, it also interacts with the photon.
+    Note that, similarly to \fref{fig:qed_vertices}, all diagrams can be read in different directions.}
     \label{fig:qfd_vertices}
 \end{figure}
 
+The flavor changing interaction allows heavy fermions to decay into lighter decay products. As long as there is a lighter particle to decay into, the probability of this decay does not vanish.
+Consequently, only the lightest fermions are stable: the electron, the \Pqu- and \Pqd-quarks and the neutrinos.
+
+\todo{electroweak unification?}
+%
+%\begin{figure}
+%    \centering
+%    \begin{fmffile}{beta_decay}
+%        \begin{fmfgraph*}(6,4)
+%            \fmfstraight
+%
+%            \fmfleft{g1,g3,g4,g5,g6,i1,i2,i3}
+%            \fmfright{f1,f2,g13,g14,o1,o2,o3}
+%            
+%            \fmflabel{\Pqu}{i1}
+%            \fmflabel{\Pqu}{i2}
+%            \fmflabel{\Pqd}{i3}
+%            \fmflabel{\Pqd}{o1}
+%            \fmflabel{\Pqu}{o2}
+%            \fmflabel{\Pqd}{o3} 
+%            
+%            
+%            \fmflabel{\Pep}{f1}            \fmflabel{\Pnue}{f2}            
+%            
+%            \fmf{fermion}{i2,o2}
+%            \fmf{fermion}{i3,o3}
+%            \fmf{fermion}{i1,v1}
+%            \fmf{fermion}{v1,o1}
+%            
+%            \fmf{dashes_arrow,label=\PWp}{v1,v2}
+%            \fmf{fermion}{f1,v2}
+%            \fmf{fermion}{v2,f2}
+%        \end{fmfgraph*}
+%    \end{fmffile}
+%    \caption{$\upbeta$ decay$+$ in the \acl{SM}: one of the \Pqu quarks in the proton decays into a \Pqd quark and a \PWp boson. The boson subsequently decays into a positron \Pep and an electron-neutrino \Pnue.}
+%    \label{fig:beta_decay}
+%\end{figure}
+%
+\subsubsection{Quantum Chromodynamics}
+The theory of \acfi{QCD} began in the 1950s, when bubble chamber experiments unexpectedly discovered large numbers of hadrons with different masses and physical properties. 
+Instead of assuming that these particles were fundamental, theorist Murray Gell-Mann et al. proposed a theory where they were made up of constituents, so-called \emph{quarks}. 
+The theory of bound states of the three known quarks (\Pqu, \Pqd, \Pqs) and their excitations was able to reproduce many of the observations.
+However, the observed $\Updelta^\text{++}$ baryon seemed to violate Pauli's exclusion principle: It consists of three \Pqu quarks with parallel spins. This dilemma was resolved in 1964, when Oscar W. Greenberg proposed a new quantum number, called \emph{color charge}.
+Alongside this quantum number, the existence of a gauge boson was predicted, the gluon, which was discovered around 1980 in three-jet events.
+
+The basic interaction vertices of \ac{QCD} are shown in \fref{fig:qcd_vertices}. The charge of the strong interaction is called color-charge, its possible values are usually called \emph{red}, \emph{green}, \emph{blue}, antired, antigreen and antiblue\footnote{Note that this concept is completely unrelated to visual perception of color.}.
+Quarks carry one unit of color charge, while gluons carry two units. Color charge is conserved within each interaction vertex. 
+An important principle of \ac{QCD} is that all naturally occurring particles are colorless: A composite particle carries either all colors (red + green + blue) or a color and its anti-color (e.g. red + antired). The former is found in baryons and the latter in mesons.
+
+Another important phenomenon in connection with \ac{QCD} is \emph{quark confinement}: As two quarks are separated from each other, new quark-antiquark pairs are created from the expended energy. Each created quark binds with one of the separated quarks such that all quarks again end up in a bound state.
+This effect has important consequences in the experimental context: Quarks and gluons in the final state of a collision often posses excess kinetic energy and thus move away from each other. Because of the confinement effect, new hadrons form. This effect is called \emph{hadronization}. Repeated hadronization leads to the formation of so-called \emph{jets}.
+
+\todo{asymptotic freedom, running coupling}
 
 \begin{figure}
     \centering
-    \begin{fmffile}{beta_decay}
-        \begin{fmfgraph*}(6,4)
-            \fmfstraight
-
-            \fmfleft{g1,g3,g4,g5,g6,i1,i2,i3}
-            \fmfright{f1,f2,g13,g14,o1,o2,o3}
-            
-            \fmflabel{\Pqu}{i1}
-            \fmflabel{\Pqu}{i2}
-            \fmflabel{\Pqd}{i3}
-            \fmflabel{\Pqd}{o1}
-            \fmflabel{\Pqu}{o2}
-            \fmflabel{\Pqd}{o3} 
-            
-            
-            \fmflabel{\Pep}{f1}            \fmflabel{\Pnue}{f2}            
-            
-            \fmf{fermion}{i2,o2}
-            \fmf{fermion}{i3,o3}
-            \fmf{fermion}{i1,v1}
-            \fmf{fermion}{v1,o1}
-            
-            \fmf{dashes_arrow,label=\PWp}{v1,v2}
-            \fmf{fermion}{f1,v2}
-            \fmf{fermion}{v2,f2}
+    \begin{fmffile}{qcd_basic_1}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1}
+            \fmfright{f2}
+            \fmf{fermion,label=\Pq}{f1,i}
+            \fmf{fermion,label=\Pq}{i,f2}
+            \fmf{gluon,label=\Pg}{l,i}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(w,0)}{f2}
+            \fmftop{l}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1}
+            \fmfright{f2}
+            \fmf{gluon,label=\Pg,label.side=left}{f1,i}
+            \fmf{gluon,label=\Pg,label.side=right}{i,f2}
+            \fmf{gluon,label=\Pg}{l,i}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(w,0)}{f2}
+            \fmftop{l}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1,f2}
+            \fmfright{f3,f4}
+            \fmf{gluon,label=\Pg,label.side=left}{f1,i}
+            \fmf{gluon,label=\Pg,label.side=right}{f2,i}
+            \fmf{gluon,label=\Pg,label.side=left}{i,f3}          
+            \fmf{gluon,label=\Pg,label.side=right}{i,f4}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(0,h)}{f2}
+            \fmfforce{(w,0)}{f3}
+            \fmfforce{(w,h)}{f4}
         \end{fmfgraph*}
     \end{fmffile}
-    \caption{}
-    \label{fig:beta_decay}
+    \caption{Basic interaction vertex of the strong force: A quark emits or absorbs a gluon. Note that this diagram can be read in different directions, similarly to \fref{fig:qed_vertices}.}
+    \label{fig:qcd_vertices}
 \end{figure}
 
-Weak force
-
-change flavor
-
-lightest particles are stable
-
-
-\subsubsection{Quantum Chromodynamics}
-The theory behind the strong force is called \acfi{QCD}. \ac{QCD} describes the interaction of particles carrying color charge: quarks and gluons. 
-
-
+\subsection{The Higgs Mechanism}
 
 \subsection{Open Questions}
 Since the discovery of the Higgs boson in 2012, all particles predicted by the Standard Model have been experimentally observed. The Standard Model has not been disproved and multiple Nobel prices have been awarded.
@@ -322,12 +423,176 @@ From the theoretical point of view, the open questions are mostly due to incompl
 First, there is no consensus about unification of the gauge interactions. At certain very high energy scales, the gauge interactions are expected to behave similarly. However, the observed Standard Model parameters do not allow for a common point of convergence\cite{Amaldi:Comparisongrandunified}.
 Secondly, the framework of quantum field theory does not allow for a non-renormalizable theory such as quantum gravity. Thus, the question about how to combine particle physics and gravity (or rather general relativity) is still open.\footnote{In the context of collider experiments, the effects of gravity are so weak that they can be neglected.}
 
-Another theoretical motivation is the \emph{mass hierarchy problem}: One of the seemingly indisputable energy scales in nature is the Planck scale at $M_\text{Pl} \approx \SI{e18}{\GeV}$. At this scale, gravity becomes as strong as the gauge interactions and nature is expected to behave differently. However, all processes that have been observed so far appear at the electroweak scale $m_\text{EW} \approx \SI{e3}{\GeV}$. This discrepancy between these two scales challenges the generality of the Standard Model.
+Another theoretical motivation is the \emph{mass hierarchy problem}: One of the seemingly indisputable energy scales in nature is the Planck scale at $M_\text{Pl} \approx \SI{e18}{\GeV}$. At this scale, gravity becomes as strong as the gauge interactions and nature is expected to behave differently. However, all processes that have been observed so far appear at the electroweak scale $m_\text{EW} \approx \SI{e3}{\GeV}$. The discrepancy between these two scales challenges the generality of the Standard Model.
 
 % Spin 3/2 particles?
 
 \section{Extensions of the Standard Model}
+Some solutions have been proposed to these problems. In this work, four extension byeond the \acl{SM} will be relevant and thus introduced in the following sections.
 
+\subsubsection{$R$-Parity Violating Supersymmetry}
+There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only know science is peaking into the \si{\TeV} range.
+
+An implication of this is the violation of lepton and baryon number. The latter effect would also enable decay of free protons, which to date has not been observed. 
+One way to solve this problem is the introduction of an additional quantum number $R$: \ac{SM} particles are assigned $R = +1$, while \ac{SUSY} particles have $R = -1$. $R$ must then be conserved at each interaction, allowing \ac{SUSY} particles to be created only in pairs, and preventing proton decay.
+
+So far, \ac{SUSY} models containing the notion of $R$-parity have been tightly constrained. Thus, some analyses focus on $R$-parity violating theories, which stabilize the proton in other ways.
+
+The \ac{RPV-SUSY} model under investigation falls into this category. It stabilizes the proton by introducing a symmetry that cancels out the baryon number violating terms. 
+Among its signatures is the resonant production of \ac{SUSY} particles from quark-quark annihilation, which decays into a \Pe \Pmu pair, violating the lepton number (see \fref{fig:rpv_signature}).\todo{Quelle: AN2016-191}
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{rpv_signature}
+        \begin{fmfgraph*}(8,3)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2}
+            \fmf{fermion,label=\Pqd,label.side=right}{x1,i1}
+            \fmf{fermion,label=\Pqd,label.side=right}{i2,x1}
+            \fmf{dashes_arrow,label=$\PSnu_\tau$}{x1,x2}
+            \fmf{fermion,label=\Pmu,label.side=right}{o1,x2}
+            \fmf{fermion,label=\Pe,label.side=right}{x2,o2}
+            \fmflabel{$\lambda_{311}'$}{x1}
+            \fmflabel{$\lambda_{132}$}{x2}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{\Pe \Pmu signature of \acf{RPV-SUSY}. A supersymmetric $\PSnu_\tau$ (tau-sneutrino) boson is produced from the annihilation of two down quarks. The boson subsequently decays into a \Pe \Pmu pair, violating the lepton number.}
+    \label{fig:rpv_signature}
+\end{figure}
+
+\subsubsection{Seesaw Type III Model}
+The so-called Seesaw model aims to explain the low neutrino masses. In this model, the neutrino masses are considered to arise via the mediation of massive fermion partners. Two additional charged partners $\PSigmapm$ are predicted alongside a neutral Majorana particle $\PSigmazero$.
+Within the \ac{LHC}, the particles are produced in pairs as electroweak decay products as shown in \fref{fig:seesaw_production}.
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{seesaw_production}
+        \begin{fmfgraph*}(6,3)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2}
+            \fmf{plain,label=\Pp,label.side=left}{i1,x1}
+            \fmf{plain,label=\Pp,label.side=right}{i2,x1}
+            \fmfblob{0.1w}{x1}
+            \fmf{dashes,label=$\PZ/\Pgamma^*/\PH$}{x1,x2}
+            \fmf{plain,label=$\Sigma^+$}{x2,o1}
+            \fmf{plain,label=$\Sigma^-$}{x2,o2}
+            \fmffreeze
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(6,3)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2}
+            \fmf{plain,label=\Pp,label.side=left}{i1,x1}
+            \fmf{plain,label=\Pp,label.side=right}{i2,x1}
+            \fmfblob{0.1w}{x1}
+            \fmf{dashes,label=$\PWpm$}{x1,x2}
+            \fmf{plain,label=$\PSigmapm$}{x2,o1}
+            \fmf{plain,label=$\PSigmazero$}{x2,o2}
+            \fmffreeze
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{Production of heavy fermions $\PSigmapm, \PSigmazero$ from proton-proton collisions within the Seesaw Type III model.}
+    \label{fig:seesaw_production}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{seesaw_full}
+        \begin{fmfgraph*}(8,5)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2,o3,o4,o5,o6}
+            \fmflabel{\Pq}{o1}
+            \fmflabel{\Pq}{o2}
+            \fmflabel{\Pe}{o3}
+            \fmflabel{\APmuon}{o4}
+            \fmflabel{\APmuon}{o5}
+            \fmflabel{\Pmuon}{o6}
+            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
+            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
+            \fmfblob{0.1w}{x1}
+            \fmf{dashes,label=$\PWp$,tension=3}{x1,x2}
+            \fmf{plain,label=$\PSigmaplus$,tension=2,label.side=left}{x2,x4}
+            \fmf{plain,label=$\PSigmazero$,tension=2,label.side=right}{x2,x3}
+            \fmf{plain}{x3,o3}
+            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
+            \fmf{plain}{x5,o1}
+            \fmf{plain}{x5,o2}
+            \fmf{dashes,label=$\PZ$,label.side=left}{x4,x6}
+            \fmf{plain}{x4,o4}
+            \fmf{plain}{x6,o5}
+            \fmf{plain}{x6,o6}
+            \fmffreeze
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{Seesaw Decay into 1 \Pe, 3 \Pmu and 2 jets.}
+    \label{fig:seesaw_full}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{seesaw_ttbar_bg}
+        \begin{fmfgraph*}(8,7)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2,o3,o4,o5,o6,o7,o8}
+            \fmflabel{\Pl}{o1}
+            \fmflabel{\Pnu}{o2}
+            \fmflabel{\APqb}{o3}
+            \fmflabel{\Pqb}{o4}
+            \fmflabel{\Pnu}{o5}
+            \fmflabel{\Pl}{o6}
+            \fmflabel{\Pl}{o7}
+            \fmflabel{\Pl}{o8}
+            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
+            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
+            \fmfblob{0.1w}{x1}
+            \fmf{curly,label=$\Pg$,tension=3,label.side=left}{x1,x2}
+            \fmf{plain,label=$\Pqt$,tension=2,label.side=left}{x2,x2a}
+            \fmf{plain,label=\Pqt,label.side=right}{x2a,x4}
+            \fmf{dashes,label=\PZ,label.side=left}{x2a,x7}
+            \fmf{plain}{x7,o7}
+            \fmf{plain}{x7,o8}
+            \fmf{plain,label=$\APqt$,tension=2,label.side=right}{x2,x3}
+            \fmf{plain}{x3,o3}
+            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
+            \fmf{plain}{x5,o1}
+            \fmf{plain}{x5,o2}
+            \fmf{dashes,label=$\PW$,label.side=left}{x4,x6}
+            \fmf{plain}{x4,o4}
+            \fmf{plain}{x6,o5}
+            \fmf{plain}{x6,o6}
+            \fmffreeze
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
+            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
+            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{x}
+    \label{fig:seesaw_ttbar_bg}
+\end{figure}
+
+
+Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} particles. The most important decay channels are
+\begin{itemize}
+    \item $\PSigmapm \to \PWpm \Pnu$
+    \item $\PSigmapm \to \PZ \Plpm$
+    \item $\PSigmapm \to \PH \Plpm$
+    \item $\PSigmazero \to \PWpm \Plmp$
+    \item $\PSigmazero \to \PZ \Pnu$
+    \item $\PSigmazero \to \PH \Pnu$
+\end{itemize}
 
 \section{Experiments}
 Beginning with Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
@@ -437,6 +702,8 @@ From the amount of deposited charge and timing measurements, a spacial resolutio
 In the endcap region, the muon system consists of cathode strip chambers instead of drift tubes. \acp{CSC} work similarly to drift tubes, but instead of having a single cathode at the chamber walls, they contain multiple cathode strips, which are aligned orthogonally to the wires and read out separately.
 The advantage of measuring all three dimensions makes them suited for use in the endcap regions where the magnetic field is not uniform. 
 
+\todo{RPCs?}
+
 \subsection{Triggering}
 As mentioned in \fref{sec:pileup}, the \ac{LHC} delivers collisions about every \SI{25}{\nano\second}, resulting in around \num{40} million events per second. Even with a raw event size of about \SI{1}{\mega\byte}, storing all events would require a bandwidth of \SI{40}{\tera\byte\per\second}. Currently, there is no technology capable of this task, especially considering the outer circumstances such as irradiation and the strong magnetic field.
 
@@ -444,7 +711,14 @@ Thus, the rate of events accepted for storage and analysis has to be drastically
 
 Triggering is implemented in a two step process: First, the \acfi{L1} trigger is consulted. It is implemented in dedicated hardware and uses information from the calorimeters and the muon system to reject low-energetic events. Events passing \ac{L1} will be read out, temporarily stored and further evaluated by the \acfi{HLT}. The \ac{HLT} is implemented in software and running on computers next to the detector cavern. It has access to the full detector information to decide whether an event is eventually stored or rejected.
 
-
-
-
 \subsection{The Computing Grid}
+Reconstruction and analyses are ran on the stored events. For this purpose, \ac{CERN} maintains several server farms, organized within the \acfi{WLCG} project.
+
+The facilities are organized in layers called \emph{tiers}. Tier 0 is the \ac{CERN} data center in Geneva. It store raw data and performs initial reconstruction. The data are then distributed to tier 1 computing centers. There are currently 13 tier 1 centers worldwide. They perform further processing on the data and distribute it to tier 3 facilities.
+
+Most of the 155 tier 3 computing centers belong to universities and other scientific institutes. They produce \ac{MC} simulations and perform scientific analyses. One of these tier 3 centers is operated at the physics department of the RWTH Aachen University, currently providing around \num{5200} processing cores and \SI{3}{\peta\byte} of storage. 
+
+\todo{quelle}
+% https://home.cern/about/computing/grid-system-tiers
+% http://www.institut3b.physik.rwth-aachen.de/cms/ParticlePhysics3B/Forschung/~gbvf/GRID-Computing/
+

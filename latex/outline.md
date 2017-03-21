@@ -25,28 +25,6 @@ Title: Sensitivity Studies for the Model Unspecific Search
         * Triggering
         * Grid (Computing/Storage)
 
-* Objects and Events (max 5 pages)
-    * Event Selection:
-        * Used Triggers
-        * MET-Filters
-
-    * Object ID + Reco:
-        * Offline Reconstruction
-        * Identification
-        * b/t-Tagging
-
-* Datasets (max 10 pages)
-    * SM MC Used (Processes, Reco-Parameters, Triggers)
-    * Signal MC Used
-    * Signal Mass/Coupling Points
-
-    * Signal Signatures:
-        * Gen View (e.g. Resonances)
-        * Gen vs. Rec Comparisons
-
-* Systematic Uncertainties (max 5 pages):
-    * Considered Uncertainties
-    * Treatment of Systematic Uncertainties
 
 * MUSiC (max 10 pages):
     * Motivation for MUSiC
@@ -80,7 +58,31 @@ Title: Sensitivity Studies for the Model Unspecific Search
         * Skimming, PXL, TAPAS --> MUSiC
         * MUSiC Workflow (plot)
         * Automation -> Luigi
+        
 
+* Objects and Events (max 5 pages)
+    * Event Selection:
+        * Used Triggers
+        * MET-Filters
+
+    * Object ID + Reco:
+        * Offline Reconstruction
+        * Identification
+        * b/t-Tagging
+
+* Datasets (max 10 pages)
+    * SM MC Used (Processes, Reco-Parameters, Triggers)
+    * Signal MC Used
+    * Signal Mass/Coupling Points
+
+    * Signal Signatures:
+        * Gen View (e.g. Resonances)
+        * Gen vs. Rec Comparisons
+
+* Systematic Uncertainties (max 5 pages):
+    * Considered Uncertainties
+    * Treatment of Systematic Uncertainties
+    
 ---
 
 * Additional studies (max 15 pages)
@@ -129,13 +131,14 @@ Title: Sensitivity Studies for the Model Unspecific Search
 BSM Models
 ==========
 
-* E-Mu QBH (Lepton Flavor Violating t-channel): EXO-16-001 / AN-2015/191 
+* E-Mu QBH (Lepton Flavor Violating t-channel): EXO-16-001 / AN-2015/191, EXO-16-058 / AN-2016/163
     - Sample: QBHToEMu, RPVresonantToEMu ... LLE
     - RPV->e mu
         + x-secs in der Datenbank (pb!) sind richtig, AN falsch
-        + Exp Limit LQD001: 1000 GeV, LQD01 2700GeV, LQD02 3300GeV
+        + PUBLIC Exp Limit LQD001: 1000 GeV, LQD01 2700GeV, LQD02 3300GeV
+        + Private Exp Limits LQD001: 1.9 TeV, LQD01 3.8TeV 
         + Mass/Coupling points:
-            * LQD 0.01: 200 GeV, 500 GeV, 1000 GeV, 1400 GeV
+            * LQD 0.01: 200 GeV, 1000 GeV, 1400 GeV
             * LQD 0.2: 4000 GeV, 5000 GeV, 6500 GeV
     - QBHToEMu:
         + Exp Limit dim4-6: 4300 GeV
@@ -157,9 +160,6 @@ Sample List:
 
 RPVresonantToEMu_M-200_LLE_LQD-001:
     RPVresonantToEMu_M-200_LLE_LQD-001_13TeV_CA
-
-RPVresonantToEMu_M-500_LLE_LQD-001:
-    RPVresonantToEMu_M-500_LLE_LQD-001_13TeV_CA
 
 RPVresonantToEMu_M-1000_LLE_LQD-001:
     RPVresonantToEMu_M-1000_LLE_LQD-001_13TeV_CA 
@@ -242,3 +242,8 @@ SeesawTypeIII_M-500:
     SeesawTypeIII_SIGMA-SIGMA0WW_M-500_13TeV_MG
     SeesawTypeIII_SIGMA-SIGMA0HZ_M-500_13TeV_MG
     SeesawTypeIII_SIGMAplusSIGMA0WZ_M-500_13TeV_MG
+
+
+Lumi for 2016:
+    36400 /pb = 36.4 /fb
+    

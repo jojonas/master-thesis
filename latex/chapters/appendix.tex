@@ -6,3 +6,29 @@
 \renewcommand\thechapter{A}
 \chapter{Appendix}
 
+\section{Monte Carlo Datasets}
+\label{sec:appendix_mc_datasets}
+
+\subsection{Sample Name}
+Most of the samples follow a consistent naming scheme. The name contains the simulated physics process, the mass range, center-of-mass energy (\SI{13}{\TeV}) and an abbreviation for the generator name.
+Possible generator abbreviations are: \texttt{AM} for aMC@NLO, \texttt{CA} for CalcHEP, \texttt{MG} for MadGraph, \texttt{P8} for Pythia 8, \texttt{PH} for POWHEG BOX, and \texttt{SP} for Sherpa.
+
+Example name "\texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}":
+\begin{itemize}
+\item \texttt{\underline{DYJetsToLL}\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}: Sample contains a simulation of the Drell-Yan process with two leptons in the final state
+\item \texttt{DYJetsToLL\_\underline{M-5to50}\_HT-200to400\_13TeV\_ext1\_MG}: Sample is binned in the di-lepton mass (optional), this sample contains masses between \SI{5}{\GeV} and \SI{50}{\GeV}
+\item \texttt{DYJetsToLL\_M-5to50\_\underline{HT-200to400}\_13TeV\_ext1\_MG}: Sample is additionally binned in the jet $H_t = p_T$ (optional), containing a range of \SI{200}{\GeV} to \SI{400}{\GeV}
+\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_\underline{13TeV}\_ext1\_MG}: The center of mass energy is $\sqrt{s} = \SI{13}{\TeV}$
+\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_\underline{ext1}\_MG}:
+ Sample is an extension sample (optional), produced in addition to an existing sample with the same name in order to reduce statistical uncertainties
+\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_\underline{MG}}:
+ Sample was produced using the Madgraph generator
+\end{itemize}
+
+\pagebreak
+\subsection{List}
+{
+    \small
+    \def\arraystretch{1}
+    \input{tables/mc_datasets}
+}

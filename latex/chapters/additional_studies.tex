@@ -1,0 +1,88 @@
+% !TeX spellcheck = en_US
+% !TeX encoding = UTF-8
+% !TeX root = ../document.tex
+
+\chapter{Additional Studies}
+\section{Coverage Analysis}
+In this chapter, we will show that the test statistic \TS introduced in \fref{sec:test_statistic} can be directly interpreted as $p$-value: $p = \TS$. We will refer to the definition and requirements of a $p$-value and show that \TS sufficiently fulfills those requirements.
+
+A $p$-value is an indicator for the significance of a deviation, where a smaller $p$-value corresponds to a higher significance. The $p$-value of a result is compared to a significance threshold $\alpha$, which is fixed before the statistical analysis. If the observed $p$-value is smaller than $\alpha$, the null hypothesis is rejected. In our case, rejection of the null hypothesis corresponds to falsification of the \acl{SM} and possibly the discovery of new physics. 
+
+Both values are constructed in way that the null hypothesis is (incorrectly) rejected by chance with a probability of $\alpha$:
+\begin{align}
+	\Pr( H_0\:\text{rejected} | H_0 ) &= \alpha \\
+    \label{eq:coverage_inequality}
+    \Rightarrow \Pr( p < \alpha | H_0 ) &= \alpha
+\end{align}
+This equation is tested during the \emph{coverage analysis}.
+
+\subsubsection{Procedure}
+To test \fref{eq:coverage_inequality}, we construct pseudo experiments based on the null hypothesis $H_0$ and calculate the corresponding $p$-value, in this case \TS. After generating and examining sufficiently many pseudo experiments, we can determine the rate of significant findings and compare them to the claimed significance threshold:
+\begin{equation}
+	p_\text{true} = \frac{\text{number of pseudo-experiments where $p < \alpha$}}{n_\text{toys}} \approx \Pr(p < \alpha | H_0)
+\end{equation}
+
+The pseudo experiments are based on \acs{MUSiC}'s null hypothesis: We assume that there is a constant probability that events end up in a particular region, and thus a constant true mean value $n_\text{true}$. 
+The arising assumption is that we only know an expected event yield, $n_\text{exp}$, which is taken as the best estimator for $n_\text{true}$, and that the estimated probability density for possible $n_\text{true}$ values is a normal distribution:
+\begin{equation}
+	f( n_\text{true} | n_\text{exp}, \sigma_\text{exp} ) = \frac{1}{\sqrt{2 \pi \sigma}} \exp\left(-\frac{(n_\text{true} - n_\text{exp})^2}{2\sigma^2}\right)
+\end{equation} 
+From symmetry of the probability density it follows that 
+\begin{equation}
+	f( n_\text{true} | n_\text{exp}, \sigma_\text{exp} ) = f( n_\text{exp} | n_\text{true}, \sigma_\text{exp} )
+\end{equation}	
+Thus, in simulation, one can draw background yield samples $n_\text{exp}$ around an assumed value $n_\text{true}$ without breaking any assumptions.
+
+Additionally, the physics process of performing a counting experiment has to be implemented: Here it is assumed that the event yield is caused by independent statistical processes with a fixed probability, thus the observed event yield follows a Poisson distribution around $n_\text{true}$.
+
+Consequently, each pseudo-experiment begins with drawing $n_\text{exp}$ from a (truncated) normal distribution around $n_\text{true}$ and from a (discrete) Poisson distribution with a mean of $n_\text{true}$. From these values, the \ac{MUSiC} $p$-value as described in chapter XYZ is calculated.
+
+This process is repeated for $n_\text{toys}$ pseudo-experiments. An estimation for the true $p$ value is afterwards calculated as:
+\begin{equation}
+	p_\text{true} = \frac{\text{number of pseudo-experiments where $p < \alpha$}}{n_\text{toys}} \approx \Pr(p < \alpha | H_0)
+\end{equation}
+The approximation becomes exact as the number of pseudo-experiment goes to infinity.
+
+The result is the left hand side of the equality in equation \ref{eq:coverageEquality}.
+
+In order to state the so called "coverage value" for the tuple ($n_\text{true}$, $\sigma_\text{exp}$), both sides of equation \ref{eq:coverageEquality} are translated to $Z$-scores\footnote{	
+	% We could/should add this to the appendix instead of having it here directly in the text...
+	The probability $p$ associated with a $Z$-score is the cumulative tail probability of a normal distribution at $Z$ standard deviations from the mean:
+	\begin{equation}
+	p = \frac{1}{\sqrt{2 \pi}}\int_Z^{\infty} \exp\left(-\frac{x^2}{2}\right) \text{d}x
+	\end{equation}
+	
+	This yields the conversion formulas:
+	\begin{equation}
+	p = \frac{1}{2} \left(1 - \text{erf}\left(\frac{Z}{\sqrt{2}}\right) \right) \Leftrightarrow Z = \sqrt{2} \cdot \text{erf}^{-1} \left( 1 - 2 p \right) 
+	\end{equation}
+}, resulting in $Z_\text{true}$ representing the observed and $Z_\text{claim}$ representing the claimed rate ob significant results.
+
+The coverage is finally reported as
+\begin{equation}
+	\text{coverage} = Z_\text{true} - Z_\text{claim}
+\end{equation}
+Note that because of the monotonically decreasing function $Z(p)$, a larger $Z$-score corresponds to a lower $p$-value and thus the inequality in equation \ref{eq:coverageEquality} may seem inverted.
+
+\subsubsection{Interpretation of Results}
+Three different result cases can arise, depending on the coverage value:
+\begin{enumerate}
+	\item $\text{coverage} = 0 \Leftrightarrow \Pr( H_0 \text{ rejected} | H_0 ) = \alpha$: This is the ideal case where the "promise" made by the confidence intervals is kept. It indicates the $p$-value performs according to its definition.
+	\item $\text{coverage} < 0 \Leftrightarrow \Pr( H_0 \text{ rejected} | H_0 ) > \alpha$: The background hypothesis is rejected more often than with a probability of $\alpha$. This case is called "undercoverage" and corresponds to "liberal" behavior. The $p$-value overestimates the significance of deviations.
+	\item $\text{coverage} > 0 \Leftrightarrow \Pr( H_0 \text{ rejected} | H_0 ) < \alpha$: The background hypothesis is not rejected in some cases where it should have been rejected. This effect is called "overcoverage" and corresponds to "conservative" behavior where the $p$-value underestimates the significance of deviations.
+\end{enumerate}	
+
+\subsubsection{Our Results}
+Since the MUSiC $p$-value is required to cover a large range of possible $n_\text{true}$ and $\sigma_\text{exp}$ values, the coverage is evaluated on a two dimensional grid in this parameter space.
+
+Instead of directly stating $\sigma_\text{exp}$, the relative uncertainty $f$ is used as one grid axis, from which the absolute uncertainty is calculated as $\sigma_\text{exp} = f \cdot n_\text{true}$. 
+
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{coverage/coverage_deficits_lognormal}
+    \includegraphics[width=\textwidth]{coverage/coverage_excesses_lognormal}
+    \caption{Results of the coverage analysis.}
+\end{figure}
+\section{Log-Normal $p$-Value}
+
+\section{A Global $p$-Value}
