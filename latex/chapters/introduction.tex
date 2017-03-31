@@ -431,12 +431,12 @@ Another theoretical motivation is the \emph{mass hierarchy problem}: One of the 
 Some solutions have been proposed to these problems. In this work, four extension byeond the \acl{SM} will be relevant and thus introduced in the following sections.
 
 \subsubsection{$R$-Parity Violating Supersymmetry}
-There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only know science is peaking into the \si{\TeV} range.
+There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only now science is peaking into the \si{\TeV} range.
 
 An implication of this is the violation of lepton and baryon number. The latter effect would also enable decay of free protons, which to date has not been observed. 
 One way to solve this problem is the introduction of an additional quantum number $R$: \ac{SM} particles are assigned $R = +1$, while \ac{SUSY} particles have $R = -1$. $R$ must then be conserved at each interaction, allowing \ac{SUSY} particles to be created only in pairs, and preventing proton decay.
 
-So far, \ac{SUSY} models containing the notion of $R$-parity have been tightly constrained. Thus, some analyses focus on $R$-parity violating theories, which stabilize the proton in other ways.
+So far, \ac{SUSY} models containing the notion of $R$-parity have been tightly constrained. Thus, some analyses focus on theories where $R$-parity conservation is violated and stabilize the proton in other ways.
 
 The \ac{RPV-SUSY} model under investigation falls into this category. It stabilizes the proton by introducing a symmetry that cancels out the baryon number violating terms. 
 Among its signatures is the resonant production of \ac{SUSY} particles from quark-quark annihilation, which decays into a \Pe \Pmu pair, violating the lepton number (see \fref{fig:rpv_signature}).\todo{Quelle: AN2016-191}
@@ -503,96 +503,108 @@ Within the \ac{LHC}, the particles are produced in pairs as electroweak decay pr
     \label{fig:seesaw_production}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \begin{fmffile}{seesaw_full}
-        \begin{fmfgraph*}(8,5)
-            \fmfleft{i1,i2}
-            \fmfright{o1,o2,o3,o4,o5,o6}
-            \fmflabel{\Pq}{o1}
-            \fmflabel{\Pq}{o2}
-            \fmflabel{\Pe}{o3}
-            \fmflabel{\APmuon}{o4}
-            \fmflabel{\APmuon}{o5}
-            \fmflabel{\Pmuon}{o6}
-            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
-            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
-            \fmfblob{0.1w}{x1}
-            \fmf{dashes,label=$\PWp$,tension=3}{x1,x2}
-            \fmf{plain,label=$\PSigmaplus$,tension=2,label.side=left}{x2,x4}
-            \fmf{plain,label=$\PSigmazero$,tension=2,label.side=right}{x2,x3}
-            \fmf{plain}{x3,o3}
-            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
-            \fmf{plain}{x5,o1}
-            \fmf{plain}{x5,o2}
-            \fmf{dashes,label=$\PZ$,label.side=left}{x4,x6}
-            \fmf{plain}{x4,o4}
-            \fmf{plain}{x6,o5}
-            \fmf{plain}{x6,o6}
-            \fmffreeze
-            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
-            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
-            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
-            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
-        \end{fmfgraph*}
-    \end{fmffile}
-    \caption{Seesaw Decay into 1 \Pe, 3 \Pmu and 2 jets.}
-    \label{fig:seesaw_full}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \begin{fmffile}{seesaw_ttbar_bg}
-        \begin{fmfgraph*}(8,7)
-            \fmfleft{i1,i2}
-            \fmfright{o1,o2,o3,o4,o5,o6,o7,o8}
-            \fmflabel{\Pl}{o1}
-            \fmflabel{\Pnu}{o2}
-            \fmflabel{\APqb}{o3}
-            \fmflabel{\Pqb}{o4}
-            \fmflabel{\Pnu}{o5}
-            \fmflabel{\Pl}{o6}
-            \fmflabel{\Pl}{o7}
-            \fmflabel{\Pl}{o8}
-            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
-            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
-            \fmfblob{0.1w}{x1}
-            \fmf{curly,label=$\Pg$,tension=3,label.side=left}{x1,x2}
-            \fmf{plain,label=$\Pqt$,tension=2,label.side=left}{x2,x2a}
-            \fmf{plain,label=\Pqt,label.side=right}{x2a,x4}
-            \fmf{dashes,label=\PZ,label.side=left}{x2a,x7}
-            \fmf{plain}{x7,o7}
-            \fmf{plain}{x7,o8}
-            \fmf{plain,label=$\APqt$,tension=2,label.side=right}{x2,x3}
-            \fmf{plain}{x3,o3}
-            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
-            \fmf{plain}{x5,o1}
-            \fmf{plain}{x5,o2}
-            \fmf{dashes,label=$\PW$,label.side=left}{x4,x6}
-            \fmf{plain}{x4,o4}
-            \fmf{plain}{x6,o5}
-            \fmf{plain}{x6,o6}
-            \fmffreeze
-            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
-            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
-            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
-            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
-        \end{fmfgraph*}
-    \end{fmffile}
-    \caption{x}
-    \label{fig:seesaw_ttbar_bg}
-\end{figure}
-
+%\begin{figure}
+%    \centering
+%    \begin{fmffile}{seesaw_full}
+%        \begin{fmfgraph*}(8,5)
+%            \fmfleft{i1,i2}
+%            \fmfright{o1,o2,o3,o4,o5,o6}
+%            \fmflabel{\Pq}{o1}
+%            \fmflabel{\Pq}{o2}
+%            \fmflabel{\Pe}{o3}
+%            \fmflabel{\APmuon}{o4}
+%            \fmflabel{\APmuon}{o5}
+%            \fmflabel{\Pmuon}{o6}
+%            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
+%            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
+%            \fmfblob{0.1w}{x1}
+%            \fmf{dashes,label=$\PWp$,tension=3}{x1,x2}
+%            \fmf{plain,label=$\PSigmaplus$,tension=2,label.side=left}{x2,x4}
+%            \fmf{plain,label=$\PSigmazero$,tension=2,label.side=right}{x2,x3}
+%            \fmf{plain}{x3,o3}
+%            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
+%            \fmf{plain}{x5,o1}
+%            \fmf{plain}{x5,o2}
+%            \fmf{dashes,label=$\PZ$,label.side=left}{x4,x6}
+%            \fmf{plain}{x4,o4}
+%            \fmf{plain}{x6,o5}
+%            \fmf{plain}{x6,o6}
+%            \fmffreeze
+%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
+%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
+%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
+%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
+%        \end{fmfgraph*}
+%    \end{fmffile}
+%    \caption{Seesaw Decay into 1 \Pe, 3 \Pmu and 2 jets.}
+%    \label{fig:seesaw_full}
+%\end{figure}
+%
+%\begin{figure}
+%    \centering
+%    \begin{fmffile}{seesaw_ttbar_bg}
+%        \begin{fmfgraph*}(8,7)
+%            \fmfleft{i1,i2}
+%            \fmfright{o1,o2,o3,o4,o5,o6,o7,o8}
+%            \fmflabel{\Pl}{o1}
+%            \fmflabel{\Pnu}{o2}
+%            \fmflabel{\APqb}{o3}
+%            \fmflabel{\Pqb}{o4}
+%            \fmflabel{\Pnu}{o5}
+%            \fmflabel{\Pl}{o6}
+%            \fmflabel{\Pl}{o7}
+%            \fmflabel{\Pl}{o8}
+%            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
+%            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
+%            \fmfblob{0.1w}{x1}
+%            \fmf{curly,label=$\Pg$,tension=3,label.side=left}{x1,x2}
+%            \fmf{plain,label=$\Pqt$,tension=2,label.side=left}{x2,x2a}
+%            \fmf{plain,label=\Pqt,label.side=right}{x2a,x4}
+%            \fmf{dashes,label=\PZ,label.side=left}{x2a,x7}
+%            \fmf{plain}{x7,o7}
+%            \fmf{plain}{x7,o8}
+%            \fmf{plain,label=$\APqt$,tension=2,label.side=right}{x2,x3}
+%            \fmf{plain}{x3,o3}
+%            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
+%            \fmf{plain}{x5,o1}
+%            \fmf{plain}{x5,o2}
+%            \fmf{dashes,label=$\PW$,label.side=left}{x4,x6}
+%            \fmf{plain}{x4,o4}
+%            \fmf{plain}{x6,o5}
+%            \fmf{plain}{x6,o6}
+%            \fmffreeze
+%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
+%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
+%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
+%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
+%        \end{fmfgraph*}
+%    \end{fmffile}
+%    \caption{x}
+%    \label{fig:seesaw_ttbar_bg}
+%\end{figure}
+%
 
 Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} particles. The most important decay channels are
-\begin{itemize}
-    \item $\PSigmapm \to \PWpm \Pnu$
-    \item $\PSigmapm \to \PZ \Plpm$
-    \item $\PSigmapm \to \PH \Plpm$
-    \item $\PSigmazero \to \PWpm \Plmp$
-    \item $\PSigmazero \to \PZ \Pnu$
-    \item $\PSigmazero \to \PH \Pnu$
-\end{itemize}
+\begin{multicols}{2}
+    \begin{itemize}
+        \setlength{\parskip}{0ex}
+        \setlength{\itemsep}{0ex}
+    
+        \item $\PSigmapm \to \PWpm \Pnu$
+        \item $\PSigmapm \to \PZ \Plpm$
+        \item $\PSigmapm \to \PH \Plpm$
+        \item $\PSigmazero \to \PWpm \Plmp$
+        \item $\PSigmazero \to \PZ \Pnu$
+        \item $\PSigmazero \to \PH \Pnu$
+    \end{itemize}
+\end{multicols}
+Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states.
+
+\subsubsection{Sequential Standard Model and \PWprime}
+Another popular extension of the \ac{SM} is the \acfi{SSM}. In the \acl{SSM}, heavier copies of the \ac{SM} gauge bosons are introduced. They behave exactly like the \PW and \PZ bosons and are consequently called \PWprime and \PZprime. 
+The masses are assumed to lay within the \si{\TeV} range and the expected experimental signature is a resonance peak in the invariant mass spectrum.
+In this thesis, we will examine a simulation of the \ac{SSM} with the \PWprime boson only. 
+
 
 \section{Experiments}
 Beginning with Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.

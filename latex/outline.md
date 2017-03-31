@@ -29,20 +29,20 @@ Title: Sensitivity Studies for the Model Unspecific Search
 * MUSiC (max 10 pages):
     * Motivation for MUSiC
     * Previous MUSiC Works
-    
+
     * Definition of Classes (incl., excl., jet incl.)
     * Kinematic Variables + Distributions
         * SumPt
         * InvMass
         * MET
-        
+
     * MUSiC-Physics Objects, incl. b-jets ?
         * Electron
         * Muon
         * Photons
         * Jets
         * MET
-        
+
     * RoI-Scanning:
         * Search Space (connected bin regions)
         * Global Significance
@@ -58,7 +58,7 @@ Title: Sensitivity Studies for the Model Unspecific Search
         * Skimming, PXL, TAPAS --> MUSiC
         * MUSiC Workflow (plot)
         * Automation -> Luigi
-        
+
 
 * Objects and Events (max 5 pages)
     * Event Selection:
@@ -82,7 +82,7 @@ Title: Sensitivity Studies for the Model Unspecific Search
 * Systematic Uncertainties (max 5 pages):
     * Considered Uncertainties
     * Treatment of Systematic Uncertainties
-    
+
 ---
 
 * Additional studies (max 15 pages)
@@ -131,30 +131,41 @@ Title: Sensitivity Studies for the Model Unspecific Search
 BSM Models
 ==========
 
-* E-Mu QBH (Lepton Flavor Violating t-channel): EXO-16-001 / AN-2015/191, EXO-16-058 / AN-2016/163
+* E-Mu QBH (Lepton Flavor Violating t-channel): EXO-16-001 (P) / AN-2015/191, EXO-16-058 / AN-2016/163
     - Sample: QBHToEMu, RPVresonantToEMu ... LLE
     - RPV->e mu
-        + x-secs in der Datenbank (pb!) sind richtig, AN falsch
-        + PUBLIC Exp Limit LQD001: 1000 GeV, LQD01 2700GeV, LQD02 3300GeV
-        + Private Exp Limits LQD001: 1.9 TeV, LQD01 3.8TeV 
+        + x-secs in der DB und AN sind falsch (in AN stehen pb, gemeint sind fb = angegebene xsecs Faktor 1000 zu groß)
+        + Public (2015) Exp Limit LQD001: 1000 GeV, LQD01 2700GeV, LQD02 3300GeV
+        + Private Exp Limits LQD001: 1.76 TeV, LQD01 3.72TeV
         + Mass/Coupling points:
             * LQD 0.01: 200 GeV, 1000 GeV, 1400 GeV
-            * LQD 0.2: 4000 GeV, 5000 GeV, 6500 GeV
+
     - QBHToEMu:
         + Exp Limit dim4-6: 4300 GeV
         + Mass/Dim points:
             * n4: 3000 GeV, 4000 GeV, 5000 GeV
-    
-* Semi-Classical-BH (non-resonant, but high multiplicities): EXO-15-007 / AN-2015/130 
-    - Private Samples
 
-* Seesaw (lll etc): EXO-16-002 / AN-2015/256 
+* Semi-Classical-BH (non-resonant, but high multiplicities): EXO-15-007 (P) / AN-2015/130
+    - Private Samples (see https://twiki.cern.ch/twiki/bin/view/CMS/BHAnalysis2015Samples )
+    - Black hole types:
+        + BH1: No tension, non-rotating << THIS I WANT
+        + BH2: Rotating, non-split dimensions, no gravitons in FinalBurst (?)
+        + BH5: like BH2, but with gravitons in FinalBurst
+    - I should take BH1, n=6, MD=4TeV, as this is one benchmark model in EXO-15-007
+        + Expected Limit BH1_n6_MD4000: MBH=8.7 TeV
+        + Cross Sections: https://twiki.cern.ch/twiki/bin/view/CMS/BlackHoleAnalysis2015#Signal_samples -> https://docs.google.com/spreadsheets/d/1UYe-w-IUYycUqRsyA7INpV_vI5F0Q1KiT50iqX9DIFM/edit#gid=1691832654
+
+* Seesaw (lll etc): EXO-16-002 (P) / AN-2015/256, EXO-17-006 (P) / AN-2016/192
     - SeesawTypeIII_*
-    - Exp Limit at 430 GeV
-    - Mass points 220, 380, 500 GeV 
+    - Exp Limit at 790 GeV
+    - Mass points 380, 500 GeV
+    - Cross Sections: ???
 
-* RPV-SUSY (resonant)
-   
+* W' to TB: B2G-17-010 (P) / AN-2016/480
+    - Limits: MW' >> Mnu: 3.3 TeV, MW' < Mnu: 3.5 TeV (expected)
+    - Mass points: 2, 3, 3.5, 4 TeV
+    - Cross Sections in AN, but not in Lep/Had
+
 ===
 Sample List:
 
@@ -162,28 +173,28 @@ RPVresonantToEMu_M-200_LLE_LQD-001:
     RPVresonantToEMu_M-200_LLE_LQD-001_13TeV_CA
 
 RPVresonantToEMu_M-1000_LLE_LQD-001:
-    RPVresonantToEMu_M-1000_LLE_LQD-001_13TeV_CA 
+    RPVresonantToEMu_M-1000_LLE_LQD-001_13TeV_CA
 
-RPVresonantToEMu_M-1400_LLE_LQD-001:  
-    RPVresonantToEMu_M-1400_LLE_LQD-001_13TeV_CA 
+RPVresonantToEMu_M-1400_LLE_LQD-001:
+    RPVresonantToEMu_M-1400_LLE_LQD-001_13TeV_CA
 
 RPVresonantToEMu_M-4000_LLE_LQD-02:
-    RPVresonantToEMu_M-4000_LLE_LQD-02_13TeV_CA 
+    RPVresonantToEMu_M-4000_LLE_LQD-02_13TeV_CA
 
-RPVresonantToEMu_M-5000_LLE_LQD-02:  
+RPVresonantToEMu_M-5000_LLE_LQD-02:
     RPVresonantToEMu_M-5000_LLE_LQD-02_13TeV_CA
 
 RPVresonantToEMu_M-6500_LLE_LQD-02:
     RPVresonantToEMu_M-6500_LLE_LQD-02_13TeV_CA
 
 QBHToEMu_M-3000_n4:
-    QBHToEMu_M-3000_n4_ADD-QBH_13TeV_P8 
+    QBHToEMu_M-3000_n4_ADD-QBH_13TeV_P8
 
 QBHToEMu_M-4000_n4:
-    QBHToEMu_M-4000_n4_ADD-QBH_13TeV_P8 
+    QBHToEMu_M-4000_n4_ADD-QBH_13TeV_P8
 
 QBHToEMu_M-5000_n4:
-    QBHToEMu_M-5000_n4_ADD-QBH_13TeV_P8 
+    QBHToEMu_M-5000_n4_ADD-QBH_13TeV_P8
 
 SeesawTypeIII_M-380:
     SeesawTypeIII_SIGMAplusSIGMA0HH_M-380_13TeV_MG
@@ -244,6 +255,35 @@ SeesawTypeIII_M-500:
     SeesawTypeIII_SIGMAplusSIGMA0WZ_M-500_13TeV_MG
 
 
-Lumi for 2016:
-    36400 /pb = 36.4 /fb
-    
+
+Lumi 2015 ( https://cds.cern.ch/record/2138682?ln=de ):
+    ? fb
+
+Lumi 2016:
+    35.9 /fb
+
+Lumi predicted for 2017 ( https://lhc-commissioning.web.cern.ch/lhc-commissioning/performance/2017-performance.htm ):
+    45-60 /fb
+
+HL-LHC ( http://hilumilhc.web.cern.ch/about/lhc-baseline#overlay-context=about/hl-lhc-project ):
+    up to 3000 /fb
+
+
+
+
+FINAL SIGNALS:
+    * Semi-Classical BH
+    * RPV->e+mu
+    * QBH->e+mu
+    * Seesaw
+
+
+Seesaw 380 ablesen:
+* Plot: 0.22pb
+* DB: 0.06188
+* Faktor: 3.56
+
+Seesaw 500 ablesen:
+* Limit Plot: M=500, xsec: 6.4e-2 pb
+* CSV: 0.01891=1.891e-2 pb
+* => Faktor 3.38
