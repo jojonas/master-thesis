@@ -257,16 +257,19 @@ SeesawTypeIII_M-500:
 
 
 Lumi 2015 ( https://cds.cern.ch/record/2138682?ln=de ):
-    ? fb
+    2.3 fb
 
 Lumi 2016:
     35.9 /fb
 
-Lumi predicted for 2017 ( https://lhc-commissioning.web.cern.ch/lhc-commissioning/performance/2017-performance.htm ):
-    45-60 /fb
+#Lumi predicted for 2017 ( https://lhc-commissioning.web.cern.ch/lhc-commissioning/performance/2017-performance.htm ):
+#    45-60 /fb
 
-HL-LHC ( http://hilumilhc.web.cern.ch/about/lhc-baseline#overlay-context=about/hl-lhc-project ):
-    up to 3000 /fb
+Lumi Run II:
+    100 /fb
+
+#HL-LHC ( http://hilumilhc.web.cern.ch/about/lhc-baseline#overlay-context=about/hl-lhc-project ):
+#    up to 3000 /fb
 
 
 

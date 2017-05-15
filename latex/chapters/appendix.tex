@@ -7,11 +7,11 @@
 \chapter{Appendix}
 
 \section{Monte Carlo Datasets}
-\label{sec:appendix_mc_datasets}
+\label{app:mc_datasets}
 
 \subsection{Sample Name}
 Most of the samples follow a consistent naming scheme. The name contains the simulated physics process, the mass range, center-of-mass energy (\SI{13}{\TeV}) and an abbreviation for the generator name.
-Possible generator abbreviations are: \texttt{AM} for aMC@NLO, \texttt{CA} for CalcHEP, \texttt{MG} for MadGraph, \texttt{P8} for Pythia 8, \texttt{PH} for POWHEG BOX, and \texttt{SP} for Sherpa.
+Possible generator abbreviations are: \texttt{AM} for aMC@NLO, \texttt{BM} for BlackMax, \texttt{CA} for CalcHEP, \texttt{MG} for MadGraph, \texttt{P8} for Pythia 8, \texttt{PH} for POWHEG BOX, and \texttt{SP} for Sherpa.
 
 Example name "\texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}":
 \begin{itemize}
@@ -32,3 +32,102 @@ Example name "\texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}":
     \def\arraystretch{1}
     \input{tables/mc_datasets}
 }
+
+\newpage
+\section{$Z$-score and $p$-value}
+\label{app:z_score}
+
+The probability $p$ associated with a $Z$-score is the cumulative tail probability of a normal distribution at $Z$ standard deviations from the mean:
+\begin{equation}
+    p = \frac{1}{\sqrt{2 \pi}}\int_Z^{\infty} \exp\left(-\frac{x^2}{2}\right) \text{d}x
+\end{equation}
+
+This yields the conversion formulas:
+\begin{equation}
+    p = \frac{1}{2} \left(1 - \text{erf}\left(\frac{Z}{\sqrt{2}}\right) \right) \Leftrightarrow Z = \sqrt{2} \cdot \text{erf}^{-1} \left( 1 - 2 p \right) 
+\end{equation}
+
+\newpage
+\section{Modified Distributions in Coverage Testing}
+\label{app:coverage_uncertainty}
+
+\todo{find better section title}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{coverage/coverage_distributions}
+    \caption{Difference in widths of distributions while keeping the probabilities constant.}
+    \label{fig:coverage_distributions}
+\end{figure}
+
+
+We find that a distribution set up at the new pseudo mean $\mu'$ with the same error parameter $\sigma$ does (in general) \emph{not} contain $\mu$ with the same probability as the original distribution around $\mu$ contained $\mu'$.
+In order to fix that, one has to adapt the width of the distribution, e.g. the error parameter, to yield the same confidence interval.
+
+The adjustment $\sigma \rightarrow \sigma'$ will be derived in the following:
+Starting with the assumption that the probability of obtaining $\mu'$ given $\mu$ should be the same as obtaining $\mu$ given $\mu'$, we will derive an expression for $\sigma'$ such that
+\begin{equation}
+    P(x \leq \mu'; \mu, \sigma) = P(x \geq \mu; \mu', \sigma')
+\end{equation}
+This requirement can also be motivated in \fref{fig:coverage_distributions}, where the left-hand-side of the equation corresponds to the area filled with circles and the right-hand-side corresponds to the cross-hatched area under the probability distribution curve.
+
+Let $g(x; \mu, \sigma)$ be the original distribution and $G(x; \mu; \sigma)$ its cumulative distribution function. The left-hand-side now spells out:
+\begin{equation}
+    P(x \leq \mu'; \mu, \sigma) = \int_0^{\mu'} g(x; \mu, \sigma) \dd{x} = G(\mu'; \mu, \sigma) - G(0; \mu, \sigma)
+\end{equation}
+Consequently, the right-hand-side corresponds to:
+\begin{equation}
+    P(x \geq \mu; \mu', \sigma) = \int_\mu^\infty g(x; \mu', \sigma') \dd{x} = G(\infty; \mu', \sigma') - G(\mu; \mu', \sigma')
+\end{equation}
+Since $G$ is a cumulative distribution function, we can substitute $G(0) = 0$ and $G(\infty) = 1$ and set both sides equal:
+\begin{equation}
+    G(\mu'; \mu, \sigma) = 1 - G(\mu; \mu', \sigma')
+\end{equation}
+
+\subsubsection{General Ideas}
+
+
+\begin{align}
+    \Phi(x) &= \frac{1}{2} \left(1+\erf\left(\frac{x}{\sqrt{2}}\right)\right) \\
+    \Phi^{-1}(x) &= \sqrt{2}\,\erf^{-1}(2x - 1) 
+\end{align}
+
+\begin{align}
+    \erf(x) &= \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \dd{t} \\
+    \erf(-x) &= -\erf(x)
+\end{align}
+
+
+\begin{align}
+    \Phi(x) &= 1 - \Phi(x') \\
+    \Rightarrow x' &= \Phi^{-1}(1 - \Phi(x)) \\
+    &= \sqrt{2} \erf^{-1}\left(2 \cdot \left[1 - \frac{1}{2} \left(1+\erf\left(\frac{x}{\sqrt{2}}\right)\right)\right]-1\right) \\
+    %&= \sqrt{2}\erf^{-1}\left(2-1-\erf\left(\frac{x}{\sqrt{2}}\right)-1\right) \\
+    &= \sqrt{2}\erf^{-1}\left(-\erf\left(\frac{x}{\sqrt{2}}\right)\right) \\
+    &= \sqrt{2}\erf^{-1}\left(\erf\left(\frac{-x}{\sqrt{2}}\right)\right) \\
+    &= -x
+\end{align}
+
+
+\subsubsection{Normal Distribution}
+
+\begin{equation}
+    G(\mu'; \mu, \sigma) = \Phi\left(\frac{\mu' - \mu}{\sigma}\right); \quad
+    G(\mu; \mu', \sigma') = \Phi\left(\frac{\mu - \mu'}{\sigma'}\right)
+\end{equation}
+
+\begin{align}
+    \Phi\left(\frac{\mu' - \mu}{\sigma}\right) &= 1 - \Phi\left(\frac{\mu - \mu'}{\sigma'}\right) \\
+    \Rightarrow \frac{\mu' - \mu}{\sigma} &= - \frac{\mu - \mu'}{\sigma'} \\
+    \Rightarrow \sigma' &= \sigma
+\end{align} 
+
+\subsubsection{Log-Normal Distribution}
+
+The argumentation for the log-normal distribution is similar. The cumulative distribution of the log-normal distribution is 
+\begin{equation}
+    G(x; \mu, \sigma) = \Phi\left(\frac{\ln x - \mu}{\sigma}\right)
+\end{equation}
+Following the same argumentation, one obtains that again $\sigma$ must be conserved. However, in contrast to the case of the normal distribution, $\sigma$ now only depends on the \emph{relative} uncertainty (see \fref{eq:log_normal_substitution}).
+
+Overall, one can conclude that the requirements on the distributions are met if the absolute error (in case of the normal distribution) or the relative error (in case of the log-normal distribution) are conserved.

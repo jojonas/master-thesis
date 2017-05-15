@@ -14,7 +14,7 @@ One of the goals of the model unspecific search is to gain knowledge from these 
 \section{Previous Works}
 The approach of a model unspecific search is not a new concept: In 1998, a note about an unspecific search has been written at the L3 experiment (\ac{LEP})\cite{Hebbeker:GlobalComparisonL3}, and in 2004, a similar approach has been applied to data of the D0-experiment at the Tevatron proton-antiproton collider at Fermilab\cite{Biallass:ModelIndependentSearch}.
 
-At \ac{CMS}, the analysis has been developed and regularly applied to observed data since 2009\cite{Schmitz:ModelUnspecificSearch,Hof:ImplementationModelIndependent,Dietz-Laursonn:ModelUnspecificSearch,Olschewski:StudyAlternativeStatistical,Brodski:ModelUnspecificSearch,Pieta:MUSiCModelUnspecific,Papacz:ModelUnspecificSearch,Albert:ExtensionModelUnspecific,Roemer:ModelUnspecificSearch} \todo{Jonas' Arbeit, Debby und Simon?}. 
+At \ac{CMS}, the analysis has been developed and regularly applied to observed data since 2009\cite{Schmitz:ModelUnspecificSearch,Hof:ImplementationModelIndependent,Dietz-Laursonn:ModelUnspecificSearch,Olschewski:StudyAlternativeStatistical,Brodski:ModelUnspecificSearch,Pieta:MUSiCModelUnspecific,Papacz:ModelUnspecificSearch,Albert:ExtensionModelUnspecific,Roemer:ModelUnspecificSearch,Knutzen:softwarereinterpretationmodel,Durchardt:MUSiCModelUnspecific}. 
 This thesis bases on the most recent implementation of the \ac{MUSiC} analysis.\todo{ok so?}
 
 Very recently, the \ac{ATLAS} collaboration published a conference note analyzing \SI{3.2}{\per\femto\barn} of \ac{LHC} data at $\sqrt{s} = \SI{13}{\TeV}$ using a similar model-independent search \cite{ATLAS:ATLAS-CONF-2017-001}. 
@@ -122,7 +122,7 @@ The variable is denoted with \MET defined as follows:
 \label{sec:deviations_search}
 
 \newcommand{\TS}{\ensuremath{\uptheta}\xspace}
-\newcommand{\TSmin}{\ensuremath{\theta_\text{min}}\xspace}
+\newcommand{\TSmin}{\ensuremath{\uptheta_\text{min}}\xspace}
 
 After the classification follows an automated search for deviations. The search is performed on each distribution of each event class separately as follows:
 First, multiple bins are combined to a \emph{region}, according to the rules in the following section. Then, a test statistic \TS for each region is calculated. The region with the lowest value of \TS, called \TSmin, is selected. This region will be called \acfi{RoI}. 
@@ -290,6 +290,7 @@ The result is known as \emph{log-normal distribution} and is the probability den
 By performing two substitutions, we obtain a parametrization with a more meaningful interpretation:
 \begin{equation}
     \sigma \rightarrow \ln{k} \text{ and } \mu \rightarrow \ln{x_0}
+    \label{eq:log_normal_substitution}
 \end{equation}
 \begin{equation}
     g_X(x) = \frac{1}{\sqrt{2\pi}\abs{x}\ln{k}} \exp(-\frac{1}{2}\left(\frac{\ln(x/x_0)}{\ln{k}}\right)^2)
@@ -315,6 +316,79 @@ CMSSW, ROOT, Python/C++
 Skimming, Pxl, TAPAS, MUSiC
 
 \subsection{MUSiC Workflow}
+
+\subsection{Lookup-Table}
+During the automated search algorithm, most of the computation time is spent calculating \TS according to \todo{ref?}, which involves integration and summation over a large number of terms.
+
+To decrease the amount of time spent in this step, we implemented a three dimensional \acfi{LUT}. The table consists of \TS values for the most frequently used input parameters, such that the expensive runtime computation is replaced by retrieving a precomputed value from a static block of memory.
+
+The \acf{LUT} is generated as a separate file during compilation and is about \SI{80}{\mega\byte} in size.
+
+\subsubsection{Implementation}
+The precise lookup procedure for $\TS_\text{LUT}(N_\text{obs}, N_\text{MC}, \sigma)$ \todo{parameter names and order?)} is as follows:
+\begin{enumerate}
+    \item Determine real-valued indices $i, j, k$ from the parameter values $N_\text{obs}, N_\text{MC}, \sigma$
+    \item Check whether the calculated indices are valid, e.g. within table bounds
+    \item Fetch four adjacent values from memory: $N_\text{obs}$ entry at $\floor i$, $N_\text{MC}$ and $\sigma$ entries at $\floor j, \ceil j, \floor k, \ceil k$.
+    \item Use two dimensional linear interpolation in the $j, k$ plane to get a better estimate for \TS:
+    \begin{align*}
+        \TS_\text{LUT}(i, j, k) \approx \; &\TS(\floor i, \floor j, \floor k)(\ceil j - j)(\ceil k - k) \\
+        + \; &\TS(\floor i, \ceil j, \floor k) (j - \floor j)(\ceil k - k) \\
+        + \; &\TS(\floor i, \floor j, \ceil k) (\ceil j - j)(k - \floor k) \\
+        + \; &\TS(\floor i, \ceil j, \ceil k) (j - \floor j)(k - \floor k)
+    \end{align*}
+    Note that $j - \floor j = 1 - (\ceil j - j)$.
+    \item Discard the result if it is too small (less than $0.005$)
+\end{enumerate}
+
+If the value has not been found in the \ac{LUT}, either because of the table bounds or an otherwise untrusted value, the implementation falls back to the full expensive calculation of \TS.
+Thus, the efficiency of the \ac{LUT} is determined by the probability that a requested value is contained in the table.
+
+In order to improve accuracy around the most commonly used parameters ($N_\text{obs} = N_\text{exp}$, $N_\text{obs}$ small), the \ac{LUT} is organized in three regions, as illustrated in \fref{fig:lut_points}. In the so-called "grid region", the point spacing for the expected number of events is independent if the observed number of events. This results in a rectangular grid up to an observed yield of \num{10} and an expected yield of \num{20}.
+The second, so-called "linear region" stretches up to an observed yield of \num{100}. In this region, every integer observed value corresponds to exactly one index, $i = N_\text{obs}$. Lastly, there is an exponential region, in which the spacing of observed points gradually becomes less dense, keeping the relative spacing constant.
+In the dimension of the expected number of events, the \ac{LUT} is more densely spaced around $N_\text{exp} = N_\text{obs}$, because this is statistically the most common scenario. There is an exponential falloff in density which in theory expands from $N_\text{exp} = \num{0.1} N_\text{obs}$ up to $\num{5.0} N_\text{obs}$, very distant values, however, are vetoed by the $\TS_\text{LUT} > \num{0.005}$ threshold. In the third dimension, uncertainty, the grid is exponentially spaced in terms of relative uncertainty, from $\sigma = \num{0.01} N_\text{exp}$ up to $\num{2.0} N_\text{exp}$.
+
+\subsubsection{Validation}
+
+VALIDATION/COMPARISON TO FULL p:
+
+Parameters determined to keep relative deviation from the "exact" p value below 1 percent
+
+Comparison between computed p value and p from LUT for different values of rel. uncert in \fref{fig:lut_reldiff_reluncert} and for multiple values of data and MC in \fref{fig:lut_reldiff_mc}. Relative difference below dashed black line at 1 percent.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{lut/lut_points}
+    \caption{LUT Points}
+    \label{fig:lut_points}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.49\textwidth]{lut/lut_uncert1}
+    \includegraphics[width=0.49\textwidth]{lut/lut_uncert2}
+    \caption{LUT Relative Differences depending on relative uncertainty}
+    \label{fig:lut_reldiff_reluncert}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.49\textwidth]{lut/lut0a}
+    \includegraphics[width=0.49\textwidth]{lut/lut0b}
+    \includegraphics[width=0.49\textwidth]{lut/lut1a}
+    \includegraphics[width=0.49\textwidth]{lut/lut1b}
+     \includegraphics[width=0.49\textwidth]{lut/lut2a}
+    \includegraphics[width=0.49\textwidth]{lut/lut2b}
+    \includegraphics[width=0.49\textwidth]{lut/lut3a}  
+    \includegraphics[width=0.49\textwidth]{lut/lut3b}
+    \caption{LUT Relative Differences depending on MC (fixed data)}
+    \label{fig:lut_reldiff_mc}
+\end{figure}
+
+Additionally accessing coverage with lookup table
+Same coverage result as for the full p value
+
+
 
 \subsection{Automation}
 \begin{figure}
