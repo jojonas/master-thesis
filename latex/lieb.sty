@@ -64,7 +64,22 @@
 	bookmarksopen=true,
 	draft=false
 ]{hyperref}
+
 \RequirePackage[plain]{fancyref}
+\newcommand*{\fancyrefapplabelprefix}{app}
+\fancyrefaddcaptions{english}{%
+  \providecommand*{\frefappname}{appendix}%
+  \providecommand*{\Frefappname}{Appendix}%
+}
+\frefformat{plain}{\fancyrefapplabelprefix}{\frefappname\fancyrefdefaultspacing#1}
+\Frefformat{plain}{\fancyrefapplabelprefix}{\Frefappname\fancyrefdefaultspacing#1}
+
+\frefformat{vario}{\fancyrefapplabelprefix}{%
+  \frefappname\fancyrefdefaultspacing#1#3%
+}
+\Frefformat{vario}{\fancyrefapplabelprefix}{%
+  \Frefappname\fancyrefdefaultspacing#1#3%
+}
 
 % drawings
 \RequirePackage{tikz}
