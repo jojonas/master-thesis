@@ -98,7 +98,7 @@
 
 % OPTION colortheme
 % --> values = bluemagenta|bluegreen
-\define@choicekey*[ct]{cthesis}{colortheme}[\val\themenr]{bluemagenta,bluegreen,rwth,jonas}[bluemagenta]{\def\cthesis@colortheme{\themenr}}
+\define@choicekey*[ct]{cthesis}{colortheme}[\val\themenr]{bluemagenta,bluegreen,rwth,jonas,tealorange,matplotlib}[bluemagenta]{\def\cthesis@colortheme{\themenr}}
 \setkeys[ct]{cthesis}{colortheme=bluemagenta}
 
 % OPTION bibsys
@@ -203,6 +203,16 @@
 	\cthesissetcolor{RGB}{57, 106, 177}{218, 124, 48}
 }
 
+% sets teal orange color scheme
+\def\cthesissetcolortealorange{%
+    \cthesissetcolor{RGB}{18, 144, 142}{196, 65, 42}
+}
+
+% sets matplotlib color scheme
+\def\cthesissetcolormatplotlib{%
+    \cthesissetcolor{RGB}{31, 119, 180}{255, 127, 14}
+}
+
 % defines general colors
 \definecolor{ctcolorblack}{gray}{0}
 \definecolor{ctcolorgray}{gray}{.5}
@@ -221,6 +231,12 @@
 \or
 	% case 3 (colortheme == jonas)
 	\cthesissetcolorjonas
+\or 
+    % case 4 (colortheme == tealorange)
+    \cthesissetcolortealorange
+\or
+    % case 5 (colortheme == matplotlib)
+    \cthesissetcolormatplotlib
 \else
 	% all other cases
 	\cthesissetcolorbluemagenta
