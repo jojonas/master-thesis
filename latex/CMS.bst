@@ -255,7 +255,14 @@ FUNCTION {field.or.null}
 FUNCTION {emphasize}
 { duplicate$ empty$
     { pop$ "" }
-    { "\textit{ " swap$ * "}" * }
+    { "\textit{" swap$ * "}" * }
+  if$
+}
+
+FUNCTION {bold}
+{ duplicate$ empty$
+    { pop$ "" }
+    { "\textbf{" swap$ * "}" * }
   if$
 }
 
@@ -267,8 +274,8 @@ FUNCTION {format.names}
   s num.names$ 'numnames :=
   numnames 'namesleft :=
     { namesleft #0 > }
-    { 
-      nameptr #3 > 
+    {
+      nameptr #3 >
       {
         nameptr #1 + 'nameptr :=
         namesleft #1 - 'namesleft :=
@@ -633,7 +640,7 @@ FUNCTION {format.pages.nopp}
 FUNCTION {format.volume}
 { volume empty$
     { "" }
-    { "\textbf{ " volume * "}" * }
+    { volume bold }
   if$
 }
 
@@ -717,7 +724,7 @@ FUNCTION {format.article.crossref}
       warning$
       ""
     }
-    { "in \textit{ " journal * "\/}" * }
+    { "in " journal * "\/" * emphasize }
       if$
     }
     { "in " key * }
@@ -760,7 +767,7 @@ FUNCTION {format.book.crossref}
           crossref * warning$
           "" *
         }
-        { "\textit{ " * series * "\/}" * }
+        { series "\/" * emphasize }
       if$
     }
     { key * }
@@ -800,7 +807,7 @@ FUNCTION {article}
       format.authors "author" output.check
     }
    {}
-  if$  
+  if$
   format.title "title" output.check
   blank.sep
   crossref missing$

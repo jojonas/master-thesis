@@ -14,7 +14,7 @@ One of the goals of the model unspecific search is to gain knowledge from these 
 \section{Previous Works}
 The approach of a model unspecific search is not a new concept: In 1998, a note about an unspecific search has been written at the L3 experiment (\ac{LEP})\cite{Hebbeker:GlobalComparisonL3}, and in 2004, a similar approach has been applied to data of the D0-experiment at the Tevatron proton-antiproton collider at Fermilab\cite{Biallass:ModelIndependentSearch}.
 
-At \ac{CMS}, the analysis has been developed and regularly applied to observed data since 2009\cite{Schmitz:ModelUnspecificSearch,Hof:ImplementationModelIndependent,Dietz-Laursonn:ModelUnspecificSearch,Olschewski:StudyAlternativeStatistical,Brodski:ModelUnspecificSearch,Pieta:MUSiCModelUnspecific,Papacz:ModelUnspecificSearch,Albert:ExtensionModelUnspecific,Roemer:ModelUnspecificSearch,Knutzen:softwarereinterpretationmodel,Durchardt:MUSiCModelUnspecific}. 
+At \ac{CMS}, the analysis has been developed and regularly applied to observed data since 2009\cite{Schmitz:ModelUnspecificSearch,Hof:ImplementationModelIndependent,Dietz-Laursonn:ModelUnspecificSearch,Olschewski:StudyAlternativeStatistical,Brodski:ModelUnspecificSearch,Pieta:MUSiCModelUnspecific,Papacz:ModelUnspecificSearch,Albert:ExtensionModelUnspecific,Roemer:ModelUnspecificSearch,CMS:CMS-PAS-EXO-14-016,Knutzen:softwarereinterpretationmodel,Durchardt:MUSiCModelUnspecific}. 
 This thesis bases on the most recent implementation of the \ac{MUSiC} analysis.\todo{ok so?}
 
 Very recently, the \ac{ATLAS} collaboration published a conference note analyzing \SI{3.2}{\per\femto\barn} of \ac{LHC} data at $\sqrt{s} = \SI{13}{\TeV}$ using a similar model-independent search \cite{ATLAS:ATLAS-CONF-2017-001}. 
@@ -154,15 +154,17 @@ Other uncertainties are correlated between bins. An example for this is the unce
 The goal of the automated search is to find the largest deviation between expected and observed number of events in a region. The size of a deviation is expressed as value of the test statistic \TS. A larger deviation will result in a smaller value of \TS.
 The formula for computing \TS will be derived in the next chapter. \todo{mention \TS = local p value?}
 
-From the test statistic, we will calculate a global significance, to which we refer as \ptilde. It expresses the probability of finding a deviation equally large or larger than the observed one somewhere in the distribution, if the expectation were true.
+From the test statistic, we will calculate a global significance, to which we refer as \ptilde. It expresses the probability of finding a deviation equally large or larger than the observed one somewhere in the distribution if the expectation were true.
 
-The simplest way of calculating \ptilde would be to first calculate a local $p$-value from the test statistic and then apply a correction factor to it. A suitable correction factor can be estimated using combinatorics, if the possible values of the local $p$-value are uncorrelated. This method is also called \emph{Bonferroni correction}. 
+The simplest way of calculating \ptilde would be to first calculate a local $p$-value from the test statistic and then apply a correction factor to it. A suitable correction factor could be estimated using combinatorics if the possible values of the local $p$-value were uncorrelated. This method is also called \emph{Bonferroni correction}. 
 
 In our case, a purely analytically calculation is not possible because the connected bin regions overlap and thus the local significances are correlated.
 
 Instead, we use a simulation-based approach:
 We simulate possible experimental outcomes based on the distribution of expected number of events, and refer to each simulation round as \emph{pseudo-experiment}.
 During each pseudo-experiment, we randomly draw a substitute observed distribution from the expected number of events. 
+
+
 
 correlated uncerts: shared value of standard gaussian multiplied with local width of uncert
 uncorrelated: random from normal distribution
@@ -400,3 +402,5 @@ Same coverage result as for the full p value
 \end{figure}
 
 Luigi
+
+At the time of writing: only classification automated, scan still manually calling scripts

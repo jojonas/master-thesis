@@ -8,7 +8,8 @@
 \section{Event Selection}
 \subsection{Triggers}
 \subsection{MET-Filters}
-Possible reasons for excluding triggered events from the analysis are e.g. reconstruction problems or saturation of the tracker by calibration layers.
+Possible reasons for excluding triggered events from the analysis are e.g.
+reconstruction problems or saturation of the tracker by calibration layers.
 
 
 \section{Object Selection}
@@ -17,4 +18,28 @@ Possible reasons for excluding triggered events from the analysis are e.g. recon
 \subsection{b/t-Tagging}
 \label{sec:b_tagging}
 
-Test\cite{CMS:CMS-PAS-BTV-15-001}
+Tracking resolution 20um transverse, 30um along beam axis, efficiency 98\%
+long life time of b hadrons
+displacement to primary vertex
+
+stable particles from PF
+jets: charged energy from tracker + ECAL/HCAL, neutral: ECAL/HCAL
+anti-kT, R=4 (AK4) jets
+CSV=combined secondary vertex, new version CSVv2
+multivariate combination of displaced tracks with info on secondary vertices
+three categories based on number of secondary (or alternatively "pseudo")
+vertices
+perceptron with one hidden layer calculates discriminating variable (Run I: likelihood ration, bad for correlations)
+likelihood ratio combines categories
+
+operating point CSVv2T (tight, discriminator=0.935): eff $\approx \SI{49}{\percent}$, misstag rate between 0 and 0.01 percent
+
+
+\cite{CMS:CMS-PAS-BTV-15-001},
+
+Scale Factor uncert 2015 \cite[Fig. 34]{CMS:CMS-AN-2016-036}: ca. 10\%
+
+Scale Factor uncert 2016 \cite[Fig. 73]{CMS:CMS-AN-2017-018}: ca. 30\%
+Here: 30\%
+Reason: high lumi -> bad tracking performance. Source: Erik Butz, "Mitigation of the Strip Tracker Dynamic Inefficiency (previously known as HIP)", August, 2016.
+

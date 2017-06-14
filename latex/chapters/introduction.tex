@@ -429,36 +429,53 @@ Another theoretical motivation is the \emph{mass hierarchy problem}: One of the 
 
 \section{Extensions of the Standard Model}
 Some solutions have been proposed to these problems. In this work, four extension byeond the \acl{SM} will be relevant and thus introduced in the following sections.
+%
+%\subsubsection{$R$-Parity Violating Supersymmetry}
+%There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only now science is peaking into the \si{\TeV} range.
+%
+%An implication of this is the violation of lepton and baryon number. The latter effect would also enable decay of free protons, which to date has not been observed. 
+%One way to solve this problem is the introduction of an additional quantum number $R$: \ac{SM} particles are assigned $R = +1$, while \ac{SUSY} particles have $R = -1$. $R$ must then be conserved at each interaction, allowing \ac{SUSY} particles to be created only in pairs, and preventing proton decay.
+%
+%So far, \ac{SUSY} models containing the notion of $R$-parity have been tightly constrained. Thus, some analyses focus on theories where $R$-parity conservation is violated and stabilize the proton in other ways.
+%
+%The \ac{RPV-SUSY} model under investigation falls into this category. It stabilizes the proton by introducing a symmetry that cancels out the baryon number violating terms. 
+%Among its signatures is the resonant production of \ac{SUSY} particles from quark-quark annihilation, which decays into a \Pe \Pmu pair, violating the lepton number (see \fref{fig:rpv_signature}).\cite{CMS:CMS-PAS-EXO-16-001}
+%
+%\begin{figure}
+%    \centering
+%    \begin{fmffile}{rpv_signature}
+%        \begin{fmfgraph*}(8,3)
+%            \fmfleft{i1,i2}
+%            \fmfright{o1,o2}
+%            \fmf{fermion,label=\Pqd,label.side=right}{x1,i1}
+%            \fmf{fermion,label=\Pqd,label.side=right}{i2,x1}
+%            \fmf{dashes_arrow,label=$\PSnu_\tau$}{x1,x2}
+%            \fmf{fermion,label=\Pmu,label.side=right}{o1,x2}
+%            \fmf{fermion,label=\Pe,label.side=right}{x2,o2}
+%            \fmflabel{$\lambda_{311}'$}{x1}
+%            \fmflabel{$\lambda_{132}$}{x2}
+%        \end{fmfgraph*}
+%    \end{fmffile}
+%    \caption{\Pe \Pmu signature of \acf{RPV-SUSY}. A supersymmetric $\PSnu_\tau$ (tau-sneutrino) boson is produced from the annihilation of two down quarks. The boson subsequently decays into a \Pe \Pmu pair, violating the lepton number.}
+%    \label{fig:rpv_signature}
+%\end{figure}
 
-\subsubsection{$R$-Parity Violating Supersymmetry}
-There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only now science is peaking into the \si{\TeV} range.
 
-An implication of this is the violation of lepton and baryon number. The latter effect would also enable decay of free protons, which to date has not been observed. 
-One way to solve this problem is the introduction of an additional quantum number $R$: \ac{SM} particles are assigned $R = +1$, while \ac{SUSY} particles have $R = -1$. $R$ must then be conserved at each interaction, allowing \ac{SUSY} particles to be created only in pairs, and preventing proton decay.
+\subsubsection{Quantum Black Holes}
+gravity
+hiearchy problem, planck scale
+extra dimensions
+ADD, RS
+non-thermal
+quantized mass 
+decay before thermalization in pairs of particles
+LFV options possible too
+here: benchmark using QBH to \Pe + \Pmu.
 
-So far, \ac{SUSY} models containing the notion of $R$-parity have been tightly constrained. Thus, some analyses focus on theories where $R$-parity conservation is violated and stabilize the proton in other ways.
-
-The \ac{RPV-SUSY} model under investigation falls into this category. It stabilizes the proton by introducing a symmetry that cancels out the baryon number violating terms. 
-Among its signatures is the resonant production of \ac{SUSY} particles from quark-quark annihilation, which decays into a \Pe \Pmu pair, violating the lepton number (see \fref{fig:rpv_signature}).\todo{Quelle: AN2016-191}
-
-\begin{figure}
-    \centering
-    \begin{fmffile}{rpv_signature}
-        \begin{fmfgraph*}(8,3)
-            \fmfleft{i1,i2}
-            \fmfright{o1,o2}
-            \fmf{fermion,label=\Pqd,label.side=right}{x1,i1}
-            \fmf{fermion,label=\Pqd,label.side=right}{i2,x1}
-            \fmf{dashes_arrow,label=$\PSnu_\tau$}{x1,x2}
-            \fmf{fermion,label=\Pmu,label.side=right}{o1,x2}
-            \fmf{fermion,label=\Pe,label.side=right}{x2,o2}
-            \fmflabel{$\lambda_{311}'$}{x1}
-            \fmflabel{$\lambda_{132}$}{x2}
-        \end{fmfgraph*}
-    \end{fmffile}
-    \caption{\Pe \Pmu signature of \acf{RPV-SUSY}. A supersymmetric $\PSnu_\tau$ (tau-sneutrino) boson is produced from the annihilation of two down quarks. The boson subsequently decays into a \Pe \Pmu pair, violating the lepton number.}
-    \label{fig:rpv_signature}
-\end{figure}
+\subsubsection{Semi-Classical Black Holes}
+classical (=astronomy): no extra dimensions
+hawking radiation
+thermal
 
 \subsubsection{Seesaw Type III Model}
 The so-called Seesaw model aims to explain the low neutrino masses. In this model, the neutrino masses are considered to arise via the mediation of massive fermion partners. Two additional charged partners $\PSigmapm$ are predicted alongside a neutral Majorana particle $\PSigmazero$.
@@ -605,6 +622,9 @@ Another popular extension of the \ac{SM} is the \acfi{SSM}. In the \acl{SSM}, he
 The masses are assumed to lay within the \si{\TeV} range and the expected experimental signature is a resonance peak in the invariant mass spectrum.
 In this thesis, we will examine a simulation of the \ac{SSM} with the \PWprime boson only. 
 
+
+\todo{HERE}
+Here: branching ratio $\PWprime \to \Pqt \Pqb$ set to 1 (as in AN2016\_480\_v2), corresponds to $M_{W'_R} < M_{\nu_R}$ scenario\cite{CMS:CMS-PAS-B2G-17-010}.
 
 \section{Experiments}
 Beginning with Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
