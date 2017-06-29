@@ -95,6 +95,7 @@ ENTRY
     series
     title
     type
+    url
     volume
     year
     archive
@@ -531,6 +532,13 @@ FUNCTION {format.SLACcitation}
 { SLACcitation empty$
   {""}
    { newline$ SLACcitation output "" newline$ }
+  if$
+}
+
+FUNCTION {format.url}
+{ url empty$
+  {""}
+    { "\url{" url * "}" * }
   if$
 }
 
@@ -1144,6 +1152,8 @@ FUNCTION {unpublished}
   blank.sep
   note "note" output.check
   format.date output
+  new.block
+  format.url output
   new.sentence
   format.eprint output
   new.sentence

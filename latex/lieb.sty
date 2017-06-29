@@ -54,6 +54,10 @@
 \floatplacement{table}{h}
 \floatplacement{figure}{h}
 
+% default figure locations
+\renewcommand{\fps@figure}{!htbp}
+\renewcommand{\fps@table}{!htbp}
+
 % references (without being highlighted)
 \RequirePackage[
 	pdfborder={0 0 0},
@@ -66,6 +70,8 @@
 ]{hyperref}
 
 \RequirePackage[plain]{fancyref}
+
+% New reference type: Appendix (app)
 \newcommand*{\fancyrefapplabelprefix}{app}
 \fancyrefaddcaptions{english}{%
   \providecommand*{\frefappname}{appendix}%
@@ -81,6 +87,24 @@
   \Frefappname\fancyrefdefaultspacing#1#3%
 }
 
+% New reference type: Listing (lst)
+\newcommand*{\fancyreflstlabelprefix}{lst}
+\fancyrefaddcaptions{english}{%
+  \providecommand*{\freflstname}{listing}%
+  \providecommand*{\Freflstname}{Listing}%
+}
+\frefformat{plain}{\fancyreflstlabelprefix}{\freflstname\fancyrefdefaultspacing#1}
+\Frefformat{plain}{\fancyreflstlabelprefix}{\Freflstname\fancyrefdefaultspacing#1}
+
+\frefformat{vario}{\fancyreflstlabelprefix}{%
+  \freflstname\fancyrefdefaultspacing#1#3%
+}
+\Frefformat{vario}{\fancyreflstlabelprefix}{%
+  \Freflstname\fancyrefdefaultspacing#1#3%
+}
+
+
+
 % drawings
 \RequirePackage{tikz}
 \usepackage{tikz-qtree}
@@ -91,8 +115,9 @@
 \setlength{\unitlength}{1cm}
       
 % Pseudocode listings
-\RequirePackage{algorithm}
-\RequirePackage{algpseudocode}
+\RequirePackage[figure,algoruled,noline]{algorithm2e}
+\DontPrintSemicolon
+\IncMargin{1em}
       
 % non-italic greek letters (for SI-prefixes)
 \RequirePackage{upgreek}
@@ -159,8 +184,9 @@
 % glossary entries
 \RequirePackage{acronym}
 % remove space in \acfi and \acfia
+% additionally: mark acronym as used after \acfi
 \renewcommand{\acfia}[1]{%
-{\itshape \AC@acl{#1}\nolinebreak[3]} (\ifAC@starred\acs*{#1}\else\acs{#1}\fi)}
+{\itshape \AC@acl{#1}\nolinebreak[3]} (\ifAC@starred\acs*{#1}\else\acs{#1}\fi)\acused{#1}}
 
 % nagging about obsolete commands
 \RequirePackage[l2tabu, orthodox]{nag}

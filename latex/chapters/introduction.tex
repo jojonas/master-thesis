@@ -428,7 +428,7 @@ Another theoretical motivation is the \emph{mass hierarchy problem}: One of the 
 % Spin 3/2 particles?
 
 \section{Extensions of the Standard Model}
-Some solutions have been proposed to these problems. In this work, four extension byeond the \acl{SM} will be relevant and thus introduced in the following sections.
+Some solutions have been proposed to these problems. In this work, four extension beyond the \acl{SM} will be relevant and thus introduced in the following sections.
 %
 %\subsubsection{$R$-Parity Violating Supersymmetry}
 %There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only now science is peaking into the \si{\TeV} range.
@@ -461,21 +461,38 @@ Some solutions have been proposed to these problems. In this work, four extensio
 %\end{figure}
 
 
-\subsubsection{Quantum Black Holes}
-gravity
-hiearchy problem, planck scale
-extra dimensions
-ADD, RS
-non-thermal
-quantized mass 
-decay before thermalization in pairs of particles
-LFV options possible too
-here: benchmark using QBH to \Pe + \Pmu.
+\subsubsection{Extra Dimensions and Black Holes}
+One class of approaches addressing the mass hierarchy problem is the introduction of additional spatial dimensions. Within the \acf{ADD} model\cite{Arkani-Hamed:Hierarchyproblemnew}, in addition to our four known dimensions, $n$ extra dimensions are assumed to exist. These dimensions are compactified on a length scale of $R$. On this scale and below, gravity is able to penetrate multiple dimensions, making it stronger than it appears in the classical four dimensions. Thus, the true Planck scale for $n$ extra dimensions is much lower than the apparent Planck scale:
+\begin{equation}
+    M_\text{Pl}^2 \sim M_{\text{Pl}(4+n)}^{2+n} R^n
+\end{equation}
+%By setting the desired Planck scale to $M_{\text{Pl}(4+n)}^{2+n} \approx m_\text{EW}$, we find that the compactification scale for $n = $ \numrange{2}{4} extra dimensions is between \SI{1}{\milli\meter} and \SI{1}{\pico\meter}.
 
-\subsubsection{Semi-Classical Black Holes}
-classical (=astronomy): no extra dimensions
-hawking radiation
-thermal
+An interesting consequence of these assumptions is the possibility to produce black holes within collider experiments\cite{Dimopoulos:BlackHolesLHCa}: As derived from a semiclassical perspective, the Schwarzschild radius of a black hole with $M_\text{BH} \sim \si{\TeV}$ is larger than the minimum separation distance of two partons at the collision. Thus, a microscopic black hole can form.
+
+In this thesis, we will look at two different models of black holes within the \acs{LHC}: semiclassical black holes and quantum black holes.
+\begin{itemize}
+\item A \emph{semiclassical black hole} is presumed to behave similarly to a classical astronomical black hole, except for the fact that it can only exist through additional extra dimensions: After formation, it reaches thermal equilibrium (\emph{thermalizes}) and subsequently evaporates via Hawking radiation. During this phase, a large number of \ac{SM} particles is produced. The relative abundance of these particles is expected to follow the number of degrees of freedom per \ac{SM} particle. Among the possible final states are many that violate the lepton number conservation and thus make excellent experimental signatures with low expected \ac{SM} contribution.\cite{CMS:CMS-PAS-EXO-15-007}
+\item A \emph{quantum black hole} is too short-lived to thermalize. Instead, it behaves like a quantum object and decays into few particles. As with the semiclassical case, lepton flavor violating final states are accessible within this model. For this thesis, a benchmark model has been chosen that decays solely into a \Pe + \Pmu pair. As this final state violates conservation of lepton number, there is no real \ac{SM} background contribution. However, through experimental practice, particles from an \ac{SM} process can be misclassified and contribute to the background yield.\cite{CMS:CMS-PAS-EXO-16-001}
+\end{itemize}
+\begin{figure}
+    \centering
+    \begin{fmffile}{qbh_signature}
+        \begin{fmfgraph*}(8,3)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2}
+            \fmf{fermion,label=\Pqd,label.side=right}{x1,i1}
+            \fmf{fermion,label=\Pqd,label.side=right}{i2,x1}
+            \fmf{dashes_arrow,label=black hole}{x1,x2}
+            \fmf{fermion,label=\Pmu,label.side=right}{o1,x2}
+            \fmf{fermion,label=\Pe,label.side=right}{x2,o2}
+            %\fmflabel{$\lambda_{311}'$}{x1}
+            %\fmflabel{$\lambda_{132}$}{x2}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{\Pe \Pmu signature of the \acf{QBH} model. A black hole is created from the annihilation of two down quarks. The black hole subsequently decays into a \Pe \Pmu pair, violating the lepton number.}
+    \label{fig:qbh_signature}
+\end{figure}
 
 \subsubsection{Seesaw Type III Model}
 The so-called Seesaw model aims to explain the low neutrino masses. In this model, the neutrino masses are considered to arise via the mediation of massive fermion partners. Two additional charged partners $\PSigmapm$ are predicted alongside a neutral Majorana particle $\PSigmazero$.
@@ -606,7 +623,6 @@ Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} parti
     \begin{itemize}
         \setlength{\parskip}{0ex}
         \setlength{\itemsep}{0ex}
-    
         \item $\PSigmapm \to \PWpm \Pnu$
         \item $\PSigmapm \to \PZ \Plpm$
         \item $\PSigmapm \to \PH \Plpm$
@@ -618,13 +634,11 @@ Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} parti
 Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states.
 
 \subsubsection{Sequential Standard Model and \PWprime}
-Another popular extension of the \ac{SM} is the \acfi{SSM}. In the \acl{SSM}, heavier copies of the \ac{SM} gauge bosons are introduced. They behave exactly like the \PW and \PZ bosons and are consequently called \PWprime and \PZprime. 
-The masses are assumed to lay within the \si{\TeV} range and the expected experimental signature is a resonance peak in the invariant mass spectrum.
-In this thesis, we will examine a simulation of the \ac{SSM} with the \PWprime boson only. 
+Another common extension of the \ac{SM} is the \acfi{SSM}. In the \acl{SSM}, heavier copies of the \ac{SM} gauge bosons are introduced. They behave exactly like the \PW and \PZ bosons and are consequently called \PWprime and \PZprime. 
+The masses are assumed to lay within the \si{\TeV} range and the expected experimental signatures are similar to those of the \ac{SM} gauge bosons.
 
+In this thesis, a model has been chosen where only the \PWprime boson exists and it may only decay into a \Pqt + \Pqb pair. This corresponds to the scenario used in dedicated analyses performed by the \ac{CMS} and \ac{ATLAS} collaborations\cite{ATLASCollaboration:SearchWtb,CMSCollaboration:SearchesWbosons,CMS:CMS-PAS-B2G-17-010}.
 
-\todo{HERE}
-Here: branching ratio $\PWprime \to \Pqt \Pqb$ set to 1 (as in AN2016\_480\_v2), corresponds to $M_{W'_R} < M_{\nu_R}$ scenario\cite{CMS:CMS-PAS-B2G-17-010}.
 
 \section{Experiments}
 Beginning with Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
@@ -645,9 +659,10 @@ The other two experiments are aimed at more general measurements. These so-calle
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{lhc}
-    \caption{Schematic illustration of the \acs{CERN} accelerator complex. Shown are \ac{LINAC} 2, the \ac{PSB}, \ac{PS}, \ac{SPS} and the LHC with its four experiments \acs{CMS}, \acs{ATLAS}, \acs{LHCb} and \acs{ALICE}. The accelerator sizes and positions are not to scale\cite{Ley:CERNAccelerators,Caron:LHCLayout
-    ,DeMelis:CERNacceleratorcomplex}.}
+    \includegraphics[width=0.6\textwidth]{lhc}
+    \caption{Schematic illustration of the \acs{CERN} accelerator complex\cite{Ley:CERNAccelerators,Caron:LHCLayout,DeMelis:CERNacceleratorcomplex}. Protons first pass through several stages of preacceleration within the \ac{LINAC} 2, \ac{PS}, the \ac{PSB} and the \ac{SPS}. Eventually, they are injected into the \ac{LHC} where they circulate in opposite directions. The two beams are further accelerated in radio-frequency cavities and their shape is restored within the cleaning sections of the ring. At each revolution, some of the protons are made to collide within one of the four experiments \acs{CMS}, \acs{ATLAS}, \acs{LHCb} and \acs{ALICE}. Once they are not needed anymore, the remaining protons can be dumped into massive metal blocks at the dump site.
+    %Note that the accelerator sizes and positions are not to scale.
+    }
     \label{fig:LHC}
 \end{figure}
 
@@ -669,10 +684,22 @@ An overview of the detector can be seen in \fref{fig:CMS_slice}. The discussion 
     \label{fig:CMS_slice}
 \end{figure}
 
-\subsection{Detector Geometry}
-In a region starting at \SI{23}{\m} before the detector, both beam pipes are united\cite{Evans:LHCMachine}. The proton groups traveling in opposite directions share the same beam pipe, which defines the $z$-axis of the detector coordinate system. The collisions occur at $z = 0$.
+\subsection{Detector Geometry and Coordinates}
+In a region starting at \SI{23}{\m} before the detector, both beam pipes are united\cite{Evans:LHCMachine}. The proton groups traveling in opposite directions share the same beam pipe, which defines the $z$-axis of the detector coordinate system. The collisions occur approximately at the interaction point at $z = 0$.
 The detector forms a barrel around the beam pipe. The barrel is subdivided into seven slices: five evenly sized \emph{wheels} and one so-called \emph{endcap} on each open side of the barrel. The central wheel is centered at $z = 0$.
 Detector layers in the wheels are mostly arranged in a cylindrical manner around the beam pipes, while the layers in the endcaps are mounted orthogonally to the beam pipe.
+
+The direction of an outgoing particle originating in the interaction point can be characterized using a spherical coordinate system $(\phi, \theta)$. The azimuthal angle $\phi$ is measured with reference to an imaginary line connecting the interaction point to the center of the \ac{LHC} ring. $\theta$ indicates the polar angle between the $z$-axis and the direction of interest.
+However, $\theta$ is rarely used because it is not invariant towards Lorentz-boosts in the $z$ direction. Instead, the Lorentz-invariant pseudo-rapidity $\eta \defeq -\ln\left[\tan\left(\frac{\theta}{2}\right)\right]$ is used to describe the angular separation between a particle and the beam pipe. The detector components in context of $\eta$ ranges can be found in \fref{fig:cms_quadrant}.
+
+To indicate angular separation between particles, the quantity $R = \sqrt{\Delta \eta^2 + \Delta \phi^2}$, which is Lorentz-invariant, can be defined. $\eta$ and $R$ will be relevant in context of particle reconstruction.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{cms_quadrant}
+    \caption{Schematic view of a CMS quadrant, taken from \cite{CMSCollaboration:AligningCMSMuon}. Besides the angle $\theta$, the values for $\abs{\eta}$ are shown around the frame. This illustration focuses on the muon system, which consists of barrel (MB) and endcap (ME) stations. It extends to $\abs{\eta} = \num{2.4}$.}
+    \label{fig:cms_quadrant}
+\end{figure}
 
 \subsection{Bunch Crossings and Pile-Up}
 \label{sec:pileup}
@@ -724,9 +751,9 @@ Particles passing the field are subject to the Lorentz force which subsequently 
 The goal of the muon system is to detect muons and measure their tracks, from which the muon momenta are calculated.
 
 Because of their high mass compared to electrons, muons are less affected by the electromagnetic fields within matter, reducing their radiative losses. This makes them the only detectable particles to pass through all inner detector subsystems as well as the solenoid coil.
-For this reason, the muon system is the outermost part of the detector. It surrounds the solenoid coil and consists of \emph{drift tubes} (\acsu{DT}s) and \emph{cathode strip chambers} (\acsu{CSC}s). 
+For this reason, the muon system is the outermost part of the detector. It surrounds the solenoid coil and consists of \emph{drift tubes} (\acsu{DT}s) in the barrel section and \emph{cathode strip chambers} (\acsu{CSC}s) in the endcaps. The muon barrel section extends in $\abs{\eta}$ up to \num{0.9}, the endcap region lies between $\abs{\eta}$ of \num{1.2} and \num{2.4}. In the range between \num{0.9} and \num{1.2}, the muon systems overlap.
 
-Drift tubes have a length of about \SI{2}{\meter} and a cross section of $\SI{13}{\milli\meter} \times \SI{42}{\milli\meter}$. In the center of each tube, there is an anode wire. Between the wire and the tube walls there is a high electric potential. Additionally, the tubes are filled with a gas mixture. 
+Drift tubes have a length of about \SI{2}{\meter} and a cross section of $\SI{13}{\milli\meter} \times \SI{42}{\milli\meter}$. In the center of each tube, there is an anode wire. Between the wire and the tube walls exists a high electric potential. Additionally, the tubes are filled with a gas mixture. 
 As the charged muons pass through the gas, they ionize a few of the gas atoms. The released electrons accelerate along the electric field lines and induce an avalanche of secondary ionizations. Eventually, the accumulated charges are deposited in the anode wires and are measurable as current spike\cite{ParticleDataGroup:ReviewParticlePhysics}.
 
 From the amount of deposited charge and timing measurements, a spacial resolution of less than \SI{250}{\micro\meter} can be achieved across each chamber. However, determining the location in the wire direction is not possible with this arrangement.
@@ -737,6 +764,7 @@ The advantage of measuring all three dimensions makes them suited for use in the
 \todo{RPCs?}
 
 \subsection{Triggering}
+\label{sec:triggering}
 As mentioned in \fref{sec:pileup}, the \ac{LHC} delivers collisions about every \SI{25}{\nano\second}, resulting in around \num{40} million events per second. Even with a raw event size of about \SI{1}{\mega\byte}, storing all events would require a bandwidth of \SI{40}{\tera\byte\per\second}. Currently, there is no technology capable of this task, especially considering the outer circumstances such as irradiation and the strong magnetic field.
 
 Thus, the rate of events accepted for storage and analysis has to be drastically reduced. This is the task of the \emph{triggering system}. Based on the physics content, statistics and bandwidth restrictions, triggers decide whether or not to store an event to disk.
@@ -748,9 +776,4 @@ Reconstruction and analyses are ran on the stored events. For this purpose, \ac{
 
 The facilities are organized in layers called \emph{tiers}. Tier 0 is the \ac{CERN} data center in Geneva. It store raw data and performs initial reconstruction. The data are then distributed to tier 1 computing centers. There are currently 13 tier 1 centers worldwide. They perform further processing on the data and distribute it to tier 3 facilities.
 
-Most of the 155 tier 3 computing centers belong to universities and other scientific institutes. They produce \ac{MC} simulations and perform scientific analyses. One of these tier 3 centers is operated at the physics department of the RWTH Aachen University, currently providing around \num{5200} processing cores and \SI{3}{\peta\byte} of storage. 
-
-\todo{quelle}
-% https://home.cern/about/computing/grid-system-tiers
-% http://www.institut3b.physik.rwth-aachen.de/cms/ParticlePhysics3B/Forschung/~gbvf/GRID-Computing/
-
+Most of the around 155 tier 3 computing centers belong to universities and other scientific institutes\cite{CERN:Gridsystemtiers}. They produce \ac{MC} simulations and perform scientific analyses. One of these tier 3 centers is operated at the physics department of the RWTH Aachen University, currently providing around \num{5200} processing cores and \SI{3}{\peta\byte} of storage\cite{UniRWTHAachenIII.PhysikalischesInstitut:GridComputing}. 

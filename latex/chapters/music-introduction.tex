@@ -27,57 +27,19 @@ For each event class, the kinematic variables of each event are calculated and \
 Up to this point, the same procedure is applied to simulated data and observed data.
 Subsequently, an automated search algorithms finds the largest deviation between data and simulation within each kinematic distribution of each event class. Afterwards, the global significance of each deviation is estimated from Standard-Model only simulations.
 
-\section{Event Classes}
-An event class is a set of events sharing the same final state. The final state is indicated by the name of the event class: All events in the class named \eventclass{2\Pe + 1\Pmu}, for example, contain two electrons and one muon in the final state.
+\section{Transverse Momentum and Energy}
+\label{sec:transverse_quantities}
 
-There are three types of event classes: \emph{exclusive}, \emph{inclusive} and \emph{jet inclusive}.
-
-Events in the exclusive event classes contain exactly the indicated (and no additional) particles in their final state. Each event thus belongs to exactly one exclusive event class.
-
-Inclusive event classes are denoted with the suffix "\eventclass{+ X}" in the name (for example \eventclass{2\Pe + 1\Pmu + X}). Their final state contains the explicitly stated particles plus any additional ones. Each event can be assigned any number of inclusive event classes. One advantage of this procedure is a larger number of events per class which can be beneficial \todo{for what?}. However, the correct combination of statistical results across multiple inclusive event classes is not trivial.
-
-Jet inclusive event classes are denoted with the suffix "\eventclass{+ Njets}" in the event class name (e.g. \eventclass{2 \Pe + 1\Pmu + Njets}). Events contained in a jet inclusive event class may contain any number of jets in addition to the explicitly stated objects. This increases the number of events per class, as effects like initial or final state radiation are ignored, leading to reduced statistical uncertainties.
-
-In any case, the kinematic variables are only calculated from the objects explicitly stated in the class name, in our example two electrons and one muon.
-
-
-\section{Particle Types}
-Not all particle types that can be identified by the experiment are used within the classification. Instead, \ac{MUSiC} focuses on a set of five particle types which can be measured most precisely.
-Additionally, certain selection criteria are imposed onto each particle in the final state to obtain an unambiguous final state.
-The particle types and identification criteria are described in the following sections.
-
-big picture
-why ids (why not just reco)
-general id criteria: pt, tracks, shower
-
-
-\subsection{Electrons}
-
-
-
-\subsection{Muons}
-
-\subsection{Photons}
-
-\subsection{Jets}
-
-\subsection{Missing Transverse Energy}
-
-\subsection{Possible Extensions}
-The analysis can be extended to identify more particle types by their decay products, called \emph{tagging}. Possible tagging choices are \Pqb-tagging, \Ptau-tagging or \PZ-tagging.
-This thesis will investigate the increase of sensitivity using \Pqb-tagging. The method is further described in chapter \todo{ref}.
-
-\section{Transverse Momentum and Transverse Energy}
-\todo{context?}
+As prerequisite for the following sections it is helpful to introduce the so-called transverse quantities \emph{transverse momentum} and \emph{transverse energy}. This section provides a motivation and definition for both.
 
 Interaction cross sections are often dependent on the amount of momentum involved. In t-channel diagrams, the entire momentum transfer can be measured by calculating the combined invariant mass of decay products.
 In order to achieve this goal, one must know all four components of the momentum of all created particles. If the final state contains neutrinos, which are not detectable by the detector, this is not achievable.
 
 In other experiments like \ac{LEP}, one could use conservation of momentum and the known momentum of colliding particles to reconstruct the neutrino four-momentum and the momentum transfer. At the \ac{LHC} this is also impossible: The total proton momentum is distributed unevenly between the constituent quarks and gluons and thus the momentum involved in a collision is only known up to statistical probability.
 
-The mitigation pursued at \ac{CMS} is to only regard kinematics in the transverse plane, orthogonally to the beam pipe. Projection of the kinematic (three-)momentum onto the transverse plane gives the so-called \emph{transverse momentum} \pT.
+The mitigation pursued at \ac{CMS} is to only regard kinematics in the transverse plane, orthogonally to the beam pipe. Projection of the kinematic (three-)momentum onto the transverse plane gives the transverse momentum \pT.
 
-An additional property of the transverse momentum is that it can be directly observed: Since the magnetic field lines are parallel to the beam direction, the Lorentz force only acts in the transverse plane, allowing direct observation of the transverse momentum.
+There are other properties of the transverse momentum that make it an interesting quantity: It can be straightforwardly measured from the tracks since the magnetic field lines are parallel to the beam direction and the Lorentz force only acts in the transverse plane. Additionally, the transverse momentum is not only invariant to the actual distribution of momenta within the proton, but also to Lorentz boosts along the $z$-axis. 
 
 Assuming $p_x$, $p_y$, $E$ and $m$ can be observed directly (e.g. via track curvature) or indirectly (e.g. via particle identification), we can define the transverse momentum and transverse energy as follows:
 \begin{align*}
@@ -87,17 +49,181 @@ Assuming $p_x$, $p_y$, $E$ and $m$ can be observed directly (e.g. via track curv
 
 Note that in the approximation of massless ($m \approx 0$) particles: $\vec{p}_T = \vec{E}_T$. % $ = \vec{M}_T$.
 
-%cross sections are dependent of momentum transfer
-%in t-channel diagrams: momentum transfer is invariant mass of created particles
-%calculate inv mass from 4-vectors of all particles
-%problem if neutrinos are produced
-%other approaches (both done at LEP): control COM energy of interaction precisely, or use momentum conservation to reconstruct neutrino 4-momentum
-%problem: energy of and initial momentum in beam direction unknown because of partons
-%mitigation: use knowledge about momentum in transverse plane, calculate momenta and energy there
-%pT has additional advantages: measured directly (magnetic field) and is invariant regarding pdfs/z-boosts
+
+\section{Event Selection}
+The following section will discuss how events are selected to be used for the \ac{MUSiC} analysis. This is tightly related to the section after, where concepts for the reconstruction of physics objects from recorded events are selected.
+
+Since this thesis aims to be a general evaluation of the \ac{MUSiC} approach, we will not go deep into detail about the algorithms used, nor the exact parameter values. For the sensitivity studies in \fref{chap:sensitivity_studies}, however, specific values have to be chosen. If not explicitly stated otherwise, values of the 2015 analysis run are used and can be found in \cite{Roemer:ModelUnspecificSearch}.
+
+\subsection{Triggers}
+\newcommand{\trigger}[1]{\texttt{\detokenize{#1}}}
+\Fref{sec:triggering} described the trigger, dedicated hardware that decides whether observed events are recorded to disk. In the vocabulary of an analyst, the term "trigger" does not only refer to the required hardware, but also to the set of rules that are applied. In practice, triggering hardware is configured to run multiple sets of rules in a so-called \emph{trigger menu}, as to maximize the usage of readout bandwidth without overloading the available resources.
+The triggering decision is also simulated on \ac{MC} generated events: Using the same information available to the triggering system and a trigger emulator, each event is assigned tags about which decision lead to it being stored. 
+
+Because multiple trigger configurations are running at the same time, the same event might end up in two separate trigger streams. In the analysis, one thus has to take care to remove events that are duplicated this way.
+An additional problem arises in the first few \si{\GeV} beyond the \pT threshold: In this so-called \emph{turn-on} region, disagreement between observed data and simulation has been found which is accounted to insufficiencies in the simulation. Because of this, an additional minimum \pT threshold close above the trigger threshold is applied.
+
+\Fref{tab:triggers} provides a reference of triggers used in the analysis. In comparison to the 2015 analysis, the \pT threshold of the single electron trigger has been raised from \SI{105}{\GeV} to \SI{115}{\TeV}. This choice ensures consistency between the 2015 and 2016 analysis for the sensitivity study.
+
+\begin{table}
+    \centering
+    \begin{tabular}{l l l}
+    \toprule
+    Stream Name & trigger $p_\text{T, min}$ & custom $p_\text{T, min}$ \\
+    \midrule
+    \trigger{HLT_Ele115_CaloIdVT_GsfTrkIdT} & \SI{115}{\GeV} & \SI{120}{\GeV} \\
+    \trigger{HLT_DoubleEle33_CaloIdL_GsfTrkIdVL_MW} & \SI{33}{\GeV}, \SI{33}{\GeV} & \SI{50}{\GeV}, \SI{50}{\GeV} \\
+    \trigger{HLT_Mu50} & \SI{50}{\GeV} & \SI{53}{\GeV} \\
+    \trigger{HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ} & \multirow{2}{*}{\SI{17}{\GeV}, \SI{8}{\GeV}} & \multirow{2}{*}{\SI{35}{\GeV}, \SI{35}{\GeV}} \\
+    \trigger{HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ} & & \\    
+    \bottomrule
+    \end{tabular}
+    \caption{Triggers used in the \ac{MUSiC} analysis. Listed are the \ac{HLT} names. The double $X$ triggers require two particles, where the second minimal threshold lies much lower than the first. Additional identification requirements are applied as indicated by the name\cite[appendix C]{Roemer:ModelUnspecificSearch}. Note that the single electron trigger \pT threshold is higher than for the 2015 run.}
+    \label{tab:triggers}
+\end{table}
+
+
+% CaloIdVT = Calo ID very tight
+% GsfTrkId = Gaussian Sum Filter Track ID
+% vvl = very very loose
+% _MW = medium window (EGM trigger meeting anfang 2016)
+% DZ = impact parameter cut
+
+\subsection{Event Filters}
+Event filters are used to mask off events that contain observations of unwanted detector behavior rather than physics content from a collision.
+Undesirable experimental effects include defective modules, anomalous electronics noise, saturation of subsystems by calibration lasers or particles scattered on residual gas in the beam pipe. They sometimes mimic real particles and events and thus cause the trigger to store the event. In the offline analysis, these events are recognizable by a large momentum imbalance of the reconstructed particles, resulting in large values for \MET. Using a set of rules (so-called \MET-filters) established at \ac{CMS}, these events are excluded from the analysis. The list of applied filters can be found in \cite[appendix B]{Roemer:ModelUnspecificSearch}.
+
+\section{Reconstruction and Selection of Objects}
+Now that a set of events to analyze has been established, we will focus on reconstruction of the particles and selection of the particles for our analysis. 
+
+In practice, the reconstruction is performed centrally at \ac{CMS}. For each particle, several reconstructed candidates are stored, from which the analyst can select. 
+Besides selecting only the particles relevant for the analysis, one often chooses a \emph{working point} for particle identification criteria. The possible options are "tight", "medium" and "loose". Tight criteria are more strict, limiting the rate of misclassified particles at the cost of discarding some legitimate particles. On the other hand, loose criteria allow for more events, reducing the statistical uncertainty, with a higher probability of misclassification. As the name indicates, "medium" aims to provide a compromise between the two extremes.
+
+For certain final states, it has been found that the probability of events being misclassified differs between \ac{MC} simulation and observation. However, the scaling factor to correct this effect has not been determined in all final states regarded by \ac{MUSiC}. Thus, to evade deviations that are caused by different misclassification rates, our particle selection generally requires tight identification criteria.
+
+The following paragraphs aim to give a short overview over the reconstruction methods and object selection criteria used in the analysis. 
+
+\subsection{Particle Flow}
+\ac{MUSiC} uses the so-called \acfi{PF} algorithm\cite{CMS:CMS-PAS-PFT-09-001}, which aims to combine measurements from separate detector subsystems into a consistent picture of all stable particles in the event. This is achieved by allowing the separate particle reconstruction algorithms to use shared definitions and communicate, avoiding duplicate interpretation of the same data.
+
+The \ac{PF} algorithm can be divided into three steps: Fitting of tracks and clustering, linking of tracks and clusters, reconstruction of particles.
+
+In the first step, clusters of tracker cells that observed a current spike during the event are linked between the layers using a Kalman-filter, yielding reconstructed tracks. The same algorithm is also applied to the tracks of muons in the muon chambers. In the same step, clusters are found within the energy deposits of the calorimeters using a greedy clustering algorithm.
+
+In the second step, tracks and clusters from the first step are linked to each other. Tracks from the inner tracking system are extrapolated to find matching clusters in the calorimeters. 
+%Special care is taken for the signature of secondary electrons emitted by bremsstrahlung within the \ac{ECAL}. 
+Similarly, clusters observed in the \ac{ECAL} as well as the \ac{HCAL} are related. Finally, tracks are matched between the inner tracker and the muon system.
+
+The final step builds the actual particle candidates from the available information.
+First, muons are identified if the momentum of linked tracks is compatible. Tracks that have been successfully associated to a muon are then removed from the track collection. Electrons are next: The tracks are refit using a Gaussian-Sum Filter and matched to energy deposits in the \ac{ECAL}. Again, information that has been related to an electron is removed from the track and cluster collections. The remaining tracks are afterwards associated to charged hadrons. Finally, the remaining energy clusters in \ac{ECAL} and \ac{HCAL} give rise to reconstructed photons and neutral hadrons respectively.
+
+\subsection{Jets}
+\label{sec:jets}
+
+Jets form during the hadronization of quarks and gluons from the final state. The goal of jet reconstruction is to obtain the mass, energy and momentum of the originating parton. 
+
+In the detector, jets are measured as tracks and clusters of stable particles. Starting with the \ac{PF} objects, in the first step, charged contributions from pile-up are removed. The undesired tracks are selected by displacement from the primary vertex and then removed from the set of candidate particles.
+After the correction, a jet clustering algorithm arranges the remaining particles into clusters. Within the \ac{MUSiC} analysis, the anti-$k_t$ algorithm\cite{Cacciari:antiktjet} with the characteristic radius $R = \num{0.4}$ is deployed. It uses pairwise recombination to form cone-like clusters around the hardest particles.
+
+As output, one obtains a set of clusters, each containing multiple \ac{PF} objects. The combined four-vector of all particles within each cluster is calculated and assigned to the jet.
+
+Measurements have shown that the energy resolution of jets is worse in observed data than in the \ac{MC} simulation. As mitigation, the transverse momenta of simulated jets are smeared with a \pT and $\eta$-dependent factor\cite{TWiki:JetResolution}.
+After the jet energy correction, the jets used within the \ac{MUSiC} analysis are selected using established jet-id criteria at the tight working point\cite{TWiki:JetID}. It ensures high data quality and low misclassification rates by requiring a minimum \pT threshold and poses certain additional requirements on the composition of the jet.
+% min pT: \SI{50}{\GeV}.
+
+\subsection{Muons}
+Muons are reconstructed from tracks in the muon system and the inner tracker.
+The identification is performed using a combined method, depending on the energy of the muon candidate. For low energetic candidates ($\pT < \SI{200}{\GeV}$), the \ac{PF} object is used and the cut-based muon identification with a tight working point is applied. High energetic muons ($\pT > \SI{200}{\GeV}$) are selected differently, without relying on the \ac{PF} candidate\cite{TWiki:MuonIdentification}.
+
+Both identification criteria require the muon to be fully contained in the detectable range ($\abs{\eta} < \num{2.4}$). The second main goal of the identification is to ensure that the muon candidate originates from the hard interaction. Secondary muons from jets or from pile-up collisions are vetoed based on displacements from the primary vertex, isolation criteria and a \pT threshold.
+
+After a muon has been successfully selected for the analysis, close-by low-energetic electrons, photons and jets are removed from the event description. This avoids double-counting of physics content and thus strives to restore a consistent event description.
+
+\subsection{Electrons}
+Electrons are recognized by their curved track in the tracker and energy deposit in the \ac{ECAL}. For the reconstruction of low energetic electrons (below \SI{100}{\GeV}), the momentum information from the tracker and the \ac{ECAL} are combined using the estimated uncertainty as a weight. At higher energies, using only the \ac{ECAL} measurement has been shown to improve performance, thus the tracker momentum information is discarded.
+
+The selection of electrons for the analysis is also applied in a piecewise manner: In the low energy regime, the tight cut-based electron identification criteria are required, while for high energies, the \acfi{HEEP} requirements\cite{TWiki:HEEP} are imposed. 
+
+Both criteria aim to differentiate between electrons from the hard interaction and electrons from jets or pile-up. Again, a maximum displacement from the primary vertex is required, as well as a minimal isolation and a minimum \pT value. Jets are also suppressed by vetoing energy contributions in the \ac{HCAL}.
+
+In addition, converted electrons and photons are vetoed by settings tight quality requirements on the electron track.
+
+\subsection{Photons}
+Photons do not leave tracks in the inner tracker. Besides that, their experimental signature resembles the signature of electrons. 
+Therefore, photons are selected and identified in a similar matter. The \ac{MUSiC} analysis uses the cut-based photon identification criteria\cite{TWiki:PhotonID} over the entire energy range. 
+
+In order to veto photons emitted as bremsstrahlung, photons with any tracker signals are discarded.
+
+\subsection{Missing Transverse Energy}
+Missing transverse energy, denoted by \MET, is a physics object characterizing momentum imbalance in the detector. The projected four momentum is calculated as follows:
+\begin{equation}
+    \MET \defeq \abs{- \sum_i \vec{E}_{T,i}} 
+\end{equation}
+Causes for missing transverse energy generally fall into one of two categories: Incorrect measurements, such as noisy, dead or asymmetric modules, and non-detectable particles. \ac{SM} neutrinos, for example, only interact very weakly and are therefore invisible for the detector. If one or more neutrinos are produced during the interaction, we can only observe their combined four momentum in terms of missing transverse energy. The same applies to hypothetical new physics particles which do not interact with the detector, making \MET an interesting physics object to work with.
+
+All corrections that change the \pT value of \ac{PF} candidates (e.g. jet energy corrections) are passed onto the \MET calculation to preserve a consistent event description. 
+Using similar arguments as for the other particles, only \MET with $\pT > \SI{100}{\GeV}$ is identified as object within the analysis.
+
+\subsection{Possible Extensions}
+The existing analysis can be extended to identify more particle types by their decay products, called \emph{tagging}. Possible tagging choices are \Pqb-tagging, \Ptau-tagging or \PZ-tagging.
+This thesis will investigate the increase of sensitivity using \Pqb-tagging, as discussed below.
+
+\subsection{b-Tagging}
+\label{sec:b_tagging}
+
+The goal of \Pqb-tagging is to distinguish jets from \Pqb-quarks ("\Pqb-flavored jets") from those originating in light quarks. One way of achieving this goal is to exploit the long lifetime of \PB-mesons. These mesons are formed during the hadronization of \Pqb-quarks and posses a comparably long lifetime of $\tau \approx \SI{1.5e-12}{\second}$\cite{ParticleDataGroup:ReviewParticlePhysics}. This allows \PB-mesons to travel up to a few centimeters before decaying.
+
+With \ac{CMS}' tracking resolution of up to \SI{20}{\micro\meter} in the transverse and \SI{30}{\micro\meter} in the longitudinal direction\cite{CMS:CMS-PAS-BTV-15-001}, displacement of such magnitude can be resolved efficiently and is therefore an appropriate discriminator.
+
+To introduce \Pqb-tagging in the \ac{MUSiC} analysis, the \acfi{CSVv2} algorithm\cite{CMSCollaboration:Identificationbquark} is used in addition to the jet requirements described in \fref{sec:jets}. The algorithm combines information of displaced tracks with information about displaced vertices in a multivariate way. The discriminator output is then compared to a threshold defined by the working point.
+For the sensitivity studies, the "tight" working point with a discriminator threshold of \num{0.935} is used. Studies of the 2015 data and simulation have found that with the tight working point, approximately \SI{50}{\percent} of jets originating from \Pqb-quarks are correctly identified as such, while less than \SI{0.5}{\percent} of the \Pqb-tagged jets do not actually originate from \Pqb decays\cite{CMS:CMS-AN-2016-036}.
+
+
+
+%\cite[Fig. 34]{CMS:CMS-AN-2016-036}\cite[Fig. 73]{CMS:CMS-AN-2017-018}
+%
+%stable particles from PF
+%jets: charged energy from tracker + ECAL/HCAL, neutral: ECAL/HCAL
+%anti-kT, R=4 (AK4) jets
+%CSV=combined secondary vertex, new version CSVv2
+%multivariate combination of displaced tracks with info on secondary vertices
+%three categories based on number of secondary (or alternatively "pseudo")
+%vertices
+%perceptron with one hidden layer calculates discriminating variable (Run I: likelihood ration, bad for correlations)
+%likelihood ratio combines categories
+%
+%operating point CSVv2T (tight, discriminator=0.935): eff $\approx \SI{49}{\percent}$, misstag rate between 0 and 0.01 percent
+%
+%
+%\cite{CMS:CMS-PAS-BTV-15-001},
+%
+%Scale Factor uncert 2015 \cite[Fig. 34]{CMS:CMS-AN-2016-036}: ca. 10\%
+%
+%Scale Factor uncert 2016 \cite[Fig. 73]{CMS:CMS-AN-2017-018}: ca. 30\%
+%Here: 30\%
+%Reason: high lumi -> bad tracking performance. Source: Erik Butz, "Mitigation of the Strip Tracker Dynamic Inefficiency (previously known as HIP)", August, 2016.
+%
+
+
+\section{Event Classes}
+An event class is a set of events sharing the same final state. The final state is indicated by the name of the event class: All events in the class named \eventclass{2\Pe + 1\Pmu}, for example, contain two electrons and one muon in the final state.
+
+There are three types of event classes: \emph{exclusive}, \emph{inclusive} and \emph{jet inclusive}.
+
+Events in the exclusive event classes contain exactly the indicated (and no additional) particles in their final state. Each event thus belongs to exactly one exclusive event class.
+
+Inclusive event classes are denoted with the suffix "\eventclass{+ X}" in the name (for example \eventclass{2\Pe + 1\Pmu + X}). Their final state contains the explicitly stated particles plus any number (including zero) of additional ones. Each event can be assigned any number of inclusive event classes. One advantage of this procedure is a larger number of events per class which can be beneficial \todo{for what?}. However, the correct combination of statistical results across multiple inclusive event classes is not trivial.
+
+Jet inclusive event classes are denoted with the suffix "\eventclass{+ Njets}" in the event class name (e.g. \eventclass{2 \Pe + 1\Pmu + Njets}). Events contained in a jet inclusive event class may contain any number of jets in addition to the explicitly stated objects. This increases the number of events per class, as effects like initial or final state radiation are ignored, leading to reduced statistical uncertainties.
+
+In any case, the kinematic variables are only calculated from the objects explicitly stated in the class name, in our example two electrons and one muon.
+
 
 \section{Kinematic Variables and Distributions}
 For each event, the \ac{MUSiC} classification calculates three scalar variables: the sum of transverse momenta, the invariant mass and the missing transverse energy.
+
+\todo{ref}
+\fref{sec:transverse_quantities}
 
 The sum of transverse momenta is the most directly observed variable. For charged particles, the transverse momentum can be deduced directly from the curvature within the magnetic field. The transverse momentum is invariant against Lorentz-boosts in the $z$-direction from the uneven momentum distribution within the proton.
 In the following, the sum of transverse momenta will be denoted with \sumpT and defined as follows:
@@ -105,18 +231,19 @@ In the following, the sum of transverse momenta will be denoted with \sumpT and 
     \sumpT \defeq \sum_i \abs{\vec{p}_{T,i}} 
 \end{equation}
 
-The invariant mass is, as mentioned before, very sensitive to resonances in the t-channel. If the event class definition contains missing transversal energy passing the selection criteria, the invariant mass will not be computed, instead the transversal mass is used. The variables are denoted with \Minv and \MT respectively and defined as:
+The invariant mass is, as mentioned before, very sensitive to resonances in the t-channel. If the event class definition contains missing transverse energy passing the selection criteria, the invariant mass will not be computed, instead the transverse mass is used. The variables are denoted with \Minv and \MT respectively and defined as:
 \begin{align}
     \Minv &\defeq \sqrt{\left(\sum_i E_i\right)^2 - \left(\sum_i \vec{p}_i\right)^2} \\
     \MT &\defeq \sqrt{\left(\sum_i E_{T,i}\right)^2 - \left(\sum_i \vec{p}_{T,i}\right)^2}     
 \end{align}
 
-The third kinematic variable is missing transversal energy. This variable is only calculated if the event class definition explicitly contains missing transversal energy.
+The third kinematic variable is missing transverse energy. This variable is only calculated if the event class definition explicitly contains missing transverse energy.
 The variable is denoted with \MET defined as follows:
 \begin{equation}
     \MET \defeq \abs{- \sum_i \vec{E}_{T,i}} 
 \end{equation}
 
+\section{Uncertainties} 
 
 \section{Search for Deviations}
 \label{sec:deviations_search}
@@ -156,15 +283,17 @@ The formula for computing \TS will be derived in the next chapter. \todo{mention
 
 From the test statistic, we will calculate a global significance, to which we refer as \ptilde. It expresses the probability of finding a deviation equally large or larger than the observed one somewhere in the distribution if the expectation were true.
 
-The simplest way of calculating \ptilde would be to first calculate a local $p$-value from the test statistic and then apply a correction factor to it. A suitable correction factor could be estimated using combinatorics if the possible values of the local $p$-value were uncorrelated. This method is also called \emph{Bonferroni correction}. 
-
+The simplest way of calculating \ptilde would be to first calculate a local $p$-value from the test statistic and then apply an analytical correction factor to it. A suitable correction factor could be estimated using combinatorics if the possible values of the local $p$-value were uncorrelated. This method is also called \emph{Bonferroni correction}. 
 In our case, a purely analytically calculation is not possible because the connected bin regions overlap and thus the local significances are correlated.
 
 Instead, we use a simulation-based approach:
 We simulate possible experimental outcomes based on the distribution of expected number of events, and refer to each simulation round as \emph{pseudo-experiment}.
-During each pseudo-experiment, we randomly draw a substitute observed distribution from the expected number of events. 
+During each pseudo-experiment, we randomly draw a substitute observed distribution from the expected number of events.
+The entire automated search is executed on each generated distribution and its result $\TS_{\text{random}, \text{min}}$ is stored.
 
+Finally, the global \ptilde-value is calculated by determining the rate of pseudo-experiments where $\TS_{\text{random}, \text{min}} < \TS_{\text{obs}, \text{min}}$. Note that the definition of a $p$-value ("probability to find a deviation equally large or larger as the observed one by chance") corresponds directly to the computed \ptilde-value in the frequentist interpretation.
 
+\Fref{fig:pseudo_experiment} illustrates the procedure for generating a pseudo-experiment.
 
 correlated uncerts: shared value of standard gaussian multiplied with local width of uncert
 uncorrelated: random from normal distribution
@@ -172,35 +301,63 @@ summed up
 poissonian draw for quantum-phenomena
 
 \begin{algorithm}
-    \caption{Pseudo Experiment}
-    \newcommand{\Nobs}{n}
-    \newcommand{\Nexp}{N}
-    \newcommand{\corr}{corr}    
-    \newcommand{\uncorr}{uncorr}
-    \newcommand{\x}{x}
+    \SetKwData{Nobs}{n}
+    \SetKwData{Nexp}{N}
+    \SetKwData{corr}{corr}
+    \SetKwData{uncorr}{uncorr}
+    \SetKwData{x}{x}
+    
+    \SetKw{KwIn}{in}
+    
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+    
+    \Input{$\Nexp_{i=1..n} \gets $ number of events in each bin $i$}
+    \Input{$\corr_{i=1..n,j=0..c} \gets $ correlated uncertainty $j$ in each bin $i$}
+    \Input{$\uncorr_{i=1..n,k=0..u} \gets $ uncorrelated uncertainty $j$ in each bin $i$}
+    
+    \Output{$\Nobs_{i=1..n}$ number of generated events in bin $i$}
+    
+    \BlankLine
+    
+    \tcp{Once for all distributions: choose systematic uncertainty bias}
+    \ForEach{correlated uncertainty $j$ \KwIn distribution}{
+        $\x_j \gets \text{RandNormal}(\mu = 0, \sigma = 1)$\;
+    }
+    
+    \BlankLine
+    \ForEach{bin $i$ \KwIn distribution}{
+        \tcp{Start with the expected yield:}
+        $\Nobs_i \gets \Nexp_i$\;
         
-    \begin{algorithmic}
-        \Require $\Nexp_{i=1..n} \gets $ number of events in each bin $i$
-        \Require $\corr_{i=1..n,j=0..c} \gets $ correlated uncertainty $j$ in each bin $i$
-        \Require $\uncorr_{i=1..n,k=0..u} \gets $ uncorrelated uncertainty $j$ in each bin $i$
+        \tcp{Simulate correlated uncertainties using the pre-chosen bias and individual magnitude:}
+        \ForEach{correlated uncertainty $j$ \KwIn bin $i$}{
+            $\Nobs_i \gets \Nobs_i + \x_j \cdot \corr_{i,j}$\;
+        }
         
-        \Statex
+        \tcp{Simulate uncorrelated uncertainties by drawing a number from a normal distribution:}
+        \ForEach{uncorrelated uncertainty $k$ \KwIn bin $i$}{
+            $\Nobs_i \gets \Nobs_i + \text{RandNormal}(\mu = 0, \sigma = \uncorr_{i,k})$\;
+        }
         
-        \ForAll {correlated uncertainty $j$ in distribution}
-            \State $\x_j \gets \text{RandNormal}(\mu = 0, \sigma = 1)$
-        \EndFor
-        
-        \ForAll {bin $i$ in distribution}
-            \State $\Nobs_i \gets \Nexp_i$
-            \ForAll {correlated uncertainty $j$ in bin $i$}
-                \State $\Nobs_i \gets \Nobs_i + \x_j \cdot \corr_{i,j}$
-            \EndFor
-            \ForAll {uncorrelated uncertainty $k$ in bin $i$}
-                \State $\Nobs_i \gets \Nobs_i + \text{RandNormal}(\mu = 0, \sigma = \uncorr_{i,k})$
-            \EndFor
-            \State $\Nobs_i \gets \text{RandPoisson}(\Nobs_i)$
-        \EndFor
-    \end{algorithmic}
+        \tcp{Simulate independent counting experiment:}
+        $\Nobs_i \gets \text{RandPoisson}(\Nobs_i)$\;
+    }
+    
+%    
+%    \ForAll {bin $i$ in distribution}
+%        \State $\Nobs_i \gets \Nexp_i$
+%        \ForAll {correlated uncertainty $j$ in bin $i$}
+%            \State $\Nobs_i \gets \Nobs_i + \x_j \cdot \corr_{i,j}$
+%        \EndFor
+%        \ForAll {uncorrelated uncertainty $k$ in bin $i$}
+%            \State $\Nobs_i \gets \Nobs_i + \text{RandNormal}(\mu = 0, \sigma = \uncorr_{i,k})$
+%        \EndFor
+%        \State $\Nobs_i \gets \text{RandPoisson}(\Nobs_i)$
+%    \EndFor
+%    
+    \caption{Pseudo-event generation algorithm. The algorithm takes absolute values for uncertainties and number of events as input and sequentially stacks pseudo-true values for uncertainties on top of the expected yield. Finally, a random number is drawn from a Poisson distribution, simulating the physical process of a counting experiment.}
+    \label{fig:pseudo_experiment}
 \end{algorithm}
 
 The recipe for each pseudo-experiment is as follows:
@@ -233,7 +390,7 @@ For each \emph{pseudo-experiment}, we draw a random number of events for each bi
 
 
  of \emph{pseudo-experiments}: For each bin of the distribution, a random number is drawn from the probability distribution caused by systematical and statistical uncertainty on the \ac{SM} expectation value. The resulting \emph{pseudo-distribution} is subsequently again compared to the expectation using the described search algorithm, yielding a local significance value \TS for each pseudo-experiment.
-The step of randomly generating a distribution and searching for a deviation is repeated \num{e5} to \num{e6} \todo{number} times.
+The step of randomly generating a distribution and searching for a deviation is repeated \num{10000} times. \todo{mention signal scan?}
 
 Finally, the global \ptilde-value is calculated by determining the rate of pseudo-experiments where $\TS_{\text{random}, \text{min}} < \TS_{\text{obs}, \text{min}}$. Note that the definition of a $p$-value ("probability to find a deviation equally large or larger as the observed one by chance") corresponds directly to the computed \ptilde-value in the frequentist interpretation.
 
@@ -311,13 +468,30 @@ corrected using global significance
 \subsubsection{Distributions}
 
 \section{Implementation}
-\subsection{Software Environment}
-CMSSW, ROOT, Python/C++
+The analysis combines various tools from different authors (\ac{CMS}, local institute collaboration, open source), which are used on a heterogeneous computing environment (\ac{WLCG}, local computing cluster, local computer). From raw data to statistical inference there are many intermediate states which have to be managed. Doing this manually does not only require manpower, but is also more prone to human error, such as confusing files or missing steps. Therefore, several levels of automation and validation are critical for a rapid development of the analysis.
 
-\subsection{Analysis Framework}
-Skimming, Pxl, TAPAS, MUSiC
+In the following sections, we will illustrate the practical steps required to reproduce the analysis and point out various opportunities for automation. In addition, this section intends to be a reference about the exact software packages and versions used for the sensitivity study.
 
-\subsection{MUSiC Workflow}
+Events triggered by the detector are stored on the \ac{WLCG}. They are centrally reconstructed by \ac{CMS} and stored on the grid in the \textsc{MiniAOD} format, accessible only to \ac{CMS} members. In the first step, these events are preprocessed by the Aachen Institute IIIA working group and stored by sample on the local Tier-2 storage element in the \emph{Pxl I/O} file format\cite{Bretz:DevelopmentEnvironmentVisual}, which has also been developed in Aachen. The programs used for preprocessing make use of a software framework for \ac{CMS} analyses, called \textsc{CMSSW}. Preprocessing of 2015 \ac{SM} and signal samples was performed with \textsc{CMSSW} version 7.6.3. In addition to he Pxl I/O files, a working-group wide shared database is used for meta-information about samples (such as cross sections and correction factors).
+
+The further analysis is performed with version 8.0.26 of the \textsc{CMSSW} framework, which includes \textsc{ROOT} version 6.06/01\cite{Brun:ROOTobjectoriented}, C++11 with \textsc{GCC} 5.3.0 and \textsc{Python} 2.7.11\cite{Oliphant:PythonScientificComputing}.
+The \ac{MUSiC} analysis starts with the classification of events on the local computing element. The classification applies the \textsc{PxlAnalyzer}, a framework written in C++11 collaboratively by the Aachen Institute IIIA working group, on the Pxl I/O files from the previous step. Subsequently, event samples that have been classified separately are merged and stored in the \textsc{ROOT} file format. The entire process is managed by the \textsc{Luigi} framework \cite{Spotify:Luigi}(version 2.4.0), which allows automated execution of dependent task such as classification and sample merging.
+
+As next step follows the automated search for deviations. The automated search is implemented in \textsc{Python} as well as C++11. A custom script distributes the workload into multiple \emph{jobs} which are executed in parallel on the local computing cluster. Each job operates on one or more \textsc{ROOT} files, searches for deviations between simulation and data or optionally generates and evaluates pseudo-experiments.
+After retrieval from the computing grid, its output is parsed into a local \textsc{Sqlite} database for statistical analysis.
+
+Eventually, several tools written in \textsc{Python} perform statistical inference (such as \ptilde and \phat) and creation of figures from the search results. These tools make use of the libraries \textsc{NumPy} 1.11.1\cite{Walt:NumPyarraystructure}, which provides fast vectorized math, \textsc{SciPy} 0.16.1\cite{Jones:SciPyOpensource} for statistical analysis and \textsc{Matplotlib} 1.5.2\cite{Hunter:Matplotlib2Dgraphics} for visualization.
+
+The dependency of intermediate states, from the preprocessed ("skimmed") samples to results published in this thesis, is illustrated in \fref{fig:music_workflow}, which served as orientation for the employment of automation.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{../music-workflow}
+    \vspace{0.5em}
+    \caption{Implementation of the MUSiC-Workflow. Using the Luigi-Automation Framework, these steps are performed on demand.}
+    \label{fig:music_workflow}
+\end{figure}
+
 
 \subsection{Lookup-Table}
 During the automated search algorithm, most of the computation time is spent calculating \TS according to \todo{ref?}, which involves integration and summation over a large number of terms.
@@ -391,16 +565,3 @@ Additionally accessing coverage with lookup table
 Same coverage result as for the full p value
 
 
-
-\subsection{Automation}
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{../music-workflow}
-    \vspace{0.5em}
-    \caption{Implementation of the MUSiC-Workflow. Using the Luigi-Automation Framework, these steps are performed on demand.}
-    \label{fig:music_workflow}
-\end{figure}
-
-Luigi
-
-At the time of writing: only classification automated, scan still manually calling scripts
