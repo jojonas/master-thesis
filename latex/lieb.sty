@@ -135,6 +135,7 @@
 	table-unit-alignment=left,
 	locale=US,
 ]{siunitx}
+
 % declare upright micro symbol
 \DeclareSIPrefix{\micro}{$\upmu$}{-6}
 
@@ -167,12 +168,17 @@
 \RequirePackage{bigdelim}
 \RequirePackage{rotating}
 
+% allow landscape (e.g. for long tables)
+\RequirePackage{lscape}
+\RequirePackage{pdflscape}
+
 % multiple text columns
 \RequirePackage{multicol}
 
 % pretty tables
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
+\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 
 % footnotes
 \RequirePackage{tablefootnote}
@@ -273,7 +279,7 @@
 \newcommand{\pT}{\ensuremath{\vec{p}_\mathrm{T}}\xspace}
 \newcommand{\sumpT}{\ensuremath{\Sigma p_T}\xspace}
 \newcommand{\ET}{\ensuremath{E_\mathrm{T}}\xspace}
-\newcommand{\MET}{\ensuremath{\slashed{E}_\mathrm{T}}\xspace}
+\newcommand{\MET}{\ensuremath{E_\mathrm{T}^\mathrm{miss}}\xspace}
 
 \newcommand{\ptilde}{\ensuremath{\tilde{p}}\xspace}
 \newcommand{\phat}{\ensuremath{\hat{p}}\xspace}

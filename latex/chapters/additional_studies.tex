@@ -2,7 +2,7 @@
 % !TeX encoding = UTF-8
 % !TeX root = ../document.tex
 
-\newcommand{\TSprime}{\ensuremath{\TS'}\xspace}
+\newcommand{\TSprime}{\ensuremath{\TS_\text{LN}}\xspace}
 \newcommand{\ntrue}{\ensuremath{n_\text{true}}\xspace}
 \newcommand{\nexp}{\ensuremath{n_\text{exp}}\xspace}
 \newcommand{\nobs}{\ensuremath{n_\text{obs}}\xspace}
@@ -12,7 +12,7 @@
 \chapter{Additional Studies}
 \section{Coverage Analysis}
 In this chapter, we will show that the test statistic \TS introduced in \fref{sec:test_statistic} can be directly interpreted as $p$-value: $p = \TS$. We will refer to the definition and requirements of a $p$-value and show that \TS sufficiently fulfills those requirements.
-Additionally, we will repeat the analysis with \TSprime, using a normal prior (as used in previous \acs{MUSiC} theses) instead of the log-normal term in \TS and compare the results.
+Additionally, we will repeat the analysis with \TSprime, using the log-normal prior (as used in previous \acs{MUSiC} theses) instead of the normal term in \TS and compare the results.
 
 A $p$-value is an indicator for the significance of a deviation, where a smaller $p$-value corresponds to a higher significance. The $p$-value of a result is compared to a significance threshold $\alpha$, which is fixed before the statistical analysis. If the observed $p$-value is smaller than $\alpha$, the null hypothesis is rejected. In our case, rejection of the null hypothesis corresponds to falsification of the \acl{SM} and thus the discovery of new physics. 
 
@@ -34,12 +34,12 @@ To test \fref{eq:coverage_inequality}, we construct pseudo experiments based on 
 The pseudo experiments are based on \acs{MUSiC}'s null hypothesis: 
 We assume that there is a constant probability that events end up in a particular region, and thus a constant true mean value \ntrue. 
 We also assume that this true mean value is only known up to an expected event yield, \nexp.
-The way that \nexp is derived from \ntrue differs between \TS and \TSprime: For \TS, \nexp is drawn from a log-normal probability density, \TSprime  will use a normal distribution instead.
+The way that \nexp is derived from \ntrue differs between \TS and \TSprime: For \TS, \nexp is drawn from a normal probability density, \TSprime  will use a log-normal distribution instead.
 
 Additionally, the physics process of performing a counting experiment has to be simulated: Here it is assumed that the event yield is caused by independent statistical processes with a fixed probability, thus the observed event yield follows a Poisson distribution around \ntrue.
 
 The way that the assumed uncertainty enters the pseudo experiment also differs between \TS and \TSprime: For \TS, we recalculate the uncertainty after drawing \nexp in order to keep the relative uncertainty constant: $\sigmaexp = \frac{\nexp}{\ntrue} \sigmatrue$. For \TSprime, the absolute uncertainty is kept constant: $\sigmaexp = \sigmatrue$.
-This has been argued by \cite[p. 78]{Schmitz:ModelUnspecificSearch}, a more rigorous discussion can be found in \fref{app:coverage_uncertainty}.
+This has been discussed by \cite[p. 78]{Schmitz:ModelUnspecificSearch}, a more rigorous discussion can be found in \fref{app:coverage_uncertainty}.
 
 In the implementation, each pseudo-experiments begins with drawing \nexp from the probability density around \ntrue. At the same time, \nobs is drawn from a (discrete) Poisson distribution with a mean of \ntrue. From these two values, as well as the uncertainty \sigmaexp, \TS (or \TSprime) is calculated.
 
@@ -66,34 +66,58 @@ Three different result cases can arise, depending on the coverage value in \fref
 
 \subsubsection{Our Results}
 Since the MUSiC $p$-value is required to cover a large range of possible \ntrue and relative uncertainty $\sigmatrue / \ntrue$ values, the coverage is evaluated on a two dimensional grid in this parameter space.
-The computed results can be found in \fref{fig:coverage}.
+The computed results can be found in \fref{fig:coverage_normal}.
+
 
 \begin{figure}
-    \includegraphics[width=\textwidth]{coverage/coverage_excess_normal_schmitz}
-    \includegraphics[width=\textwidth]{schmitz_coverage}
-    \caption{Comparison of our results (top) with \cite{Schmitz:ModelUnspecificSearch} (bottom). The test settings as well as plotting options have been chosen to match. From visual inspection one can deduce that the results are very similar, which allows us to directly compare results from our implementation with the earlier thesis.}
-    \label{fig:coverage_schmitz}
+    \includegraphics[width=\textwidth]{coverage/coverage_deficit_normal_log}
+    \includegraphics[width=\textwidth]{coverage/coverage_excess_normal_log}
+    \caption{Results of the coverage analysis.}
+    \label{fig:coverage_normal}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=\textwidth]{coverage/coverage_deficit_lognormal_log}
     \includegraphics[width=\textwidth]{coverage/coverage_excess_lognormal_log}
     \caption{Results of the coverage analysis.}
-    \label{fig:coverage}
+    \label{fig:coverage_lognormal}
 \end{figure}
 
-\begin{figure}
-    \includegraphics[width=\textwidth]{coverage/coverage_deficit_normal_log}
-    \includegraphics[width=\textwidth]{coverage/coverage_excess_normal_log}
-    \caption{Results of the coverage analysis.}
-    \label{fig:coverage2}
-\end{figure}
 
 
 \section{Log-Normal $p$-Value}
+\label{sec:lognormal_pvalue}
+
+As observed in the previous section, using the truncated normal distribution as prior within the $p$-value has disadvantages: Especially at a low expected yield and high relative uncertainties, its validity disappears. 
+At the same time, we have observed that using a log-normal prior improves test coverage in the problematic regions.
+
+In addition, a log-normal prior is more suited for modeling our uncertainties: Analogously to the normal distribution, which is generated from a sum of independent random variables, the log-normal distribution results from the multiplication of independent random variables (see \fref{app:lognormal_derivation}). The latter corresponds to our situation, as most uncertainties on the event yield originate from shifting the event yield by a multiplicative factor.
+
+\todo{lognormal with n->inf is normal}
+
+Changing the prior in the test statistic also implies a new null-hypothesis, namely that all uncertainties are distributed in a log-normal fashion. Therefore, the pseudo-experiment generation, which is based on the null-hypothesis, must also be adapted. Instead of choosing a new pseudo-mean value using a sum of uncertainties multiplied by a normally distributed bias (see \fref{eq:pseudo_experiment_mean}), one now has to use a product of relative uncertainties:
+\begin{equation}
+    \Ntrue' = \Nmc \cdot \sum_i \left(1 + \frac{\sigma_i}{\Nmc}\right)^{x_i}
+\end{equation}
+
+However, this approach also comes with its disadvantages: When combining multiple bins into a region, previously we added individual bin contents. Assuming normally distributed bin contents, this approach is valid because the sum of two normally distributed random variables is also normally distributed. Yet, this principle does not apply to log-normal distributions. The sum of log-normally distributed random variables is not log-normally distributed.
+
+In the following, we want to discuss some solutions to this challenge, some of which have also come up in previous works on the log-normal prior\cite{Schmitz:ModelUnspecificSearch}.
+
+\begin{itemize}
+    \item just add them up anyways
+    \item use approximation \cite{Mehta:ApproximatingSumCorrelated}
+    \item generate pseudos in combined bins
+    \item draw normally, evaluate lognormal (Gegenbeispiel nennen) 
+    \item Schmitz: likelihood (multiplying $p$ of each bin), different observable (product of events?)
+\end{itemize}
+
+
 
 
 \section{A Global $p$-Value}
+\label{sec:global_pvalue}
+
 \newcommand{\TSphat}{\ensuremath{T}\xspace}
 
 The \ptilde distribution provides the ability to register less significant deviations in many classes by looking at the central part of the distribution. However, this manual method is only qualitative. We will now introduce a possible extension to the analysis which provides a quantitative method of combining the \ptilde values of all classes.

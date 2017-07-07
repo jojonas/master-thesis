@@ -9,29 +9,130 @@
 \section{Monte Carlo Datasets}
 \label{app:mc_datasets}
 
-\subsection{Sample Name}
-Most of the samples follow a consistent naming scheme. The name contains the simulated physics process, the mass range, center-of-mass energy (\SI{13}{\TeV}) and an abbreviation for the generator name.
-Possible generator abbreviations are: \texttt{AM} for MadGraph\_aMC@NLO\cite{Alwall:automatedcomputationtreea}, \texttt{BM} for BlackMax\cite{Dai:BlackMaxblackhole}, \texttt{CA} for CalcHEP\cite{Belyaev:CalcHEP34collider}, \texttt{MG} for MadGraph\cite{Alwall:MadGraph5}, \texttt{P8} for Pythia 8\cite{Sjoestrand:BriefIntroductionPYTHIA}, \texttt{PH} for POWHEG BOX\cite{Frixione:MatchingNLOQCDa,Alioli:generalframeworkimplementing}, and \texttt{SP} for Sherpa\cite{Gleisberg:EventgenerationSHERPA}.
+The following pages list the \ac{MC} samples used within the analysis. 
+The column "Group" indicates the process group. All cross section uncertainties within a process group are assumed to be correlated. 
+The second column, "Dataset Name" lists the \ac{CMS} internal dataset name, which also gives information about the simulated physics process. 
+The third column shows the cross section in \si{\pico\barn}. 
+If a higher order correction factor has been applied, it is listed in the column denoted by $k$-factor. 
+This is also visible in the "Order" column, which shows the perturbative calculation order before and, where applicable, after application of the $k$-factor. Possible values are "LO" (leading order), "NLO" (next to leading order), "NNLO" (next to next to leading order). Another possible value is present only for processes containing the \PW boson and additional jets, "NLO\_W", which corresponds to the next to leading order but is treated with a slightly larger uncertainty due to \ac{QCD} effects.
+Finally, the filter efficiency indicates that the samples have already undergone some filtering. The numbers have to be combined into a total effective cross section for each sample by multiplying the indicated cross section, $k$-factor and filter efficiency.
 
-Example name "\texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}":
-\begin{itemize}
-\item \texttt{\underline{DYJetsToLL}\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}: Sample contains a simulation of the Drell-Yan process with two leptons in the final state
-\item \texttt{DYJetsToLL\_\underline{M-5to50}\_HT-200to400\_13TeV\_ext1\_MG}: Sample is binned in the di-lepton mass (optional), this sample contains masses between \SI{5}{\GeV} and \SI{50}{\GeV}
-\item \texttt{DYJetsToLL\_M-5to50\_\underline{HT-200to400}\_13TeV\_ext1\_MG}: Sample is additionally binned in the jet $H_t = p_T$ (optional), containing a range of \SI{200}{\GeV} to \SI{400}{\GeV}
-\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_\underline{13TeV}\_ext1\_MG}: The center of mass energy is $\sqrt{s} = \SI{13}{\TeV}$
-\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_\underline{ext1}\_MG}:
- Sample is an extension sample (optional), produced in addition to an existing sample with the same name in order to reduce statistical uncertainties
-\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_\underline{MG}}:
- Sample was produced using the Madgraph generator
-\end{itemize}
+%\subsection{Sample Name}
+%Most of the samples follow a consistent naming scheme. The name contains the simulated physics process, the mass range, center-of-mass energy (\SI{13}{\TeV}) and an abbreviation for the generator name.
+%Possible generator abbreviations are: \texttt{AM} for MadGraph\_aMC@NLO\cite{Alwall:automatedcomputationtreea}, \texttt{BM} for BlackMax\cite{Dai:BlackMaxblackhole}, \texttt{CA} for CalcHEP\cite{Belyaev:CalcHEP34collider}, \texttt{MG} for MadGraph\cite{Alwall:MadGraph5}, \texttt{P8} for Pythia 8\cite{Sjoestrand:BriefIntroductionPYTHIA}, \texttt{PH} for POWHEG BOX\cite{Frixione:MatchingNLOQCDa,Alioli:generalframeworkimplementing}, and \texttt{SP} for Sherpa\cite{Gleisberg:EventgenerationSHERPA}.
+%
+%Example name "\texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}":
+%\begin{itemize}
+%\item \texttt{\underline{DYJetsToLL}\_M-5to50\_HT-200to400\_13TeV\_ext1\_MG}: Sample contains a simulation of the Drell-Yan process with two leptons in the final state
+%\item \texttt{DYJetsToLL\_\underline{M-5to50}\_HT-200to400\_13TeV\_ext1\_MG}: Sample is binned in the di-lepton mass (optional), this sample contains masses between \SI{5}{\GeV} and \SI{50}{\GeV}
+%\item \texttt{DYJetsToLL\_M-5to50\_\underline{HT-200to400}\_13TeV\_ext1\_MG}: Sample is additionally binned in the jet $H_t = p_T$ (optional), containing a range of \SI{200}{\GeV} to \SI{400}{\GeV}
+%\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_\underline{13TeV}\_ext1\_MG}: The center of mass energy is $\sqrt{s} = \SI{13}{\TeV}$
+%\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_\underline{ext1}\_MG}:
+% Sample is an extension sample (optional), produced in addition to an existing sample with the same name in order to reduce statistical uncertainties
+%\item \texttt{DYJetsToLL\_M-5to50\_HT-200to400\_13TeV\_ext1\_\underline{MG}}:
+% Sample was produced using the Madgraph generator
+%\end{itemize}
+%
+
 
 \pagebreak
-\subsection{List}
 {
-    \small
-    \def\arraystretch{1}
-    \input{tables/mc_datasets}
+    \sisetup{
+        %table-figures-integer = 2,
+        table-figures-decimal = 2,
+        table-figures-exponent = 2,
+        %table-auto-round = true,
+        round-mode = places,
+        %round-precision = 3,
+    }
+    \begin{landscape}    
+        \subsection{\acl{SM} Samples}
+        {
+            \scriptsize
+            \def\arraystretch{1}
+            \centering
+            \input{tables/mc_datasets}
+        }
+        \newpage
+        \subsection{Signal Samples}     
+        {
+            \scriptsize
+            \def\arraystretch{1}
+            \centering
+            \input{tables/mc_signal_datasets}
+        }
+    \end{landscape}
 }
+
+\newpage
+\section{Expected Minimal $p$-Values}
+\label{app:minimal_pvalues}
+
+The probability of observing a $p$-value of $p$ (or more extreme) is $p$, thus the distribution of $p$-values is uniform.
+
+We now want to derive the distribution of minimal $p$-values, depending on the sample size $N$: 
+Taking $N$ $p$-values, the probability that the smallest one has the value $p_\text{min}$ can be calculated by requiring that the other $N-1$ $p$-values are in the range $p=[0, p_\text{min})$:
+\begin{equation}
+    P(p_\text{min} = p) = C \cdot \left(1-p\right)^{N-1}
+\end{equation}
+The proportionality factor $C$ can be calculated from normalization: $C = N$.
+
+The entire probability density for minimal $p$-values os therefore:
+\begin{equation}
+    P(p_\text{min} = p) = N \cdot \left(1-p\right)^{N-1}
+\end{equation}
+
+We can verify this derivation by taking pseudo-experiments: We draw $N$ numbers from a uniform distribution $\mathcal{U}([0, 1])$ and store the minimal value. This is repeated \num{10000} times and the empirical distribution function is compared to the predicted distribution. This is shown in figure \ref{fig:minimal_pvalues}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{minimal_pvalues}
+    \caption{Minimal $p$-values from \num{100000} pseudo experiments using $N = \num{100}$.}
+    \label{fig:minimal_pvalues}
+\end{figure}
+
+One additional study on the probability density is to calculate the expected minimal value of $N$ uniform $p$-values:
+\begin{equation}
+    \langle p \rangle = \int_0^1 N \cdot \left(1-p\right)^{N-1} \cdot p \dd p = \frac{1}{N+1}
+\end{equation}
+
+\newpage
+\section{Derivation of the Log-Normal $p$-value}
+\label{app:lognormal_derivation}
+
+The total number of events is thus scaled by an unknown factor $X$, which is a random variable that emerges as product of multiple other random variables $x_i$.
+In the following section, we will derive how $X$ is distributed.
+
+We begin with rewriting the product in terms of a sum within an exponential distribution:
+\begin{equation}
+    X = \prod_i x_i = \prod_i \exp(\ln(x_i)) = \exp(\sum_i \ln(x_i))
+\end{equation}
+$\ln(x_i)$ is a random variable, and the central limit theorem implies that the sum is distributed according to the normal distribution.
+\begin{equation}
+    Y \defeq \sum_i \ln(x_i) \Rightarrow X = \exp(Y) \text{ and } f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma} \exp(-\frac{1}{2}\left(\frac{y-\mu}{\sigma}\right)^2)
+\end{equation}
+After defining $Y$ as the normally distributed variable with the probability density $f_Y(y)$, we introduce a new unknown probability density function $g_X(x)$:
+\begin{equation}
+    f_Y(y) \: \dd y \eqdef g_X(x) \: \dd x 
+\end{equation}
+Finally, we can insert all definitions, calculate the derivative and write the distribution function dependent of $x$:
+\begin{align}
+    g_X(x) &= f_Y(y) \: \dv{y}{x} \\
+    &= f_Y(\ln{x}) \: \dv{\ln{x}}{x} \\
+    &= f_Y(\ln{x}) \: \frac{1}{\abs{x}} \\
+    &= \frac{1}{\sqrt{2\pi}\sigma\abs{x}} \exp(-\frac{1}{2}\left(\frac{\ln{x}-\mu}{\sigma}\right)^2)
+\end{align}
+The result is known as \emph{log-normal distribution} and is the probability density function of a product of random variables.
+
+By performing two substitutions, we obtain a parametrization with a more meaningful interpretation:
+\begin{equation}
+    \sigma \rightarrow \ln{k} \text{ and } \mu \rightarrow \ln{x_0}
+    \label{eq:log_normal_substitution}
+\end{equation}
+\begin{equation}
+    g_X(x) = \frac{1}{\sqrt{2\pi}\abs{x}\ln{k}} \exp(-\frac{1}{2}\left(\frac{\ln(x/x_0)}{\ln{k}}\right)^2)
+\end{equation}
+
+\todo{explain meaning of parameters}
 
 \newpage
 \section{$Z$-score and $p$-value}
@@ -46,6 +147,170 @@ This yields the conversion formulas:
 \begin{equation}
     p = \frac{1}{2} \left(1 - \text{erf}\left(\frac{Z}{\sqrt{2}}\right) \right) \Leftrightarrow Z = \sqrt{2} \cdot \text{erf}^{-1} \left( 1 - 2 p \right) 
 \end{equation}
+
+\newpage
+\section{MUSiC Workflow}
+\label{app:music_workflow}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{../music-workflow}
+    \caption{Illustration of the dependencies of intermediate products during the analysis. Chronologically, the analysis starts at the top by classifying preprocessed ("skimmed") data and simulation samples. In the following steps, the classified samples are merged into a consistent set and the search for deviations is executed. Eventually, the results are stored in a database file and statistical inference is applied.}
+    \label{fig:music_workflow}
+\end{figure}
+
+\newpage
+\section{Performance of the Lookup-Table}
+\label{app:lut_performance}
+
+The performance of the \acf{LUT} is evaluated by applying the automated search on \ac{SM} pseudo-experiments with and without a \ac{LUT}. The classification output contains \num{4297} event classes, including event classes with \Pqb-tagged jets. The pseudo-experiments are generated on the \sumpT kinematic distribution.
+
+The \ac{LUT} under evaluation is \SI{80}{\mega\byte} in size. The performance is measured by wall-time, therefore is subject to small deviations ($\pm \SI{3}{\percent}$), e.g. due to other processes using the same core.
+The test is performed twice, on \num{10} (\fref{tab:lut_performance_10}) and \num{100} (\fref{tab:lut_performance_100}) pseudo-experiments, to indicate scaling behavior.
+
+\begin{table}
+    \centering
+    \small
+    \begin{tabular}{l l l}
+        \toprule
+        & without \ac{LUT} & with \ac{LUT} \\
+        \midrule
+        pseudo exp. generation & \SI{5}{\second} & \SI{5}{\second} \\
+        region building / veto & \SI{1373}{\second} & \SI{1337}{\second} \\
+        number of regions & \multicolumn{2}{c}{\num{223877750}} \\
+        number of \TS values & \multicolumn{2}{c}{\num{92503930}} \\
+        \ac{LUT} hits & - & \num{86681242} (\SI{93.7}{\percent}) \\
+        time spent calculating \TS values & \SI{5220}{\second} (\SI{56}{\micro\second} per \TS) & \SI{561}{\second} (\SI{6}{\micro\second} per \TS) \\
+        other & \SI{910}{\second} & \SI{1397}{\second} \\        
+        \midrule
+        total time & \SI{7517}{\second} & \SI{3300}{\second} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Performance results on the automated search on \num{4297} event classes, \num{10} pseudo-experiments on the \sumpT distribution. All listed durations express wall-time.}
+    \label{tab:lut_performance_10}
+\end{table}
+
+%
+%[8:01 PM] Jonas Lieb: LUT timing results!
+%[8:01 PM] Jonas Lieb: 1. Ohne Lookuptable
+%[8:01 PM] Jonas Lieb:
+%    == RAW TIMING ==
+%                            dicing:          4.7
+%                            pValue:       5220.7
+%                        roiFinding:       6593.6
+%    ===============
+%    == RAW STATS ==
+%                          p-values:     92503930
+%          skip: (classic) coverage:      4195355
+%           skip: adaptive coverage:     13600580
+%                       skip: empty:     30089330
+%      skip: leading bg is negative:      1426160
+%          skip: leading bg missing:     10553750
+%              skip: low statistics:     13859140
+%                 skip: negative MC:      1223625
+%        skip: too much negative bg:      5547480
+%                     total regions:    223877750
+%    ===============
+%    Total RoI-finding time: 6593.65s (1.83157h)
+%    Time per p-value: 56.4377us
+%[8:01 PM] Jonas Lieb: 2. Mit Lookuptable
+%[8:01 PM] Jonas Lieb:
+%    == RAW TIMING ==
+%                            dicing:          4.7
+%                            pValue:        561.3
+%                        roiFinding:       1898.2
+%    ===============
+%    == RAW STATS ==
+%                          lut: hit:     86681242
+%                         lut: miss:      5822688
+%                          p-values:     92503930
+%          skip: (classic) coverage:      4182300
+%           skip: adaptive coverage:     13600580
+%                       skip: empty:     30089330
+%      skip: leading bg is negative:      1426160
+%          skip: leading bg missing:     10553750
+%              skip: low statistics:     13859140
+%                 skip: negative MC:      1236680
+%        skip: too much negative bg:      5547480
+%                     total regions:    223877750
+%    ===============
+%    Total RoI-finding time: 1898.24s (0.527288h)
+%    Time per p-value: 6.06811us
+%    LUT Hit percentage: 93.7 %
+%[8:02 PM] Jonas Lieb: War jetzt ein voller SM-only scan, SumPt, bJets, lokal, 10 Pseudo-Experimente pro Klasse
+%
+
+\begin{table}
+    \centering
+    \small
+    \begin{tabular}{l l l}
+        \toprule
+        & without \ac{LUT} & with \ac{LUT} \\
+        \midrule
+        pseudo exp. generation & \SI{33}{\second} & \SI{37}{\second} \\
+        region building / veto & \SI{13520}{\second} & \SI{13365}{\second} \\
+        number of regions & \multicolumn{2}{c}{\num{2238777500}} \\
+        number of \TS values & \multicolumn{2}{c}{\num{925039300}} \\
+        \ac{LUT} hits & - & \num{862902004} (\SI{93.3}{\percent}) \\
+        time spent calculating \TS values & \SI{53746}{\second} (\SI{58}{\micro\second} per \TS) & \SI{6165}{\second} (\SI{7}{\micro\second} per \TS) \\
+        other & \SI{1022}{\second} & \SI{1615}{\second} \\
+        \midrule
+        total time & \SI{68321}{\second} & \SI{21182}{\second} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Performance results on the automated search on \num{4297} event classes, \num{100} pseudo-experiments on the \sumpT distribution. All listed durations express wall-time.}
+    \label{tab:lut_performance_100}
+\end{table}
+%
+%without LUT
+%== RAW TIMING ==
+%                        dicing:         33.4
+%                        pValue:      53746.6
+%                    roiFinding:      67266.9
+%===============
+%== RAW STATS ==
+%                      p-values:    925039300
+%      skip: (classic) coverage:     41893018
+%       skip: adaptive coverage:    136005800
+%                   skip: empty:    300893300
+%  skip: leading bg is negative:     14261600
+%      skip: leading bg missing:    105537500
+%          skip: low statistics:    138591400
+%             skip: negative MC:     12296782
+%    skip: too much negative bg:     55474800
+%                 total regions:   2238777500
+%===============
+%Total RoI-finding time: 67266.9s (18.6853h)
+%Time per p-value: 58.1019us
+% wall time: 68321s
+%
+%with LUT
+%
+%== RAW TIMING ==
+%                        dicing:         36.6
+%                        pValue:       6165.1
+%                    roiFinding:      19530.9
+%===============
+%== RAW STATS ==
+%                      lut: hit:    862902004
+%                     lut: miss:     62137296
+%                      p-values:    925039300
+%      skip: (classic) coverage:     41885803
+%       skip: adaptive coverage:    136005800
+%                   skip: empty:    300893300
+%  skip: leading bg is negative:     14261600
+%      skip: leading bg missing:    105537500
+%          skip: low statistics:    138591400
+%             skip: negative MC:     12303997
+%    skip: too much negative bg:     55474800
+%                 total regions:   2238777500
+%===============
+%Total RoI-finding time: 19530.9s (5.42526h)
+%Time per p-value: 6.66467us
+%LUT Hit percentage: 93.3 %
+% Wall time: 21182s
+
+
+
 
 \newpage
 \section{Modified Distributions in Coverage Testing}
@@ -131,3 +396,15 @@ The argumentation for the log-normal distribution is similar. The cumulative dis
 Following the same argumentation, one obtains that again $\sigma$ must be conserved. However, in contrast to the case of the normal distribution, $\sigma$ now only depends on the \emph{relative} uncertainty (see \fref{eq:log_normal_substitution}).
 
 Overall, one can conclude that the requirements on the distributions are met if the absolute error (in case of the normal distribution) or the relative error (in case of the log-normal distribution) are conserved.
+
+\newpage
+\section{Comparison of Coverage Results with Thesis by Stefan Schmitz}
+\label{app:coverage_schmitz}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{coverage/coverage_excess_normal_schmitz}
+    \includegraphics[width=0.7\textwidth]{schmitz_coverage}
+    \caption{Comparison of our results (top) with \cite{Schmitz:ModelUnspecificSearch} (bottom). The test settings as well as plotting options have been chosen to match. From visual inspection one can deduce that the results are very similar, which allows us to directly compare results from our implementation with the earlier thesis.}
+    \label{fig:coverage_schmitz}
+\end{figure}
