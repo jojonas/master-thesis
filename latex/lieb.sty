@@ -122,10 +122,13 @@
 % non-italic greek letters (for SI-prefixes)
 \RequirePackage{upgreek}
 
+% miscellaneous math enhancements from AMS-TeX
+\RequirePackage{amsmath}
+
 % awesome units!
 \RequirePackage[
 	binary-units=true,
-	range-phrase={ to },
+	range-phrase={\text{ to }},
 	mode=text,
 	separate-uncertainty=true,
 	group-digits=integer,
@@ -133,6 +136,7 @@
 	table-number-alignment=right,
 	table-text-alignment=center,
 	table-unit-alignment=left,
+    table-auto-round=true,
 	locale=US,
 ]{siunitx}
 
@@ -150,9 +154,6 @@
 
 % Shortcuts often used in physics
 \RequirePackage{physics}
-
-% miscellaneous math enhancements from AMS-TeX
-\RequirePackage{amsmath}
 
 % slash notation (e.g. for MET)
 \RequirePackage{slashed}
@@ -219,7 +220,6 @@
 
 % spacing between figures/tables and text
 \setlength{\intextsep}{1\parskip+1\baselineskip}
-
 % table padding
 \def\arraystretch{1.3}
 
@@ -280,6 +280,7 @@
 \newcommand{\sumpT}{\ensuremath{\Sigma p_T}\xspace}
 \newcommand{\ET}{\ensuremath{E_\mathrm{T}}\xspace}
 \newcommand{\MET}{\ensuremath{E_\mathrm{T}^\mathrm{miss}}\xspace}
+\newcommand{\METvec}{\ensuremath{\vec{E}_\mathrm{T}^\mathrm{miss}}\xspace}
 
 \newcommand{\ptilde}{\ensuremath{\tilde{p}}\xspace}
 \newcommand{\phat}{\ensuremath{\hat{p}}\xspace}

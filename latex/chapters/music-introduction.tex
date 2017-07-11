@@ -164,9 +164,9 @@ Therefore, photons are selected and identified in a similar matter. The \ac{MUSi
 In order to veto photons emitted as bremsstrahlung, photons with any tracker signals are discarded.
 
 \subsection{Missing Transverse Energy}
-Missing transverse energy, denoted by \MET, is a physics object characterizing momentum imbalance in the detector. The projected four momentum is calculated as follows:
+Missing transverse energy, denoted by \MET, is a physics object characterizing momentum imbalance in the detector. The projected three-momentum is calculated from objects' corrected transverse energies as follows:
 \begin{equation}
-    \MET \defeq \abs{- \sum_i \vec{E}_{T,i}} 
+    \METvec \defeq - \sum_i \vec{E}_{T,i}
 \end{equation}
 Causes for missing transverse energy generally fall into one of two categories: Incorrect measurements, such as noisy, dead or asymmetric modules, and non-detectable particles. \ac{SM} neutrinos, for example, only interact very weakly and are therefore invisible for the detector. If one or more neutrinos are produced during the interaction, we can only observe their combined four momentum in terms of missing transverse energy. The same applies to hypothetical new physics particles which do not interact with the detector, making \MET an interesting physics object to work with.
 
@@ -247,10 +247,10 @@ The invariant mass is, as mentioned before, very sensitive to resonances in the 
     \MT &\defeq \sqrt{\left(\sum_i E_{T,i}\right)^2 - \left(\sum_i \vec{p}_{T,i}\right)^2}     
 \end{align}
 
-The third kinematic variable is missing transverse energy. This variable is only calculated if the event class definition explicitly contains missing transverse energy.
-The variable is denoted with \MET defined as follows:
+The third kinematic variable is missing transverse energy. 
+This variable is only calculated if the event class definition explicitly contains \METvec (above the threshold of \SI{100}{\GeV}) and describes the magnitude of \METvec:
 \begin{equation}
-    \MET \defeq \abs{- \sum_i \vec{E}_{T,i}} 
+    \MET \defeq \abs{\METvec} 
 \end{equation}
 
 \section{Systematic Uncertainties}
@@ -313,9 +313,7 @@ Subsequently, a global \ptilde-value for the region is calculated. This \ptilde-
 The search is performed on so-called regions. A region is a set of adjacent bins and is represented by the combined number of expected and observed events as well as a combined uncertainty.
 
 Some bins may contain few simulated events with a large weight. To be insensitive towards deviations that arise from this effect, a region in the \sumpT and \MET kinematic distributions must consist of at least \num{3} adjacent bins.
-For a increased sensitivity to resonant deviations, the minimal number of bins in the \Minv and \MT distributions is \num{1}.
-
-An additional criterion on the regions is based on the number of simulated events in a region. If a region shows a lack of simulated events in context of a local neighborhood, the test statistic is not computed for this particular region. Since each region (that is not the entire distribution) is embedded in a larger region, regions skipped in this step are still considered. \todo{low stats ausfuerlicher erklaeren?}
+For a increased sensitivity to resonant deviations, the minimal number of bins in the \Minv and \MT distributions is \num{1}. In addition, we employ a veto on regions where the simulation is incomplete, which is described in the next section.
 
 The combined number of events and the combined uncertainty for each region is calculated as
 \begin{align}
@@ -330,7 +328,25 @@ Some uncertainties, such as the statistical uncertainty on the simulated number 
 Other uncertainties are correlated between bins. An example for this is the uncertainty on the luminosity measurement, which affects all bins of all distributions the same way. We treat any uncertainty that is assumed to be correlated to some extend as fully correlated ($\rho_{i,j} = 1$) and calculate the combined uncertainty as linear sum. This method possibly overestimates the total uncertainty, in case the correlation coefficient is somewhere between 0 and 1, leading to a lower \todo{(conservative?)} sensitivity.
 
 \subsection{Region Veto}
-\todo{!}
+\label{sec:region_veto}
+Although the analysis aims to cover as much phase space as possible by combining large amounts of \ac{MC} events, there are regions where the \ac{MC} description is incomplete. 
+Because the null-hypothesis (the \acl{SM}) is not correctly represented in some areas, we must not probe for new physics in these regions, i.e. any statistical inference from these regions would be invalid.
+
+Therefore, several rules have been identified and implemented in order to skip calculation of \TS values for incorrectly modeled regions. These rules may only depend on the \ac{SM} values, not on the observed data per region. In addition, note that any region is usually embedded in a larger region with a higher confidence in simulation. 
+
+The following rules are tested, if any of them matches, the region is vetoed, no \TS value is calculated and thus not considered for \ac{RoI}. Some of the rules do not only depend on the region itself, but also on a \emph{neighborhood}. The neighborhood is defined as combination of adjacent bins below and above the region boundaries, \num{4} in each direction. In the neighborhood, we define a set of \emph{dominant neighborhood processes} as the set of processes with the largest contributions, which in total make up more than \SI{95}{\percent} of the total yield in the neighborhood.
+
+%\todo{was heißen die prozente? Antwort: prozent der regions vetoed durch regel. ACHTUNG: manche regions würden durch mehrere tests fallen, also prio... oder weglassen}
+\begin{itemize}
+    \item No or negative total \ac{MC} yield: $\Nmc \leq \num{0}$. %($\approx \SIrange{5}{15}{\percent}$).
+    \item Any process contributes more than \SI{2}{\percent} of the event yield in the negative direction. %($\approx \SI{3}{\percent}$).
+    \item Any process which has been identified as dominant in the neighborhood has no or negative total \ac{MC} yield. %($< \SI{1}{\percent}$).
+    \item Region has large total statistical uncertainty: $\frac{\sigma_\text{stat}}{\Nmc} > \SI{60}{\percent}$. %($\approx \SIrange{5}{10}{\percent}$).
+\end{itemize}
+
+Negative total \ac{MC} yield can arise from negative terms in next-to-leading cross section calculations. The negative contributions are accounted for by assigning negative weights to a small number of events, while keeping the mean weight positive. 
+Therefore, especially in phase space areas with few simulated events, situations can occur where only negative event weights contribute to a region. 
+In these regions the original assumption, having enough events for a regression to the mean, is not fulfilled, thus the \ac{SM} is not correctly represented and the regions must be vetoed.
 
 \subsection{Test Statistic}
 \label{sec:test_statistic}
@@ -417,7 +433,7 @@ During each pseudo-experiment, we randomly draw a substitute observed distributi
 The entire automated search is repeated on each generated distribution and its result $\TS_{\text{random}, \text{min}}$ is stored. 
 
 Finally, the global \ptilde-value is calculated by determining the rate of pseudo-experiments where a more significant deviation has been found: $\TS_{\text{random}, \text{min}} < \TS_{\text{obs}, \text{min}}$. Thus, the \ptilde value automatically fulfills the definition of a $p$-value ("probability to find a deviation equally large or larger as the observed one by chance") if the pseudo-experiment generation corresponds to the null hypothesis.
-For this thesis, the number of pseudo-experiments has been chosen to be \num{10000}, therefore the minimal meaningful result is $\ptilde = \frac{1}{10000} = \num{0.0001}$, which corresponds to a two-sided $Z$-score of $\num{3.7} \sigma$ (see \fref{app:z_score}).
+For this thesis, the number of pseudo-experiments has been chosen to be \num{10000}, therefore the minimal meaningful result is $\ptilde = \frac{1}{10000} = \num{1e-4}$, which corresponds to a two-sided $Z$-score of $\num{3.7} \sigma$ (see \fref{app:z_score}).
 
 \Fref{fig:pseudo_experiment} illustrates the procedure for generating a pseudo-experiment. The pseudo-experiment generation is performed separately for each bin of the distribution. First, a possible true value $\Ntrue$ is generated from the known \ac{SM} mean and systematic uncertainties, then the counting experiment is simulated by drawing from a Poisson distribution $\mathcal{P}$.
 
@@ -434,7 +450,7 @@ In order to simulate reality as close as possible, within each pseudo experiment
     \SetKwData{Nobs}{n}
     \SetKwData{Nexp}{N}
     \SetKwData{corr}{corr}
-    \SetKwData{uncorr}{uncorr}
+    \SetKwData{stat}{stat}
     \SetKwData{x}{x}
     
     \SetKw{KwIn}{in}
@@ -444,7 +460,7 @@ In order to simulate reality as close as possible, within each pseudo experiment
     
     \Input{$\Nexp_{i=1..n} \gets $ number of events in each bin $i$}
     \Input{$\corr_{i=1..n,j=0..c} \gets $ correlated uncertainty $j$ in each bin $i$}
-    \Input{$\uncorr_{i=1..n,k=0..u} \gets $ uncorrelated uncertainty $j$ in each bin $i$}
+    \Input{$\stat_{i=1..n} \gets $ statistical uncertainty in each bin $i$}
     
     \Output{$\Nobs_{i=1..n}$ number of generated events in bin $i$}
     
@@ -465,10 +481,8 @@ In order to simulate reality as close as possible, within each pseudo experiment
             $\Nobs_i \gets \Nobs_i + \x_j \cdot \corr_{i,j}$\;
         }
         
-        \tcp{Simulate uncorrelated uncertainties by drawing a number from a normal distribution:}
-        \ForEach{uncorrelated uncertainty $k$ \KwIn bin $i$}{
-            $\Nobs_i \gets \Nobs_i + \text{RandNormal}(\mu = 0, \sigma = \uncorr_{i,k})$\;
-        }
+        \tcp{Simulate (uncorrelated) statistical uncertainties by drawing a number from a normal distribution:}
+        $\Nobs_i \gets \Nobs_i + \text{RandNormal}(\mu = 0, \sigma=\stat_{i})$\;
         
         \tcp{Simulate independent counting experiment:}
         $\Nobs_i \gets \text{RandPoisson}(\Nobs_i)$\;
@@ -477,19 +491,9 @@ In order to simulate reality as close as possible, within each pseudo experiment
     \label{fig:pseudo_experiment}
 \end{algorithm}
 
-%Within the (statistical and systematical) uncertainty distribution of the Standard Model  
-%The statistical nature of the Standard-Model is simulated by randomly choosing values for the observed number of events in each bin.
-%The probabilities of observing deviations are correlated between overlapping regions. 
-%Since the regions' overlap, the regions are correlated. Thus, the probabilities of observing deviations by chance are correlated between overlapping regions.
-%assess the significance of a deviation, expressed as probability to observe a deviation the same as or more extreme just by chance (given SM) SOMEWHERE in the distribution
-%procedure also known as Bonferroni correction
-%correction factor cannot be calculated analytically because of correlations between regions
-%idea: pseudo-experiment, simulate circumstances using SM only, count more-extreme values, interpret fraction as probability (frequentist  approach)
-%problem: need measure for "extremity" of deviation (-> also used for finding RoI)
-
-
-\subsection{Treatment of Regions With Too Few Simulated Events}
-\todo{wie tief darauf eingehen}
+\subsection{Minimum Yield}
+For further statistical inference it is important to note that any non-zero event yield in a certain final state will trigger the creation of an event class corresponding to that final state. Therefore, by pure combinatorics, the number of event classes grows as more simulated events are added to the analysis. 
+These almost empty event classes cause problems during the pseudo-experiment procedure: As the event yield is very low, the pseudo-data generation will generate $\Ndata = \num{0}$ in most cases and $\Ndata = \num{1}$ in very few cases. The \num{0}-case will be insignificant and the few \num{1}-cases will yield a very significant \TS and \ptilde value. Because of this discretization, the \ptilde value will not be uniformly distributed, which is our assumption for the following statistical inference. For this reason, event classes with a total integrated yield of less than \num{0.1} are excluded from statistical inference.
 
 \subsection{\ptilde-Distribution}
 Similarly to the look-elsewhere effect within a single distribution, the probability of finding a significant deviation in any distribution increases as we search within multiple event classes.
@@ -498,20 +502,10 @@ Since \ptilde fulfills the definition of a $p$-value, the probability of observi
 
 In order to set all calculated \ptilde values into context, the last step of the analysis is to aggregate a distribution of \ptilde values. Since for every \ac{SM} pseudo-experiment round, there is a \ptilde value for each event class, we can aggregate the distribution for each pseudo-experiment round. Afterwards, all histograms are combined to calculate the mean, median, \SI{68}{\percent} and \SI{95}{\percent} intervals on each bin content of the \ptilde distribution. Similarly, the distribution of \ptilde-values of all event classes from observed data is calculated. Up to this thesis, both distributions are only qualitatively compared (by eye). In \fref{sec:global_pvalue}, a quantitative solution to this approach will be discussed.
 
-\todo{min yield}
-
-%
-%\subsection{Look-Elsewhere-Effects}
-%\subsubsection{Regions}
-%corrected using global significance 
-%\subsubsection{Classes}
-%\subsubsection{Distributions}
-
-
 \section{Signal Study}
 The goal of the signal study is to investigate how signatures of new physics propagate to the result of the analysis. For this purpose, simulated events of new physics processes are classified into event classes and merged with the classification results from the \acl{SM}. Experimental uncertainties between the \ac{SM} classification results and the signal results are assumed to be fully correlated and accordingly combined. However, no uncertainty on the signal cross section is assumed, because the signal study investigates one specific cross section scenario.
 
-Subsequently, pseudo-experiments are generated from the combined signal and background ($S+B$) and compared to the \ac{SM} simulation by the automated search for deviations, using the pseudo-experiments instead of observed data. Subsequently, the resulting \TSmin values are corrected for the look-elsewhere effect using a precomputed set of \ac{SM} \TS values, resulting one distribution of \ptilde values for each signal pseudo-experiment round.
+Subsequently, pseudo-experiments are generated from the combined signal and background and compared to the \ac{SM} simulation by the automated search for deviations, using the pseudo-experiments instead of observed data. Subsequently, the resulting \TSmin values are corrected for the look-elsewhere effect using a precomputed set of \ac{SM} \TS values, resulting one distribution of \ptilde values for each signal pseudo-experiment round.
 
 The interpretation of the \ptilde-distributions is performed qualitatively, analogous to the interpretation of real observed data. If the resulting \ptilde-values are not distributed uniformly anymore and there is a deviation from \ac{SM}-only simulation or the uniform distribution, it is interpreted as sensitivity of the \ac{MUSiC} analysis towards that specific model.
 Because the qualitative inference is very vague, we will discuss an alternative in \fref{sec:global_pvalue}, where multiple pseudo-experiment rounds are used to calculate a test-power towards the model under investigation.

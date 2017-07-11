@@ -6,28 +6,80 @@
 \label{chap:sensitivity_studies}
 
 \section{Results}
+\label{sec:results}
 
-\subsection{Most Significant Classes}
-\subsection{Distribution of \ptilde values}
-\subsection{\phat Results}
+The following sections will present the results of the analysis of the discovery potential. For each signal model, we will show the most significant classes, distribution of \ptilde values and the newly introduced \phat results which quantify the test power towards a certain model. 
+We will start by presenting a validation which has been obtained by executing the entire analysis on a \ac{SM}-only sample.
+
+
+We will claim to be sensitive to a model if any \phat test power is above \SI{70}{\percent}.
+
+\subsection{Validation Using the \ac{SM}}
+\subsubsection{Most Significant Classes}
+%\begin{table}
+%    \centering
+%    \input{tables/most_significant/signal,validation,bJets,SumPt/exclusive/table}
+%    \caption{Most significant classes for the \ac{QBH} model at $M = \SI{4000}{\GeV}$.}
+%\end{table}
+%
+\subsubsection{Distribution of \ptilde Values}
+\begin{figure}
+    \centering
+    \input{tables/most_significant/signal,validation,bJets,SumPt/exclusive/table}
+    \vspace{1\baselineskip}
+    \includegraphics[width=\textwidth]{results/ptildeplots/signal,validation,bJets,SumPt/SM,bJets,SumPt/exclusive/pdf/p-tildeSumPt}
+    \caption{Most significant classes for the \ac{QBH} model at $M = \SI{4000}{\GeV}$.}
+\end{figure}
+%
+%
+%\subsection{Black Holes}
+%\subsubsection{Most Significant Classes}
+%\begin{table}
+%    \centering
+%    \input{tables/most_significant/signal,QBH_M-4000,bJets,SumPt/exclusive/table}
+%    \caption{Most significant classes for the \ac{QBH} model at $M = \SI{4000}{\GeV}$.}
+%\end{table}
+%
+%\subsubsection{Distribution of \ptilde Values}
+%\subsubsection{\phat Results}
+%
+%\subsection{Seesaw}
+%
+%\subsection{\PWprime}
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{results/phatplots/bJets/VALIDATION/exclusive/SumPt/KS_referenced_results}
+    \includegraphics[width=0.5\textwidth]{results/phatplots/bJets/VALIDATION/exclusive/SumPt/Simple_results}
+    \caption{\phat results for the validation. As expected, the test power of the null-hypothesis is about \SI{5}{\percent} and no significant deviation from the solid curve can be found.}
+\end{figure}
+
+\subsubsection{Differences between Luminosity of \SI{2.3}{\per\femto\barn} and \SI{35.9}{\per\femto\barn}}
 
 \section{Discussion}
+
+
+Concerning the choice of test statistic for \phat: It all cases, it seems that the simple test, which only counts very significant classes, outperforms more sophisticated test statistics which also perform a comparison in the bulk of the distribution. One possible explanation could be that the analysis has previously been developed with sensitivity towards very significant classes rather than optimizing for the bulk of the \ptilde distribution.
+Nevertheless, the test power towards the other test statistics should be considered during future design decisions of the analysis.
 
 \subsection{Comparison to dedicated analyses}
 \begin{table}
     \centering
-    \begin{tabular}{r r r r}
+    \begin{tabular}{r r r r r r r}
         \toprule
-        Model & $\mathcal{L} \approx \SI{2.3}{\per\femto\barn}$ & $\mathcal{L} \approx \SI{35.9}{\per\femto\barn}$ & Our threshold \\
+        & \phantom{ab} & \multicolumn{2}{c}{$\mathcal{L} \approx \SI{2.3}{\per\femto\barn}$} & \phantom{ab} & \multicolumn{2}{c}{$\mathcal{L} \approx \SI{35.9}{\per\femto\barn}$} \\
+        \cmidrule{3-4} \cmidrule{6-7}
+        Model && \ac{CMS} Limit & \ac{MUSiC} && \ac{CMS} Limit & \ac{MUSiC} \\
         \midrule
         %RPV-SUSY $\lambda = 0.01$& \SI{1}{\TeV}\cite{CMS:CMS-PAS-EXO-16-001} & \SI{1.9}{\TeV}\tablefootnote{not public} & 0 \\
-        QBH $n=4$ & \SI{4.2}{\TeV}\cite{CMS:CMS-PAS-EXO-16-001} & \SI{5.4}{\TeV}\tablefootnote{not public} & 0 \\
-        Black Hole & \SI{8.6}{\TeV}\cite{CMS:CMS-PAS-EXO-15-007} & - & 0 \\
-        Seesaw & \SI{440}{\GeV}\cite{CMS:CMS-PAS-EXO-16-002} & \SI{790}{\GeV}\cite{CMS:CMS-PAS-EXO-17-006} & 0 \\
-        $\PWprime \to \Pqt \Pqb$ & \SI{2.4}{\TeV}\cite{CMSCollaboration:SearchesWbosons} & \SI{3.4}{\TeV}\cite{CMS:CMS-PAS-B2G-17-010} & 0 \\
+        QBH $n=4$ && \SI{4.2}{\TeV}\cite{CMS:CMS-PAS-EXO-16-001} & 0 && \SI{5.4}{\TeV}\tablefootnote{not public} & 0 \\
+        Black Hole && \SI{8.6}{\TeV}\cite{CMS:CMS-PAS-EXO-15-007} & 0 && - & 0 \\
+        Seesaw && \SI{440}{\GeV}\cite{CMS:CMS-PAS-EXO-16-002} & 0 && \SI{790}{\GeV}\cite{CMS:CMS-PAS-EXO-17-006} & 0 \\
+        $\PWprime \to \Pqt \Pqb$ && \SI{2.4}{\TeV}\cite{CMSCollaboration:SearchesWbosons} & 0 && \SI{3.4}{\TeV}\cite{CMS:CMS-PAS-B2G-17-010} & 0 \\
         \bottomrule
     \end{tabular}
-    \caption{Comparison of our discovery thresholds to comparable dedicated analyses published by the \ac{CMS} collaboration.}
+    \caption{Comparison of our discovery thresholds to comparable dedicated analyses published by the \ac{CMS} collaboration. Our values are the highest mass points at which \ac{MUSiC} is sensitive to the given model (according to the definition of \fref{sec:results}). Missing values indicate that the corresponding analysis on this model/luminosity combination has not been conducted.}
 \end{table}
 
 \subsection{General Validity for New Physics}

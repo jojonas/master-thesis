@@ -4,14 +4,11 @@
 
 \chapter{Introduction}
 
-\section{This Thesis}
 This thesis deals with the \acf{MUSiC}, which is a particle physics analysis aiming to find new physics within data observed by the \acs{CMS} experiment.
 
-In the first chapter, we will give a short introduction to the \acl{SM} of particle physics and the \acs{CMS} experiment. 
-The second chapter is a description of the \acs{MUSiC} analysis in its current state. It will motivate and explain the different strategies and algorithms employed in the analysis.
-Afterwards, we will show the effectiveness of the existing analysis steps using statistical methods as well as simulations of new physics processes.
-Finally, we will examine multiple extensions to the search and study their impact on the analysis sensitivity for different new physics models.
-
+In the first chapter introduces the \acl{SM} of particle physics and the \acs{CMS} experiment. 
+The second chapter is a description of the \acs{MUSiC} analysis in its current state. Different strategies and algorithms within the analysis framework are motivated and explained. The capabilities to detect new physics with the employed approach is evaluated using simulations of new physics processes as well as statistical methods.
+The last part of this work examines multiple extensions to the existing analysis and studies their impact on the analysis sensitivity for different new physics models.
 
 \section{Units and Abbreviations}
 Throughout this work, we will use the natural unit system. This means that the speed of light and the Planck constant are fixed to $1$:
@@ -22,7 +19,7 @@ It follows that the only unit needed to express most other physical quantities i
 Two exceptions to this are the cross section and luminosity, which are expressed in femtobarn and inverse femtobarn respectively: $\SI{1}{\femto\barn} = \SI{e-43}{\meter\squared}$.
 
 \section{Particle Physics}
-Finding the building blocks of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. As of 2017, the state of particle physics research is summed up in the so-called \emph{\acl{SM} of Particle Physics}.
+Finding the building blocks of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter\cite{Melsen:atomosatomhistory}. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. As of 2017, the state of particle physics research is summed up in the so-called \emph{\acl{SM} of Particle Physics}.
 
 The following sections will be a short introduction to the \acl{SM}, its theoretical foundations and open questions. Motivated by these questions, we will introduce possible extensions to the \acl{SM} in the next chapter.
 
@@ -117,8 +114,8 @@ Elementary particles can be subdivided into several groups, as shown in \fref{fi
 At the first level, one distinguishes between two groups: \emph{fermions} and \emph{bosons}.
 
 Fermions are elementary particles with a spin of $\nicefrac{1}{2}$. They follow Fermi-Dirac statistics and have to obey Pauli's exclusion principle which states that no more than one particle can occupy a certain state characterized by its quantum numbers.
-The group of fermions can be further divided into quarks and leptons.
-There are six quarks: up (\Pup), down (\Pdown), charm (\Pcharm), strange (\Pstrange), bottom (\Pbottom) and top (\Ptop). Quarks carry color charge and are the only objects to take part in the strong interaction.
+The group of fermions can be further divided into \emph{quarks} and \emph{leptons}.
+There are six quarks: up (\Pup), down (\Pdown), charm (\Pcharm), strange (\Pstrange), bottom (\Pbottom) and top (\Ptop). Quarks carry color charge and are the only fermions to take part in the strong interaction.
 In addition, there are three lepton families: \emph{electron} (\Pe), \emph{muon} (\Pmu) and \emph{tau} (\Ptau). Each charged lepton has a very light, electrically neutral \emph{neutrino} associated with it.
 
 The second group of particles are called bosons. They mediate interactions (also called \emph{forces}) and posses an integer spin. Bosons follow Bose-Einstein statistics and may thus occupy the same quantum state.
@@ -167,20 +164,16 @@ In addition, there is the \emph{Higgs boson} (\PH), which uses the Higgs mechani
     \label{tab:particles}
 \end{table}
 
-In terms of conventional matter, one can conclude that fermions make up matter and bosons hold matter together.
-
 \subsection{Interactions}
 \subsubsection{Quantum Electrodynamics}
 The theory of electromagnetism at extremely small or extremely high energetic scales is called \acfi{QED}. It is a field theory that unifies classical quantum mechanics, special relativity and gauge invariance.
 
 Because the probability amplitude of a quantum mechanical wave function is independent of the wave's phase, two wave functions that only differ in phase are equivalent. Thus, physics processes should behave exactly the same, regardless of the phase term. This concept is called \emph{invariance under phase transformations} and is a necessary property for quantum field theories.
 
-In 1928, the British physicist Paul Dirac derived an relativistic extension of the classical Schrödinger equation by substituting observables with corresponding operators in the relativistic energy-momentum relation $E^2 = p^2 + m^2$. The resulting so-called \emph{Dirac equation} describes the behavior of free spin-\nicefrac{1}{2} particles and even predicts the existence of antiparticles.
-However, the Dirac equation is not invariant under phase transformations and thus Richard Feynman et al. developed a gauge invariant extension of Dirac's theory. This extension, quantum electrodynamics, was awarded the Nobel prize in 1965\cite{NobelMedia:NobelPrize1965}.
+In 1928, the British physicist Paul Dirac derived an relativistic extension of the classical Schrödinger equation\cite{Dirac:quantumtheoryelectron} by substituting observables with corresponding operators in the relativistic energy-momentum relation $E^2 = p^2 + m^2$. The resulting so-called \emph{Dirac equation} describes the behavior of free spin-\nicefrac{1}{2} particles and even predicts the existence of antiparticles.
+However, the Dirac equation is not invariant under phase transformations and thus Richard Feynman et al. developed a gauge invariant extension of Dirac's theory\cite{Feynman:Spacetimeapproach}. This extension, quantum electrodynamics, was awarded the Nobel Prize in 1965\cite{NobelMedia:NobelPrize1965}.
 
-In \ac{QED} interactions happen between exactly two charged particles and one photon, as show in \fref{fig:qed_vertices}: Two particles may annihilate into one photon, a photon may be emitted or absorbed, or a particle-antiparticle pair may be created from the photon energy. In each case, the electrical charge is conserved.
-
-\todo{running coupling constant?}
+The theory of \ac{QED} evolves around the electric charge: A photon, which couples to the electric charge, may interact with exactly two charged particles, as show in \fref{fig:qed_vertices}: Two particles may annihilate into one photon, a photon may be emitted or absorbed, or a particle-antiparticle pair may be created from the photon energy. In each case, the electrical charge is conserved.
 
 \begin{figure}
     \centering
@@ -216,12 +209,91 @@ In \ac{QED} interactions happen between exactly two charged particles and one ph
     \label{fig:qed_vertices}
 \end{figure}
 
+One arising challenge in the calculation of the scattering cross section in \ac{QED} is that higher order contributions have to be regarded. Taking for example the loop-correction to electron-positron annihilation as shown in \fref{fig:qed_higher_order}. In order to calculate the scattering amplitude for this scenario, one has to integrate over all possible momenta $k$ within the fermion loop. Unfortunately, this integral diverges quickly. A solution for this problem is \emph{renormalization}: By making the coupling strength $\alpha(q^2)$ dependent on the momentum transfer, infinities can be avoided. $\alpha(q^2)$, which now "runs" with the momentum transfer is consequently called \emph{running coupling constant}. Its value is $\alpha(0) \approx \frac{1}{137}$ in the low energy limit and increases at higher energies\cite{Halzen:Quarksleptonsintroductory}. 
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{qed_higher_order}
+        \begin{fmfgraph*}(7,4)
+            \fmfleft{o1,i1}
+            \fmfright{o2,i2}
+            \fmf{fermion,tension=0.5,label=$p_1$}{i1,v1,o1}
+            \fmf{fermion,tension=0.5,label=$p_2$}{i2,v2,o2}
+            \fmf{photon,label=$q$}{v1,x1}
+            \fmf{fermion,left,tension=0.5,label=$k$}{x1,x2}
+            \fmf{fermion,left,tension=0.5,label=$q - k$}{x2,x1}
+            \fmf{photon,label=$q$}{x2,v2}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{Higher order Feynman diagram of electron-positron annihilation. Renormalization is required because of divergence of the integral over $k$.}
+    \label{fig:qed_higher_order}
+\end{figure}
+
+\subsubsection{Quantum Chromodynamics}
+The theory of \acfi{QCD} was first proposed in the early 1960s, after bubble chamber experiments had unexpectedly discovered large numbers of hadrons with different masses and physical properties. 
+Instead of assuming that these particles were fundamental, theorist Murray Gell-Mann et al. proposed a theory where they were made up of constituents, so-called quarks\cite{Gell-Mann:EightfoldWayTheory,Gell-Mann:SchematicModelBaryons}. 
+The theory of bound states of the three known quarks (\Pqu, \Pqd, \Pqs) and their excitations was able to reproduce many of the observations.
+However, the observed $\Updelta^\text{++}$ baryon seemed to violate Pauli's exclusion principle: It consists of three \Pqu quarks with parallel spins. This dilemma was resolved in 1964, when Oscar W. Greenberg proposed a new quantum number, called \emph{color charge}\cite{Greenberg:SpinUnitarySpin}.
+Alongside this quantum number, the existence of a gauge boson was predicted, the gluon, which was discovered at \acs{DESY} in 1979 in three-jet events\cite{Barber:DiscoveryThreeJet}.
+
+The basic interaction vertices of \ac{QCD} are shown in \fref{fig:qcd_vertices}. The charge of the strong interaction is called color-charge, its possible values are usually called \emph{red}, \emph{green}, \emph{blue}, antired, antigreen and antiblue\footnote{Note that this concept is completely unrelated to visual perception of color.}.
+Quarks carry one unit of color charge, while gluons carry two units. Color charge is conserved within each interaction vertex. 
+An important principle of \ac{QCD} is that all naturally occurring particles are colorless: A composite particle carries either all colors (red + green + blue) or a color and its anti-color (e.g. red + antired). The former is found in baryons and the latter in mesons.
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{qcd_basic_1}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1}
+            \fmfright{f2}
+            \fmf{fermion,label=\Pq}{f1,i}
+            \fmf{fermion,label=\Pq}{i,f2}
+            \fmf{gluon,label=\Pg}{l,i}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(w,0)}{f2}
+            \fmftop{l}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1}
+            \fmfright{f2}
+            \fmf{gluon,label=\Pg,label.side=left}{f1,i}
+            \fmf{gluon,label=\Pg,label.side=right}{i,f2}
+            \fmf{gluon,label=\Pg}{l,i}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(w,0)}{f2}
+            \fmftop{l}
+        \end{fmfgraph*}
+        \hspace{1cm}
+        \begin{fmfgraph*}(3,3)
+            \fmfleft{f1,f2}
+            \fmfright{f3,f4}
+            \fmf{gluon,label=\Pg,label.side=left}{f1,i}
+            \fmf{gluon,label=\Pg,label.side=right}{f2,i}
+            \fmf{gluon,label=\Pg,label.side=left}{i,f3}          
+            \fmf{gluon,label=\Pg,label.side=right}{i,f4}
+            \fmfforce{(0,0)}{f1}
+            \fmfforce{(0,h)}{f2}
+            \fmfforce{(w,0)}{f3}
+            \fmfforce{(w,h)}{f4}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{Basic interaction vertex of the strong force: A quark emits or absorbs a gluon. Note that this diagram can be read in different directions, similarly to \fref{fig:qed_vertices}.}
+    \label{fig:qcd_vertices}
+\end{figure}
+
+Similarly as with \ac{QED}, \ac{QCD} also has to undergo renormalization. But unlike \ac{QED}, where only fermionic loops are possible, gluons can also interact with each other, resulting in gluon loops. Therefore, renormalization in \ac{QCD} is much more complicated. Its result is again a running coupling constant, however this time, the strong coupling constant $\alpha_s(q^2)$ decreases at higher energies. In fact, at infinite energies the quarks appear to be free, therefore this effect is called \emph{asymptotic freedom}.
+
+The contrary effect at low energies is also visible: As the distance between quarks is increased, which is equivalent to decreasing the probing energy, the coupling strength rises. The expended energy in turn allows new quark-antiquark pairs to form from the vacuum. Each of the created quarks binds with one of the separated quarks such that all quarks again end up in a bound, color-neutral state. This effect tis called \emph{confinement}.
+
+Confinement is also relevant in the experimental context: Quarks and gluons in the final state of a collision often posses excess kinetic energy and thus move away from each other. During that process, confinement causes new quarks and eventually hadrons to form. This effect is called \emph{hadronization}. Repeated hadronization leads to the formation of so-called \emph{jets}, cones of hadrons and other particles.
+
 
 \subsubsection{Weak Interaction}
-Theoretical research on the \emph{weak interaction} started in 1933 when Enrico Fermi proposed a contact interaction theory explaining the $\upbeta$-decay. 
-In 1968, Sheldon Glashow, Abdus Salam and Steven Weinberg revised this theory by predicting a resolved, finite range force within the framework of \acfi{QFD}. This force is propagated by  massive vector bosons, the charged \PWpm and the neutral \PZ. It was only in 1983 that these particles were experimentally confirmed by Carlo Rubia's group at \ac{CERN}\cite[p. 48]{Griffiths:IntroductionElementaryParticles}.
+Theoretical research on the \emph{weak interaction} started in 1933 when Enrico Fermi proposed a contact interaction theory explaining the $\upbeta$-decay\cite{Fermi:Tentativodiuna}. 
+In 1968, Sheldon Glashow, Abdus Salam and Steven Weinberg revised this theory by predicting a resolved, finite range force within the framework of \acfi{QFD}\cite{Glashow:PartialSymmetriesWeak,Weinberg:modelleptons,Salam:WeakElectromagneticInteractions}. This force is propagated by  massive vector bosons, the charged \PWpm and the neutral \PZ. It was only in 1983 that these particles were experimentally confirmed by Carlo Rubia's group at \acs{CERN}\cite{Arnison:ExperimentalObservationIsolated,Arnison:Experimentalobservationlepton}.
 
-The weak interaction via the \PW boson allows changing particles' types (also called \emph{flavor}). For leptons, the basic interaction vertex always consists of one neutrino, one heavy fermion and a \PW boson. In the case of quarks, the \PW boson couples to a quark pair. Each quark pair has a predetermined probability to couple to the \PW boson, as expressed by the \acsu{CKM} matrix.
+The weak interaction via the \PW boson allows changing particles' types (also called \emph{flavor}). For leptons, the basic interaction vertex always consists of one neutrino, one heavy fermion and a \PW boson. In the case of quarks, the \PW boson couples to a quark pair. Each quark pair has a predetermined probability to couple to the \PW boson, as expressed by the \acsu{CKM} matrix\cite{Kobayashi:CPViolationRenormalizable}.
 
 \begin{figure}
     \centering
@@ -304,111 +376,29 @@ The weak interaction via the \PW boson allows changing particles' types (also ca
 The flavor changing interaction allows heavy fermions to decay into lighter decay products. As long as there is a lighter particle to decay into, the probability of this decay does not vanish.
 Consequently, only the lightest fermions are stable: the electron, the \Pqu- and \Pqd-quarks and the neutrinos.
 
-\todo{electroweak unification?}
-%
-%\begin{figure}
-%    \centering
-%    \begin{fmffile}{beta_decay}
-%        \begin{fmfgraph*}(6,4)
-%            \fmfstraight
-%
-%            \fmfleft{g1,g3,g4,g5,g6,i1,i2,i3}
-%            \fmfright{f1,f2,g13,g14,o1,o2,o3}
-%            
-%            \fmflabel{\Pqu}{i1}
-%            \fmflabel{\Pqu}{i2}
-%            \fmflabel{\Pqd}{i3}
-%            \fmflabel{\Pqd}{o1}
-%            \fmflabel{\Pqu}{o2}
-%            \fmflabel{\Pqd}{o3} 
-%            
-%            
-%            \fmflabel{\Pep}{f1}            \fmflabel{\Pnue}{f2}            
-%            
-%            \fmf{fermion}{i2,o2}
-%            \fmf{fermion}{i3,o3}
-%            \fmf{fermion}{i1,v1}
-%            \fmf{fermion}{v1,o1}
-%            
-%            \fmf{dashes_arrow,label=\PWp}{v1,v2}
-%            \fmf{fermion}{f1,v2}
-%            \fmf{fermion}{v2,f2}
-%        \end{fmfgraph*}
-%    \end{fmffile}
-%    \caption{$\upbeta$ decay$+$ in the \acl{SM}: one of the \Pqu quarks in the proton decays into a \Pqd quark and a \PWp boson. The boson subsequently decays into a positron \Pep and an electron-neutrino \Pnue.}
-%    \label{fig:beta_decay}
-%\end{figure}
-%
-\subsubsection{Quantum Chromodynamics}
-The theory of \acfi{QCD} began in the 1950s, when bubble chamber experiments unexpectedly discovered large numbers of hadrons with different masses and physical properties. 
-Instead of assuming that these particles were fundamental, theorist Murray Gell-Mann et al. proposed a theory where they were made up of constituents, so-called \emph{quarks}. 
-The theory of bound states of the three known quarks (\Pqu, \Pqd, \Pqs) and their excitations was able to reproduce many of the observations.
-However, the observed $\Updelta^\text{++}$ baryon seemed to violate Pauli's exclusion principle: It consists of three \Pqu quarks with parallel spins. This dilemma was resolved in 1964, when Oscar W. Greenberg proposed a new quantum number, called \emph{color charge}.
-Alongside this quantum number, the existence of a gauge boson was predicted, the gluon, which was discovered around 1980 in three-jet events.
+\subsubsection{Electroweak Theory}
+Instead of regarding \ac{QED} and \ac{QFD} as two separate gauge theories with independent coupling constants, they can be unified within the \emph{electroweak theory}. Instead of regarding particles by their flavor and electrical charge, they are classified by their \emph{weak isospin} and \emph{weak hypercharge}. Furthermore, four gauge fields $W^+$, $W^-$, $W^0$ and $B$ are introduced, which couple to the weak isospin and weak hypercharge. 
 
-The basic interaction vertices of \ac{QCD} are shown in \fref{fig:qcd_vertices}. The charge of the strong interaction is called color-charge, its possible values are usually called \emph{red}, \emph{green}, \emph{blue}, antired, antigreen and antiblue\footnote{Note that this concept is completely unrelated to visual perception of color.}.
-Quarks carry one unit of color charge, while gluons carry two units. Color charge is conserved within each interaction vertex. 
-An important principle of \ac{QCD} is that all naturally occurring particles are colorless: A composite particle carries either all colors (red + green + blue) or a color and its anti-color (e.g. red + antired). The former is found in baryons and the latter in mesons.
+While the \ac{QFD} gauge bosons \PWp and \PWm directly correspond to the fields $W^+$, $W^-$, the neutral \PZzero and photons are reproduced by mixing $W^0$ and $B$ with the Weinberg angle $\theta_0$. $\theta_0$ in turn also relates the coupling constants of \ac{QED} and \ac{QFD} with particles' weak isospin and hypercharge \cite{Schleper:TeilchenphysikfuerFortgeschrittene}.
 
-Another important phenomenon in connection with \ac{QCD} is \emph{quark confinement}: As two quarks are separated from each other, new quark-antiquark pairs are created from the expended energy. Each created quark binds with one of the separated quarks such that all quarks again end up in a bound state.
-This effect has important consequences in the experimental context: Quarks and gluons in the final state of a collision often posses excess kinetic energy and thus move away from each other. Because of the confinement effect, new hadrons form. This effect is called \emph{hadronization}. Repeated hadronization leads to the formation of so-called \emph{jets}.
+\subsection{Higgs Mechanism}
+The naive introduction of boson mass terms in a theory breaks its gauge invariance. While this does not pose a problem for \ac{QED} and \ac{QCD}, which are mediated by the massless photon and gluon, \ac{QFD}, with its massive gauge bosons \PW and \PZ, would be able to describe interactions at high energies.
+Thus, another mechanism is required to give mass to these particles.
 
-\todo{asymptotic freedom, running coupling}
+A solution was independently proposed by Peter Higgs\cite{Higgs:BrokenSymmetriesMasses}, François Englert et. al. \cite{Englert:BrokenSymmetryMass} in 1964: A scalar field, the so-called \emph{Higgs field} and an additional potential within the \ac{SM} Lagrangian. The introduced potential is symmetric, but not around its minimum. This has far-reaching consequences: \emph{Spontaneous symmetry breaking} is necessary to transform into a non-symmetric ground state. This induces mass-like terms in the Lagrangian for the gauge bosons, as well as a field associated with a spin-0 particle, the Higgs boson. Furthermore, fermion mass terms can be replaced with interactions with the Higgs field. Therefore, the Higgs boson couples predominantly to heavy particles.
 
-\begin{figure}
-    \centering
-    \begin{fmffile}{qcd_basic_1}
-        \begin{fmfgraph*}(3,3)
-            \fmfleft{f1}
-            \fmfright{f2}
-            \fmf{fermion,label=\Pq}{f1,i}
-            \fmf{fermion,label=\Pq}{i,f2}
-            \fmf{gluon,label=\Pg}{l,i}
-            \fmfforce{(0,0)}{f1}
-            \fmfforce{(w,0)}{f2}
-            \fmftop{l}
-        \end{fmfgraph*}
-        \hspace{1cm}
-        \begin{fmfgraph*}(3,3)
-            \fmfleft{f1}
-            \fmfright{f2}
-            \fmf{gluon,label=\Pg,label.side=left}{f1,i}
-            \fmf{gluon,label=\Pg,label.side=right}{i,f2}
-            \fmf{gluon,label=\Pg}{l,i}
-            \fmfforce{(0,0)}{f1}
-            \fmfforce{(w,0)}{f2}
-            \fmftop{l}
-        \end{fmfgraph*}
-        \hspace{1cm}
-        \begin{fmfgraph*}(3,3)
-            \fmfleft{f1,f2}
-            \fmfright{f3,f4}
-            \fmf{gluon,label=\Pg,label.side=left}{f1,i}
-            \fmf{gluon,label=\Pg,label.side=right}{f2,i}
-            \fmf{gluon,label=\Pg,label.side=left}{i,f3}          
-            \fmf{gluon,label=\Pg,label.side=right}{i,f4}
-            \fmfforce{(0,0)}{f1}
-            \fmfforce{(0,h)}{f2}
-            \fmfforce{(w,0)}{f3}
-            \fmfforce{(w,h)}{f4}
-        \end{fmfgraph*}
-    \end{fmffile}
-    \caption{Basic interaction vertex of the strong force: A quark emits or absorbs a gluon. Note that this diagram can be read in different directions, similarly to \fref{fig:qed_vertices}.}
-    \label{fig:qcd_vertices}
-\end{figure}
-
-\subsection{The Higgs Mechanism}
+In 2012, the experimental signature of a particle compatible with the predicted Higgs boson was discovered at the \ac{LHC}\cite{CMSCollaboration:Observationnewboson,ATLASCollaboration:Observationnewparticle}, leading to a Nobel Prize for Higgs and Englert in 2013\cite{NobelMedia:NobelPrize2013}.
 
 \subsection{Open Questions}
-Since the discovery of the Higgs boson in 2012, all particles predicted by the Standard Model have been experimentally observed. The Standard Model has not been disproved and multiple Nobel prices have been awarded.
+With the discovery of the Higgs boson, all particles predicted by the Standard Model have been experimentally observed. The Standard Model has not been disproved and multiple Nobel Prizes have been awarded.
 One could assume that our understanding of nature is now complete, but this is not the case:
 In the recent decades, several observations have been made that demand  theories beyond the Standard Model. In the following sections, we want to discuss a few of them.
 
 %Observations: gravitational waves (2016), neutrino masses
 
 \subsubsection{Astrophysical Observations}
-One astrophysical research method is to probe whether observed gravitational effects can be completely accounted for by visible matter distributions. For this purpose, the rotation curves of galaxies have been measured and shown to be incompatible with simulations of visible matter only. Also, fluctuations in gravitational lensing without a visible origin has been observed.\cite{Bertone:Particledarkmatter,Peebles:Cosmologicalconstantdark}
-Furthermore, several experiments have probed the cosmic microwave background for anisotropies. These data have subsequently been compared to the matter distributions obtained by simulations of the early universe according to the $\Uplambda$CDM model. The results indicated that only about \SI{5}{\percent} of the universe is made up of conventional (baryonic) matter.\cite{Planck:Planck2015results}
+One astrophysical research method is to probe whether observed gravitational effects can be completely accounted for by visible matter distributions. For this purpose, the rotation curves of galaxies have been measured and shown to be incompatible with simulations of visible matter only. Also, fluctuations in gravitational lensing without a visible origin has been observed\cite{Bertone:Particledarkmatter,Peebles:Cosmologicalconstantdark}.
+Furthermore, several experiments have probed the cosmic microwave background for anisotropies. These data have subsequently been compared to the matter distributions obtained by simulations of the early universe according to the $\Uplambda$CDM model. The results indicated that only about \SI{5}{\percent} of the universe is made up of conventional (baryonic) matter\cite{Planck:Planck2015results}.
 % https://arxiv.org/pdf/1003.0939v2.pdf
 
 All of these findings suggest that there must be a large amount of matter in the universe that only interacts gravitationally. Because of its electromagnetic invisibility, it is called \emph{Dark Matter}.
@@ -421,9 +411,9 @@ Recent observations of neutrino oscillations\cite{KamLAND:ReactorAntineutrinoMea
 \subsubsection{Theoretical Considerations}
 From the theoretical point of view, the open questions are mostly due to incomplete theories: 
 First, there is no consensus about unification of the gauge interactions. At certain very high energy scales, the gauge interactions are expected to behave similarly. However, the observed Standard Model parameters do not allow for a common point of convergence\cite{Amaldi:Comparisongrandunified}.
-Secondly, the framework of quantum field theory does not allow for a non-renormalizable theory such as quantum gravity. Thus, the question about how to combine particle physics and gravity (or rather general relativity) is still open.\footnote{In the context of collider experiments, the effects of gravity are so weak that they can be neglected.}
+Secondly, the framework of quantum field theory does not allow for a non-renormalizable theory of quantum gravity. Thus, the question about how to combine particle physics and gravity (or rather general relativity) is still open.\footnote{In the context of collider experiments, the effects of gravity are so weak that they can be neglected.}
 
-Another theoretical motivation is the \emph{mass hierarchy problem}: One of the seemingly indisputable energy scales in nature is the Planck scale at $M_\text{Pl} \approx \SI{e18}{\GeV}$. At this scale, gravity becomes as strong as the gauge interactions and nature is expected to behave differently. However, all processes that have been observed so far appear at the electroweak scale $m_\text{EW} \approx \SI{e3}{\GeV}$. The discrepancy between these two scales challenges the generality of the Standard Model.
+Another theoretical motivation is the \emph{hierarchy problem}\cite{Arkani-Hamed:Hierarchyproblemnew}: One of the seemingly indisputable energy scales in nature is the Planck scale at $M_\text{Pl} \approx \SI{e18}{\GeV}$. At this scale, gravity becomes as strong as the gauge interactions and nature is expected to behave differently. However, all processes that have been observed so far appear at the electroweak scale $m_\text{EW} \approx \SI{e3}{\GeV}$. The discrepancy between these two scales challenges the generality of the Standard Model.
 
 % Spin 3/2 particles?
 
@@ -472,8 +462,8 @@ An interesting consequence of these assumptions is the possibility to produce bl
 
 In this thesis, we will look at two different models of black holes within the \acs{LHC}: semiclassical black holes and quantum black holes.
 \begin{itemize}
-\item A \emph{semiclassical black hole} is presumed to behave similarly to a classical astronomical black hole, except for the fact that it can only exist through additional extra dimensions: After formation, it reaches thermal equilibrium (\emph{thermalizes}) and subsequently evaporates via Hawking radiation. During this phase, a large number of \ac{SM} particles is produced. The relative abundance of these particles is expected to follow the number of degrees of freedom per \ac{SM} particle. Among the possible final states are many that violate the lepton number conservation and thus make excellent experimental signatures with low expected \ac{SM} contribution.\cite{CMS:CMS-PAS-EXO-15-007}
-\item A \emph{quantum black hole} is too short-lived to thermalize. Instead, it behaves like a quantum object and decays into few particles. As with the semiclassical case, lepton flavor violating final states are accessible within this model. For this thesis, a benchmark model has been chosen that decays solely into a \Pe + \Pmu pair. As this final state violates conservation of lepton number, there is no real \ac{SM} background contribution. However, through experimental practice, particles from an \ac{SM} process can be misclassified and contribute to the background yield.\cite{CMS:CMS-PAS-EXO-16-001}
+\item A \emph{semiclassical black hole} is presumed to behave similarly to a classical astronomical black hole, except for the fact that it can only exist through additional extra dimensions: After formation, it reaches thermal equilibrium (\emph{thermalizes}) and subsequently evaporates via Hawking radiation. During this phase, a large number of \ac{SM} particles is produced. The relative abundance of these particles is expected to follow the number of degrees of freedom per \ac{SM} particle. Among the possible final states are many that violate the lepton number conservation and thus make excellent experimental signatures with low expected \ac{SM} contribution\cite{CMS:CMS-PAS-EXO-15-007}.
+\item A \emph{quantum black hole} is too short-lived to thermalize. Instead, it behaves like a quantum object and decays into few particles. As with the semiclassical case, lepton flavor violating final states are accessible within this model. For this thesis, a benchmark model has been chosen that decays solely into a \Pe + \Pmu pair. As this final state violates conservation of lepton number, there is no real \ac{SM} background contribution. However, through experimental practice, particles from an \ac{SM} process can be misclassified and contribute to the background yield\cite{CMS:CMS-PAS-EXO-16-001}.
 \end{itemize}
 \begin{figure}
     \centering
@@ -495,6 +485,7 @@ In this thesis, we will look at two different models of black holes within the \
 \end{figure}
 
 \subsubsection{Seesaw Type III Model}
+\cite{Foot:SeesawNeutrinoMasses}
 The so-called Seesaw model aims to explain the low neutrino masses. In this model, the neutrino masses are considered to arise via the mediation of massive fermion partners. Two additional charged partners $\PSigmapm$ are predicted alongside a neutral Majorana particle $\PSigmazero$.
 Within the \ac{LHC}, the particles are produced in pairs as electroweak decay products as shown in \fref{fig:seesaw_production}.
 
@@ -537,87 +528,6 @@ Within the \ac{LHC}, the particles are produced in pairs as electroweak decay pr
     \label{fig:seesaw_production}
 \end{figure}
 
-%\begin{figure}
-%    \centering
-%    \begin{fmffile}{seesaw_full}
-%        \begin{fmfgraph*}(8,5)
-%            \fmfleft{i1,i2}
-%            \fmfright{o1,o2,o3,o4,o5,o6}
-%            \fmflabel{\Pq}{o1}
-%            \fmflabel{\Pq}{o2}
-%            \fmflabel{\Pe}{o3}
-%            \fmflabel{\APmuon}{o4}
-%            \fmflabel{\APmuon}{o5}
-%            \fmflabel{\Pmuon}{o6}
-%            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
-%            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
-%            \fmfblob{0.1w}{x1}
-%            \fmf{dashes,label=$\PWp$,tension=3}{x1,x2}
-%            \fmf{plain,label=$\PSigmaplus$,tension=2,label.side=left}{x2,x4}
-%            \fmf{plain,label=$\PSigmazero$,tension=2,label.side=right}{x2,x3}
-%            \fmf{plain}{x3,o3}
-%            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
-%            \fmf{plain}{x5,o1}
-%            \fmf{plain}{x5,o2}
-%            \fmf{dashes,label=$\PZ$,label.side=left}{x4,x6}
-%            \fmf{plain}{x4,o4}
-%            \fmf{plain}{x6,o5}
-%            \fmf{plain}{x6,o6}
-%            \fmffreeze
-%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
-%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
-%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
-%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
-%        \end{fmfgraph*}
-%    \end{fmffile}
-%    \caption{Seesaw Decay into 1 \Pe, 3 \Pmu and 2 jets.}
-%    \label{fig:seesaw_full}
-%\end{figure}
-%
-%\begin{figure}
-%    \centering
-%    \begin{fmffile}{seesaw_ttbar_bg}
-%        \begin{fmfgraph*}(8,7)
-%            \fmfleft{i1,i2}
-%            \fmfright{o1,o2,o3,o4,o5,o6,o7,o8}
-%            \fmflabel{\Pl}{o1}
-%            \fmflabel{\Pnu}{o2}
-%            \fmflabel{\APqb}{o3}
-%            \fmflabel{\Pqb}{o4}
-%            \fmflabel{\Pnu}{o5}
-%            \fmflabel{\Pl}{o6}
-%            \fmflabel{\Pl}{o7}
-%            \fmflabel{\Pl}{o8}
-%            \fmf{plain,label=\Pp,label.side=left,tension=2}{i1,x1}
-%            \fmf{plain,label=\Pp,label.side=right,tension=2}{i2,x1}
-%            \fmfblob{0.1w}{x1}
-%            \fmf{curly,label=$\Pg$,tension=3,label.side=left}{x1,x2}
-%            \fmf{plain,label=$\Pqt$,tension=2,label.side=left}{x2,x2a}
-%            \fmf{plain,label=\Pqt,label.side=right}{x2a,x4}
-%            \fmf{dashes,label=\PZ,label.side=left}{x2a,x7}
-%            \fmf{plain}{x7,o7}
-%            \fmf{plain}{x7,o8}
-%            \fmf{plain,label=$\APqt$,tension=2,label.side=right}{x2,x3}
-%            \fmf{plain}{x3,o3}
-%            \fmf{dashes,label=$\PW$,label.side=right}{x3,x5}
-%            \fmf{plain}{x5,o1}
-%            \fmf{plain}{x5,o2}
-%            \fmf{dashes,label=$\PW$,label.side=left}{x4,x6}
-%            \fmf{plain}{x4,o4}
-%            \fmf{plain}{x6,o5}
-%            \fmf{plain}{x6,o6}
-%            \fmffreeze
-%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(1,-1))}
-%            \fmfi{plain}{vpath (__i1,__x1) shifted (thick*(-1,1))}
-%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(1,1))}
-%            \fmfi{plain}{vpath (__i2,__x1) shifted (thick*(-1,-1))}
-%        \end{fmfgraph*}
-%    \end{fmffile}
-%    \caption{x}
-%    \label{fig:seesaw_ttbar_bg}
-%\end{figure}
-%
-
 Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} particles. The most important decay channels are
 \begin{multicols}{2}
     \begin{itemize}
@@ -634,33 +544,33 @@ Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} parti
 Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states.
 
 \subsubsection{Sequential Standard Model and \PWprime}
-Another common extension of the \ac{SM} is the \acfi{SSM}. In the \acl{SSM}, heavier copies of the \ac{SM} gauge bosons are introduced. They behave exactly like the \PW and \PZ bosons and are consequently called \PWprime and \PZprime. 
-The masses are assumed to lay within the \si{\TeV} range and the expected experimental signatures are similar to those of the \ac{SM} gauge bosons.
+Heavy gauge bosons are postulated by several extensions of the \ac{SM}, most prominently by grand unification theories\cite{Langacker:NewHeavyGauge}.
+In order to provide a consistent simplified benchmark model, the \acfi{SSM}\cite{Altarelli:SearchingNewHeavy} has been constructed, which introduces heavier copies of the \ac{SM} \PW and \PZ bosons, consequently called \PWprime and \PZprime. The heavier copies interact with \ac{SM} particles just like their \ac{SM} counterparts, but because of the much larger mass, decays into the \Pqt and \Pqb-quarks are accessible.
 
-In this thesis, a model has been chosen where only the \PWprime boson exists and it may only decay into a \Pqt + \Pqb pair. This corresponds to the scenario used in dedicated analyses performed by the \ac{CMS} and \ac{ATLAS} collaborations\cite{ATLASCollaboration:SearchWtb,CMSCollaboration:SearchesWbosons,CMS:CMS-PAS-B2G-17-010}.
+In this thesis, a variant of the \ac{SSM} has been chosen where only the \PWprime boson exists and it may only decay into a \Pqt + \Pqb pair. This corresponds to the scenario used in dedicated analyses performed by the \ac{CMS} and \ac{ATLAS} collaborations\cite{ATLASCollaboration:SearchWtb,CMSCollaboration:SearchesWbosons,CMS:CMS-PAS-B2G-17-010}.
 
 
 \section{Experiments}
-Beginning with Rutherford's experiments in the early 20th century, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
+Beginning with Rutherford's experiments in the early 20th century\cite{Rutherford:scatteringalphabeta}, there have been an abundance of particle physics experiments using the approach of particle collisions. Today, most scattering experiments can be classified in two groups: Fixed target experiments and collider experiments. In the former case, accelerated particles are collided with a fixed target, such as Rutherford's gold foils. In the latter case, two beams of particles are made to collide at an interaction point. This allows for a higher center of mass energy and is thus favorable whenever the technical circumstances allow.
 
 In both cases, outgoing scattered particles are registered. 
 Because of the statistical nature of quantum mechanics, the Standard Model only describes scattering processes in terms of probabilities. These probabilities depend on particle properties before and after collision. 
 Controlling the incoming particles and counting outgoing particles is thus a very efficient way of testing the theory.
 
 \section{The Large Hadron Collider}
-The to date largest particle collider experiment is located in a tunnel about \SI{100}{\m} underground just below Geneva in Switzerland. It belongs to the \acfi{CERN} and is called \acfi{LHC}.
+The to date largest particle collider experiment is located in a tunnel about \SI{100}{\m} underground between Geneva and the Jura mountains. It is operated by the \acfi{CERN} and is called \acfi{LHC}.
 
 The Large Hadron Collider is a proton-proton collider with a circumference of \SI{26.7}{\km}. It has been built in the early 2000s within the tunnel of the former \acfi{LEP}. The tunnel contains the storage ring as well as accelerator structures and experiments. Within two beam pipes, in an ultra-high vacuum (about \SI{e-11}{\milli\bar}), groups of protons circulate in opposite directions. They are accelerated using radio-frequency cavities and kept on track by \num{1232} superconducting dipole and \num{450} quadrupole magnets.
 
 The protons are then brought to collision at one of the four \emph{interaction points} along the ring. The energy of each accelerated proton before collision is \SI{6.5}{\TeV} in the rest system, resulting in a total center-of-mass energy of $\sqrt{s} = \SI{13}{\TeV}$.
 
-Around each interaction point, a detector has been constructed. The task of two of the experiments is to perform very specialized measurements at lead ions (\acsu{ALICE}) and hadrons made of \Pcharm or \Pbottom quarks (\acsu{LHCb}). 
+Around each interaction point, a detector has been constructed. The task of two of the experiments is to perform very specialized measurements with lead ions (\acsu{ALICE}) and hadrons made of \Pcharm or \Pbottom quarks (\acsu{LHCb}). 
 The other two experiments are aimed at more general measurements. These so-called \emph{general purpose} experiments are the \acfi{CMS} and the \acsu{ATLAS} experiment\cite{Evans:LHCMachine}. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{lhc}
-    \caption{Schematic illustration of the \acs{CERN} accelerator complex\cite{Ley:CERNAccelerators,Caron:LHCLayout,DeMelis:CERNacceleratorcomplex}. Protons first pass through several stages of preacceleration within the \ac{LINAC} 2, \ac{PS}, the \ac{PSB} and the \ac{SPS}. Eventually, they are injected into the \ac{LHC} where they circulate in opposite directions. The two beams are further accelerated in radio-frequency cavities and their shape is restored within the cleaning sections of the ring. At each revolution, some of the protons are made to collide within one of the four experiments \acs{CMS}, \acs{ATLAS}, \acs{LHCb} and \acs{ALICE}. Once they are not needed anymore, the remaining protons can be dumped into massive metal blocks at the dump site.
+    \caption{Schematic illustration of the \acs{CERN} accelerator complex\cite{Ley:CERNAccelerators,Caron:LHCLayout,DeMelis:CERNacceleratorcomplex}. Protons first pass through several stages of preacceleration within the \ac{LINAC} 2, \ac{PS}, the \ac{PSB} and the \ac{SPS}. Eventually, they are injected into the \ac{LHC} where they circulate in opposite directions. The two beams are further accelerated in radio-frequency cavities and their shape is restored within the cleaning sections of the ring. At each revolution, some of the protons are brought to collision within one of the four experiments \acs{CMS}, \acs{ATLAS}, \acs{LHCb} and \acs{ALICE}. Once they are not needed anymore, the remaining protons can be dumped into massive metal blocks at the dump site.
     %Note that the accelerator sizes and positions are not to scale.
     }
     \label{fig:LHC}
@@ -690,7 +600,7 @@ The detector forms a barrel around the beam pipe. The barrel is subdivided into 
 Detector layers in the wheels are mostly arranged in a cylindrical manner around the beam pipes, while the layers in the endcaps are mounted orthogonally to the beam pipe.
 
 The direction of an outgoing particle originating in the interaction point can be characterized using a spherical coordinate system $(\phi, \theta)$. The azimuthal angle $\phi$ is measured with reference to an imaginary line connecting the interaction point to the center of the \ac{LHC} ring. $\theta$ indicates the polar angle between the $z$-axis and the direction of interest.
-However, $\theta$ is rarely used because it is not invariant towards Lorentz-boosts in the $z$ direction. Instead, the Lorentz-invariant pseudo-rapidity $\eta \defeq -\ln\left[\tan\left(\frac{\theta}{2}\right)\right]$ is used to describe the angular separation between a particle and the beam pipe. The detector components in context of $\eta$ ranges can be found in \fref{fig:cms_quadrant}.
+However, $\theta$ is rarely used because it is not invariant under Lorentz-boosts in the $z$ direction. Instead, the Lorentz-invariant pseudo-rapidity $\eta \defeq -\ln\left[\tan\left(\frac{\theta}{2}\right)\right]$ is used to describe the angular separation between a particle and the beam pipe. The detector components in context of $\eta$ ranges can be found in \fref{fig:cms_quadrant}.
 
 To indicate angular separation between particles, the quantity $R = \sqrt{\Delta \eta^2 + \Delta \phi^2}$, which is Lorentz-invariant, can be defined. $\eta$ and $R$ will be relevant in context of particle reconstruction.
 
@@ -710,7 +620,7 @@ Similarly, the collision of a single proton pair may result in multiple partons 
 
 \subsection{Subsystems}
 \subsubsection{Inner Tracking System}
-The \emph{inner tracking system} is used for precise measurements of direction and curvature of charged particles. 
+The \emph{inner tracking system} is used for precise measurements of the direction and curvature of charged particles. 
 It is composed of silicon semiconductor pixel layers surrounded by strip modules.
 
 Each pixel cell consists of a silicon semiconductor in reverse bias direction. Charged particles passing through the semiconductor induce ionization and thus allow small currents to flow. These currents are amplified and read out by dedicated electronics. There are about \num{66} million pixel cells, each with a size of $\SI{100}{\micro\meter} \times \SI{150}{\micro\meter}$, allowing for a high spacial resolution.
@@ -727,7 +637,8 @@ It consists of dense, transparent lead tungstate ($\textup{PbWO}_4$) crystals. W
 This leads to large numbers of lower-energy electrons and photons, until the electron energy loss is dominated by ionization losses and the photon energy is below the pair-production threshold of $2 \si{\electronmass} = \SI{1022}{\keV}$.
 Low energetic photons and those emitted by ionization or excitation are eventually registered using photodiodes. The initial particle energy is calculated from the light yield.\cite{ParticleDataGroup:ReviewParticlePhysics}.
 
-As long as the cascade does not leak through the photodetectors, the achieved energy resolution for photons is about \SI{1}{\percent}.\todo{electrons, quelle}
+The energy resolution of the \ac{ECAL} has been studied on $\PZ \to \Pe + \Pe$ and $\PH \to \Pgamma \Pgamma$ simulations. The electron energy resolution (at $E_\text{T} \approx \SI{45}{\GeV}$)
+is below \SI{2}{\percent} in the center of the barrel and \SIrange{2}{5}{\percent} elsewhere. The photon resolution (at $E_\text{t} \approx \SI{60}{\GeV}$) has been determined to be below \SI{3}{\percent} in the barrel and \SIrange{2}{5}{\percent} in the endcaps\cite{CMSCollaboration:Energycalibrationresolution}.
 
 \subsubsection{Hadron Calorimeter}
 The \acfi{HCAL} measures the energy of hadrons produced during the collision. 
@@ -743,7 +654,7 @@ Similarly to the electromagnetic calorimeter, a high resolution can be achieved 
 
 \subsubsection{Solenoid Magnet}
 The \ac{CMS} solenoid magnet is designed to deliver a magnetic field strength of \SI{4}{\tesla}. This is achieved by cooling the \SI{220}{\tonne} cold mass to \SI{4.6}{\kelvin}, such that the NbTi wires become superconducting and the current can reach up to \SI{19.5}{\kilo\ampere}.
-The magnet surrounds the calorimeters and has a diameter of \SI{6}{\meter}. Within the coil, the magnetic field is approximately uniform with the field lines being parallel to the beam pipe. Outside, the magnetic field lines are closed by an iron yoke, which is interspersed with the muon system.
+The magnet surrounds the calorimeters and has a diameter of \SI{6}{\meter}. Within the coil, the magnetic field is approximately uniform with the field lines being parallel to the beam pipe. Outside, the magnetic flux is returned using an iron yoke, which is interspersed with the muon system.
 
 Particles passing the field are subject to the Lorentz force which subsequently bends their tracks into circular curvatures. This effect allows to distinguish between charged and neutral particles and enables measurement of particle momenta independently of their energy.
 
@@ -751,17 +662,16 @@ Particles passing the field are subject to the Lorentz force which subsequently 
 The goal of the muon system is to detect muons and measure their tracks, from which the muon momenta are calculated.
 
 Because of their high mass compared to electrons, muons are less affected by the electromagnetic fields within matter, reducing their radiative losses. This makes them the only detectable particles to pass through all inner detector subsystems as well as the solenoid coil.
-For this reason, the muon system is the outermost part of the detector. It surrounds the solenoid coil and consists of \emph{drift tubes} (\acsu{DT}s) in the barrel section and \emph{cathode strip chambers} (\acsu{CSC}s) in the endcaps. The muon barrel section extends in $\abs{\eta}$ up to \num{0.9}, the endcap region lies between $\abs{\eta}$ of \num{1.2} and \num{2.4}. In the range between \num{0.9} and \num{1.2}, the muon systems overlap.
+For this reason, the muon system is the outermost part of the detector. It surrounds the solenoid coil and consists of \emph{resistive plate chambers} (\acsu{RPC}s), \emph{drift tubes} (\acsu{DT}s) in the barrel section and \emph{cathode strip chambers} (\acsu{CSC}s) in the endcaps. The muon barrel section extends in $\abs{\eta}$ up to \num{0.9}, the endcap region lies between $\abs{\eta}$ of \num{1.2} and \num{2.4}. In the range between \num{0.9} and \num{1.2}, the muon systems overlap.
 
 Drift tubes have a length of about \SI{2}{\meter} and a cross section of $\SI{13}{\milli\meter} \times \SI{42}{\milli\meter}$. In the center of each tube, there is an anode wire. Between the wire and the tube walls exists a high electric potential. Additionally, the tubes are filled with a gas mixture. 
 As the charged muons pass through the gas, they ionize a few of the gas atoms. The released electrons accelerate along the electric field lines and induce an avalanche of secondary ionizations. Eventually, the accumulated charges are deposited in the anode wires and are measurable as current spike\cite{ParticleDataGroup:ReviewParticlePhysics}.
 
 From the amount of deposited charge and timing measurements, a spacial resolution of less than \SI{250}{\micro\meter} can be achieved across each chamber. However, determining the location in the wire direction is not possible with this arrangement.
 
-In the endcap region, the muon system consists of cathode strip chambers instead of drift tubes. \acp{CSC} work similarly to drift tubes, but instead of having a single cathode at the chamber walls, they contain multiple cathode strips, which are aligned orthogonally to the wires and read out separately.
-The advantage of measuring all three dimensions makes them suited for use in the endcap regions where the magnetic field is not uniform. 
+In the endcap region, the muon system consists of cathode strip chambers instead of drift tubes. \acp{CSC} work similarly to drift tubes, but instead of having a single cathode at the chamber walls, they contain multiple cathode strips, which are aligned orthogonally to the wires and read out separately. \acp{CSC} can operate at high rates of muons and under non-uniform magnetic fields, which makes them suited for use in the endcap region.
 
-\todo{RPCs?}
+In both barrel and endcap, the \acp{DT} and \acp{CSC} are complemented with \acp{RPC}. Similarly to \acp{DT} and \acp{CSC}, \acp{RPC} are gaseous detectors operated in avalanche mode. They posses a low spacial resolution but an excellent timing resolution, which helps to assign tracks to a bunch crossing.
 
 \subsection{Triggering}
 \label{sec:triggering}
@@ -772,8 +682,8 @@ Thus, the rate of events accepted for storage and analysis has to be drastically
 Triggering is implemented in a two step process: First, the \acfi{L1} trigger is consulted. It is implemented in dedicated hardware and uses information from the calorimeters and the muon system to reject low-energetic events. Events passing \ac{L1} will be read out, temporarily stored and further evaluated by the \acfi{HLT}. The \ac{HLT} is implemented in software and running on computers next to the detector cavern. It has access to the full detector information to decide whether an event is eventually stored or rejected.
 
 \subsection{The Computing Grid}
-Reconstruction and analyses are ran on the stored events. For this purpose, \ac{CERN} maintains several server farms, organized within the \acfi{WLCG} project.
+Reconstruction and analyses are ran on the stored events. For this purpose, the \acfi{WLCG} project was founded, which consists of several computing facilities operated by the \ac{CERN} member states.
 
-The facilities are organized in layers called \emph{tiers}. Tier 0 is the \ac{CERN} data center in Geneva. It store raw data and performs initial reconstruction. The data are then distributed to tier 1 computing centers. There are currently 13 tier 1 centers worldwide. They perform further processing on the data and distribute it to tier 3 facilities.
+The facilities are organized in layers called \emph{tiers}. There are two tier 0 computing centers, one at the \ac{CERN} data center in Geneva and one at the Wigner Research Centre for Physics in Budapest, which store and reconstruct raw data. From there, the data are distributed to one of the 13 tier 1 data centers worldwide, where they are further processed, stored for safe-keeping and distributed to tier 2 facilities.
 
-Most of the around 155 tier 3 computing centers belong to universities and other scientific institutes\cite{CERN:Gridsystemtiers}. They produce \ac{MC} simulations and perform scientific analyses. One of these tier 3 centers is operated at the physics department of the RWTH Aachen University, currently providing around \num{5200} processing cores and \SI{3}{\peta\byte} of storage\cite{UniRWTHAachenIII.PhysikalischesInstitut:GridComputing}. 
+There are about 160 tier 2 computing centers, most of which are operated by universities and other scientific institutes. Their task is to provide computing power for event generation and analyses\cite{CERN:Gridsystemtiers,WLCG:Tiercentres}. One of these tier 2 centers is operated at the physics department of the RWTH Aachen University, currently providing around \num{5200} processing cores and \SI{3}{\peta\byte} of storage\cite{UniRWTHAachenIII.PhysikalischesInstitut:GridComputing}. 
