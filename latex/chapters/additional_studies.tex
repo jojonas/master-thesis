@@ -54,7 +54,7 @@ The coverage is finally reported as
 %    \text{coverage}' = \log_{10} %\left(\frac{p_\text{true}}{p_\text{claim}}\right)
 %\end{equation}
 
-\subsection{Interpretation of Results}
+\subsection{Possible Outcomes}
 Three different result cases can arise, depending on the coverage value in \fref{eq:coverage_value}:
 \begin{enumerate}
 	\item $\text{coverage} = 0 \Leftrightarrow \Pr( H_0 \text{ rejected} | H_0 ) = \alpha$: This is the ideal case. It indicates the $p$-value performs according to its definition.
@@ -62,7 +62,7 @@ Three different result cases can arise, depending on the coverage value in \fref
 	\item $\text{coverage} > 0 \Leftrightarrow \Pr( H_0 \text{ rejected} | H_0 ) < \alpha$: The background hypothesis is not rejected in some cases where it should have been rejected. This effect is called "overcoverage" and corresponds to "conservative" behavior where the $p$-value underestimates the significance of deviations.
 \end{enumerate}	
 
-\subsection{Our Results}
+\subsection{Results}
 Since the MUSiC $p$-value is required to cover a large range of possible \Ntrue and relative uncertainty $\sigmatrue / \Ntrue$ values, the coverage is evaluated on a two dimensional grid in this parameter space.
 The computed results for \TS can be found in \fref{fig:coverage_normal}, for \TSprime in \fref{fig:coverage_lognormal}. 
 
@@ -80,7 +80,7 @@ The computed results for \TS can be found in \fref{fig:coverage_normal}, for \TS
     \label{fig:coverage_lognormal}
 \end{figure}
 
-Areas tinted with dark blue color have determined to be overcovered (conservative behavior), while the bright yellow shows areas of undercoverage. Within the blank areas, the coverage value could not be determined since no significant result could be observed. This is expected, especially for deficits below $\Ntrue = \num{1}$, because at $\Nmc < \num{1}$, the only possible deficit is $\Ndata = \num{0}$, which is not significant ($p = \num{0.37}$ with $\sigmamc \rightarrow \num{0}$).
+Areas tinted with dark blue color have determined to be overcovered (conservative behavior), while the bright yellow shows areas of undercoverage. Within the blank areas, the coverage value could not be determined since no significant result could be observed. This is expected, especially for deficits below $\Ntrue = \num{1}$, because at $\Nmc < \num{1}$, the only possible deficit is $\Ndata = \num{0}$, which is not significant purely by the Poisson contribution in \TS ($p \geq e^{-1} = \num{0.37}$ with $\sigmamc \rightarrow \num{0}$).
 
 Further illustrations in non-logarithmic view can be found in \fref{app:coverage_additional_results}.
 
@@ -116,10 +116,10 @@ Changing the prior in the test statistic also implies a new null-hypothesis, nam
 
 However, this approach also comes with its disadvantages: When combining multiple bins into a region, previously we added individual bin contents. Assuming normally distributed bin contents, this approach is valid because the sum of two normally distributed random variables is also normally distributed. Yet, this principle does not apply to log-normal distributions. The sum of log-normally distributed random variables is not log-normally distributed.
 
-In the following, we want to discuss some solutions to this challenge, some of which have also come up in previous works on the log-normal prior\cite{Schmitz:ModelUnspecificSearch}.
+In the following, we want to discuss some solutions to this challenge, some of which have been discussed in previous works on the log-normal prior\cite{Schmitz:ModelUnspecificSearch}.
 
 \begin{itemize}
-    \item Use Gaussian error propagation anyways: While this solution may approximately hold for two bins with the same number of events and relative uncertainty, it breaks down with larger contrasts because the combined uncertainty underestimates the probability to obtain a large result. 
+    \item Use Gaussian error propagation anyways: While this solution may approximately hold for two bins with the same number of events and relative uncertainty, it breaks down with more unequal numbers because the combined uncertainty underestimates the probability to obtain a large result. 
     \item Use an approximation: The challenge of approximating a sum of log-normally distributed random variables is of interest for various applications and has therefore been thoroughly researched. The oldest, most popular approach is the Fenton-Wilkinson approximation which is obtained by matching mean and variance of the sum to a log-normal distribution. Unfortunately, this approach breaks down when combining more than two bins \cite{Pirinen:Statisticalpowersum}.
     Other possible alternatives are the Schwartz-Yeh approximation \cite{Schwartz:DistributionFunctionMoments}, which matches the first two moments of the logarithms with additional weight functions, and a recent procedure by Mehta et.al.\cite{Mehta:ApproximatingSumCorrelated} which uses a Gauss-Hermite approximation and poses the most accurate solution. The downside of the latter approaches is that they are computationally expensive, involving the calculation of integrals.
     Since a region can consist out of up to $\sim \num{100}$ bins, the number of regions per event class can reach up to $\sim \num{10000}$. Thus using a computationally cheap algorithm is absolutely necessary. Because of the high number of parameters (two for each bin) using a \ac{LUT} is also not feasible.
@@ -132,6 +132,8 @@ In the following, we want to discuss some solutions to this challenge, some of w
 Although the problem of combining bins is the only problem arising from a log-normal prior, it is so grave that the log-normal prior will not be used for the signal study in this thesis. Instead, an alternative solution to the overcoverage of the normal \TS-value will be presented in the next section.
 
 \section{Region Veto Against Overcoverage}
+\label{sec:overcoverage_veto}
+
 In \fref{sec:region_veto}, several rules have been introduced to prevent inference for regions with incomplete simulation.
 In this section, we will add another rule, which however does not intend to limit the search space because of invalid input for the test statistic, but to avoid shortcomings of the normal test statistic itself.
 
@@ -159,58 +161,87 @@ The excluded area is illustrated in \fref{fig:coverage_veto}.
 \section{A Global $p$-Value}
 \label{sec:global_pvalue}
 
-\newcommand{\TSphat}{\ensuremath{T}\xspace}
-
 The \ptilde distribution provides the ability to register less significant deviations in many classes by looking at the central part of the distribution. However, this manual method is only qualitative. We will now introduce a possible extension to the analysis which provides a quantitative method of combining the \ptilde values of all classes.
 
 This not only allows us to draw conclusions about the presence of new physics in our observed data set, but also to quantify \ac{MUSiC}'s sensitivity for simulations of known benchmark models. Furthermore, an automated analysis can be used as regression test to decide whether future modifications to the analysis improve its sensitivity.
 
-As before, the desired output for such a global method is a $p$-value which can then be compared to a significance threshold $\alpha$.
 As input, the algorithm takes the look-elsewhere-corrected \ptilde values of all classes. In the case of \ac{MC} simulation, either for \ac{SM} or signal studies, such a set of \ptilde values can be provided for each pseudo experiment round, for observed data we only obtain one list (one value for each class).
 
-The algorithm for the \ac{SM} distribution goes as follows: For each pseudo experiment round, the distribution of \ptilde values (of all classes) is compared to a reference distribution using a statistical test. The test outputs a scalar result \TSphat, where a larger value indicates a larger deviation from the reference distribution. \TSphat is then noted in a separate set, which eventually contains one test statistic value for each pseudo experiment round.
-For observed data, the test statistic is calculated for the (only) set of \ptilde-values, resulting in $\TSphat_\text{data}$.
+The algorithm for the \ac{SM} distribution goes as follows: For each pseudo experiment round, the distribution of \ptilde values (of all classes) is compared to a reference distribution using a statistical test. The test outputs a scalar result \TSphat for each of the \nrounds rounds, where a larger value indicates a larger deviation from the reference distribution. The set of \nrounds test statistic values is stored.
+Given a single observed \ptilde distribution, one can analogously compute the test statistic \TSphatdata. The \phat value is then defined as
+\begin{equation}
+    \phat = \Pr(\TSphat > \TSphatdata | H_0),
+\end{equation}
+where $H_0$ indicates the null hypothesis given by the \acl{SM}.
+For a decision whether or not the null hypothesis should be rejected, \phat has to be compared to a significance threshold $\alpha$. $\alpha$ is equivalent to the type-I error rate, the probability of incorrectly rejecting the null hypothesis if it were true\cite{Cowan:StatisticsSearchesLHC}:
+\begin{equation}
+    \Pr(\phat \leq \alpha | H_0) \leq \alpha
+\end{equation}
+Equivalently, a critical value \TSphatcrit of the test statistic can be defined, such that 
+\begin{equation}
+    \Pr(\TSphat \geq \TSphatcrit | H_0) \leq \alpha
+\end{equation}
 
-Finally, the resulting \phat value is defined as the rate of pseudo-rounds where $\TSphat > \TSphat_\text{data}$, similar to \ptilde before. This way, full coverage of \phat is guaranteed by definition.
+Similarly, the type-II error rate can be identified, which denotes the probability of incorrectly accepting $H_0$ if it is false\cite{Cowan:StatisticsSearchesLHC}:
+\begin{equation}
+    \Pr(\phat > \alpha | H_1) = \Pr(\TSphat < \TSphatcrit | H_1) = \beta
+\end{equation}
+The quantity $1 - \beta$ is called \emph{test power}\cite{Cowan:StatisticsSearchesLHC} and in our case indicates the probability of correctly rejecting the \ac{SM} if the dataset under investigation contains new physics. The test power of a test therefore directly describes the sensitivity towards a particular new physics scenario.
 
-For the quantification of sensitivity, the \emph{test power} $\beta$ for a given signal is calculated. The test power describes the probability that the \ac{SM} null hypothesis is (correctly) rejected if new physics are present in the data set. 
-The \ac{SM}-step is applied as described above. \phat is then calculated for each signal pseudo experiment round, resulting in multiple $\TSphat_\text{signal}$ values. After agreeing on a significance threshold $\alpha$, $\beta$ is the rate of significant \TSphat values.
+The test power can be calculated from simulations of new physics, such as the combined signal and background pseudo-experiments as described in \fref{sec:signal_study}. The test power does not only depend on the chosen test statistic and signal model, but also on $\alpha$. A larger value of $\alpha$ is less restrictive and will correctly accept the alternative hypothesis more often, at the cost of incorrectly rejecting the \ac{SM}.
 
-So far, the choice of statistical test and reference distribution is not specified. In the following, multiple options are discussed. The distribution of \ptilde values under investigation is denoted as $f(\ptilde)$, the reference distribution is $g(\ptilde)$. The cumulative distribution functions are $F(\ptilde)$ and $G(\ptilde)$ respectively. 
+The choice of $\alpha$ is subjective\cite{Cowan:StatisticalMethodsDiscovery}. Rather than following a strict convention, it is important to state which significance threshold has been used and, if the test statistic indicates that the null hypothesis should be discarded, to act accordingly. In the case of the \ac{MUSiC} analysis, finding a deviation from the \ac{SM} would certainly initiate a dedicated analysis at \ac{CMS}. Therefore, we can afford to set an aggressively high value of $\alpha = \SI{5}{\percent}$\footnote{For comparison, a discovery in particle physics is usually claimed at $\alpha \sim \num{e-7}$\cite{Cowan:StatisticsSearchesLHC}.}, and accepting the fact that in \SI{5}{\percent} of the cases, we would incorrectly reject the \ac{SM} and trigger a dedicated analysis.
 
+So far, the choice of the test statistic \TSphat and reference distribution is not specified. In the following, multiple options are discussed. The distribution of \ptilde values under investigation is denoted as $f(\ptilde)$, the reference distribution is $g(\ptilde)$. The cumulative distribution functions are $F(\ptilde)$ and $G(\ptilde)$ respectively. 
+
+\todo{soll ich hier wirklich alle formeln und two-sample alternativen nennen?}
+discrete versionen: \cite{Flannery:NumericalrecipesFORTRAN}
 \begin{itemize}
-    \item $\chi^2$-Test: This test is used to compare two binned distributions. For each bin $i'$, the difference between reference $g'_i$ and comparison $f_i$ is evaluated.
+    \item $\chi^2$-Test\cite{Cowan:Statisticaldataanalysis}: This test is used to compare two binned distributions. For each bin $i'$, the difference between reference $g'_i$ and comparison $f_i$ is evaluated.
     \begin{equation}
         \TSphat = \frac{\chi^2}{\text{ndof}} = \frac{1}{\text{number of bins}} \sum_i^{\text{bins}} \frac{\left(f'_i - g'_i\right)^2}{g'_i}
     \end{equation}
     A disadvantage of this method is that binning discards information. Additionally, the method works best for large number of event classes.
     
-    \item Kolmogorov-Smirnov: This test does not require binning. It compares the cumulative distribution functions of reference and comparison. The maximal distance between $F$ and $G$ is \TSphat.
+    \item Kolmogorov-Smirnov: This test does not require binning. It compares the cumulative distribution functions of reference and comparison. The maximal distance between $F$ and $G$ is \TSphat. The number of data points (rounds) is denoted with \nrounds.
     \begin{equation}
-        \TSphat = \sup_x \abs{F(x) - G(x)}
+        \TSphat = \sqrt{\nrounds} \cdot \sup_i \abs{F(\ptilde_i) - G(\ptilde)}
     \end{equation}
+    Alternatively, there is a two-sample version of this test statistic, where $N$ denotes the number of samples in there reference distribution\footnote{Note that this version is equivalent to the first with $N \rightarrow \infty$}:
+    \begin{equation}
+        \TSphat = \sqrt{\frac{\nrounds \cdot N}{\nrounds + N}} \cdot \sup_i \abs{F(\ptilde_i) - G(\ptilde_i)}
+    \end{equation}
+    
     A disadvantage of this test statistic is that it is most sensitive to deviations in the center of the distribution. Additionally, only the largest difference is used for the result, instead of accumulating the difference.
     
     \item Cramér-von-Mises: The Cramér-von-Mises test statistic consists of the integral over the quadratic difference between the reference and compared cumulative distribution functions:
     \begin{equation}
-        \TSphat = n \int_{-\infty}^{\infty}\left(F(x) - G(x)\right)^2 w(x)\, \dd F(x)
+        \TSphat = \nrounds \int_{-\infty}^{\infty}\left(F(x) - G(x)\right)^2 w(x)\, \dd F(x) 
     \end{equation}
-    where $w(x) = 1$.
+    where $w(x) = 1$. 
+    The discrete version of this test for comparing to a uniform distribution is:
+    \begin{equation}
+        \TSphat = \frac{1}{12 \nrounds} + \sum_{i=1}^\nrounds \left[\frac{2i-1}{2\nrounds} - F(\ptilde_i)\right]^2
+    \end{equation}
     
     \item Anderson-Darling: This test is similar to the Cramér-von-Mises method, but uses $w(x) = \left[G(x)(1 - G(x))\right]^{-1}$ instead, thus giving more weight to both tails of the distribution.
-    For this test, there exists a discrete version for comparing with a uniform distribution\cite{Stephens:EDFstatisticsgoodness} and a discrete version for $k$ samples\cite{Scholz:KsampleAnderson}. Both are implemented and used in this analysis.
+    
+    The discrete formula comparing the empirical distribution to a uniform one is\cite{Stephens:EDFstatisticsgoodness}:
+    \begin{equation}
+        \TSphat = - \nrounds - \frac{1}{\nrounds} \sum_{i=1}^{\nrounds} \left[(2i - 1) \cdot \left(\ln \ptilde_i + \ln(1 - \ptilde_{\nrounds+1-i})\right)\right]
+    \end{equation}
+    For this test statistic, the values $\ptilde_i$ must be ordered in ascending order.
+    
+    Additionally, for this test there also exists a two-sample version\cite{Scholz:KsampleAnderson} which has been used.
     
     \item Simple: \TSphat is the ratio of \ptilde values below a critical value, in this case \num{0.1}.
 \end{itemize}
 
 A thorough comparison of the afore-mentioned test statistics can be found in \cite{Stephens:EDFstatisticsgoodness}.
 
-For each of the mentioned test statistics, two different reference distributions have been tested: a uniform distribution and the empirical distribution of all \ptilde-values of all pseudo experiment rounds in the \ac{SM} sample.
+For each of the mentioned test statistics, two different reference distributions have been tested: a uniform distribution and the empirical distribution of all \ptilde-values of all pseudo experiment rounds in the \ac{SM} sample. 
+%The empirical distribution is being subsampled to a be \num{10} times as large as the sample distribution to improve computational performance.
 While the former choice has the advantage of being able to identify whether the \ac{SM} distribution agrees with our assumptions, in practice the latter gives better sensitivity because of the direct comparison with the \ac{SM}. It is up to interpretation which approach is more correct.
-
-The global method has been validated on a \ac{SM}-only sample. The \ac{SM}-only sample was used as signal input and a separate automated search, \ptilde and \phat calculation was performed. 
-The resulting test power is $\beta \approx \alpha$, which agrees well with the expectation.
-
 
 %
 %

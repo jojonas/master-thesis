@@ -4,15 +4,17 @@
 
 \chapter{Datasets}
 \section{Monte-Carlo Simulations}
-The \ac{MUSiC} analysis directly compares data to the \ac{SM} expectation. If the comparison shows agreement, the absence of new physics can only be concluded if the expectation has not been fitted to the data prior to the analysis. Thus, we avoid data-driven methods as much as possible and rely on theoretical predictions.
+The \ac{MUSiC} analysis aims to search for deviations in a large number of final states and a wide kinematic phase space. Deviations are expected in any area under investigation and therefore there is no signal-free region that could be used for validation or fine tuning. Thus, we avoid data-driven methods as much as possible and rely on theoretical predictions in form of \acl{MC} simulations.
 
-The \ac{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps: First, the hard scattering process is simulated. Different scenarios are covered by drawing pseudo-random numbers according to the predicted scattering probabilities. In the second step, parton showering and hadronization is applied: Since the required higher order terms of \ac{QCD} cannot be computed exactly, several parametrized models are used to simulate the formation of hadrons from quarks and gluons. In the last step, the detector response is simulated, also using parametrized interactions of the final state particles with detector components.
+The \ac{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps: First, the distribution of proton momentum between partons is simulated. This is done by drawing pseudo-random numbers according to probability distributions related to the empirically measured \emph{parton density functions}.
+Afterwards, the hard scattering process is simulated. Similarly as with the momentum distribution, different scenarios are are possible, each with a probability corresponding to the predicted scattering probability. In the second step, parton showering and hadronization is applied: Since the required higher order terms of \ac{QCD} cannot be computed exactly, several parametrized models are used to simulate the formation of hadrons from quarks and gluons. In the last step, the detector response is simulated, also using parametrized interactions of the final state particles with detector components.
 
-In practice, events of different physics processes are simulated in separate sets, so-called \emph{samples}. Additionally, some samples only contain events within a certain \pT range. This is done not only for technical reasons, but moreover in order to ensure a low statistical uncertainty event at improbably phase space regions like the tails of distributions.
+In practice, events of different physics processes are simulated in separate sets, so-called \emph{samples}. 
+Additionally, some samples only contain events within a certain \pT or mass range. This is done in order to provide a low statistical uncertainty in the tails of steeply falling distributions.
 
-In order to have consistent and checked samples for all \ac{CMS} analyses, the \ac{MC} samples are generated centrally by \ac{CMS} on the \ac{WLCG}.
+In order to have consistent and validated samples for all \ac{CMS} analyses, the \ac{MC} samples are generated centrally by \ac{CMS} on the \ac{WLCG}.
 
-During the analysis, each event is assigned a weight. It is computed from the expected cross section, an expected higher order correction factor ($k$-factor) and the luminosity. 
+In addition to weight assigned by generators, each event is assigned a further weight during the analysis. It is computed from the expected cross section, an expected higher order correction factor ($k$-factor) and the luminosity. 
 Additionally, events are reweighted to compensate for difference pileup simulation between expectation and data. 
 The expected event yield with certain properties can now be obtained by summing the weights of the desired events.
 
@@ -41,14 +43,12 @@ The full list of used \ac{MC} samples can be found in \fref{app:mc_datasets}.
 \subsection{Signal Samples}
 The signal study uses the same set of signal samples as the corresponding dedicated analyses \cite{CMS:CMS-PAS-EXO-16-001,CMS:CMS-PAS-EXO-15-007,CMS:CMS-PAS-EXO-16-002,CMSCollaboration:SearchesWbosons}. This makes results comparable and also allows reusing central production and reconstruction by \ac{CMS}. The mass points are chosen to cover a broad range including the resulting limits set by the dedicated analyses. However, since the automated search has to be re-run for each signal sample, computation time limits the amount of samples analyzed.
 \begin{itemize}
-    %\item For the \ac{RPV-SUSY} model, we choose the coupling strength $\lambda_{132} = \lambda'_{311} = \num{0.01}$, resulting in a very narrow resonance peak. The observed resonance width is thus only limited by detector resolution. The mass points \SI{200}{\GeV}, \SI{400}{\GeV}, \SI{600}{\GeV}, \SI{800}{\GeV}, \SI{1000}{\GeV}, \SI{1500}{\GeV}, \SI{2000}{\GeV} are analyzed. The  \genCA\cite{Belyaev:CalcHEP34collider} generator is used for the simulation.
-    
     \item For the \ac{QBH} model, the \acf{ADD} model with $n = 4$ extra dimensions is analyzed. The chosen mass points $M$ are \SI{1}{\TeV}, \SI{2}{\TeV}, \SI{3}{\TeV}, \SI{4}{\TeV} and \SI{5}{\TeV}. The events are simulated by the \genQBH\cite{Gingrich:MonteCarloevent} generator.
     
     \item In the black hole study, we consider the case of a non-rotating black hole. The fundamental Planck mass is set to $M_\text{D} = \SI{4}{\TeV}$ with $n = 6$ extra dimensions. This choice corresponds to the benchmark result published in \cite{CMS:CMS-PAS-EXO-15-007}. The black hole mass is varied between \SI{6}{\TeV}, \SI{7}{\TeV}, \SI{8}{\TeV}, \SI{9}{\TeV}, \SI{10}{\TeV}. The \ac{MC} generator used for the model is \genBM\cite{Dai:BlackMaxblackhole}.
     
     \item For the Seesaw-TypeIII samples, only the mass points $M_\Sigma = \SI{380}{\GeV}$ and $M_\Sigma = \SI{500}{\GeV}$  are tested. The samples are generated with \genAM\cite{Alwall:automatedcomputationtreea}.
     
-    \item The \PWprime model is tested for \PWprime masses of \SI{3}{\TeV}, \SI{4}{\TeV}, \SI{5}{\TeV}. The branching ratio of $\PWprime \to \Ptop \Pbottom$ is set to 1. This sample also uses the \genCA\cite{Belyaev:CalcHEP34collider} generator.
+    \item The \PWprime model is tested for \PWprime masses of \SI{3}{\TeV}, \SI{4}{\TeV}, \SI{5}{\TeV}. The branching ratio of $\PWprime \to \Ptop \Pbottom$ is set to 1. This sample uses the \genCA\cite{Belyaev:CalcHEP34collider} generator.
 \end{itemize}
 Again, where necessary, hadronization is applied using \genPY and the detector response is simulated with \genGEANT.

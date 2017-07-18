@@ -73,13 +73,13 @@ The probability of observing a $p$-value of $p$ (or more extreme) is $p$, thus t
 We now want to derive the distribution of minimal $p$-values, depending on the sample size $N$: 
 Taking $N$ $p$-values, the probability that the smallest one has the value $p_\text{min}$ can be calculated by requiring that the other $N-1$ $p$-values are in the range $p=[0, p_\text{min})$:
 \begin{equation}
-    P(p_\text{min} = p) = C \cdot \left(1-p\right)^{N-1}
+    \Pr(p_\text{min} = p) = C \cdot \left(1-p\right)^{N-1}
 \end{equation}
 The proportionality factor $C$ can be calculated from normalization: $C = N$.
 
 The entire probability density for minimal $p$-values os therefore:
 \begin{equation}
-    P(p_\text{min} = p) = N \cdot \left(1-p\right)^{N-1}
+    \Pr(p_\text{min} = p) = N \cdot \left(1-p\right)^{N-1}
 \end{equation}
 
 We can verify this derivation by taking pseudo-experiments: We draw $N$ numbers from a uniform distribution $\mathcal{U}([0, 1])$ and store the minimal value. This is repeated \num{10000} times and the empirical distribution function is compared to the predicted distribution. This is shown in figure \ref{fig:minimal_pvalues}.
@@ -332,17 +332,17 @@ In order to fix that, one has to adapt the width of the distribution, e.g. the e
 The adjustment $\sigma \rightarrow \sigma'$ will be derived in the following:
 Starting with the assumption that the probability of obtaining $\mu'$ given $\mu$ should be the same as obtaining $\mu$ given $\mu'$, we will derive an expression for $\sigma'$ such that
 \begin{equation}
-    P(x \leq \mu'; \mu, \sigma) = P(x \geq \mu; \mu', \sigma')
+    \Pr(x \leq \mu'; \mu, \sigma) = \Pr(x \geq \mu; \mu', \sigma')
 \end{equation}
 This requirement can also be motivated in \fref{fig:coverage_distributions}, where the left-hand-side of the equation corresponds to the area filled with circles and the right-hand-side corresponds to the cross-hatched area under the probability distribution curve.
 
 Let $g(x; \mu, \sigma)$ be the original distribution and $G(x; \mu; \sigma)$ its cumulative distribution function. The left-hand-side now spells out:
 \begin{equation}
-    P(x \leq \mu'; \mu, \sigma) = \int_0^{\mu'} g(x; \mu, \sigma) \dd{x} = G(\mu'; \mu, \sigma) - G(0; \mu, \sigma)
+    \Pr(x \leq \mu'; \mu, \sigma) = \int_0^{\mu'} g(x; \mu, \sigma) \dd{x} = G(\mu'; \mu, \sigma) - G(0; \mu, \sigma)
 \end{equation}
 Consequently, the right-hand-side corresponds to:
 \begin{equation}
-    P(x \geq \mu; \mu', \sigma) = \int_\mu^\infty g(x; \mu', \sigma') \dd{x} = G(\infty; \mu', \sigma') - G(\mu; \mu', \sigma')
+    \Pr(x \geq \mu; \mu', \sigma) = \int_\mu^\infty g(x; \mu', \sigma') \dd{x} = G(\infty; \mu', \sigma') - G(\mu; \mu', \sigma')
 \end{equation}
 Since $G$ is a cumulative distribution function, we can substitute $G(0) = 0$ and $G(\infty) = 1$ and set both sides equal:
 \begin{equation}

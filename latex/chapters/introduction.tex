@@ -18,23 +18,19 @@ Throughout this work, we will use the natural unit system. This means that the s
 It follows that the only unit needed to express most other physical quantities is the unit of energy. Our choice here is electron volts. Too keep numbers in a reasonable range, we mostly use gigaelectronvolts: $\SI{1}{\giga\eV} = \SI{1.60218e-10}{\joule}$.
 Two exceptions to this are the cross section and luminosity, which are expressed in femtobarn and inverse femtobarn respectively: $\SI{1}{\femto\barn} = \SI{e-43}{\meter\squared}$.
 
-\section{Particle Physics}
-Finding the building blocks of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter\cite{Melsen:atomosatomhistory}. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. As of 2017, the state of particle physics research is summed up in the so-called \emph{\acl{SM} of Particle Physics}.
-
-The following sections will be a short introduction to the \acl{SM}, its theoretical foundations and open questions. Motivated by these questions, we will introduce possible extensions to the \acl{SM} in the next chapter.
-
-This chapter is based on \cite{Hebbeker:SkriptzurElementarteilchenphysik} if not explicitly stated otherwise.
-
 \section{The Standard Model}
-The \acfi{SM} is a theoretical model describing matter and its interactions through \emph{particles} and \emph{forces}. It was once motivated by classical phenomena such as electromagnetism and particle decays and has since made important predictions about the existence of non-classical forms of matter.
+Finding substructure of matter has interested mankind for thousands of years. Ancient Greek philosophers already contemplated about the basic building blocks of matter\cite{Melsen:atomosatomhistory}. They coined the term \emph{atom} for what they thought to be indivisible. Since then, our understanding of the smallest parts and what holds them together has vastly improved. This field of science is nowadays called \emph{Elementary Particle Physics}. 
 
-So far, it has not been disproved, although there are some inconsistencies, as we will see later.
+As of 2017, the most broadly accepted model in particle physics is the so-called \emph{\acl{SM} of Particle Physics}. The \acl{SM} describes matter and its interactions through \emph{particles} and \emph{forces}. It is based on the mathematical foundation of quantum field theory, exhibiting several concepts such as gauge invariance, spontaneous symmetry breaking, perturbative and non-perturbative behavior.
+ 
+Although it has provided accurate predictions, making it a successful theory, recent observations have yielded minor inconsistencies, which motivate the scientific field to advance. The following sections will be a short introduction to the \acl{SM}, its historical development, fundamental ideas and open questions. Motivated by these questions, possible extensions to the \acl{SM} will be introduced afterwards.
 
 \subsection{Particles and Interactions}
 Elementary particles are described as point-like indivisible structureless objects, much like the atoms were to the ancient Greeks. These objects are characterized by physical observables such as mass, charge and spin.
 
 \begin{figure}
     \centering
+%    \includegraphics[width=0.5\textwidth]{Elementary_particle_interactions}
     \tikzset{font=\small,
         edge from parent fork down,
         level distance=3em,
@@ -45,7 +41,6 @@ Elementary particles are described as point-like indivisible structureless objec
         },
         every leaf node/.style={
             circle,
-%            rectangle,rounded corners,
             draw,           
             very thick,
             inner sep=0,
@@ -71,18 +66,6 @@ Elementary particles are described as point-like indivisible structureless objec
                 ]
             ]
             [.Quarks
-%               [.{1st gen.}
-%                   {\Pup}
-%                   {\Pdown}
-%               ]
-%               [.{2nd gen.}
-%                   {\Pcharm}
-%                   {\Pstrange}
-%               ]
-%               [.{3rd gen.}
-%                   {\Pbottom}
-%                   {\Ptop}
-%               ]
                 [.{up-type}
                     {\Pup}
                     {\Pcharm}
@@ -116,7 +99,7 @@ At the first level, one distinguishes between two groups: \emph{fermions} and \e
 Fermions are elementary particles with a spin of $\nicefrac{1}{2}$. They follow Fermi-Dirac statistics and have to obey Pauli's exclusion principle which states that no more than one particle can occupy a certain state characterized by its quantum numbers.
 The group of fermions can be further divided into \emph{quarks} and \emph{leptons}.
 There are six quarks: up (\Pup), down (\Pdown), charm (\Pcharm), strange (\Pstrange), bottom (\Pbottom) and top (\Ptop). Quarks carry color charge and are the only fermions to take part in the strong interaction.
-In addition, there are three lepton families: \emph{electron} (\Pe), \emph{muon} (\Pmu) and \emph{tau} (\Ptau). Each charged lepton has a very light, electrically neutral \emph{neutrino} associated with it.
+In addition, there are three lepton families: \emph{electron} (\Pe), \emph{muon} (\Pmu) and \emph{tau} (\Ptau). Each charged lepton has a massless, electrically neutral \emph{neutrino} associated with it.
 
 The second group of particles are called bosons. They mediate interactions (also called \emph{forces}) and posses an integer spin. Bosons follow Bose-Einstein statistics and may thus occupy the same quantum state.
 Each kind of boson is responsible for one kind of elementary force: the electrodynamic force is mediated by the \emph{photon} (\Pgamma), the strong force by the \emph{gluon} (\Pg) and the weak force by the \emph{\PZ} and \emph{\PW} bosons.
@@ -379,7 +362,7 @@ Consequently, only the lightest fermions are stable: the electron, the \Pqu- and
 \subsubsection{Electroweak Theory}
 Instead of regarding \ac{QED} and \ac{QFD} as two separate gauge theories with independent coupling constants, they can be unified within the \emph{electroweak theory}. Instead of regarding particles by their flavor and electrical charge, they are classified by their \emph{weak isospin} and \emph{weak hypercharge}. Furthermore, four gauge fields $W^+$, $W^-$, $W^0$ and $B$ are introduced, which couple to the weak isospin and weak hypercharge. 
 
-While the \ac{QFD} gauge bosons \PWp and \PWm directly correspond to the fields $W^+$, $W^-$, the neutral \PZzero and photons are reproduced by mixing $W^0$ and $B$ with the Weinberg angle $\theta_0$. $\theta_0$ in turn also relates the coupling constants of \ac{QED} and \ac{QFD} with particles' weak isospin and hypercharge \cite{Schleper:TeilchenphysikfuerFortgeschrittene}.
+While the \ac{QFD} gauge bosons \PWp and \PWm directly correspond to the fields $W^+$, $W^-$, the neutral \PZzero and photons are reproduced by mixing $W^0$ and $B$ with the Weinberg angle $\theta_0$. $\theta_0$ in turn also relates the coupling constants of \ac{QED} ($\alpha$) and \ac{QFD} ($\alpha_s$) with electroweak couplings $g$ and $g'$ \cite{Schleper:TeilchenphysikfuerFortgeschrittene}.
 
 \subsection{Higgs Mechanism}
 The naive introduction of boson mass terms in a theory breaks its gauge invariance. While this does not pose a problem for \ac{QED} and \ac{QCD}, which are mediated by the massless photon and gluon, \ac{QFD}, with its massive gauge bosons \PW and \PZ, would be able to describe interactions at high energies.
@@ -390,9 +373,10 @@ A solution was independently proposed by Peter Higgs\cite{Higgs:BrokenSymmetries
 In 2012, the experimental signature of a particle compatible with the predicted Higgs boson was discovered at the \ac{LHC}\cite{CMSCollaboration:Observationnewboson,ATLASCollaboration:Observationnewparticle}, leading to a Nobel Prize for Higgs and Englert in 2013\cite{NobelMedia:NobelPrize2013}.
 
 \subsection{Open Questions}
-With the discovery of the Higgs boson, all particles predicted by the Standard Model have been experimentally observed. The Standard Model has not been disproved and multiple Nobel Prizes have been awarded.
-One could assume that our understanding of nature is now complete, but this is not the case:
-In the recent decades, several observations have been made that demand  theories beyond the Standard Model. In the following sections, we want to discuss a few of them.
+\label{sec:open_questions}
+
+With the discovery of the Higgs boson, all particles predicted by the \acl{SM} have been experimentally observed. The model as described in the previous sections has proven to be a successful theory. 
+However, as mentioned earlier, in the last decade, several observations have been made that stand in conflict with its prediction. Additionally, the \acl{SM} is subject to some theoretical shortcomings. A selection of open questions from both areas will be discussed in the following sections.
 
 %Observations: gravitational waves (2016), neutrino masses
 
@@ -409,47 +393,17 @@ So far, no right-handed neutrinos have been detected. Thus the Standard Model wa
 Recent observations of neutrino oscillations\cite{KamLAND:ReactorAntineutrinoMeasurement,DoubleChooz:Improvedmeasurementsneutrino,IceCube:Determiningneutrinooscillation,DayaBay:NewMeasurementAntineutrino} indicate that neutrinos may be massive. For the theory to remain renormalizable, neutrinos must thus also exist in their right-handed state\cite{Klinkhamer:NeutrinomassStandard}, which demands for an extension or modification of the Standard Model.
 
 \subsubsection{Theoretical Considerations}
-From the theoretical point of view, the open questions are mostly due to incomplete theories: 
-First, there is no consensus about unification of the gauge interactions. At certain very high energy scales, the gauge interactions are expected to behave similarly. However, the observed Standard Model parameters do not allow for a common point of convergence\cite{Amaldi:Comparisongrandunified}.
-Secondly, the framework of quantum field theory does not allow for a non-renormalizable theory of quantum gravity. Thus, the question about how to combine particle physics and gravity (or rather general relativity) is still open.\footnote{In the context of collider experiments, the effects of gravity are so weak that they can be neglected.}
+From a theoretical point of view, the \ac{SM} shows several deficiencies. 
 
-Another theoretical motivation is the \emph{hierarchy problem}\cite{Arkani-Hamed:Hierarchyproblemnew}: One of the seemingly indisputable energy scales in nature is the Planck scale at $M_\text{Pl} \approx \SI{e18}{\GeV}$. At this scale, gravity becomes as strong as the gauge interactions and nature is expected to behave differently. However, all processes that have been observed so far appear at the electroweak scale $m_\text{EW} \approx \SI{e3}{\GeV}$. The discrepancy between these two scales challenges the generality of the Standard Model.
+First, there is no consensus about unification of the gauge interactions. Unification of the electroweak and strong interactions would require the coupling constants $g$, $g'$ and $\alpha_s$ to converge at very high energy scales ($\sim \SI{e15}{\GeV}$). However, the \acl{SM} does not predict a common point of convergence\cite{Amaldi:Comparisongrandunified}. 
+A second open question is how to combine gravity with the \acl{SM}. Although it is possible to derive a quantum field theory of gravity, which includes the prediction of a \emph{graviton}, this theory is not renormalizable, i.e. infinities that appear during the calculation cannot be absorbed into a running coupling constant.
+In any case, if there were a theory of quantum gravity, it would be expected to become relevant at the Planck scale $M_\text{Pl} \approx \SI{e18}{\GeV}$, where a particle's Compton wave length is comparable to its Schwarzschild radius. However, all processes that have been observed so far appear at the electroweak scale $m_\text{EW} \approx \SI{e3}{\GeV}$. This discrepancy is called \emph{mass hierarchy problem}\cite{Amaldi:Comparisongrandunified} and will be addressed by the black hole \ac{SM} extension in the following chapter.
 
+% three families in leptons and quarks
 % Spin 3/2 particles?
 
 \section{Extensions of the Standard Model}
 Some solutions have been proposed to these problems. In this work, four extension beyond the \acl{SM} will be relevant and thus introduced in the following sections.
-%
-%\subsubsection{$R$-Parity Violating Supersymmetry}
-%There are several extensions falling under the name \acfi{SUSY}, but they all share a common feature: The pairing of each \acl{SM} particle with a much heavier so-called \emph{superpartner} (sometimes also called \emph{sparticle}). Superpartners of \ac{SM} fermions are \acs{SUSY} bosons, \ac{SM} bosons are complemented with \acs{SUSY} fermions. Their high mass makes them more difficult to detect, as only now science is peaking into the \si{\TeV} range.
-%
-%An implication of this is the violation of lepton and baryon number. The latter effect would also enable decay of free protons, which to date has not been observed. 
-%One way to solve this problem is the introduction of an additional quantum number $R$: \ac{SM} particles are assigned $R = +1$, while \ac{SUSY} particles have $R = -1$. $R$ must then be conserved at each interaction, allowing \ac{SUSY} particles to be created only in pairs, and preventing proton decay.
-%
-%So far, \ac{SUSY} models containing the notion of $R$-parity have been tightly constrained. Thus, some analyses focus on theories where $R$-parity conservation is violated and stabilize the proton in other ways.
-%
-%The \ac{RPV-SUSY} model under investigation falls into this category. It stabilizes the proton by introducing a symmetry that cancels out the baryon number violating terms. 
-%Among its signatures is the resonant production of \ac{SUSY} particles from quark-quark annihilation, which decays into a \Pe \Pmu pair, violating the lepton number (see \fref{fig:rpv_signature}).\cite{CMS:CMS-PAS-EXO-16-001}
-%
-%\begin{figure}
-%    \centering
-%    \begin{fmffile}{rpv_signature}
-%        \begin{fmfgraph*}(8,3)
-%            \fmfleft{i1,i2}
-%            \fmfright{o1,o2}
-%            \fmf{fermion,label=\Pqd,label.side=right}{x1,i1}
-%            \fmf{fermion,label=\Pqd,label.side=right}{i2,x1}
-%            \fmf{dashes_arrow,label=$\PSnu_\tau$}{x1,x2}
-%            \fmf{fermion,label=\Pmu,label.side=right}{o1,x2}
-%            \fmf{fermion,label=\Pe,label.side=right}{x2,o2}
-%            \fmflabel{$\lambda_{311}'$}{x1}
-%            \fmflabel{$\lambda_{132}$}{x2}
-%        \end{fmfgraph*}
-%    \end{fmffile}
-%    \caption{\Pe \Pmu signature of \acf{RPV-SUSY}. A supersymmetric $\PSnu_\tau$ (tau-sneutrino) boson is produced from the annihilation of two down quarks. The boson subsequently decays into a \Pe \Pmu pair, violating the lepton number.}
-%    \label{fig:rpv_signature}
-%\end{figure}
-
 
 \subsubsection{Extra Dimensions and Black Holes}
 One class of approaches addressing the mass hierarchy problem is the introduction of additional spatial dimensions. Within the \acf{ADD} model\cite{Arkani-Hamed:Hierarchyproblemnew}, in addition to our four known dimensions, $n$ extra dimensions are assumed to exist. These dimensions are compactified on a length scale of $R$. On this scale and below, gravity is able to penetrate multiple dimensions, making it stronger than it appears in the classical four dimensions. Thus, the true Planck scale for $n$ extra dimensions is much lower than the apparent Planck scale:
@@ -485,7 +439,6 @@ In this thesis, we will look at two different models of black holes within the \
 \end{figure}
 
 \subsubsection{Seesaw Type III Model}
-\cite{Foot:SeesawNeutrinoMasses}
 The so-called Seesaw model aims to explain the low neutrino masses. In this model, the neutrino masses are considered to arise via the mediation of massive fermion partners. Two additional charged partners $\PSigmapm$ are predicted alongside a neutral Majorana particle $\PSigmazero$.
 Within the \ac{LHC}, the particles are produced in pairs as electroweak decay products as shown in \fref{fig:seesaw_production}.
 
@@ -541,7 +494,9 @@ Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} parti
         \item $\PSigmazero \to \PH \Pnu$
     \end{itemize}
 \end{multicols}
-Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states.
+Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states. The highest sensitivity is expected to arise from final states with at least three leptons, as the number of \ac{SM} processes contributing to these final states is very low.
+
+%\cite{Foot:SeesawNeutrinoMasses}
 
 \subsubsection{Sequential Standard Model and \PWprime}
 Heavy gauge bosons are postulated by several extensions of the \ac{SM}, most prominently by grand unification theories\cite{Langacker:NewHeavyGauge}.
@@ -675,11 +630,11 @@ In both barrel and endcap, the \acp{DT} and \acp{CSC} are complemented with \acp
 
 \subsection{Triggering}
 \label{sec:triggering}
-As mentioned in \fref{sec:pileup}, the \ac{LHC} delivers collisions about every \SI{25}{\nano\second}, resulting in around \num{40} million events per second. Even with a raw event size of about \SI{1}{\mega\byte}, storing all events would require a bandwidth of \SI{40}{\tera\byte\per\second}. Currently, there is no technology capable of this task, especially considering the outer circumstances such as irradiation and the strong magnetic field.
+As mentioned in \fref{sec:pileup}, the \ac{LHC} delivers collisions about every \SI{25}{\nano\second}, resulting in around \num{40} million events per second. Even with a raw event size of about \SI{500}{\kilo\byte}\cite{CMSCollaboration:CMStriggersystem}, storing all events would require a bandwidth of \SI{20}{\tera\byte\per\second}. Currently, there is no technology suitable for this task, especially considering the outer circumstances such as irradiation and the strong magnetic field.
 
 Thus, the rate of events accepted for storage and analysis has to be drastically reduced. This is the task of the \emph{triggering system}. Based on the physics content, statistics and bandwidth restrictions, triggers decide whether or not to store an event to disk.
 
-Triggering is implemented in a two step process: First, the \acfi{L1} trigger is consulted. It is implemented in dedicated hardware and uses information from the calorimeters and the muon system to reject low-energetic events. Events passing \ac{L1} will be read out, temporarily stored and further evaluated by the \acfi{HLT}. The \ac{HLT} is implemented in software and running on computers next to the detector cavern. It has access to the full detector information to decide whether an event is eventually stored or rejected.
+Triggering is implemented in a two step process: First, the \acfi{L1} trigger is consulted. It is implemented in dedicated hardware and uses information from the calorimeters and the muon system to reject low-energetic events. Events passing \ac{L1} will be read out, temporarily stored and further evaluated by the \acfi{HLT}. The \ac{HLT} is implemented in software and running on computers next to the detector cavern. It has access to the full detector information to decide whether an event is eventually stored or rejected\cite{CMSCollaboration:CMStriggersystem}.
 
 \subsection{The Computing Grid}
 Reconstruction and analyses are ran on the stored events. For this purpose, the \acfi{WLCG} project was founded, which consists of several computing facilities operated by the \ac{CERN} member states.
