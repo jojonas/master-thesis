@@ -161,13 +161,22 @@ The excluded area is illustrated in \fref{fig:coverage_veto}.
 \section{A Global $p$-Value}
 \label{sec:global_pvalue}
 
-The \ptilde distribution provides the ability to register less significant deviations in many classes by looking at the central part of the distribution. However, this manual method is only qualitative. We will now introduce a possible extension to the analysis which provides a quantitative method of combining the \ptilde values of all classes.
+The \ptilde distribution provides the ability to notice an increase of less significant deviations in many classes by inspecting the central part of the distribution. However, this manual method is only qualitative. We will now introduce a possible extension to the analysis which provides a quantitative method of combining the \ptilde values of all classes.
 
-This not only allows us to draw conclusions about the presence of new physics in our observed data set, but also to quantify \ac{MUSiC}'s sensitivity for simulations of known benchmark models. Furthermore, an automated analysis can be used as regression test to decide whether future modifications to the analysis improve its sensitivity.
+This allows us not only to draw conclusions about the presence of new physics in our observed data set, but also to quantify \ac{MUSiC}'s sensitivity for simulations of known benchmark models. Furthermore, an automated analysis can be used as a regression test to decide whether future modifications to the analysis improve its sensitivity.
 
 As input, the algorithm takes the look-elsewhere-corrected \ptilde values of all classes. In the case of \ac{MC} simulation, either for \ac{SM} or signal studies, such a set of \ptilde values can be provided for each pseudo experiment round, for observed data we only obtain one list (one value for each class).
 
-The algorithm for the \ac{SM} distribution goes as follows: For each pseudo experiment round, the distribution of \ptilde values (of all classes) is compared to a reference distribution using a statistical test. The test outputs a scalar result \TSphat for each of the \nrounds rounds, where a larger value indicates a larger deviation from the reference distribution. The set of \nrounds test statistic values is stored.
+The algorithm for the \ac{SM} distribution performs as follows: For each pseudo experiment round, the distribution of \ptilde values (of all classes) is compared to a reference distribution using a statistical test. The reference distribution is the distribution of all \ptilde values of \ac{SM}-only pseudo-experiments, of all \nclasses event classes and \nrounds pseudo-experiment rounds, as presented in \fref{fig:phat_reference}. Note that the distribution features a spike at $\ptilde \approx 1$, which originates from the remaining discretization of \ptilde discussed in \fref{sec:min_yield}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{reference_plot}
+    \caption{Reference distribution $g(\ptilde)$, serving as input to the analysis. In this instance, the \sumpT distribution has been analyzed, shown are all \ptilde values of exclusive event classes.}
+    \label{fig:phat_reference}
+\end{figure}
+
+The statistical test outputs a scalar result \TSphat for each of the \nrounds rounds, where a larger value indicates a larger deviation from the reference distribution. The set of \nrounds test statistic values is stored.
 Given a single observed \ptilde distribution, one can analogously compute the test statistic \TSphatdata. The \phat value is then defined as
 \begin{equation}
     \phat = \Pr(\TSphat > \TSphatdata | H_0),
@@ -192,84 +201,50 @@ The test power can be calculated from simulations of new physics, such as the co
 
 The choice of $\alpha$ is subjective\cite{Cowan:StatisticalMethodsDiscovery}. Rather than following a strict convention, it is important to state which significance threshold has been used and, if the test statistic indicates that the null hypothesis should be discarded, to act accordingly. In the case of the \ac{MUSiC} analysis, finding a deviation from the \ac{SM} would certainly initiate a dedicated analysis at \ac{CMS}. Therefore, we can afford to set an aggressively high value of $\alpha = \SI{5}{\percent}$\footnote{For comparison, a discovery in particle physics is usually claimed at $\alpha \sim \num{e-7}$\cite{Cowan:StatisticsSearchesLHC}.}, and accepting the fact that in \SI{5}{\percent} of the cases, we would incorrectly reject the \ac{SM} and trigger a dedicated analysis.
 
-So far, the choice of the test statistic \TSphat and reference distribution is not specified. In the following, multiple options are discussed. The distribution of \ptilde values under investigation is denoted as $f(\ptilde)$, the reference distribution is $g(\ptilde)$. The cumulative distribution functions are $F(\ptilde)$ and $G(\ptilde)$ respectively. 
+So far, the choice of the test statistic \TSphat has not been specified. In the following, multiple options are discussed. The distribution of \ptilde values under investigation is denoted as $f(\ptilde)$, having $N_f = \nrounds$ values, the reference distribution is $g(\ptilde)$, with $N_g$ values. The cumulative distribution functions are $F(\ptilde)$ and $G(\ptilde)$ respectively. 
 
-\todo{soll ich hier wirklich alle formeln und two-sample alternativen nennen?}
-discrete versionen: \cite{Flannery:NumericalrecipesFORTRAN}
 \begin{itemize}
-    \item $\chi^2$-Test\cite{Cowan:Statisticaldataanalysis}: This test is used to compare two binned distributions. For each bin $i'$, the difference between reference $g'_i$ and comparison $f_i$ is evaluated.
+    \item $\chi^2$-Test\cite{Cowan:Statisticaldataanalysis,Flannery:NumericalrecipesFORTRAN}: This test is used to compare two sets of values, binned into distributions. For each bin $i$, the difference between bin contents $g'_i$ for the reference and the sample bin content $f'_i$ is evaluated.
     \begin{equation}
-        \TSphat = \frac{\chi^2}{\text{ndof}} = \frac{1}{\text{number of bins}} \sum_i^{\text{bins}} \frac{\left(f'_i - g'_i\right)^2}{g'_i}
+        \TSphat = \frac{\chi^2}{\text{ndof}} = \frac{1}{\text{number of bins}} \sum_i^{\text{bins}} \frac{\left(\sqrt{N_g/N_f} \cdot f'_i - \sqrt{N_f/N_g} \cdot g'_i\right)^2}{N_f + N_g}
     \end{equation}
+    
     A disadvantage of this method is that binning discards information. Additionally, the method works best for large number of event classes.
     
-    \item Kolmogorov-Smirnov: This test does not require binning. It compares the cumulative distribution functions of reference and comparison. The maximal distance between $F$ and $G$ is \TSphat. The number of data points (rounds) is denoted with \nrounds.
+    \item Kolmogorov-Smirnov\cite{Flannery:NumericalrecipesFORTRAN,Darling:kolmogorovsmirnovcramer}: This test does not require binning. It compares the empirical cumulative distribution functions of reference and comparison, finding the maximal distance between $F$ and $G$.
     \begin{equation}
-        \TSphat = \sqrt{\nrounds} \cdot \sup_i \abs{F(\ptilde_i) - G(\ptilde)}
+        \TSphat = \left(\sqrt{N_e} + \num{0.12} + \num{0.11}/\sqrt{N_e}\right) \cdot \sup_i \abs{F(\ptilde_i) - G(\ptilde_i)}
     \end{equation}
-    Alternatively, there is a two-sample version of this test statistic, where $N$ denotes the number of samples in there reference distribution\footnote{Note that this version is equivalent to the first with $N \rightarrow \infty$}:
+    where 
     \begin{equation}
-        \TSphat = \sqrt{\frac{\nrounds \cdot N}{\nrounds + N}} \cdot \sup_i \abs{F(\ptilde_i) - G(\ptilde_i)}
+        N_e = \frac{N_f \cdot N_g}{N_f + N_g}
     \end{equation}
+    is an effective number of values.
     
     A disadvantage of this test statistic is that it is most sensitive to deviations in the center of the distribution. Additionally, only the largest difference is used for the result, instead of accumulating the difference.
     
-    \item Cramér-von-Mises: The Cramér-von-Mises test statistic consists of the integral over the quadratic difference between the reference and compared cumulative distribution functions:
+%    \item Cramér-von-Mises\cite{Stephens:EDFstatisticsgoodness}: The Cramér-von-Mises test statistic consists of the integral over the quadratic difference between the reference and compared cumulative distribution functions:
+%    \begin{equation}
+%        \TSphat = \nrounds \int_{-\infty}^{\infty}\left(F(x) - G(x)\right)^2 w(x)\, \dd F(x) 
+%    \end{equation}
+%    where $w(x) = 1$. 
+%    The discrete version of this test for comparing to a uniform distribution is:
+%    \begin{equation}
+%        \TSphat = \frac{1}{12 \nrounds} + \sum_{i=1}^\nrounds \left[\frac{2i-1}{2\nrounds} - F(\ptilde_i)\right]^2
+%    \end{equation}
+    
+    \item Anderson-Darling\cite{Stephens:EDFstatisticsgoodness,Darling:kolmogorovsmirnovcramer,Flannery:NumericalrecipesFORTRAN}: This test belongs to the group of quadratic EDF\footnote{EDF = empirical distribution function} statistics. This group consists of test statistics that integrate over the quadratic difference between the reference and sample cumulative functions:
     \begin{equation}
         \TSphat = \nrounds \int_{-\infty}^{\infty}\left(F(x) - G(x)\right)^2 w(x)\, \dd F(x) 
     \end{equation}
-    where $w(x) = 1$. 
-    The discrete version of this test for comparing to a uniform distribution is:
-    \begin{equation}
-        \TSphat = \frac{1}{12 \nrounds} + \sum_{i=1}^\nrounds \left[\frac{2i-1}{2\nrounds} - F(\ptilde_i)\right]^2
-    \end{equation}
+    Here, the weighting term $w(x)$ can be used to focus on specific parts of the distribution. The simplest possible weight is $w(x) = 1$, which is used by the Cramér-von-Mises test statistic.
+    The Anderson-Darling metric uses a more sophisticated weight $w(x) = \left[G(x)(1 - G(x))\right]^{-1}$ instead, giving more weight to both tails of the distribution.
     
-    \item Anderson-Darling: This test is similar to the Cramér-von-Mises method, but uses $w(x) = \left[G(x)(1 - G(x))\right]^{-1}$ instead, thus giving more weight to both tails of the distribution.
+    For this thesis, the discrete two-sample version is used, which is described in \cite{Scholz:KsampleAnderson}.
     
-    The discrete formula comparing the empirical distribution to a uniform one is\cite{Stephens:EDFstatisticsgoodness}:
-    \begin{equation}
-        \TSphat = - \nrounds - \frac{1}{\nrounds} \sum_{i=1}^{\nrounds} \left[(2i - 1) \cdot \left(\ln \ptilde_i + \ln(1 - \ptilde_{\nrounds+1-i})\right)\right]
-    \end{equation}
-    For this test statistic, the values $\ptilde_i$ must be ordered in ascending order.
-    
-    Additionally, for this test there also exists a two-sample version\cite{Scholz:KsampleAnderson} which has been used.
-    
-    \item Simple: \TSphat is the ratio of \ptilde values below a critical value, in this case \num{0.1}.
+    \item Simple: \TSphat is the ratio of \ptilde values below a critical value, in this case \num{0.01}.
 \end{itemize}
 
 A thorough comparison of the afore-mentioned test statistics can be found in \cite{Stephens:EDFstatisticsgoodness}.
 
-For each of the mentioned test statistics, two different reference distributions have been tested: a uniform distribution and the empirical distribution of all \ptilde-values of all pseudo experiment rounds in the \ac{SM} sample. 
-%The empirical distribution is being subsampled to a be \num{10} times as large as the sample distribution to improve computational performance.
-While the former choice has the advantage of being able to identify whether the \ac{SM} distribution agrees with our assumptions, in practice the latter gives better sensitivity because of the direct comparison with the \ac{SM}. It is up to interpretation which approach is more correct.
-
-%
-%
-%necessity of a global p-value: quantification of deviation of p-tilde distribution
-%quantification of test power towards known new physics models
-%regression testing of features
-%input: look-elsewhere corrected p-values for all classes and N rounds (SM, signal), or look-elsewhere corrected-pvalues for all classes and 1 round (data)
-%output for data: p-value for this specific test and SM-scenario
-%output for signal: distribution of p-values (?)
-%
-%suggested procedure:
-%gather p-tilde-values for all classes and one round
-%apply statistical test (KS, KS-referenced, AD, Chi2, Simple)
-%apply definition of p-value: count "more extreme" outcomes
-%problems: uniform reference vs SM-reference, binning (chi2), possibility of infinite p=1 classes (solution: low-stats treatment + cut at p<0.95)
-%
-%tests:
-%KS: common nonparametric methods for comparing samples, unbinned, formula, disadvantage: more sensitive near center of distribution, max() instead of integration
-%
-%KS-referenced: as KS
-%
-%AD: quadratic EDF (empirical distribution function) test, integrates instead of max, weight in tails 
-%
-%Likelihood
-%
-%Simple test: count classes with p-tilde<0.1
-%
-%also tested: CvM (=AD with w=1)
-%
-%
-%validation on SM: power approx alpha
+Alternatively, the reference distribution can be replaced by a uniform distribution. This also simplifies the formulas of most test statistics. Additionally, this variant has the advantage of enabling the analyst to identify whether the \ac{SM}-only distribution agrees with our assumptions. However, as we will see in \fref{chap:sensitivity_studies}, the comparison to a uniform distribution can only be done with a higher minimum yield threshold of e.g. $\Nmc \geq \num{1.0}$, which reduces the number of event classes with $\ptilde \approx 1$ and therefore brings each distribution closer to a uniform distribution.

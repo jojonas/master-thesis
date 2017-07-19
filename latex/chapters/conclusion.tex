@@ -3,10 +3,25 @@
 % !TeX root = ../document.tex
 
 \chapter{Conclusion}
+In this thesis, several new features of the \ac{MUSiC} analysis have been introduced and evaluated with regard to the discovery potential towards new physics. 
 
-automation
-bJets
-LUT
-coverage
-evaluation of lognormal
-phat
+The first new contribution within the existing analysis was to include \Pqb-tagged jets as dedicated physics objects, which has not been attempted since the increase of energy to $\sqrt{s} = \SI{13}{\TeV}$ in 2015. Although the increase in sensitivity could not be explicitly shown, this feature should be reevaluated in further studies and is completely implemented.
+
+On the technical side of the analysis, the growing complexity of the tool chain, from classification to statistical inference, has motivated employing further automation. Additionally, a \acl{LUT} has been implemented and evaluated in order to optimize the performance of the automated search for deviations.
+
+Taking up discussions that have been published in a thesis eight years ago\cite{Schmitz:ModelUnspecificSearch}, the potential of a log-normal prior within the local test statistic has been discussed. For this purpose, a study of the coverage behavior of both the normal- and log-normal prior has been performed, indicating that the log-normal case features superior coverage properties. However, several difficulties regarding pseudo-experiments with a log-normal prior arise. Possible mitigations have been discussed, and it was decided to maintain using the normal prior with additional constraints on the search space.
+
+Another new feature within the analysis is the computation of a global $p$-value. This allows to quantify deviations within the distribution of \ptilde-values, instead of judging deviations by eye. The feature enables future analysts to observe whether a certain change of a parameter value or the implementation of a new feature increases the sensitivity towards certain benchmark models.
+
+Finally, the sensitivity of the analysis towards four models of new physics has been assessed. These benchmark models have been chosen to cover a wide range of possible signatures of new physics. By combining simulated events of these models with \acl{SM} processes, generating pseudo-experiments and analyzing the resulting distributions with the automated search, the impact of each model on the statistical inference has been evaluated. 
+In two instances, the \PWprime and the Seesaw Type-III model, the sensitivity did not suffice to discover the presence of the simulated events. In these cases, a comparison to the dedicated analyses was drawn, yielding several suggestions for features that may increase the sensitivity.
+The other two models, semiclassical and quantum black holes, could successfully discovered. The highest discoverable object masses are in agreement with mass limits from corresponding dedicated analyses.
+
+In the future, we would like to encourage analysts who pursue a model independent analysis approach to regularly reevaluate the sensitivity of their analysis to a wide range of new physics simulations. Furthermore, we would suggest to refine the idea of a global $p$-value and a measure of sensitivity, as informed decisions will help the analysis to remain lean and efficient for discovering new physics.
+
+%automation
+%bJets
+%LUT
+%coverage
+%evaluation of lognormal
+%phat
