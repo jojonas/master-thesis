@@ -6,13 +6,13 @@
 \section{Monte-Carlo Simulations}
 The \ac{MUSiC} analysis aims to search for deviations in a large number of final states and a wide kinematic phase space. Deviations are expected in any area under investigation and therefore there is no signal-free region that could be used for validation or fine tuning. Thus, we avoid data-driven methods as much as possible and rely on theoretical predictions in form of \acl{MC} simulations.
 
-The \ac{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps: First, the distribution of proton momentum between partons is simulated. This is done by drawing pseudo-random numbers according to probability distributions related to the empirically measured \emph{parton density functions}.
-Afterwards, the hard scattering process is simulated. Similarly as with the momentum distribution, different scenarios are are possible, each with a probability corresponding to the predicted scattering probability. In the second step, parton showering and hadronization is applied: Since the required higher order terms of \ac{QCD} cannot be computed exactly, several parametrized models are used to simulate the formation of hadrons from quarks and gluons. In the last step, the detector response is simulated, also using parametrized interactions of the final state particles with detector components.
+The \acl{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps\cite{Webber:PartonshowerMonte}: First, the distribution of proton momentum between partons is simulated. This is done sampling momenta from the empirically determined \emph{parton density functions}.
+Afterwards, the hard scattering process is simulated. Similarly as with the momentum distribution, different scenarios are possible, each with a probability corresponding to the predicted scattering probability. In the next step, parton showering and hadronization is applied: Since the required higher order terms of \ac{QCD} cannot be computed exactly, several parametrized models are used to simulate the formation of hadrons from quarks and gluons. In the last step, the detector response is simulated, also using parametrized interactions of the final state particles with detector components.
 
 In practice, events of different physics processes are simulated in separate sets, so-called \emph{samples}. 
 Additionally, some samples only contain events within a certain \pT or mass range. This is done in order to provide a low statistical uncertainty in the tails of steeply falling distributions.
 
-In order to have consistent and validated samples for all \ac{CMS} analyses, the \ac{MC} samples are generated centrally by \ac{CMS} on the \ac{WLCG}.
+In order to have consistent and validated samples for all \ac{CMS} analyses, the \ac{MC} samples are generated centrally by \ac{CMS} on the \ac{WLCG}\cite{TWiki:GeneratorValidation}.
 
 In addition to weight assigned by generators, each event is assigned a further weight during the analysis. It is computed from the expected cross section, an expected higher order correction factor ($k$-factor) and the luminosity. 
 Additionally, events are reweighted to compensate for difference pileup simulation between expectation and data. 

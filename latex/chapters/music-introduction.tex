@@ -15,7 +15,7 @@ One of the goals of the model unspecific search is to gain knowledge from these 
 The approach of a model unspecific search is not a new concept: In 1998, a note about an unspecific search has been written at the L3 experiment (\ac{LEP})\cite{Hebbeker:GlobalComparisonL3}, and in 2004, a similar approach has been applied to data of the D0-experiment at the Tevatron proton-antiproton collider at Fermilab\cite{Biallass:ModelIndependentSearch}.
 
 At \ac{CMS}, the analysis has been developed and regularly applied to observed data since 2009\cite{Schmitz:ModelUnspecificSearch,Hof:ImplementationModelIndependent,Dietz-Laursonn:ModelUnspecificSearch,Olschewski:StudyAlternativeStatistical,Brodski:ModelUnspecificSearch,Pieta:MUSiCModelUnspecific,Papacz:ModelUnspecificSearch,Albert:ExtensionModelUnspecific,Roemer:ModelUnspecificSearch,CMS:CMS-PAS-EXO-14-016,Knutzen:softwarereinterpretationmodel,Durchardt:MUSiCModelUnspecific}. 
-This thesis bases on the most recent implementation of the \ac{MUSiC} analysis, which has recently been applied to analyze the dataset of the 2015 \ac{LHC} run\cite{Roemer:ModelUnspecificSearch} (\SI{2.3}{\per\femto\barn}).
+This thesis bases on the most recent implementation of the \ac{MUSiC} analysis, which has recently been applied to analyze the dataset of the 2015 \ac{LHC} run\cite{Roemer:ModelUnspecificSearch} containing events with a integrated luminosity of \SI{2.3}{\per\femto\barn}.
 
 A similar approach is also being pursued by the \ac{ATLAS} collaboration, who published several analyses using a model unspecific search at the \ac{LHC} at $\sqrt{s} = \SI{7}{\TeV}$\cite{ATLAS:ATLAS-CONF-2012-107}, \SI{8}{\TeV}\cite{ATLAS:ATLAS-CONF-2014-006} and \SI{13}{\TeV}\cite{ATLAS:ATLAS-CONF-2017-001}.
 
@@ -27,11 +27,11 @@ The analysis starts out with reconstructed events of observed as well as \ac{MC}
 As first step, requirements on events and physics objects are applied, discarding unwanted events and extracting objects for the \ac{MUSiC} analysis (sections \ref{sec:event_selection} and \ref{sec:reconstruction}).
 
 Afterwards, each event is sorted into so-called \emph{event classes}, sets of events that share the same final state (\fref{sec:event_classes}).
-For each event class, a set of kinematic variables of each event are calculated and \emph{kinematic distributions} are aggregated (\fref{sec:kinematic_distributions}).
+For each event class, a set of kinematic variables of each event is calculated and \emph{kinematic distributions} are aggregated (\fref{sec:kinematic_distributions}).
 
-Subsequently, an automated search algorithms finds the largest deviation between data and simulation within each kinematic distribution of each event class (\fref{sec:deviations_search}). Afterwards, the significance of each deviation is corrected for the look-elsewhere-effect using pseudo-experiments from Standard-Model-only simulations (\fref{sec:global_significance}). 
+Subsequently, an automated search algorithm finds the largest deviation between data and simulation within each kinematic distribution of each event class (\fref{sec:deviations_search}). Afterwards, the significance of each deviation is corrected for the look-elsewhere-effect using pseudo-experiments from \ac{SM}-only simulations (\fref{sec:global_significance}). 
 
-Finally, the observed deviations are aggregated and the distribution of deviations is compared to the expected distribution given the \ac{SM} only hypothesis as a measure for the global agreement between simulation and data (\fref{sec:ptilde_distribution}).
+Finally, the observed deviations are aggregated and the distribution of deviations is compared to the expected distribution given the \ac{SM}-only hypothesis as a measure for the global agreement between simulation and data (\fref{sec:ptilde_distribution}).
 
 \section{Transverse Momentum and Energy}
 \label{sec:transverse_quantities}
@@ -43,14 +43,15 @@ In order to achieve this goal, one must know all four components of the momentum
 
 In other experiments like \ac{LEP}, one could use conservation of momentum and the known momentum of colliding particles to reconstruct the neutrino four-momentum and the momentum transfer. At the \ac{LHC} this is also impossible: The total proton momentum is distributed unevenly between the constituent quarks and gluons and thus the momentum involved in a collision is only known up to statistical probability.
 
-The mitigation pursued at \ac{CMS} is to only regard kinematics in the transverse plane, orthogonally to the beam pipe. Projection of the kinematic (three-)momentum onto the transverse plane gives the transverse momentum \pT.
+The mitigation pursued at \ac{CMS} is to only regard kinematics in the transverse plane, orthogonally to the beam pipe. Projection of the kinematic (three-)momentum onto the transverse plane gives the transverse momentum \pTvec.
 
 There are other properties of the transverse momentum that make it an interesting quantity: It can be straightforwardly measured from the tracks since the magnetic field lines are approximately parallel to the beam direction and the Lorentz force only acts in the transverse plane. Additionally, the transverse momentum is not only invariant to the actual distribution of momenta within the proton, but also to Lorentz boosts along the $z$-axis. 
 
 Assuming $p_x$, $p_y$, $E$ and $m$ can be observed directly (e.g. via track curvature) or indirectly (e.g. via particle identification), we can define the transverse momentum and transverse energy as follows:
 \begin{align*}
-\vec{p}_T &\defeq \left( p_x, p_y, 0 \right)^T  \\
-\vec{E}_T &\defeq E \frac{\vec{p}_T}{\abs{\vec{p}}} = \frac{\vec{p}_T}{\sqrt{1-\left(m/E\right)^2}}
+\pTvec &\defeq \left( p_x, p_y, 0 \right)^T  \\
+\pT &\defeq \abs{\pTvec} \\
+\vec{E}_\mathrm{T} &\defeq E \frac{\pTvec}{\abs{\vec{p}}} = \frac{\pTvec}{\sqrt{1-\left(m/E\right)^2}}
 \end{align*}
 
 Note that in the approximation of massless ($m \approx 0$) particles: $\vec{p}_T = \vec{E}_T$. % $ = \vec{M}_T$.
@@ -65,11 +66,11 @@ Since this thesis aims to be a general evaluation of the \ac{MUSiC} approach, we
 
 \subsection{Triggers}
 \newcommand{\trigger}[1]{\texttt{\detokenize{#1}}}
-In \fref{sec:triggering} the triggering system has been introduced, dedicated hard- and software that decides whether observed events are recorded to disk. In the vocabulary of an analyst, the term "trigger" does not only refer to the required hardware, but also to the set of rules that are applied. In practice, triggering hardware is configured to run multiple sets of rules in a so-called \emph{trigger menu}, as to maximize the usage of readout bandwidth without overloading the available resources.
+In \fref{sec:triggering} the triggering system has been introduced, a dedicated system that decides whether observed events are recorded to disk. In the vocabulary of an analyst, the term "trigger" does not only refer to the system itself, but also to the set of rules that are applied. In practice, triggering hardware is configured to run multiple sets of rules in a so-called \emph{trigger menu}, in order to maximize the usage of readout bandwidth without overloading the available resources.
 The triggering decision is also simulated on \ac{MC} generated events: Using the same information available to the triggering system and a trigger emulator, each event is assigned tags about which decision lead to it being stored. 
 
 Because multiple trigger configurations are running at the same time, the same event might end up in two separate trigger streams. Such duplicate events are removed in the analysis.
-An additional problem arises in the first few \si{\GeV} beyond the \pT threshold: In this so-called \emph{turn-on} region, disagreement between observed data and simulation has been found which is accounted to insufficiencies in the simulation. Because of this, an additional minimum \pT threshold close above the trigger threshold is applied.
+An additional problem arises within the first few \si{\GeV} beyond the \pT threshold: In this so-called \emph{turn-on} region, disagreement between observed data and simulation has been found which is accounted to insufficiencies in the simulation. Because of this, an additional minimum \pT threshold close above the trigger threshold is applied.
 
 \Fref{tab:triggers} provides a reference of triggers used in the analysis. In comparison to the 2015 analysis, the \pT threshold of the single electron trigger has been raised from \SI{105}{\GeV} to \SI{115}{\GeV}. This choice ensures consistency between the 2015 and 2016 analysis for the study of the discovery potential.
 
@@ -109,7 +110,7 @@ Now that a set of events to analyze has been established, we will focus on recon
 In practice, the reconstruction is performed centrally by \ac{CMS} working groups. For each particle, several reconstructed candidates are stored, from which the analyst can select. 
 Besides selecting only the particles relevant for the analysis, one often chooses a \emph{working point} for particle identification criteria. The possible options are "tight", "medium" and "loose". Tight criteria are more strict, limiting the rate of misclassified particles at the cost of discarding some legitimate particles. On the other hand, loose criteria allow for more events, reducing the statistical uncertainty, with a higher probability of misclassification. As the name indicates, "medium" aims to provide a compromise between the two extremes.
 
-For certain final states, it has been found that the probability of events being misclassified differs between \ac{MC} simulation and observation. However, the scaling factor to correct this effect has not been determined in all final states regarded by \ac{MUSiC}. Thus, to evade deviations that are caused by different misclassification rates, our particle selection generally requires tight identification criteria.
+For certain final states, it has been found that the probability of events being misclassified differs between \ac{MC} simulation and observation. However, the scaling factor to correct this effect has not been determined in all final states regarded by \ac{MUSiC}. Thus, to evade deviations that are caused by different misclassification rates, our particle selection generally requires tight identification criteria, except for light jets, which are selected with loose criteria to ensure a complete event description.
 
 The following paragraphs aim to give a short overview over the reconstruction methods and object selection criteria used in the analysis. 
 
@@ -142,8 +143,9 @@ After the jet energy correction, the jets used within the \ac{MUSiC} analysis ar
 % min pT: \SI{50}{\GeV}.
 
 \subsection{Muons}
-Muons are reconstructed from tracks in the muon system and the inner tracker.
-The identification is performed using a combined method, depending on the energy of the muon candidate. For low energetic candidates ($\pT < \SI{200}{\GeV}$ from tracker measurement), the \ac{PF} object is used and the cut-based muon identification with a tight working point is applied. High energetic muons ($\pT > \SI{200}{\GeV}$) are selected differently, without relying on the \ac{PF} candidate\cite{TWiki:MuonIdentification}.
+Muons are reconstructed from tracks in the inner tracker and in the muon system. For low energetic muons ($\pT < \SI{200}{\GeV}$), the momentum resolution of the inner tracker is superior to the muon chambers. Therefore, the momentum information is extracted from the tracker measurement, while the muon chambers are only used for selecting the tracks used. At high momenta ($\pT \geq \SI{200}{\GeV}$), the resolution can be increased by adding curvature measurement from the muon chambers and is therefore reconstructed using a combined methods.
+
+The algorithms used for identification also depend on the muon momentum. Low energetic muons are identified using a series of cut-based criteria with a tight working point. High energetic muons are identified by a dedicated high-\pT algorithm which attempts to combine information from multiple muon chambers to achieve the best resolution\cite{TWiki:MuonIdentification}.
 
 Both identification criteria require the muon to be fully contained in the detectable range ($\abs{\eta} < \num{2.4}$). The second main goal of the identification is to ensure that the muon candidate originates from the hard interaction. Secondary muons from jets or from pile-up collisions are vetoed based on displacements from the primary vertex, isolation criteria and a \pT threshold.
 
@@ -169,10 +171,10 @@ Missing transverse energy, denoted by \MET, is a physics object characterizing m
 \begin{equation}
     \METvec \defeq - \sum_i \vec{E}_{T,i}
 \end{equation}
-Causes for missing transverse energy generally fall into one of two categories: Incorrect measurements, such as noisy, dead or asymmetric modules, and non-detectable particles. \ac{SM} neutrinos, for example, only interact very weakly and are therefore invisible for the detector. If one or more neutrinos are produced during the interaction, we can only observe their combined four momentum in terms of missing transverse energy. The same applies to hypothetical new physics particles which do not interact with the detector, making \MET an interesting physics object to work with.
+Causes for missing transverse energy generally fall into one of two categories: Incorrect measurements, such as noisy, dead or asymmetric modules, and non-detectable particles. Neutrinos, for example, only interact very weakly and are therefore invisible for the detector. If one or more neutrinos are produced during the interaction, we can only observe their combined four momentum in terms of missing transverse energy. The same applies to hypothetical new physics particles which do not interact with the detector, making \MET an interesting physics object to work with.
 
 All corrections that change the \pT value of \ac{PF} candidates (e.g. jet energy corrections) are passed onto the \MET calculation to preserve a consistent event description. 
-Using similar arguments as for the other particles, only \MET with $\pT > \SI{100}{\GeV}$ is identified as object within the analysis.
+Using similar arguments as for the other particles, only \MET with $\pT \geq \SI{100}{\GeV}$ is identified as object within the analysis.
 
 \subsection{Possible Extensions}
 The existing analysis can be extended to identify more particle types by their decay products, called \emph{tagging}. Possible tagging choices are \Pqb-tagging, \Ptau-tagging or \PZ-tagging.
@@ -181,8 +183,7 @@ This thesis will investigate the increase of sensitivity using \Pqb-tagging, as 
 \subsection{b-Tagging}
 \label{sec:b_tagging}
 
-The goal of \Pqb-tagging is to distinguish jets from \Pqb-quarks ("\Pqb-flavored jets") from those originating from light quarks. One way of achieving this goal is to exploit the long lifetime of \PB-mesons. These mesons are formed during the hadronization of \Pqb-quarks and posses a comparably long lifetime of $\tau \approx \SI{1.5e-12}{\second}$\cite{ParticleDataGroup:ReviewParticlePhysics}. This allows \PB-mesons to travel up to a few centimeters before decaying.
-
+The goal of \Pqb-tagging is to distinguish jets from \Pqb-quarks ("\Pqb-flavored jets") from those originating from light quarks. One way of achieving this goal is to exploit the long lifetime of \PB-mesons. These mesons are formed during the hadronization of \Pqb-quarks and possess a comparably long lifetime of $\tau \approx \SI{1.5e-12}{\second}$\cite{ParticleDataGroup:ReviewParticlePhysics}. This allows \PB-mesons to travel up to a few centimeters before decaying.
 With \ac{CMS}' tracking resolution of up to \SI{20}{\micro\meter} in the transverse and \SI{30}{\micro\meter} in the longitudinal direction\cite{CMS:CMS-PAS-BTV-15-001}, displacement of such magnitude can be resolved efficiently and is therefore an appropriate discriminator.
 
 To introduce \Pqb-tagging in the \ac{MUSiC} analysis, the \acfi{CSVv2} algorithm\cite{CMSCollaboration:Identificationbquark} is used in addition to the jet requirements described in \fref{sec:jets}. The algorithm combines information of displaced tracks with information about displaced vertices in a multivariate analysis. The discriminator output is then compared to a threshold defined by the working point.
@@ -213,7 +214,7 @@ For each event, the \ac{MUSiC} classification calculates three scalar variables 
 As discussed in \fref{sec:transverse_quantities}, the sum of transverse momenta is the most directly observable variable and is invariant to Lorentz-boosts in the $z$ direction.
 In the analysis it is denoted by \sumpT and calculated from the scalar sum of the magnitudes of the transverse momenta of all particles under consideration:
 \begin{equation}
-    \sumpT \defeq \sum_i \abs{\vec{p}_{T,i}} 
+    \sumpT \defeq \sum_i \abs{\vec{p}_{\mathrm{T}, i}} 
 \end{equation}
 
 The invariant mass is, as mentioned before, very sensitive to resonances in the t-channel. If the event class definition contains missing transverse energy passing the selection criteria, the invariant mass will not be computed, instead the transverse mass is used. The variables are denoted with \Minv and \MT respectively and defined as:
@@ -232,7 +233,7 @@ From each of the kinematic variables, \emph{kinematic distributions}, histograms
 
 \section{Systematic Uncertainties}
 When comparing observed data to simulation, \emph{systematic uncertainties} have to be considered. For various reasons, one will never be able to exactly predict how many events will pass the analysis. Possible causes include inaccuracies in the theoretical prediction, uncertainty on how a particle affects the detector and statistical uncertainty from performing a counting experiment on independent events. 
-Therefore, we are only able to estimate the observable event yield up to a certain interval. In this analysis, we assume that most of the uncertainties that arise can be modeled with a normal distribution and thus denote them with a mean value and a \SI{68}{\percent} confidence interval within $\pm 1 \sigma$ around the mean.
+Therefore, we are only able to estimate the observable event yield up to a certain interval. In this analysis, we assume that most of the uncertainties that arise can be modeled with a normal distribution and thus denote them with a mean value and a \SI{68}{\percent} confidence interval within $\pm 1 \sigma$ around the mean. The uncertainties are propagated onto the event yield of each kinematic bin and used in the subsequent automated search as well as the generation of pseudo-experiments.
 
 There are multiple quantities involved in the calculation of the predicted number of events $N$. Here, we will categorize these effects into three groups:
 \begin{equation}
@@ -261,7 +262,7 @@ In addition to uncertainties on the measured momenta, we also consider uncertain
 
 To reproduce the identification probability of data in simulation, the expected yield is multiplied by so-called scale factors. The uncertainties of these scale factors are propagated by shifting the scale factors and observing the effects on the event yield.
 
-The treatment of incorrectly identified objects is more difficult: For each identified particle, there is a nonzero chance that it may not actually correspond to the reconstructed particle type. To account for differences of this behavior between observation and prediction, we study incorrectly classified objects in the simulation. If an event contains one or more incorrectly classified objects, an uncertainty of \num{1} event is assigned to the corresponding bin (for electrons, muons and photons). 
+The treatment of incorrectly identified objects is more difficult: For each identified particle, there is a nonzero chance that it may not actually correspond to the reconstructed particle type. To account for differences of this behavior between observation and prediction, we study incorrectly classified objects in the simulation. If an event contains one or more incorrectly classified objects, an uncertainty of \num{1} event is assigned to the corresponding bin (for electrons, muons and photons)\cite{Roemer:ModelUnspecificSearch}. 
 For \Pqb-tagged jets, the mismatch of the misclassification rate between data and prediction has been studied in 2016 data and found to be up to \SI{30}{\percent}\cite[Fig. 73]{CMS:CMS-AN-2017-018}, so \num{0.3} events of uncertainty are assigned for each misclassified event. 
 
 The actual misclassification rates depend on the final state but are in the order of \SI{1}{\percent} for most event classes.
@@ -321,7 +322,7 @@ The following rules are tested, if any of them matches, the region is vetoed, no
     \item Region has large total statistical uncertainty: $\frac{\sigma_\text{stat}}{\Nmc} > \SI{60}{\percent}$. %($\approx \SIrange{5}{10}{\percent}$).
 \end{itemize}
 
-Negative total \ac{MC} yield can arise from few events with negative weights. In order to account for possible double counting between leading order matrix element calculations and parton showering, which is for some samples performed by a different application, \ac{MC} generators may assign negative weights to a small number of events.
+Negative total \ac{MC} yield can arise from few events with negative weights. In order to account for possible double counting between leading order matrix element calculations and parton showering, which is for some samples performed by a different application, \ac{MC} generators may assign negative weights to a small number of events\cite{Frixione:MatchingNLOQCD}.
 Therefore, especially in phase space areas with few simulated events, situations can occur where only negative event weights contribute to a region. 
 In these regions the original assumption, having enough events for a regression to the mean, is not fulfilled, thus the \ac{SM} is not correctly represented and the regions must be vetoed.
 
@@ -359,7 +360,7 @@ In reality, \Ntrue can never been known with perfect precision. Instead, our kno
 \end{equation}
 Here, one can imagine that $x$ takes the role of all possible \Ntrue values and $\rho$ assigns different weights to contributions from equations \ref{eq:p_value_excess} and \ref{eq:p_value_deficit}.
 
-In the case of \ac{MUSiC}, we apply the smearing procedure after deciding whether a region contains an excess or a deficit, which allows us to move the piecewise definition out of the integral\todo{warum?}:
+In the case of \ac{MUSiC}, we apply the smearing procedure after deciding whether a region contains an excess or a deficit, which allows us to move the piecewise definition out of the integral:
 \begin{equation}
     p(\Ndata | \Nmc, \sigmamc) = \begin{cases} \displaystyle
         \int_{-\infty}^\infty \rho(x | \Nmc, \sigmamc) \mathmakebox[30pt][c]{\displaystyle \sum_{n = 0}^{\Ndata}} \frac{x^n}{n!} e^{-x} \dd x & \Ndata < \Nmc \\
@@ -475,7 +476,7 @@ These almost empty event classes cause problems during the pseudo-experiment pro
 \label{sec:ptilde_distribution}
 Similarly to the look-elsewhere effect within a single distribution, the probability of finding a significant deviation in any distribution increases as we search within multiple event classes.
 
-Since \ptilde fulfills the definition of a $p$-value, the probability of observing an event class with a \ptilde-value of $P$ in the absence of new physics is $P$, thus \ptilde-values should be uniformly distributed. Note, that this also implies that, in the absence of correlations, among \nclasses event classes we expect our most significant class to have a \ptilde-value of $\frac{1}{\nclasses+1}$ (see \fref{app:minimal_pvalues}), e.g. $\ptilde = \num{0.002}, Z = \num{2.9}\sigma$ with \num{500} event classes.
+Since \ptilde fulfills the definition of a $p$-value, the probability of observing an event class with a \ptilde-value of $P$ in the absence of new physics is $P$, thus \ptilde-values should be uniformly distributed. Note, that this also implies that, in the absence of correlations, among \nclasses event classes we expect our most significant class to have a \ptilde-value of $\frac{1}{\nclasses+1}$ (see \fref{app:minimal_pvalues}), e.g. $\ptilde = \num{0.002}, Z = \num{2.9}$ with \num{500} event classes.
 
 This presumption is subsequently used to set \ptilde values into context. For this purpose, we can reuse \TSpseudomin values of all pseudo-experiments: In the correction step, we calculated one \TSpseudomin value for each pseudo-experiment round in each event class. Now, for each event class, each pseudo-experiment result can be corrected using all other $\nrounds - 1$ pseudo-experiments from the same event class. This procedure is applied to all \nclasses event classes, yielding $\nclasses \cdot \nrounds$ \ptilde values. Then, a histogram of all \ptilde values belonging to one pseudo-round are aggregated (\nclasses values). All \nrounds histograms are combined to calculate the mean, median, \SI{68}{\percent} and \SI{95}{\percent} intervals on each bin content of the \ptilde distribution. Similarly, the distribution of \ptilde-values of all event classes from observed data is calculated. Up to this thesis, both distributions are only qualitatively compared (by eye). In \fref{sec:global_pvalue}, a quantitative solution to this approach will be discussed.
 
@@ -563,14 +564,14 @@ In both cases the relative differences show a repetitive pattern mostly below \S
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.49\textwidth]{lut/lut0a}
-    \includegraphics[width=0.49\textwidth]{lut/lut0b}
-    \includegraphics[width=0.49\textwidth]{lut/lut1a}
-    \includegraphics[width=0.49\textwidth]{lut/lut1b}
-    \includegraphics[width=0.49\textwidth]{lut/lut2a}
-    \includegraphics[width=0.49\textwidth]{lut/lut2b}
-    \includegraphics[width=0.49\textwidth]{lut/lut3a}  
-    \includegraphics[width=0.49\textwidth]{lut/lut3b}
+    \includegraphics[width=0.4\textwidth]{lut/lut0a}
+    \includegraphics[width=0.4\textwidth]{lut/lut0b}
+    \includegraphics[width=0.4\textwidth]{lut/lut1a}
+    \includegraphics[width=0.4\textwidth]{lut/lut1b}
+    \includegraphics[width=0.4\textwidth]{lut/lut2a}
+    \includegraphics[width=0.4\textwidth]{lut/lut2b}
+    \includegraphics[width=0.4\textwidth]{lut/lut3a}  
+    \includegraphics[width=0.4\textwidth]{lut/lut3b}
     \caption{Relative differences between the complete calculation of \TS and results from the \ac{LUT}, varying \Nmc while keeping \Ndata and the relative uncertainty fixed. The relative difference between the algorithms is below \SI{1}{\percent} (dashed line) in almost all regions.}
     \label{fig:lut_reldiff_mc}
 \end{figure}

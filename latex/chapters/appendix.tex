@@ -125,14 +125,12 @@ The result is known as \emph{log-normal distribution} and is the probability den
 
 By performing two substitutions, we obtain a parametrization with a more meaningful interpretation:
 \begin{equation}
-    \sigma \rightarrow \ln{k} \text{ and } \mu \rightarrow \ln{x_0}
+    \sigma \rightarrow \ln{k} = \ln(1 + \sigma/\mu) \text{ and } \mu \rightarrow \ln{x_0}
     \label{eq:log_normal_substitution}
 \end{equation}
 \begin{equation}
     g_X(x) = \frac{1}{\sqrt{2\pi}\abs{x}\ln{k}} \exp(-\frac{1}{2}\left(\frac{\ln(x/x_0)}{\ln{k}}\right)^2)
 \end{equation}
-
-\todo{explain meaning of parameters}
 
 \newpage
 \section{$Z$-score and $p$-value}
@@ -147,6 +145,17 @@ This yields the conversion formulas:
 \begin{equation}
     p = \frac{1}{2} \left(1 - \text{erf}\left(\frac{Z}{\sqrt{2}}\right) \right) \Leftrightarrow Z = \sqrt{2} \cdot \text{erf}^{-1} \left( 1 - 2 p \right) 
 \end{equation}
+
+A table of values computed according to this formula can be found in \fref{tab:z_score_table}.
+
+\begin{table}
+    \small
+    \def\arraystretch{1}
+    \centering
+    \input{tables/sigma_p_table}
+    \caption{Conversion table for $Z$-score to a one tailed $p$-value.}
+    \label{tab:z_score_table}
+\end{table}
 
 \newpage
 \section{MUSiC Workflow}
@@ -350,7 +359,7 @@ Since $G$ is a cumulative distribution function, we can substitute $G(0) = 0$ an
 \end{equation}
 
 \subsubsection{General Ideas}
-
+\todo{Text ausformulieren.}
 
 \begin{align}
     \Phi(x) &= \frac{1}{2} \left(1+\erf\left(\frac{x}{\sqrt{2}}\right)\right) \\
@@ -403,8 +412,8 @@ Overall, one can conclude that the requirements on the distributions are met if 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{coverage/coverage_excess_normal_schmitz}
-    \includegraphics[width=0.7\textwidth]{schmitz_coverage}
+    \includegraphics[width=0.8\textwidth]{coverage/coverage_excess_normal_schmitz}
+    \includegraphics[width=0.8\textwidth]{schmitz_coverage}
     \caption{Comparison of our results (top) with \cite{Schmitz:ModelUnspecificSearch} (bottom). The test settings as well as plotting options have been chosen to match. From visual inspection one can deduce that the results are very similar, which allows us to directly compare results from our implementation with the earlier thesis.}
     \label{fig:coverage_schmitz}
 \end{figure}
@@ -415,14 +424,14 @@ Overall, one can conclude that the requirements on the distributions are met if 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{coverage/coverage_deficit_normal_lin}
-    \includegraphics[width=0.7\textwidth]{coverage/coverage_excess_normal_lin}
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_deficit_normal_lin}
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_excess_normal_lin}
     \caption{Results of the coverage study of \TS, similar to \fref{fig:coverage_normal}, but evaluated on a non-logarithmic grid.}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{coverage/coverage_deficit_lognormal_lin}
-    \includegraphics[width=0.7\textwidth]{coverage/coverage_excess_lognormal_lin}
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_deficit_lognormal_lin}
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_excess_lognormal_lin}
     \caption{Results of the coverage study of \TSprime, similar to \fref{fig:coverage_lognormal}, but evaluated on a non-logarithmic grid.}
 \end{figure}

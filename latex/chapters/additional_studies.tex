@@ -12,7 +12,7 @@
 In this chapter, we will show that the test statistic \TS introduced in \fref{sec:test_statistic} can be directly interpreted as $p$-value: $p = \TS$. We will refer to the definition and requirements of a $p$-value and show that \TS sufficiently fulfills those requirements.
 Additionally, we will repeat the analysis with \TSprime, using the log-normal prior (as used in previous \acs{MUSiC} theses) instead of the normal term in \TS and compare the results.
 
-A $p$-value is an indicator for the significance of a deviation, where a smaller $p$-value corresponds to a higher significance. The $p$-value of a result is compared to a significance threshold $\alpha$, which is fixed before the statistical analysis. If the observed $p$-value is smaller than $\alpha$, the null hypothesis is rejected. In our case, rejection of the null hypothesis corresponds to falsification of the \acl{SM} and thus the discovery of new physics. 
+A $p$-value is an indicator for the significance of a deviation, where a smaller $p$-value corresponds to a higher significance. The $p$-value of a result is compared to a significance threshold $\alpha$, which is fixed before the statistical analysis. If the observed $p$-value is smaller than $\alpha$, the null hypothesis is rejected\cite{Cowan:StatisticsSearchesLHC}. In our case, rejection of the null hypothesis corresponds to falsification of the \acl{SM} and thus the discovery of new physics. 
 
 Both values are constructed in way that the null hypothesis is (incorrectly) rejected by chance with a probability of $\alpha$:
 \begin{align}
@@ -67,15 +67,17 @@ Since the MUSiC $p$-value is required to cover a large range of possible \Ntrue 
 The computed results for \TS can be found in \fref{fig:coverage_normal}, for \TSprime in \fref{fig:coverage_lognormal}. 
 
 \begin{figure}
-    \includegraphics[width=\textwidth]{coverage/coverage_deficit_normal_log}
-    \includegraphics[width=\textwidth]{coverage/coverage_excess_normal_log}
+    \centering
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_deficit_normal_log}
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_excess_normal_log}
     \caption{Results of the coverage analysis for \TS, using the Gaussian prior. The figure on top shows that coverage for deficits, the bottom figure indicates coverage behavior for excesses. Within the blank areas, the coverage value could not be determined since no significant result could be observed.}
     \label{fig:coverage_normal}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=\textwidth]{coverage/coverage_deficit_lognormal_log}
-    \includegraphics[width=\textwidth]{coverage/coverage_excess_lognormal_log}
+    \centering
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_deficit_lognormal_log}
+    \includegraphics[width=0.9\textwidth]{coverage/coverage_excess_lognormal_log}
     \caption{Results of the coverage analysis for \TSprime, using the log-normal prior. The figure on top shows that coverage for deficits, the bottom figure indicates coverage behavior for excesses.}
     \label{fig:coverage_lognormal}
 \end{figure}
@@ -87,10 +89,9 @@ Further illustrations in non-logarithmic view can be found in \fref{app:coverage
 \subsubsection{Results for \TS}
 For the Gaussian prior in \TS, one can see almost ideal coverage for $\Ntrue > \num{1}$ and $\sigmamc/\Ntrue < \SI{50}{\percent}$. This is compatible with the results from earlier studies\cite{Schmitz:ModelUnspecificSearch}, which have partially been reproduced in \ref{app:coverage_schmitz}.
 
-In both cases (deficits and excesses), the coverage value gets worse at high relative uncertainties. This is due to the truncation of the normal distribution at \num{0}. In the excess case, the conservativeness prevents any significant results to appear during the coverage study, therefore the area stays blank.
+At high uncertainties, the deficit case shows undercoverage (aggressive behavior), while the excess case shows overcoverage. For several regions, the \TS-value is too conservative, leading to the effect that not a single significant round can be obtained during the coverage study. In these regions, the coverage value cannot be computed and therefore the area is displayed blank.
 
-\todo{versuchen zu erklären, warum?}
-
+%Agressiv mit def reluncert->inf weil exp(-lambda) term.
 % excess, uncert -> inf => p->1
 
 % deficit, uncert -> inf => p->0 siehe Script truncated_normal
@@ -121,12 +122,10 @@ In the following, we want to discuss some solutions to this challenge, some of w
 \begin{itemize}
     \item Use Gaussian error propagation anyways: While this solution may approximately hold for two bins with the same number of events and relative uncertainty, it breaks down with more unequal numbers because the combined uncertainty underestimates the probability to obtain a large result. 
     \item Use an approximation: The challenge of approximating a sum of log-normally distributed random variables is of interest for various applications and has therefore been thoroughly researched. The oldest, most popular approach is the Fenton-Wilkinson approximation which is obtained by matching mean and variance of the sum to a log-normal distribution. Unfortunately, this approach breaks down when combining more than two bins \cite{Pirinen:Statisticalpowersum}.
-    Other possible alternatives are the Schwartz-Yeh approximation \cite{Schwartz:DistributionFunctionMoments}, which matches the first two moments of the logarithms with additional weight functions, and a recent procedure by Mehta et.al.\cite{Mehta:ApproximatingSumCorrelated} which uses a Gauss-Hermite approximation and poses the most accurate solution. The downside of the latter approaches is that they are computationally expensive, involving the calculation of integrals.
+    Other possible alternatives are the Schwartz-Yeh approximation \cite{Schwartz:DistributionFunctionMoments}, which matches the first two moments of the logarithms with additional weight functions, and a recent procedure by Mehta et. al.\cite{Mehta:ApproximatingSumCorrelated} which uses a Gauss-Hermite approximation and poses the most accurate solution. The downside of the latter approaches is that they are computationally expensive, involving the calculation of integrals.
     Since a region can consist out of up to $\sim \num{100}$ bins, the number of regions per event class can reach up to $\sim \num{10000}$. Thus using a computationally cheap algorithm is absolutely necessary. Because of the high number of parameters (two for each bin) using a \ac{LUT} is also not feasible.
     \item Combine bins to regions first, generate pseudo-experiments on the complete regions instead of bins: This approach completely ignores the direct correlation between overlapping regions, and therefore does not represent our null-hypothesis.
-    \item Generate pseudo-experiments from a normal distribution, evaluate the \TS-value with the log-normal prior: This approach has been pursued in an earlier signal study\cite{Schmitz:ModelUnspecificSearch}. As this signal study was performed before the start of data taking at \ac{CMS}, uncertainties were underestimated. With larger uncertainties, this procedure is no longer feasible. The problem can be illustrated using an example from the turn-on region of the distribution. The uncertainty in these areas mostly originates from distribution shifts and therefore can be very large. Using a normal prior, the scenario $\Nmc = \num{50} \pm \num{100}, \Ndata = \num{0}$ yields a \TS-value of \num{0.005}, while a log-normal prior would assign \num{0.001}. This tension causes very significant pseudo-experiments in these regions of large uncertainties and large event numbers.
-    \todo{Problem: Argument hinkt, da Unterschied in $Z$-scores nur $\num{0.5}\sigma$.}
-    %\item Schmitz: likelihood (multiplying $p$ of each bin), different observable (product of events?)
+    \item Generate pseudo-experiments from a normal distribution, evaluate the \TS-value with the log-normal prior: This approach has been pursued in an earlier signal study\cite{Schmitz:ModelUnspecificSearch}. As this signal study was performed before the start of data taking at \ac{CMS}, uncertainties were underestimated. With larger uncertainties, this procedure is no longer feasible. The problem can be illustrated using an example from the turn-on region of the distribution. The uncertainty in these areas mostly originates from distribution shifts and therefore can be very large. Using a normal prior, the scenario $\Nmc = \num{1000} \pm \num{2000}, \Ndata = \num{0}$ yields a \TS-value of \num{0.00025}, while a log-normal prior would assign \num{2.5e-8}. This tension of $\num{1.9}\sigma$ causes very significant pseudo-experiments in these regions of large uncertainties and large event numbers.
 \end{itemize}
 
 Although the problem of combining bins is the only problem arising from a log-normal prior, it is so grave that the log-normal prior will not be used for the signal study in this thesis. Instead, an alternative solution to the overcoverage of the normal \TS-value will be presented in the next section.
@@ -184,11 +183,11 @@ Given a single observed \ptilde distribution, one can analogously compute the te
 where $H_0$ indicates the null hypothesis given by the \acl{SM}.
 For a decision whether or not the null hypothesis should be rejected, \phat has to be compared to a significance threshold $\alpha$. $\alpha$ is equivalent to the type-I error rate, the probability of incorrectly rejecting the null hypothesis if it were true\cite{Cowan:StatisticsSearchesLHC}:
 \begin{equation}
-    \Pr(\phat \leq \alpha | H_0) \leq \alpha
+    \Pr(\phat < \alpha | H_0) = \alpha
 \end{equation}
 Equivalently, a critical value \TSphatcrit of the test statistic can be defined, such that 
 \begin{equation}
-    \Pr(\TSphat \geq \TSphatcrit | H_0) \leq \alpha
+    \Pr(\TSphat > \TSphatcrit | H_0) = \alpha
 \end{equation}
 
 Similarly, the type-II error rate can be identified, which denotes the probability of incorrectly accepting $H_0$ if it is false\cite{Cowan:StatisticsSearchesLHC}:

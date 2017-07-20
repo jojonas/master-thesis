@@ -103,7 +103,9 @@
   \Freflstname\fancyrefdefaultspacing#1#3%
 }
 
-
+% datetime formatting
+\def\germandate{\leavevmode\hbox{\twodigits\day.\twodigits\month.\the\year}}
+\def\twodigits#1{\ifnum#1<10 0\fi\the#1}
 
 % drawings
 \RequirePackage{tikz}
@@ -217,9 +219,10 @@
 % typesetting improvements
 % Todo: try kerning=true, tracking=true and see if it makes any difference
 \RequirePackage{microtype}
+\setlength{\emergencystretch}{2em}
 
 % spacing between figures/tables and text
-\setlength{\intextsep}{1\parskip+1\baselineskip}
+%\setlength{\intextsep}{1\parskip+1\baselineskip}
 % table padding
 \def\arraystretch{1.3}
 
@@ -276,8 +279,9 @@
 
 \newcommand{\Minv}{\ensuremath{M_\mathrm{inv}}\xspace}
 \newcommand{\MT}{\ensuremath{M_\mathrm{T}}\xspace}
-\newcommand{\pT}{\ensuremath{\vec{p}_\mathrm{T}}\xspace}
-\newcommand{\sumpT}{\ensuremath{\Sigma p_T}\xspace}
+\newcommand{\pT}{\ensuremath{p_\mathrm{T}}\xspace}
+\newcommand{\pTvec}{\ensuremath{\vec{p}_\mathrm{T}}\xspace}
+\newcommand{\sumpT}{\ensuremath{\Sigma \pT}\xspace}
 \newcommand{\ET}{\ensuremath{E_\mathrm{T}}\xspace}
 \newcommand{\MET}{\ensuremath{E_\mathrm{T}^\mathrm{miss}}\xspace}
 \newcommand{\METvec}{\ensuremath{\vec{E}_\mathrm{T}^\mathrm{miss}}\xspace}
