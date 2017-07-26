@@ -27,6 +27,9 @@ Although it has provided accurate predictions, making it a successful theory, re
 \subsection{Particles and Interactions}
 Elementary particles are described as point-like indivisible structureless objects, much like the atoms were to the ancient Greeks. These objects are characterized by physical observables such as mass, charge and spin.
 
+Elementary particles can be subdivided into several groups, as shown in \fref{fig:particle_groups}. 
+At the first level, one distinguishes between two groups: \emph{fermions} and \emph{bosons}.
+
 \begin{figure}
     \centering
 %    \includegraphics[width=0.5\textwidth]{Elementary_particle_interactions}
@@ -92,15 +95,12 @@ Elementary particles are described as point-like indivisible structureless objec
     \label{fig:particle_groups}
 \end{figure}
 
-Elementary particles can be subdivided into several groups, as shown in \fref{fig:particle_groups}. 
-At the first level, one distinguishes between two groups: \emph{fermions} and \emph{bosons}.
-
 Fermions are elementary particles with a spin of $\nicefrac{1}{2}$. They follow Fermi-Dirac statistics and have to obey Pauli's exclusion principle which states that no more than one particle can occupy a certain state characterized by its quantum numbers.
 The group of fermions can be further divided into \emph{quarks} and \emph{leptons}.
 There are six quarks: up (\Pup), down (\Pdown), charm (\Pcharm), strange (\Pstrange), bottom (\Pbottom) and top (\Ptop). Quarks carry color charge and are the only fermions to take part in the strong interaction.
 The remaining fermions are called leptons. There are three charged leptons: The \emph{electron} (\Pe), the \emph{muon} (\Pmu) and the \emph{tau} (\Ptau). Each of the charged leptons has a massless, electrically neutral \emph{neutrino} (\Pnue, \Pnum, \Pnut), associated with it.
 
-The second group of particles are called bosons. They mediate interactions (also called \emph{forces}) and posses an integer spin. Bosons follow Bose-Einstein statistics and may thus occupy the same quantum state.
+The second group of particles are called bosons. They mediate interactions (also called \emph{forces}) and possess an integer spin. Bosons follow Bose-Einstein statistics and may thus occupy the same quantum state.
 Each kind of boson is responsible for one kind of elementary force: the electrodynamic force is mediated by the \emph{photon} (\Pgamma), the strong force by the \emph{gluon} (\Pg) and the weak force by the \emph{\PZ} and \emph{\PW} bosons.
 In addition, there is the \emph{Higgs boson} (\PH), which uses the Higgs mechanism to give mass to all mentioned massive elementary particles.\footnote{Note that this does not apply to composite particles (like protons) which gain mask mostly through binding energy.}
 
@@ -275,7 +275,7 @@ Confinement is also relevant in the experimental context: Quarks and gluons in t
 \subsubsection{Electroweak Interaction}
 Although theoretical research on the \emph{weak interaction} started in 1933 when Enrico Fermi proposed a contact interaction theory explaining the $\upbeta$-decay\cite{Fermi:Tentativodiuna}, it was only further explored in the second half of the 20th century. 
 
-In 1968, Sheldon Glashow\cite{Glashow:PartialSymmetriesWeak}, Abdus Salam\cite{Salam:WeakElectromagneticInteractions} and Steven Weinberg\cite{Weinberg:modelleptons} independently formulated a theory unifying \ac{QED} with the weak interaction, called \emph{electroweak theory}. They discovered that instead of classifying particles by their type and electrical charge, they could be regarded by quantum numbers called \emph{weak isospin} and \emph{weak hypercharge}. Additionally, the theory introduces four gauge fields, $W^+$, $W^-$, $W^0$ and $B$ which couple to these charges. It then predicts the existence of four bosons: The massive \PWp and \PWm, which directly correspond to the fields $W^+$ and $W^-$ and the massive \PZ and massless photon which arise from mixing of the $W^0$ and $B$ fields. While the photon had been known for a long time, the predicted vector bosons were experimentally confirmed by Carlo Rubia's group at \acs{CERN}\cite{Arnison:ExperimentalObservationIsolated,Arnison:Experimentalobservationlepton} 15 years later.
+In 1968, Sheldon Glashow\cite{Glashow:PartialSymmetriesWeak}, Abdus Salam\cite{Salam:WeakElectromagneticInteractions} and Steven Weinberg\cite{Weinberg:modelleptons} independently formulated a theory unifying \ac{QED} with the weak interaction, called \emph{electroweak theory}. They discovered that instead of classifying particles by their type and electrical charge, they could be regarded by quantum numbers called \emph{weak isospin} and \emph{weak hypercharge}. Additionally, the theory introduces four gauge fields, $W^+$, $W^-$, $W^0$ and $B$ which couple to these charges. It then predicts the existence of four bosons: The charged massive \PWp and \PWm, which directly correspond to the fields $W^+$ and $W^-$ and the massive \PZ and massless photon which arise from mixing of the $W^0$ and $B$ fields. While the photon had been known for a long time, the predicted vector bosons were experimentally confirmed by Carlo Rubia's group at \acs{CERN}\cite{Arnison:ExperimentalObservationIsolated,Arnison:Experimentalobservationlepton} 15 years later.
 The mixing angle used for the \PZ and photon is called \emph{Weinberg angle}, and in turn also relates the coupling strengths of the weak interaction and \ac{QED} with the electroweak couplings $g$ and $g'$\cite{Schleper:TeilchenphysikfuerFortgeschrittene}.
 
 Besides \ac{QED}, the electroweak theory predicts the weak force, which is mediated by the heavy gauge bosons \PWpm and \PZ. The name "weak force" originates from its finite range and coupling strength which is much smaller than $\alpha$ or $\alpha_s$. Although the weak interaction would not be able to exist without electroweak unification, it is sometimes treated as a separate theory, called \acfi{QFD}.
@@ -316,7 +316,7 @@ Besides \ac{QED}, the electroweak theory predicts the weak force, which is media
             \fmfforce{(w,0)}{f2}
             \fmftop{l}
         \end{fmfgraph*} \\
-        \vspace{1cm}
+        \vspace{\intextsep}
         \begin{fmfgraph*}(3,3)
             \fmfleft{f1}
             \fmfright{f2}
@@ -331,10 +331,10 @@ Besides \ac{QED}, the electroweak theory predicts the weak force, which is media
         \begin{fmfgraph*}(3,3)
             \fmfleft{f1,f2}
             \fmfright{f3,f4}
-            \fmf{dashes,label=\PW}{f1,i}
-            \fmf{dashes,label=\PW}{f2,i}
-            \fmf{dashes,label=\PW}{i,f3}          
-            \fmf{dashes,label=\PW}{i,f4}
+            \fmf{dashes,label=\PW,label.side=left}{f1,i}
+            \fmf{dashes,label=\PW,label.side=right}{f2,i}
+            \fmf{dashes,label=\PW,label.side=left}{i,f3}          
+            \fmf{dashes,label=\PW,label.side=right}{i,f4}
             \fmfforce{(0,0)}{f1}
             \fmfforce{(0,h)}{f2}
             \fmfforce{(w,0)}{f3}
@@ -354,7 +354,7 @@ Besides \ac{QED}, the electroweak theory predicts the weak force, which is media
             \fmfforce{(w,h)}{f4}
         \end{fmfgraph*}
     \end{fmffile}
-    \caption{Basic vertices of the weak interaction: In the top row, interaction of a \PW boson with a lepton and neutrino, and with a quark pair is shown. On the right side of the top row, the flavor-conserving interaction of a fermion with a \PZ boson is displayed. The bottom row shows interactions between the bosons. Because the \PW boson is charged, it also interacts with the photon.
+    \caption{Basic vertices of the weak interaction: In the top row, interaction of a \PW boson with a lepton and neutrino and a quark pair is shown. The third diagram in the top row shows the flavor-conserving interaction of a fermion with a \PZ boson. The bottom row shows interactions between the bosons, including the photon.
     Note that, similarly to \fref{fig:qed_vertices}, all diagrams can be read in different directions.}
     \label{fig:qfd_vertices}
 \end{figure}
@@ -365,10 +365,10 @@ The basic interaction vertices of \ac{QFD} are displayed in \fref{fig:qfd_vertic
 The \PZ boson interacts similarly to the photon. In fact, every interaction mediated by a photon can also be mediated by a \PZ boson. Additionally, the \PZ boson couples to the electrically neutral neutrinos.
 
 \subsection{Higgs Mechanism}
-The naive introduction of boson mass terms in a theory breaks its gauge invariance. While this does not pose a problem for \ac{QED} and \ac{QCD}, which are mediated by the massless photon and gluon, \ac{QFD}, with its massive gauge bosons \PW and \PZ, would be able to describe interactions at high energies.
+The naive introduction of boson mass terms in a theory breaks its gauge invariance. While this does not pose a problem for \ac{QED} and \ac{QCD}, which are mediated by the massless photon and gluon, \ac{QFD}, with its massive gauge bosons \PW and \PZ, would not be able to describe interactions at high energies.
 Thus, another mechanism is required to give mass to these particles.
 
-A solution was independently proposed by Peter Higgs\cite{Higgs:BrokenSymmetriesMasses}, François Englert et. al. \cite{Englert:BrokenSymmetryMass} in 1964: A scalar field, the so-called \emph{Higgs field} and an additional potential within the \ac{SM} Lagrangian. The introduced potential is symmetric, but not around its minimum. This has far-reaching consequences: \emph{Spontaneous symmetry breaking} is necessary to transform into a non-symmetric ground state. This induces mass-like terms in the Lagrangian for the gauge bosons, as well as a field associated with a spin-0 particle, the Higgs boson. Furthermore, fermion mass terms can be replaced with interactions with the Higgs field. Therefore, the Higgs boson couples predominantly to heavy particles.
+A solution was independently proposed by Peter Higgs\cite{Higgs:BrokenSymmetriesMasses}, François Englert et. al. \cite{Englert:BrokenSymmetryMass} in 1964: a scalar field, called \emph{Higgs field}, and an additional potential within the \ac{SM} Lagrangian. The introduced potential is symmetric, but not around its minimum. This has far-reaching consequences: \emph{Spontaneous symmetry breaking} is necessary to transform into a non-symmetric ground state. This induces mass-like terms in the Lagrangian for the gauge bosons, as well as a field associated with a spin-0 particle, the Higgs boson. Furthermore, fermion mass terms can be replaced with interactions with the Higgs field. Therefore, the Higgs boson couples predominantly to heavy particles.
 
 In 2012, the experimental signature of a particle compatible with the predicted Higgs boson was discovered at the \ac{LHC}\cite{CMSCollaboration:Observationnewboson,ATLASCollaboration:Observationnewparticle}, leading to a Nobel Prize for Higgs and Englert in 2013\cite{NobelMedia:NobelPrize2013}.
 
@@ -391,6 +391,8 @@ Since the Standard Model does not provide a fitting Dark Matter candidate, this 
 \subsubsection{Neutrino Masses}
 So far, no right-handed neutrinos have been detected. Thus the Standard Model was crafted in a way that neutrinos only occur as left-handed particles.
 Recent observations of neutrino oscillations\cite{KamLAND:ReactorAntineutrinoMeasurement,DoubleChooz:Improvedmeasurementsneutrino,IceCube:Determiningneutrinooscillation,DayaBay:NewMeasurementAntineutrino} indicate that neutrinos are massive. For the theory to remain renormalizable, neutrinos must thus also exist in their right-handed state\cite{Klinkhamer:NeutrinomassStandard}, which demands for an extension or modification of the Standard Model.
+
+\pagebreak
 
 \subsubsection{Theoretical Considerations}
 From a theoretical point of view, the \ac{SM} shows several deficiencies. 
@@ -444,6 +446,21 @@ In this thesis, we will look at two different models of black holes within the \
 \subsubsection{Seesaw Type III Model}
 The so-called Seesaw model aims to explain the low neutrino masses. In this model, the neutrino masses are considered to arise via the mediation of massive fermion partners. Two additional charged partners $\PSigmapm$ are predicted alongside a neutral Majorana particle $\PSigmazero$.
 Within the \ac{LHC}, the particles are produced in pairs as electroweak decay products as shown in \fref{fig:seesaw_production}.
+\pagebreak
+
+Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} particles. The most important decay channels are:
+\begin{multicols}{2}
+    \begin{itemize}[noitemsep]
+        \item $\PSigmapm \to \PWpm \Pnu$
+        \item $\PSigmapm \to \PZ \Plpm$
+        \item $\PSigmapm \to \PH \Plpm$
+        \item $\PSigmazero \to \PWpm \Plmp$
+        \item $\PSigmazero \to \PZ \Pnu$
+        \item $\PSigmazero \to \PH \Pnu$
+    \end{itemize}
+\end{multicols}
+Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states. The highest sensitivity is expected to arise from final states with at least three leptons, as the number of \ac{SM} processes contributing to these final states is very low.
+
 
 \begin{figure}
     \centering
@@ -484,19 +501,6 @@ Within the \ac{LHC}, the particles are produced in pairs as electroweak decay pr
     \label{fig:seesaw_production}
 \end{figure}
 
-Each of the $\PSigma$ particles is assumed to decay into a pair of \ac{SM} particles. The most important decay channels are
-\begin{multicols}{2}
-    \begin{itemize}[noitemsep]
-        \item $\PSigmapm \to \PWpm \Pnu$
-        \item $\PSigmapm \to \PZ \Plpm$
-        \item $\PSigmapm \to \PH \Plpm$
-        \item $\PSigmazero \to \PWpm \Plmp$
-        \item $\PSigmazero \to \PZ \Pnu$
-        \item $\PSigmazero \to \PH \Pnu$
-    \end{itemize}
-\end{multicols}
-Subsequent decays of the gauge bosons as well as the \Ptau lepton allow for a plethora of accessible final states. The highest sensitivity is expected to arise from final states with at least three leptons, as the number of \ac{SM} processes contributing to these final states is very low.
-
 %\cite{Foot:SeesawNeutrinoMasses}
 
 \subsubsection{Sequential Standard Model and \PWprime}
@@ -504,6 +508,25 @@ Heavy gauge bosons are postulated by several extensions of the \ac{SM}, most pro
 In order to provide a consistent simplified benchmark model, the \acfi{SSM}\cite{Altarelli:SearchingNewHeavy} has been constructed, which introduces heavier copies of the \ac{SM} \PW and \PZ bosons, consequently called \PWprime and \PZprime. The heavier copies interact with \ac{SM} particles just like their \ac{SM} counterparts, but because of the much larger mass, decays into the \Pqt and \Pqb-quarks are accessible.
 
 In this thesis, a variant of the \ac{SSM} has been chosen where only the \PWprime boson exists and it may only decay into a \Pqt + \Pqb pair. This corresponds to the scenario used in dedicated analyses performed by the \ac{CMS} and \ac{ATLAS} collaborations\cite{ATLASCollaboration:SearchWtb,CMSCollaboration:SearchesWbosons,CMS:CMS-PAS-B2G-17-010}.
+
+\begin{figure}
+    \centering
+    \begin{fmffile}{wprime_signature}
+        \begin{fmfgraph*}(8,3)
+            \fmfleft{i1,i2}
+            \fmfright{o1,o2}
+            \fmf{fermion,label=\Pqd,label.side=right}{x1,i1}
+            \fmf{fermion,label=\Pqu,label.side=right}{i2,x1}
+            \fmf{dashes_arrow,label=\PWprime}{x1,x2}
+            \fmf{fermion,label=\Pqt,label.side=right}{o1,x2}
+            \fmf{fermion,label=\Pqb,label.side=right}{x2,o2}
+            %\fmflabel{$\lambda_{311}'$}{x1}
+            %\fmflabel{$\lambda_{132}$}{x2}
+        \end{fmfgraph*}
+    \end{fmffile}
+    \caption{Experimental signature of the \PWprime model. The heavy boson is created from the annihilation of a quark pair and subsequently decays into a \Pqt + \Pqb pair.}
+    \label{fig:wprime_signature}
+\end{figure}
 
 
 \section{Experiments}
@@ -515,7 +538,6 @@ Controlling the incoming particles and counting outgoing particles is thus a ver
 
 \section{The Large Hadron Collider}
 The to date largest particle collider experiment is located in a tunnel about \SI{100}{\m} underground between Geneva and the Jura mountains. It is operated by the \acfi{CERN} and is called \acfi{LHC}.
-
 The Large Hadron Collider\cite{Evans:LHCMachine} is a proton-proton collider with a circumference of \SI{26.7}{\km}. It has been built in the early 2000s within the tunnel of the former \acfi{LEP}. The tunnel contains the storage ring as well as accelerator structures and experiments. Within two beam pipes, in an ultra-high vacuum (about \SI{e-11}{\milli\bar}), groups of protons circulate in opposite directions. They are accelerated using radio-frequency cavities and kept on track by \num{1232} superconducting dipole and \num{450} quadrupole magnets.
 
 The protons are then brought to collision at one of the four \emph{interaction points} along the ring. The energy of each accelerated proton before collision is \SI{6.5}{\TeV} in the rest system, resulting in a total center-of-mass energy of $\sqrt{s} = \SI{13}{\TeV}$.
@@ -525,7 +547,7 @@ The other two experiments are aimed at more general measurements. These so-calle
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{lhc}
+    \includegraphics[width=0.9\textwidth]{lhc}
     \caption{Schematic illustration of the \acs{CERN} accelerator complex\cite{Ley:CERNAccelerators,Caron:LHCLayout,DeMelis:CERNacceleratorcomplex}. Protons first pass through several stages of preacceleration within the \ac{LINAC} 2, \ac{PS}, the \ac{PSB} and the \ac{SPS}. Eventually, they are injected into the \ac{LHC} where they circulate in opposite directions. The two beams are further accelerated in radio-frequency cavities and their shape is restored within the cleaning sections of the ring. At each revolution, some of the protons are brought to collision within one of the four experiments \acs{CMS}, \acs{ATLAS}, \acs{LHCb} and \acs{ALICE}. Once they are not needed anymore, the remaining protons can be dumped into massive metal blocks at the dump site.
     %Note that the accelerator sizes and positions are not to scale.
     }
@@ -599,7 +621,7 @@ is below \SI{2}{\percent} in the center of the barrel and \SIrange{2}{5}{\percen
 \subsubsection{Hadron Calorimeter}
 The \acfi{HCAL}\cite{CMS:CMShadroncalorimeter} measures the energy of hadrons produced during the collision. 
 
-It is designed as a sampling calorimeter with alternating layers of brass absorbers and plastic scintillator tiles. Hadrons passing through the calorimeter interact with nuclei of the denser brass absorbers. During collisions, secondary charged (\Pgppm, \Pproton, ...) as well as neutral hadrons (\Pgpz, \Peta, ...) are produced. The charged secondaries cause electromagnetic radiation via ionization while the neutral particles decay into photons, which themselves cause electromagnetic showers (see \fref{sec:ecal}).
+It is designed as a sampling calorimeter with alternating layers of brass absorbers and plastic scintillator tiles. Hadrons passing through the calorimeter interact with nuclei of the denser brass absorbers. During collisions, secondary charged (e.g. \Pgppm,~\Pproton) as well as neutral hadrons (e.g. \Pgpz,~\Peta) are produced. The charged secondaries cause electromagnetic radiation via ionization while the neutral particles decay into photons, which themselves cause electromagnetic showers (see \fref{sec:ecal}).
 
 The charged particles from electromagnetic showers are detected via scintillation. In the plastic scintillators, passage of charged particles induce emission of optical photons. These are guided to photodiodes using wavelength-shifting fibers. The fiber material suppresses Cherenkov light and do not act as scintillators themselves.\cite{ParticleDataGroup:ReviewParticlePhysics}.
 
@@ -626,7 +648,7 @@ From the amount of deposited charge and timing measurements, a spacial resolutio
 
 In the endcap region, the muon system consists of cathode strip chambers instead of drift tubes. \acp{CSC} work similarly to drift tubes, but instead of having a single cathode at the chamber walls, they contain multiple cathode strips, which are aligned orthogonally to the wires and read out separately. \acp{CSC} can operate at high rates of muons and under non-uniform magnetic fields, which makes them suited for use in the endcap region.
 
-In both barrel and endcap, the \acp{DT} and \acp{CSC} are complemented with \acp{RPC}. Similarly to \acp{DT} and \acp{CSC}, \acp{RPC} are gaseous detectors operated in avalanche mode. They posses a low spacial resolution but an excellent timing resolution, which helps to assign tracks to a bunch crossing.
+In both barrel and endcap, the \acp{DT} and \acp{CSC} are complemented with \acp{RPC}. Similarly to \acp{DT} and \acp{CSC}, \acp{RPC} are gaseous detectors operated in avalanche mode. They possess a low spacial resolution but an excellent timing resolution, which helps to assign tracks to a bunch crossing.
 
 The overall muon momentum resolution has been determined from measurements of cosmic muons and is approximately \SI{7}{\percent} for a \pT range of \SIrange{350}{2000}{\GeV}\cite{CMSCollaboration:PerformanceCMSmuon}.
 

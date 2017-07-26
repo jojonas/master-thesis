@@ -19,6 +19,8 @@ This thesis bases on the most recent implementation of the \ac{MUSiC} analysis, 
 
 A similar approach is also being pursued by the \ac{ATLAS} collaboration, who published several analyses using a model unspecific search at the \ac{LHC} at $\sqrt{s} = \SI{7}{\TeV}$\cite{ATLAS:ATLAS-CONF-2012-107}, \SI{8}{\TeV}\cite{ATLAS:ATLAS-CONF-2014-006} and \SI{13}{\TeV}\cite{ATLAS:ATLAS-CONF-2017-001}.
 
+\pagebreak
+
 \section{Procedure}
 In the following sections, the existing analysis will be outlined.
 
@@ -562,6 +564,14 @@ In both cases the relative differences show a repetitive pattern mostly below \S
     \label{fig:lut_reldiff_reluncert}
 \end{figure}
 
+
+\subsubsection{Discussion}
+Within the validated regions, the \ac{LUT} has only shown small deviations from the results of a full computation, orders of magnitude below the previously set threshold of \SI{1}{\percent}. Under these conditions it is therefore believed to provide a suitable alternative to the full computation of \TS values.
+
+Performance measurements (see \fref{app:lut_performance}) indicate that the time spent on calculating \TS values, which was previously the dominating computational expense, has been reduced by a factor of $\approx \num{8}$. However, additional expenses arise, such as transferring the file to worker nodes and subsequently reading the file from the hard drive. The total gain will thus be less.
+
+Overall, the \ac{LUT} contributes great value to the automated search, as a reduction in computing time allows us to increase the number of pseudo-experiments, enhancing the resolution of \ptilde values. In future developments of the analysis, we would suggest further optimization of the \ac{LUT} parameters, as they have only been roughly chosen to match the given requirements.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.4\textwidth]{lut/lut0a}
@@ -575,11 +585,3 @@ In both cases the relative differences show a repetitive pattern mostly below \S
     \caption{Relative differences between the complete calculation of \TS and results from the \ac{LUT}, varying \Nmc while keeping \Ndata and the relative uncertainty fixed. The relative difference between the algorithms is below \SI{1}{\percent} (dashed line) in almost all regions.}
     \label{fig:lut_reldiff_mc}
 \end{figure}
-
-\subsubsection{Discussion}
-Within the validated regions, the \ac{LUT} has only shown small deviations from the results of a full computation, orders of magnitude below the previously set threshold of \SI{1}{\percent}. Under these conditions it is therefore believed to provide a suitable alternative to the full computation of \TS values.
-
-Performance measurements (see \fref{app:lut_performance}) indicate that the time spent on calculating \TS values, which was previously the dominating computational expense, has been reduced by a factor of $\approx \num{8}$. However, additional expenses arise, such as transferring the file to worker nodes and subsequently reading the file from the hard drive. The total gain will thus be less.
-
-Overall, the \ac{LUT} contributes great value to the automated search, as a reduction in computing time allows us to increase the number of pseudo-experiments, enhancing the resolution of \ptilde values. In future developments of the analysis, we would suggest further optimization of the \ac{LUT} parameters, as they have only been roughly chosen to match the given requirements.
-

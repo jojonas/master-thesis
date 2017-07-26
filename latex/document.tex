@@ -12,8 +12,8 @@
 	bibliography=totoc,
 	listof=totoc,
 	titlepage=on,
-	draft
-%	final
+%	draft
+	final
 	]{scrreprt}
 
 \usepackage{lieb}
@@ -72,7 +72,14 @@
 
 \cleardoublepage
 \bibliographystyle{CMS}
-\bibliography{bibliography,images,theses,twiki}
+\renewcommand\thechapter{B}
+\chapter{Bibliography}
+{
+    \renewcommand\refname{}
+    \renewcommand{\section}[4]{}%
+    \renewcommand{\chapter}[4]{}% for other classes
+    \bibliography{bibliography,images,theses,twiki}
+}
 
 \cleardoublepage
 \input{chapters/acronyms}

@@ -2,8 +2,8 @@
 % !TeX encoding = UTF-8
 % !TeX root = ../document.tex
 
-\newcommand{\lumiA}{\SI{2.3}{\per\femto\barn}}
-\newcommand{\lumiB}{\SI{35.9}{\per\femto\barn}}
+\newcommand{\lumiA}{\SI{2.3}{\per\femto\barn}\xspace}
+\newcommand{\lumiB}{\SI{35.9}{\per\femto\barn}\xspace}
 
 \chapter{Discovery Potential}
 \label{chap:sensitivity_studies}
@@ -16,26 +16,28 @@ In the second part, the sensitivity towards the benchmark models introduced earl
 \section{Evaluation of Features}
 The goal of the first part of the chapter is to evaluate various features of the analysis, including some that have been newly introduced with this thesis. The evaluation will be guided by the following set of key questions that arise in this context:
 \begin{itemize}
+    \setlength{\parskip}{0.5em}
+    \setlength{\itemsep}{0ex}
     \item Validation: Using only the \ac{SM} as new physics input, are the \ptilde-distribution and \phat results inconclusive, as expected?
-    \item How does the \ptilde distribution of the \ac{SM}-only scan scale with luminosity?
-    \item How does the minimum-yield-per-event-class threshold (\fref{sec:min_yield}) affect the \ac{SM}-only distribution?
+    \item How does the \ptilde-distribution of the \ac{SM}-only scan scale with luminosity?
+    \item How does the minimum-yield-per-event-class threshold (\fref{sec:min_yield}) affect the \ac{SM}-only distribution of \ptilde-values?
     \item How do the region vetoes (including the overcoverage veto introduced in \fref{sec:overcoverage_veto}) reduce the available search space?
     \item Which test statistic \TSphat shows the best sensitivity?
-    \item Under which conditions can a uniform distribution be used as test statistic reference?
+    \item Can a uniform distribution be used as test statistic reference?
     \item Is \ac{MUSiC} sensitive to new physics that are only visible in one or few final states?
-    \item Is \ac{MUSiC} sensitive to new physics that have a smaller impact on several final states?    
+    \item Is \ac{MUSiC} sensitive to new physics with a small impact on several final states?    
     \item How does an increase in luminosity affect the sensitivity? For which kind of models does the analysis benefit from a higher luminosity?
     %\item How do \Pqb-tagged jets affect the sensitivity?
 \end{itemize}
 
-\subsection{Interpretation of the Result Plots}
+\subsection{Interpretation of the Result Displays}
 \label{sec:how_to_read_plots}
 
 The result figures presented in the following sections contain a large amount of information that might be difficult to interpret for readers not accustomed to \ac{MUSiC}. Therefore, this section aims to quickly introduce the material used to present the results and explain how they can be interpreted. An overview of the information presented is schematically shown in \fref{fig:results_flow}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{ptilde_distrib_and_sign_classes}
+    \includegraphics[width=0.8\textwidth]{ptilde_distrib_and_sign_classes}
     \caption{Flow of information from the sets of \ptilde values to the results presented in this chapter. The schematic shows the vertical aggregation of \ptilde values from $\nrounds = 4$ pseudo-experiments into median \ptilde values as well as the horizontal aggregation of distributions of \ptilde values for each round. Furthermore, the test statistic \TSphat is also computed horizontally and aggregated into a distribution.}
     \label{fig:results_flow}
 \end{figure}
@@ -93,8 +95,12 @@ The qualitative results of this validation run are depicted in \fref{fig:result_
     \label{fig:result_validation_phat}
 \end{figure}
 
+\pagebreak
+
 \subsection{Differences between Luminosity of \lumiA and \lumiB}
 To assess the differences between the luminosities of the data taking periods in 2015 (with a luminosity of \lumiA) and 2016 (\lumiB), we can compare the results from the \ptilde distribution in \fref{fig:result_validation_ptilde} to similarly obtained results in \fref{fig:result_lumi2016_ptilde}. For this distribution, all event yields have been scaled to the new luminosity and the automated search was repeated. Because of the increase in the scaled event yield, more event classes will pass the threshold of $\Nmc \geq \num{0.01}$, therefore more event classes will be searched for deviations in the 2016 dataset. This also shows e.g. in the number of exclusive event classes, which rises from \num{460} to \num{716}. 
+
+The validation procedure presented in the previous chapter was also applied on the dataset with the luminosity of \lumiB, as depicted in red in \fref{fig:result_lumi2016_ptilde}. Again, no deviation between the validation dataset and the \ac{SM}-only pseudo-experiments is visible.
 
 \begin{figure}
     \centering
@@ -103,12 +109,12 @@ To assess the differences between the luminosities of the data taking periods in
     \label{fig:result_lumi2016_ptilde}
 \end{figure}
 
-The validation procedure presented in the previous chapter was also applied on the dataset with the luminosity of \lumiB, as depicted in red in \fref{fig:result_lumi2016_ptilde}. Again, no deviation between the validation dataset and the \ac{SM}-only pseudo-experiments is visible.
+\pagebreak
 
 \subsection{Effect of the Minimum Yield Threshold}
 The minimum yield threshold was introduced in \fref{sec:min_yield} in order to suppress the creation of almost-empty event classes, as the discretization of the \TS- and \ptilde-values would invalidate the interpretation of the \ptilde value as a probability. This effect has been analyzed by performing automated searches and aggregating distributions of \ptilde-values with several different values of the minimum yield threshold. The results are presented in \fref{fig:result_minyield_ptilde} and \fref{tab:result_minyield_table}. 
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/minyieldplots/no_minyield/plotOut/pdf/p-tildeSumPt}
     \includegraphics[width=\textwidth]{results/minyieldplots/minyield01/plotOut/pdf/p-tildeSumPt}
@@ -117,6 +123,8 @@ The minimum yield threshold was introduced in \fref{sec:min_yield} in order to s
 \end{figure}
 
 The first \ptilde distribution has been generated with $\Nmc \geq \num {0}$, only filtering out event classes with negative total event yield. The \ac{SM}-only distribution clearly shows deviations from the uniform distribution, especially in the bins containing less significant event classes. This is not the case in the second figure, showing a distribution generated with $\Nmc \geq \num{0.1}$, the threshold chosen for this thesis.
+
+In addition, one can regard the reduction in the number of event classes between several threshold values, as shown in \fref{tab:result_minyield_table}. Overall, the minimum yield threshold reduces the number of event classes by more than a factor of two for the 2015 dataset. Because the same \ac{MC} simulated events were used for the 2015 and 2016 scenarios, the number of initial event classes remains the same between the studies. The increase in luminosity by a factor of \num{16} however causes more event classes to pass the threshold.
 
 \begin{table}
     \centering
@@ -145,7 +153,7 @@ The first \ptilde distribution has been generated with $\Nmc \geq \num {0}$, onl
     \label{tab:result_minyield_table}
 \end{table}
 
-In addition, one can regard the reduction in the number of event classes between several threshold values, as shown in \fref{tab:result_minyield_table}. Overall, the minimum yield threshold reduces the number of event classes by more than a factor of two for the 2015 dataset. Because the same \ac{MC} simulated events were used for the 2015 and 2016 scenarios, the number of initial event classes remains the same between the studies. The increase in luminosity by a factor of \num{16} however causes more event classes to pass the threshold.
+\pagebreak
 
 \subsection{Impact of Vetoes}
 In \fref{sec:region_veto}, several rules have been introduced that aim to exclude regions from the automated search where the \ac{SM} simulation is incomplete and therefore no inference can be made. The set of rules was expanded in \fref{sec:overcoverage_veto} in order to avoid statistical inference on regions where our test statistic is known to be incorrect because of overcoverage.
@@ -180,8 +188,10 @@ Overall, more than half of the regions (\SI{58.7}{\percent}) are skipped. Howeve
 
 \subsection{Comparison of Test Statistics}
 In this section, the results of using several test statistics on the semiclassical black hole model are explored. The distributions of the four aforementioned test statistics can be found in \fref{fig:results_test_statistics}. The test power towards each model is indicated in the legend and in this case varies between \SI{53}{\percent} and \SI{100}{\percent} for the given test statistics.
+The largest test power is given by the "simple" test statistic. While this may appear surprising at first, considering that the other test statistics are much more sophisticated, there exists a possible explanation: In the past, the \ac{MUSiC} analysis has been developed while assessing the sensitivity by eye from the \ptilde-distribution. The \ptilde-distribution, which is binned in logarithmic bin sizes, strongly favors deviations in bins with $\ptilde \rightarrow 0$. Therefore, the analysis might have been optimized for this area of sensitivity.
+Only now, with the introduction of a quantitative measure for deviations in the bulk of the distribution, we can start to also optimize for sensitivity in this region. Therefore, the test power of these statistical test should be considered alongside the "simple" test during future design decisions of the analysis.
 
-\begin{figure}
+\begin{figure}[p]
     \centering    \includegraphics[height=7cm]{results/phatplots/bJets/BH_DEMO/inclusive/SumPt/ChiSq_referenced_results}
     \includegraphics[height=7cm]{results/phatplots/bJets/BH_DEMO/inclusive/SumPt/KS_referenced_results}
     \includegraphics[height=7cm]{results/phatplots/bJets/BH_DEMO/inclusive/SumPt/AD_referenced_results}
@@ -190,44 +200,41 @@ In this section, the results of using several test statistics on the semiclassic
     \label{fig:results_test_statistics}
 \end{figure}
 
-The largest test power is given by the "simple" test statistic. While this may appear surprising at first, considering that the other test statistics are much more sophisticated, there exists a possible explanation: In the past, the \ac{MUSiC} analysis has been developed while assessing the sensitivity by eye from the \ptilde-distribution. The \ptilde-distribution, which is binned in logarithmic bin sizes, strongly favors deviations in bins with $\ptilde \rightarrow 0$. Therefore, the analysis might have been optimized for this area of sensitivity.
-Only now, with the introduction of a quantitative measure for deviations in the bulk of the distribution, we can start to also optimize for sensitivity in this region. Therefore, the test power of these statistical test should be considered alongside the "simple" test during future design decisions of the analysis.
-
 \subsection{Uniform Reference Distribution for \TSphat}
 So far, all results from the global $p$-tilde value have been obtained by comparing the empirical distribution to a reference distribution given by all \ac{SM}-only values of \ptilde. As mentioned in \fref{sec:global_pvalue}, a uniform distribution can be used as alternative reference. In this section we want to show the challenges that arise when comparing to a uniform distribution with $\Nmc \geq \num{0.1}$ and how the alternative performs if one requires $\Nmc \geq \num{1.0}$.
 
-\begin{figure}
+\Fref{fig:results_phat_uniform_minyield01} shows results of a \ac{SM}-only validation similar to the results obtained earlier (\fref{fig:result_validation_phat}), but using a uniform distribution as reference. However, unlike earlier results, the test power on the validation is not $\approx \SI{5}{\percent}$, as it would be expected, but about \SI{50}{\percent}. Therefore it can be concluded that using the test statistics in combination with the uniform distribution yields invalid results in this case.
+\Fref{fig:results_phat_uniform_minyield1} presents the situation with $\Nmc \geq \num{1.0}$. This time, the validation results (upper two figures) indicate a test power of approximately \SI{5}{\percent}, as desired. Therefore, one can continue to perform inferences from these results. The two figures on the bottom show distributions obtained from pseudo-experiments of the semiclassical black hole model, similar to \fref{fig:results_test_statistics} in the previous section. Although a clear deviation between the \ac{SM}-only distribution and the new physics results is visible, the total test power is about \SI{10}{\percent} in both cases. The reduced sensitivity possibly originates in the reduction of event classes with $\Nmc \geq \num{1.0}$, as discussed earlier.
+
+Overall we can conclude that, although the comparison to the uniform distribution offers an interesting alternative, the sensitivity of this approach is not competitive.
+
+
+\begin{figure}[p]
     \centering
-    \includegraphics[height=7.2cm]{results/phatplots/bJets/VALIDATION/exclusive/SumPt/ChiSq_uniform_results}
-    \includegraphics[height=7.2cm]{results/phatplots/bJets/VALIDATION/exclusive/SumPt/KS_uniform_results}
+    \includegraphics[height=6cm]{results/phatplots/bJets/VALIDATION/exclusive/SumPt/ChiSq_uniform_results}
+    \includegraphics[height=6cm]{results/phatplots/bJets/VALIDATION/exclusive/SumPt/KS_uniform_results}
     %\includegraphics[height=7.2cm]{results/phatplots/bJets/BH_DEMO/exclusive/SumPt/ChiSq_uniform_results}
     %\includegraphics[height=7.2cm]{results/phatplots/bJets/BH_DEMO/exclusive/SumPt/KS_uniform_results}
     \caption{Distributions of \TSphat values, obtained by comparing to a uniform distribution. This case, calculated with $\Nmc \geq \num{0.1}$, shows a failed validation attempt: Instead of \SI{5}{\percent}, the test power is around \SI{50}{\percent}, indicating that the method cannot be used with these parameters.}
     \label{fig:results_phat_uniform_minyield01}
 \end{figure}
 
-\Fref{fig:results_phat_uniform_minyield01} shows results of a \ac{SM}-only validation similar to the results obtained earlier (\fref{fig:result_validation_phat}), but using a uniform distribution as reference. The required minimal yield in each event class is $\Nmc \geq \num{0.1}$. However, unlike earlier results, the test power on the validation is not $\approx \SI{5}{\percent}$, as it would be expected, but about \SI{50}{\percent}. Therefore it can be concluded that using the test statistics in combination with the uniform distribution yields invalid results in this case.
-
-\begin{figure}
+\begin{figure}[p]
     \centering
-    \includegraphics[height=7.2cm]{results/phatplots_uni/bJets/VALIDATION/exclusive/SumPt/ChiSq_uniform_results}
-    \includegraphics[height=7.2cm]{results/phatplots_uni/bJets/VALIDATION/exclusive/SumPt/KS_uniform_results}
-    \includegraphics[height=7.2cm]{results/phatplots_uni/bJets/BH_DEMO/exclusive/SumPt/ChiSq_uniform_results}
-    \includegraphics[height=7.2cm]{results/phatplots_uni/bJets/BH_DEMO/exclusive/SumPt/KS_uniform_results}
+    \includegraphics[height=6cm]{results/phatplots_uni/bJets/VALIDATION/exclusive/SumPt/ChiSq_uniform_results}
+    \includegraphics[height=6cm]{results/phatplots_uni/bJets/VALIDATION/exclusive/SumPt/KS_uniform_results} \\
+    \includegraphics[height=6cm]{results/phatplots_uni/bJets/BH_DEMO/exclusive/SumPt/ChiSq_uniform_results}
+    \includegraphics[height=6cm]{results/phatplots_uni/bJets/BH_DEMO/exclusive/SumPt/KS_uniform_results}
     \caption{Distributions  of \TSphat values, obtained by comparing to a uniform distribution, but with an increased minimal yield requirement of $\Nmc \geq \num{1.0}$. The two upper figures show the same validation as in \fref{fig:results_phat_uniform_minyield01}. The test power is now $1 - \beta \approx \alpha = \SI{5}{\percent}$, as desired.}
     \label{fig:results_phat_uniform_minyield1}
 \end{figure}
 
-\Fref{fig:results_phat_uniform_minyield1} presents the situation with $\Nmc \geq \num{1.0}$. This time, the validation results (upper two figures) indicate a test power of approximately \SI{5}{\percent}, as desired. Therefore, one can continue to perform inferences from these results. The two figures on the bottom show distributions obtained from pseudo-experiments of the semiclassical black hole model, similar to \fref{fig:results_test_statistics} in the previous section. Although a clear deviation between the \ac{SM}-only distribution and the new physics results is visible, the total test power is about \SI{10}{\percent} in both cases. The reduced sensitivity possibly originates in the reduction of event classes with $\Nmc \geq \num{1.0}$, as discussed earlier.
-
-Overall we can conclude that, although the comparison to the uniform distribution offers an interesting alternative, the sensitivity of this approach is not competitive.
 
 \subsection{Sensitivity in Few Final States}
 The \ac{QBH} model introduced in \fref{sec:sm_extensions} serves as benchmark for new physics that appear in few final states. Since the simulated black holes are assumed to decay completely into a \Pe + \Pmu pair, this final state is expected to dominate the list of significant classes.
-
 To illustrate this, we regard the \ac{QBH} dataset with the black hole mass of $M = \SI{4000}{\GeV}$. It is the highest mass point for this model that generates a significant deviation from the \ac{SM}. The results of the analysis are presented as a distribution of \ptilde values and table of most significant classes in \fref{fig:results_few_final_states} and the distribution of \TSphat values in \fref{fig:results_few_final_states_phat}.
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots/signal,QBH_M-4000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
     {
@@ -237,7 +244,7 @@ To illustrate this, we regard the \ac{QBH} dataset with the black hole mass of $
     \label{fig:results_few_final_states}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[p]
     \centering    \includegraphics[height=9.2cm]{results/phatplots/bJets/QBH/inclusive/SumPt/ChiSq_referenced_results}
     \includegraphics[height=9.2cm]{results/phatplots/bJets/QBH/inclusive/SumPt/KS_referenced_results}
     \includegraphics[height=9.2cm]{results/phatplots/bJets/QBH/inclusive/SumPt/AD_referenced_results}
@@ -265,13 +272,15 @@ The third most significant event class is completely insignificant with a $Z$-sc
 The \ptilde distribution indicates a similar result: There is no apparent deviation within the bulk of the distribution, but the overflow bin contains one event class in the median, occasionally also none or two event classes. However, overall the distribution is compatible with the prediction from \ac{SM}-only pseudo-experiments.
 The same applies to the distribution of \TSphat values in \fref{fig:results_few_final_states_phat}. The only test statistic that shows sensitivity to this model is the simple test, with a test power of \SI{86}{\percent} for $M = \SI{2000}{\GeV}$. However, this mass is much lower than the most sensitive mass that could be discovered using the table of most significant classes.
 
+\enlargethispage{1em}
+
 Overall, this study shows that the sensitivity towards a model that appears in one or a few final states is mostly given by the table of median most significant classes. Neither the distribution of \ptilde values nor the distributions of \TSphat values can provide a comparable sensitivity in this case.
 
 \subsection{Sensitivity in Multiple Final States}
 As opposed to the previous section, the goal of this section is to assess sensitivity of the \ac{MUSiC} analysis towards a new physic that appear as insignificant deviations in multiple final states. The benchmark model for this analysis is the semiclassical \acl{BH} model introduced in \fref{sec:sm_extensions}, with a mass of $M_\text{BH} = \SI{8000}{\GeV}$.
 Similarly to the previous section, the results are first presented as distribution of \ptilde values and as a table of most significant classes in \fref{fig:multiple_final_states}.
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots/signal,BlackHole_MBH-8000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
     {
@@ -281,7 +290,7 @@ Similarly to the previous section, the results are first presented as distributi
     \label{fig:multiple_final_states}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[p]
     \centering    \includegraphics[height=8.4cm]{results/phatplots/bJets/BH_LIGHT/inclusive/SumPt/ChiSq_referenced_results}
     \includegraphics[height=8.4cm]{results/phatplots/bJets/BH_LIGHT/inclusive/SumPt/KS_referenced_results}
     \includegraphics[height=8.4cm]{results/phatplots/bJets/BH_LIGHT/inclusive/SumPt/AD_referenced_results}
@@ -301,10 +310,12 @@ Again, a similar result is apparent in the distribution of \TSphat values in \fr
 
 In this study we have shown the complete opposite behavior of the previous study: For new physics appearing in many final states, the table of median most significant classes does not give a conclusive result, however the distribution of \ptilde-values as well as the global $p$-value display enhanced sensitivity.
 
+\pagebreak
+
 \subsection{Dependence on the Luminosity}
 In the previous section, the highest discoverable mass points of the \ac{QBH} and \ac{BH} models have been presented, with respect to a luminosity of \lumiA. In this section, we will revisit the results, this time with the luminosity scenario of 2016 (\lumiB). The corresponding distributions are depicted in \fref{fig:results_lumichange}. 
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots16/signal,QBH_M-4000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
     \includegraphics[width=\textwidth]{results/ptildeplots16/signal,BlackHole_MBH-8000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
@@ -339,7 +350,7 @@ For this purpose, we claim that a model would be discoverable if any of the foll
 The results for the semiclassical black hole theory have already been presented and discussed in the previous sections. At a luminosity of \lumiA, the largest black hole mass that the \ac{MUSiC} analysis is sensitive is about $M_\text{BH} = \SI{8000}{\GeV}$. In this case, the distribution of \ptilde values shows an excess in the overflow bin, although no single event class has a $Z$-score larger than \num{3}.
 
 Increasing the luminosity from \lumiA to \lumiB additionally enables sensitivity up to a black hole mass of $M_\text{BH} = \SI{9000}{\GeV}$, as shown in \fref{fig:result_bh_9000}. However, the decision about sensitivity towards this model is inconclusive as the \ptilde-distribution only shows a moderate deviation. 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots16/signal,BlackHole_MBH-9000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
     {
@@ -356,7 +367,7 @@ Similarly to the semiclassical black hole, the results regarding the \ac{QBH} mo
 
 With an increased luminosity of \lumiB, the analysis becomes sensitive up to a \ac{QBH} mass of  $M = \SI{5000}{\GeV}$ (\fref{fig:result_qbh_5000}), with \eventclass{1\Pe + 1\Pmu + \MET jet incl.} being the most significant event class ($Z > \num{3.7}$).
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots16/signal,QBH_M-5000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
     {
@@ -373,7 +384,7 @@ With an increased luminosity of \lumiB, the analysis becomes sensitive up to a \
 The results for the Seesaw Type-III signal model are presented in \fref{fig:result_seesaw}. Because no sensitivity can be observed in the dataset of \lumiA, we directly present the results corresponding to a luminosity of \lumiB.
 The distribution of \ptilde values shows no significant deviation from the \ac{SM}-only distribution and the median most significant class has a significance of $Z = \num{2.4}$.
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots16/signal,Seesaw_M-380,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
     {
@@ -393,12 +404,12 @@ Overall, the search strategy of the dedicated search is to start with as many ev
 
 The \PWprime model was originally included in this thesis in order to demonstrate the increase of sensitivity due to enabling \Pqb-tagged jets as analysis objects. However, as one can see in \fref{fig:result_wprime}, even with \Pqb-tagged jets and the luminosity of \lumiB, the \ac{MUSiC} analysis is not sensitive to deviations caused by the new physics model: The \ptilde distribution shows no significant deviation between the distribution of \ptilde-values from \ac{SM}-pseudo experiments and pseudo-experiments involving contributions of the \PWprime boson. The median most significant class is insignificant with a $Z$-score of \num{0.3}. 
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{results/ptildeplots16/signal,Wprime_M-2000,bJets,SumPt/SM,bJets,SumPt/jet-inclusive/pdf/p-tildeSumPt}
-    {
-        \input{tables/most_significant16/signal,Wprime_M-2000,bJets,SumPt/jet-inclusive/table}
-    }
+    %{
+    %    \input{tables/most_significant16/signal,Wprime_M-2000,bJets,SumPt/jet-inclusive/table}
+    %}
     \caption{Distribution of \ptilde values and most significant exclusive event classes for the \PWprime model at the mass of $M = \SI{2000}{\GeV}$ and a luminosity of \lumiB.}
     \label{fig:result_wprime}
 \end{figure}
