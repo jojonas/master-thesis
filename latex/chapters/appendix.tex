@@ -322,53 +322,43 @@ The test is performed twice, on \num{10} (\fref{tab:lut_performance_10}) and \nu
 
 
 \newpage
-\section{Adapted Distributions for Coverage Testing}
+\section{Adapted Distributions for Coverage Tests}
 \label{app:coverage_uncertainty}
+
+A probability distribution parameterized by $\mu$ and $\sigma$ will in general not assign the same $p$-value to the value $x$ as the same distribution would do if it were parametrized by $x$ and $\sigma$ for the value $\mu$. This quite obvious fact becomes important during coverage testing: The pseudo-experiments generate a value \Nmc from a distribution usually parametrized by \Ntrue, but then in the following a distribution around \Nmc is used in the evaluation of the significance.
+
+In this section, we want to regard the special cases of a normal probability distribution and a log-normal distribution and derive a formula for adapting the distribution width parameter $\sigma$ such that the $p$-value to include \Ntrue in a (log-)normal distribution parametrized around \Nmc will remain the same as for \Nmc parametrized by \Ntrue. However, some of the ideas mentioned here can be adapted to other distributions too. 
+
+We start by rephrasing the problem as an equation:
+\begin{equation}
+    \Pr(x \leq \Nmc | \Ntrue, \sigma) = \Pr(x \geq \Ntrue | \Nmc, \sigma')
+\end{equation}
+
+This equation can also be graphically illustrated as in \fref{fig:coverage_distributions}. The blue dashed distribution indicates the initial probability distribution which is used to generate the pseudo-experiments. The orange distribution is the resulting distribution used to calculate the $p$-value, which has been modified according to the recipe from this chapter, in order to keep the integrals (circled and cross-hatched areas) equal.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{coverage/coverage_distributions}
-    \caption{Difference in widths of distributions while keeping the probabilities constant.}
+    \includegraphics[width=0.5\textwidth]{coverage/coverage_distributions}
+    \caption{Difference in widths of distributions while keeping the $p$-values constant.}
     \label{fig:coverage_distributions}
 \end{figure}
 
-
-We find that a distribution set up at the new pseudo mean $\mu'$ with the same error parameter $\sigma$ does (in general) \emph{not} contain $\mu$ with the same probability as the original distribution around $\mu$ contained $\mu'$.
-In order to fix that, one has to adapt the width of the distribution, e.g. the error parameter, to yield the same confidence interval.
-
-The adjustment $\sigma \rightarrow \sigma'$ will be derived in the following:
-Starting with the assumption that the probability of obtaining $\mu'$ given $\mu$ should be the same as obtaining $\mu$ given $\mu'$, we will derive an expression for $\sigma'$ such that
+Now, let $g(x | \Ntrue, \sigma)$ be the distribution from which the pseudo-experiments are drawn and $G(x | \Ntrue; \sigma)$ its cumulative distribution function. The left-hand-side now spells out:
 \begin{equation}
-    \Pr(x \leq \mu'; \mu, \sigma) = \Pr(x \geq \mu; \mu', \sigma')
+    \Pr(x \leq \Nmc | \Ntrue, \sigma) = \int_0^{\Nmc} g(x | \Ntrue, \sigma) \dd{x} = G(\Nmc | \Ntrue, \sigma) - G(0 | \Ntrue, \sigma)
 \end{equation}
-This requirement can also be motivated in \fref{fig:coverage_distributions}, where the left-hand-side of the equation corresponds to the area filled with circles and the right-hand-side corresponds to the cross-hatched area under the probability distribution curve.
 
-Let $g(x; \mu, \sigma)$ be the original distribution and $G(x; \mu; \sigma)$ its cumulative distribution function. The left-hand-side now spells out:
+On the right hand side, we have the distribution used for calculating the $p$-value:
 \begin{equation}
-    \Pr(x \leq \mu'; \mu, \sigma) = \int_0^{\mu'} g(x; \mu, \sigma) \dd{x} = G(\mu'; \mu, \sigma) - G(0; \mu, \sigma)
-\end{equation}
-Consequently, the right-hand-side corresponds to:
-\begin{equation}
-    \Pr(x \geq \mu; \mu', \sigma) = \int_\mu^\infty g(x; \mu', \sigma') \dd{x} = G(\infty; \mu', \sigma') - G(\mu; \mu', \sigma')
+    \Pr(x \geq \Ntrue | \Nmc, \sigma) = \int_\Ntrue^\infty g(x | \Nmc, \sigma') \dd{x} = G(\infty | \Nmc, \sigma') - G(\Ntrue | \Nmc, \sigma')
 \end{equation}
 Since $G$ is a cumulative distribution function, we can substitute $G(0) = 0$ and $G(\infty) = 1$ and set both sides equal:
 \begin{equation}
-    G(\mu'; \mu, \sigma) = 1 - G(\mu; \mu', \sigma')
+    G(\Nmc | \Ntrue, \sigma) = 1 - G(\Ntrue | \Nmc, \sigma')
 \end{equation}
+The width adaption can now be specified by solving this equation for $\sigma'(\Ntrue, \Nmc, \sigma)$.
 
-\subsubsection{General Ideas}
-%\todo{Text ausformulieren.}
-
-\begin{align}
-    \Phi(x) &= \frac{1}{2} \left(1+\erf\left(\frac{x}{\sqrt{2}}\right)\right) \\
-    \Phi^{-1}(x) &= \sqrt{2}\,\erf^{-1}(2x - 1) 
-\end{align}
-
-\begin{align}
-    \erf(x) &= \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \dd{t} \\
-    \erf(-x) &= -\erf(x)
-\end{align}
-
+For this purpose, we first derive a general solution for $\Phi(x)$, which is the cumulative distribution function of a standard normal distribution $\mathcal N(\mu=0, \sigma=1)$:
 
 \begin{align}
     \Phi(x) &= 1 - \Phi(x') \\
@@ -380,29 +370,41 @@ Since $G$ is a cumulative distribution function, we can substitute $G(0) = 0$ an
     &= -x
 \end{align}
 
+Here, we have used that $\Phi$ can be expressed in terms of the error function, which in turn can be further expressed by an integral.
+\begin{align}
+    \Phi(x) &= \frac{1}{2} \left(1+\erf\left(\frac{x}{\sqrt{2}}\right)\right) \\
+    \Phi^{-1}(x) &= \sqrt{2}\,\erf^{-1}(2x - 1) \\
+    \erf(x) &= \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \dd{t}
+\end{align}
+
+The error function is odd, i.e. $\erf(-x) = -\erf(x)$.
 
 \subsubsection{Normal Distribution}
-
+A general normal distribution $\mathcal N(\mu, \sigma)$ has the following cumulative distribution function:
 \begin{equation}
-    G(\mu'; \mu, \sigma) = \Phi\left(\frac{\mu' - \mu}{\sigma}\right); \quad
-    G(\mu; \mu', \sigma') = \Phi\left(\frac{\mu - \mu'}{\sigma'}\right)
+    G(\mu' | \mu, \sigma) = \Phi\left(\frac{\mu' - \mu}{\sigma}\right); \quad
+    G(\mu | \mu', \sigma') = \Phi\left(\frac{\mu - \Nmc}{\sigma'}\right)
 \end{equation}
 
+We can now use the expression for $\Phi$ derived earlier to solve our initial equation:
 \begin{align}
-    \Phi\left(\frac{\mu' - \mu}{\sigma}\right) &= 1 - \Phi\left(\frac{\mu - \mu'}{\sigma'}\right) \\
-    \Rightarrow \frac{\mu' - \mu}{\sigma} &= - \frac{\mu - \mu'}{\sigma'} \\
+    \Phi\left(\frac{\Nmc - \Ntrue}{\sigma}\right) &= 1 - \Phi\left(\frac{\Ntrue - \Nmc}{\sigma'}\right) \\
+    \Rightarrow \frac{\Nmc - \Ntrue}{\sigma} &= - \frac{\Ntrue - \Nmc}{\sigma'} \\
     \Rightarrow \sigma' &= \sigma
 \end{align} 
 
-\subsubsection{Log-Normal Distribution}
+The final result is that the width parameter does not have to be adapted for a normal distribution, which was expected (as it is symmetrical). 
 
+\subsubsection{Log-Normal Distribution}
 The argumentation for the log-normal distribution is similar. The cumulative distribution of the log-normal distribution is 
 \begin{equation}
-    G(x; \mu, \sigma) = \Phi\left(\frac{\ln x - \mu}{\sigma}\right)
+    G(x | \Ntrue, \sigma) = \Phi\left(\frac{\ln x - \Ntrue}{\sigma}\right)
 \end{equation}
+
 Following the same argumentation, one obtains that again $\sigma$ must be conserved. However, in contrast to the case of the normal distribution, $\sigma$ now only depends on the \emph{relative} uncertainty (see \fref{eq:log_normal_substitution}).
 
-Overall, one can conclude that the requirements on the distributions are met if the absolute error (in case of the normal distribution) or the relative error (in case of the log-normal distribution) are conserved.
+\subsubsection{Conclusion}
+Overall, one can conclude that the distributions used for pseudo-experiment generation and evaluation of the $p$-value are not necessarily the same. In order to keep the probabilities to obtain \Ntrue from \Nmc after drawing \Nmc from \Ntrue the same, in case of the log-normal distribution, the absolute error has to be recomputed with the newly drawn \Nmc, such that the relative error remains the same. The normal property does not need such adaptation as it has the decent property of being symmetrical.
 
 \newpage
 \section{Comparison of Coverage Results with Thesis by Stefan Schmitz}

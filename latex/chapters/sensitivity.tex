@@ -18,13 +18,13 @@ The goal of the first part of the chapter is to evaluate various features of the
 \begin{itemize}
     \setlength{\parskip}{0.5em}
     \setlength{\itemsep}{0ex}
-    \item Validation: Using only the \ac{SM} as new physics input, are the \ptilde-distribution and \phat results inconclusive, as expected?
-    \item How does the \ptilde-distribution of the \ac{SM}-only scan scale with luminosity?
+    \item Validation: Using only the \ac{SM} as new physics input, do the \ptilde-distribution and \phat results agree with the \ac{SM}-only search?
+    \item How does the \ptilde-distribution of the \ac{SM}-only search scale with luminosity?
     \item How does the minimum-yield-per-event-class threshold (\fref{sec:min_yield}) affect the \ac{SM}-only distribution of \ptilde-values?
     \item How do the region vetoes (including the overcoverage veto introduced in \fref{sec:overcoverage_veto}) reduce the available search space?
     \item Which test statistic \TSphat shows the best sensitivity?
     \item Can a uniform distribution be used as test statistic reference?
-    \item Is \ac{MUSiC} sensitive to new physics that are only visible in one or few final states?
+    \item Is \ac{MUSiC} sensitive to new physics that is only visible in one or few final states?
     \item Is \ac{MUSiC} sensitive to new physics with a small impact on several final states?    
     \item How does an increase in luminosity affect the sensitivity? For which kind of models does the analysis benefit from a higher luminosity?
     %\item How do \Pqb-tagged jets affect the sensitivity?
@@ -126,6 +126,8 @@ The first \ptilde distribution has been generated with $\Nmc \geq \num {0}$, onl
 
 In addition, one can regard the reduction in the number of event classes between several threshold values, as shown in \fref{tab:result_minyield_table}. Overall, the minimum yield threshold reduces the number of event classes by more than a factor of two for the 2015 dataset. Because the same \ac{MC} simulated events were used for the 2015 and 2016 scenarios, the number of initial event classes remains the same between the studies. The increase in luminosity by a factor of \num{16} however causes more event classes to pass the threshold.
 
+For this thesis, a threshold of $\Nmc \geq \num{0.1}$ was chosen, as it brings the \ptilde-distribution of the \ac{SM}-only pseudo-experiments and the uniform distribution into agreement. A larger value would be impractical as the analyst manually has to review classes that do not pass the threshold but contain observed data.
+
 \begin{table}
     \centering
     Event classes created with a luminosity of \lumiA:
@@ -153,31 +155,29 @@ In addition, one can regard the reduction in the number of event classes between
     \label{tab:result_minyield_table}
 \end{table}
 
-\pagebreak
-
 \subsection{Impact of Vetoes}
 In \fref{sec:region_veto}, several rules have been introduced that aim to exclude regions from the automated search where the \ac{SM} simulation is incomplete and therefore no inference can be made. The set of rules was expanded in \fref{sec:overcoverage_veto} in order to avoid statistical inference on regions where our test statistic is known to be incorrect because of overcoverage.
 
 In this section, we would like to assess the impact of the region vetoes on the number of regions that are searched for deviations. 
-The numbers in \fref{tab:result_veto} have been obtained by recording the reason for each veto during an automated search on the \sumpT distribution of \ac{SM}-only pseudo-experiments. Because the vetoes are evaluated in a given order, aborting after the first matching rule, the numbers on the latter vetoes are only an approximation and a lower bound. The total number of vetoes, however, can be accurately determined using this feature.
+The numbers in \fref{tab:result_veto} have been obtained by recording the reason for each veto during an automated search of the \sumpT distribution of \ac{SM}-only pseudo-experiments of all event classes. Because the vetoes are evaluated in a given order, aborting after the first matching rule, the numbers on the latter vetoes are only an approximation and a lower bound. The total number of vetoes, however, can be accurately determined using this feature.
 
 \begin{table}
     \centering
-    \begin{tabular}{l r r}
+    \begin{tabular}{l r}
         \toprule
-        {veto reason} & {vetoed regions} & {percentage of $x$-axis}\\
+        {veto reason} & {vetoed regions} \\
         \midrule
-        empty bin added & \SI{38.8}{\percent} & \SI{35.6}{\percent} \\
-        \textbf{overcoverage threshold (\fref{sec:overcoverage_veto})} & \SI{4.9}{\percent} & \SI{5.6}{\percent} \\
-        negative total yield & \SI{1.0}{\percent} & \SI{0.5}{\percent} \\
-        large negative contribution of any process & \SI{2.5}{\percent} & \SI{2.0}{\percent} \\
-        negative/low leading contribution & \SI{5.3}{\percent} & \SI{4.4}{\percent} \\
-        large statistical uncertainty & \SI{6.2}{\percent} & \SI{4.3}{\percent} \\
+        empty bin added & \SI{38.8}{\percent} \\
+        \textbf{overcoverage threshold (\fref{sec:overcoverage_veto})} & \SI{4.9}{\percent} \\
+        negative total yield & \SI{1.0}{\percent} \\
+        large negative contribution of any process & \SI{2.5}{\percent} \\
+        negative/low leading contribution & \SI{5.3}{\percent} \\
+        large statistical uncertainty & \SI{6.2}{\percent} \\
         \midrule
-        total vetoed & \SI{58.7}{\percent} & \SI{52.4}{\percent} \\
+        total vetoed & \SI{58.7}{\percent} \\
         \bottomrule
     \end{tabular}
-    \caption{Impact of region vetoes. The vetoes are applied in the order listed here. The first veto, "empty bin added", which is not explained in \fref{sec:region_veto}, originates from an optimization where the test statistic \TS is not recomputed after an empty bin has been added to the region. The third column gives the percentage of the $x$-axis that is affected by each veto. As the kinematic distributions are binned with a variable bin width, this number varies slightly from the values in the second column.}
+    \caption{Impact of region vetoes. The vetoes are applied in the order listed here. The first veto, "empty bin added", which is not explained in \fref{sec:region_veto}, originates from an optimization where the test statistic \TS is not recomputed after an empty bin has been added to the region.}
     \label{tab:result_veto}
 \end{table}
 
@@ -423,7 +423,7 @@ The search strategy consists of reconstructing the complete four momentum of the
 \acl{SM} contributions are further suppressed by requiring the top quark to have $\pT > \SI{650}{\GeV}$ and both jets to have a combined momentum of $\pT > \SI{700}{\GeV}$. This increases the signal to background ratio, and therefore the sensitivity.
 
 \subsection{Comparison to Limits of Dedicated Analyses}
-Several groups at \ac{CMS} have optimized and applied dedicated analyses for the new physics models considered in this thesis. In those instances where these analyses do not find a significant deviation of the observed data from the \ac{SM} expectation, so-called \emph{limits} are calculated.
+Several groups at \ac{CMS} have optimized and applied dedicated analyses for the new physics models considered in this thesis. In those instances where these analyses do not find a significant deviation of the observed data from the \ac{SM} expectation, \emph{limits} are calculated.
 
 The term "limit" is commonly used to describe two distinct quantities: In the first meaning, the term refers to a \emph{cross section limit}. Roughly speaking, the cross section limit denotes the maximal cross section that a new physics process could exhibit while being in agreement with the observed data. The numerical value is usually stated to the \SI{95}{\percent} confidence level, meaning that the new physics model is incorrectly rejected in only \SI{5}{\percent} of the cases. Note that this is not directly comparable to the discovery threshold $\alpha$ used in this thesis, where we would incorrectly reject the \acl{SM} with a probability of \SI{5}{\percent}.
 

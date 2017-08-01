@@ -6,7 +6,7 @@
 \section{Monte-Carlo Simulations}
 The \ac{MUSiC} analysis aims to search for deviations in a large number of final states and a wide kinematic phase space. Deviations are expected in any area under investigation and therefore there is no signal-free region that could be used for validation or fine tuning. Thus, we avoid data-driven methods as much as possible and rely on theoretical predictions in form of \acl{MC} simulations.
 
-The \acl{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps\cite{Webber:PartonshowerMonte}: First, the distribution of proton momentum between partons is simulated. This is done sampling momenta from the empirically determined \emph{parton density functions}.
+The \acl{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps\cite{Webber:PartonshowerMonte}: First, the sharing of proton momentum between partons is simulated. This is done sampling momenta from the empirically determined \emph{parton density functions}.
 Afterwards, the hard scattering process is simulated. Similarly as with the momentum distribution, different scenarios are possible, each with a probability corresponding to the predicted scattering probability. In the next step, parton showering and hadronization is applied: Since the required higher order terms of \ac{QCD} cannot be computed exactly, several parametrized models are used to simulate the formation of hadrons from quarks and gluons. In the last step, the detector response is simulated, also using parametrized interactions of the final state particles with detector components.
 
 In practice, events of different physics processes are simulated in separate sets, so-called \emph{samples}. 
