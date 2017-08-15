@@ -8,10 +8,10 @@
 \section{Coverage Analysis}
 \label{sec:coverage}
 
-In this chapter, we will investigate to what extend the test statistic \TS introduced in \fref{sec:test_statistic} can be directly interpreted as $p$-value, as intended: $p = \TS$. For that purpose, we will refer to the definition and requirements of a $p$-value and test whether \TS fulfills those requirements.
-Additionally, we will repeat the analysis with \TSprime, using the log-normal prior (as suggested in \fref{sec:test_statistic}) instead of the Gaussian term in \TS and compare the results.
+This chapter investigates to what extend the test statistic \TS introduced in \fref{sec:test_statistic} can be directly interpreted as $p$-value, as intended: $p = \TS$. For that purpose, it will refer to the definition and requirements of a $p$-value and test whether \TS fulfills those requirements.
+Additionally, the analysis will be repeated with \TSprime, using the log-normal prior (as suggested in \fref{sec:test_statistic}) instead of the Gaussian term in \TS and compare the results.
 
-A $p$-value is an indicator for the significance of a deviation, where a smaller $p$-value corresponds to a higher significance. The $p$-value of a result is compared to a significance threshold $\alpha$, which is fixed before the statistical analysis. If the observed $p$-value is smaller than $\alpha$, the null hypothesis is rejected\cite{Cowan:StatisticsSearchesLHC}. In our case, rejection of the null hypothesis corresponds to falsification of the \acl{SM} and thus the discovery of new physics. 
+A $p$-value is an indicator for the significance of a deviation, where a smaller $p$-value corresponds to a higher significance. The $p$-value of a result is compared to a significance threshold $\alpha$, which is fixed before the statistical analysis. If the observed $p$-value is smaller than $\alpha$, the null hypothesis is rejected\cite{Cowan:StatisticsSearchesLHC}. In this case, rejection of the null hypothesis corresponds to falsification of the \acl{SM} and thus the discovery of new physics. 
 
 Both values are constructed in a way that the null hypothesis is (incorrectly) rejected by chance with a probability of $\alpha$:
 \begin{align}
@@ -27,25 +27,25 @@ Usually, the probability of including the true value in a certain interval aroun
     &\Pr(\Nmc - x \cdot \sigma \leq \Ntrue < \Nmc + x \cdot \sigma) \\
     = &\Pr(\Ntrue - x \cdot \sigma \leq \Nmc < \Ntrue + x \cdot \sigma)
 \end{align}
-This property holds for all $x$ if the probability density is a (non-truncated) normal distribution.
+This property holds for all $x$ if the probability density is a (non-truncated) Gaussian distribution.
 Truncation however breaks this property. 
 The effect becomes more visible as the truncated probability increases and therefore should be most dominant in areas of very large uncertainty.
 
 \subsection{Procedure}
-To test \fref{eq:coverage_inequality}, we construct pseudo experiments based on the null hypothesis $H_0$ and calculate the corresponding $p$-value, in this case \TS or \TSprime. After generating and examining sufficiently many pseudo experiments, we can determine the rate of significant findings and compare them to the claimed significance threshold:
+To test \fref{eq:coverage_inequality}, one can construct pseudo-experiments based on the null hypothesis $H_0$ and calculate the corresponding $p$-value, in this case \TS or \TSprime. After generating and examining sufficiently many pseudo experiments, the rate of significant findings can be determined and compared to the claimed significance threshold:
 \begin{equation}
 	p_\text{true} = \frac{\text{number of pseudo-experiments where $p < \alpha$}}{n_\text{toys}} = \Pr(p < \alpha | H_0)
     \label{eq:coverage}
 \end{equation}
 
-The pseudo experiments are based on \acs{MUSiC}'s null hypothesis: 
-We assume that there is a constant probability that events end up in a particular region, and thus a constant true mean value \Ntrue. 
-We also assume that this true mean value is only known up to an expected event yield, \Nmc.
+The pseudo-experiments are based on \acs{MUSiC}'s null hypothesis: 
+It is assumed that there is a constant probability that events end up in a particular region, and thus a constant true mean value \Ntrue. 
+Additionally, it is assumed that this true mean value is only known up to an expected event yield, \Nmc.
 The way that \Nmc is derived from \Ntrue differs between \TS and \TSprime: For \TS, \Nmc is drawn from a normal probability density, \TSprime  will use a log-normal distribution instead.
 
 Additionally, the physics process of performing a counting experiment has to be simulated: Here it is assumed that the event yield is caused by independent statistical processes with a fixed probability, thus the observed event yield follows a Poisson distribution around \Ntrue.
 
-The way that the assumed uncertainty enters the pseudo experiment also differs between \TS and \TSprime: For \TS, the absolute uncertainty is kept constant: $\sigmamc = \sigmatrue$. For \TSprime, we recalculate the uncertainty after drawing \Nmc in order to keep the relative uncertainty constant: $\sigmamc = \frac{\Nmc}{\Ntrue} \sigmatrue$.
+The way that the assumed uncertainty enters the pseudo experiment also differs between \TS and \TSprime: For \TS, the absolute uncertainty is kept constant: $\sigmamc = \sigmatrue$. For \TSprime, the uncertainty is recalculated after drawing \Nmc in order to keep the relative uncertainty constant: $\sigmamc = \frac{\Nmc}{\Ntrue} \sigmatrue$.
 This has been discussed by \cite{Schmitz:ModelUnspecificSearch}, a more rigorous discussion can be found in \fref{app:coverage_uncertainty}.
 
 In the implementation, each pseudo-experiment begins with drawing \Nmc from the probability density around \Ntrue. At the same time, \Ndata is drawn from a (discrete) Poisson distribution with a mean of \Ntrue. From these two values, as well as the uncertainty \sigmamc, \TS (or \TSprime) is calculated.
@@ -111,7 +111,7 @@ For several regions, the \TS-value is too conservative, leading to the effect th
 The log-normal prior shows much better coverage values across the probed range. There are areas of slight overcoverage, but especially in the excess case the overcoverage does not exceed $\num{1} \sigma$.
 
 \subsection{Discussion}
-We have conducted a coverage analysis of the local test statistic \TS with a Gaussian and a log-normal prior. As expected, the Gaussian prior shows deficiencies especially at high values of relative uncertainty. 
+A coverage analysis of the local test statistic \TS with a Gaussian and a log-normal prior has been conducted. As expected, the Gaussian prior shows deficiencies especially at high values of relative uncertainty. 
 One apparent solution would be to correct the \TS-value with a parametrized correction factor to reestablish perfect coverage. In practice, it is not obvious how to parametrize the coverage difference in all three ($\Ndata, \Nmc, \sigmamc$) dimensions. Therefore, this approach is not further pursued in this thesis.
 
 In comparison, the log-normal prior performs well over the entire tested range, with a coverage of $\abs{\Delta Z} \leq 1$. 
@@ -120,10 +120,10 @@ Therefore, if the goal of the local test statistic is to correspond to the defin
 \section{Log-Normal $p$-Value}
 \label{sec:lognormal_pvalue}
 
-As observed in the previous section, using the truncated Gaussian distribution as prior within the $p$-value has limited validity at high relative uncertainties.
-At the same time, we have observed that using a log-normal prior improves test coverage in the problematic regions.
+As observed in the previous section, using the truncated Gaussian distribution as prior in the $p$-value has limited validity at high relative uncertainties.
+At the same time, it has been observed that using a log-normal prior improves test coverage in the problematic regions.
 
-In addition, a log-normal prior is more suited for modeling our uncertainties: Analogously to the normal distribution, which is generated from a sum of independent random variables, the log-normal distribution results from the multiplication of independent random variables (see \fref{app:lognormal_derivation}). The latter corresponds to our situation, as most uncertainties on the event yield originate from shifting the event yield by a multiplicative factor.
+In addition, a log-normal prior is more suited for modeling uncertainties in event numbers: Analogously to the normal distribution, which is generated from a sum of independent random variables, the log-normal distribution results from the multiplication of independent random variables (see \fref{app:lognormal_derivation}). The latter corresponds to the situation of event numbers, as most uncertainties on the event yield originate from shifting the event yield by a multiplicative factor.
 Also note that in the limit of $\Nmc \rightarrow \infty$ and $\sigmamc \rightarrow 0$, the log-normal distribution recovers the shape of a normal distribution, which explains similar coverage properties in that region.
 
 Changing the prior in the test statistic also implies a new null-hypothesis, namely that all uncertainties are distributed in a log-normal fashion. Therefore, the pseudo-experiment generation, which is based on the null-hypothesis, must also be adapted. Instead of choosing a new pseudo-mean value using a sum of uncertainties multiplied by a normally distributed bias (see \fref{eq:pseudo_experiment_mean}), one now has to use a product of relative uncertainties:
@@ -131,16 +131,16 @@ Changing the prior in the test statistic also implies a new null-hypothesis, nam
     \Ntrue' = \Nmc \cdot \prod_i \left(1 + \frac{\sigma_i}{\Nmc}\right)^{x_i}
 \end{equation}
 
-However, this approach also comes with its disadvantages: When combining multiple bins into a region, previously we added individual bin contents. Assuming normally distributed bin contents, this approach is valid because the sum of two normally distributed random variables is also normally distributed. Yet, this principle does not apply to log-normal distributions. The sum of log-normally distributed random variables is not log-normally distributed.
+However, this approach also comes with its disadvantages: When combining multiple bins into a region, usually, individual bin contents are added. Assuming normally distributed bin contents, this approach is valid because the sum of two normally distributed random variables is also normally distributed. Yet, this principle does not apply to log-normal distributions. The sum of log-normally distributed random variables is not log-normally distributed.
 
-In the following, we want to discuss some solutions to this challenge, some of which have been discussed in previous works on the log-normal prior\cite{Schmitz:ModelUnspecificSearch}.
+In the following, some solutions to this challenge are discussed, some of which have also been considered in previous works on the log-normal prior\cite{Schmitz:ModelUnspecificSearch}.
 
 \begin{itemize}
     \item Use Gaussian error propagation in any case: While this solution may approximately hold for two bins with the same number of events and relative uncertainty, it breaks down with more unequal numbers as the combined distribution differs significantly from the distribution obtained by summation of two (or more) random numbers drawn separately.
     \item Use an approximation: The challenge of approximating a sum of log-normally distributed random variables is of interest for various applications and has therefore been thoroughly researched. The oldest, most popular approach is the Fenton-Wilkinson approximation which is obtained by matching mean and variance of the sum to a log-normal distribution. Unfortunately, this approach breaks down when combining more than two bins \cite{Pirinen:Statisticalpowersum}.
     Other possible alternatives are the Schwartz-Yeh approximation \cite{Schwartz:DistributionFunctionMoments}, which matches the first two moments of the logarithms with additional weight functions, and a recent procedure by Mehta et. al.\cite{Mehta:ApproximatingSumCorrelated} which uses a Gauss-Hermite approximation and poses the most accurate solution. The downside of the latter approaches is that they are computationally expensive, involving the calculation of integrals.
     Since a region can consist out of up to $\sim \num{100}$ bins, the number of regions per event class can reach up to $\sim \num{10000}$. Thus using a computationally cheap algorithm is absolutely necessary. Because of the high number of parameters (two for each bin) using a \ac{LUT} is also not feasible.
-    \item Combine bins to regions first, generate pseudo-experiments on the complete regions instead of bins: This approach completely ignores the direct correlation between overlapping regions, and therefore does not represent our null-hypothesis.
+    \item Combine bins to regions first, generate pseudo-experiments on the complete regions instead of bins: This approach completely ignores the direct correlation between overlapping regions, and therefore does not represent the null-hypothesis.
     \item Generate pseudo-experiments from a normal distribution, evaluate the \TS-value with the log-normal prior: This approach has been pursued in an earlier signal study\cite{Schmitz:ModelUnspecificSearch}. As this signal study was performed before the start of data taking at \ac{CMS}, uncertainties were underestimated. With larger uncertainties, this procedure is no longer feasible. The problem can be illustrated using an example from the turn-on region of the distribution. The uncertainty in these areas mostly originates from distribution shifts and therefore can be very large. Using a Gaussian prior, the scenario $\Nmc = \num{1000} \pm \num{2000}, \Ndata = \num{0}$ yields a \TS-value of \num{0.00025}, while a log-normal prior would assign \num{2.5e-8}. This tension of $\num{1.9}\sigma$ causes very significant pseudo-experiments in these regions of large uncertainties and large event numbers.
 \end{itemize}
 
@@ -150,16 +150,16 @@ Although the problem of combining bins is the only problem arising from a log-no
 \label{sec:overcoverage_veto}
 
 In \fref{sec:region_veto}, several rules have been introduced to prevent inference for regions with incomplete simulation.
-In this section, we will add another rule, which however does not intend to limit the search space because of invalid input for the test statistic, but to avoid shortcomings of the Gaussian test statistic itself.
+In this section, add another rule will be added, which however does not intend to limit the search space because of invalid input for the test statistic, but to avoid shortcomings of the Gaussian test statistic itself.
 
-In \fref{sec:coverage}, it was shown that the test statistic \TS with the Gaussian prior has severe overcoverage for regions of high relative systematic uncertainty. We will now introduce a simple rule excluding these problematic regions from our search.
-In the bottom plot of \fref{fig:coverage_lognormal}, we can see that the contour line $\text{coverage} = +2\sigma$ follows a straight path in double logarithmic presentation. This line can be approximately parametrized with 
+In \fref{sec:coverage}, it was shown that the test statistic \TS with the Gaussian prior has severe overcoverage for regions of high relative systematic uncertainty. This section now introduces a simple rule excluding these problematic regions from the search.
+In the bottom plot of \fref{fig:coverage_lognormal}, one can see that the contour line $\text{coverage} = +2\sigma$ follows a straight path in double logarithmic presentation. This line can be approximately parametrized with 
 \begin{equation}
    \frac{\sigmamc}{\Ntrue} =  \num{1.2} \cdot \Ntrue^{-0.2}
 \end{equation}
 Regions with a larger systematic uncertainty (above the line) should be excluded from the search due to insufficient coverage of the test statistic.
 
-As \Nmc is our best estimator for \Ntrue, we will also replace \Ntrue with \Nmc. Additionally, in order not to unnecessarily veto regions with large \Ntrue, and not to diverge at $\Nmc \rightarrow 0$, this value is restricted to the range between \num{0.5} and \num{5.0}:
+As \Nmc is the best estimator for \Ntrue, \Ntrue is replaced with \Nmc. Additionally, in order not to unnecessarily veto regions with large \Ntrue, and not to diverge at $\Nmc \rightarrow 0$, this value is restricted to the range between \num{0.5} and \num{5.0}:
 \begin{equation}
     \frac{\sigmamc}{\Nmc} = \max(\num{0.5}, \min(\num{1.2} \cdot \Nmc^{-0.2}, \num{5.0}))
 \end{equation}
@@ -176,23 +176,23 @@ The excluded area is illustrated in \fref{fig:coverage_veto}.
 \section{A Global $p$-Value}
 \label{sec:global_pvalue}
 
-The \ptilde distribution provides the ability to notice an increase of not very significant deviations in many classes by inspecting the central part of the distribution. However, this manual method is only qualitative. We will now introduce a possible extension to the analysis which provides a quantitative method of combining all \ptilde-values of a search in one kinematic variable for all classes.
+The \ptilde distribution provides the ability to notice an increase of not very significant deviations in many classes by inspecting the central part of the distribution. However, this manual method is only qualitative. I will now introduce a possible extension to the analysis which provides a quantitative method of combining all \ptilde-values of a search in one kinematic variable for all classes.
 
-This allows us not only to draw conclusions about the presence of new physics in our observed data set, but also to quantify \ac{MUSiC}'s sensitivity for simulations of known benchmark models. Furthermore, an automated analysis can be used as a regression test to decide whether future modifications to the analysis improve its sensitivity.
+This allows the analyst not only to draw conclusions about the presence of new physics in the observed data set, but also to quantify \ac{MUSiC}'s sensitivity for simulations of known benchmark models. Furthermore, an automated analysis can be used as a regression test to decide whether future modifications to the analysis improve its sensitivity.
 
-As input, the algorithm takes the look-elsewhere-corrected \ptilde values of all classes. In the case of \ac{MC} simulation, either for \ac{SM} or signal studies, such a set of \ptilde values can be provided for each pseudo experiment round, for observed data we only obtain one list (one value for each class).
+As input, the algorithm takes the look-elsewhere-corrected \ptilde-values of all classes. In the case of \ac{MC} simulation, either for \ac{SM} or signal studies, such a set of \ptilde-values can be provided for each pseudo experiment round, for observed data one only obtains one list (one value for each class).
 
-The algorithm for the \ac{SM} distribution performs as follows: For each pseudo experiment round, the distribution of \ptilde values (of all classes) is compared to a reference distribution using a statistical test. The reference distribution is the distribution of all \ptilde values of \ac{SM}-only pseudo-experiments, of all \nclasses event classes and \nrounds pseudo-experiment rounds, as presented in \fref{fig:phat_reference}. Note that the distribution features a spike at $\ptilde \approx 1$, which originates from the remaining discretization of \ptilde discussed in \fref{sec:min_yield}. 
+The algorithm for the \ac{SM} distribution performs as follows: For each pseudo experiment round, the distribution of \ptilde-values (of all classes) is compared to a reference distribution using a statistical test. The reference distribution is the distribution of all \ptilde-values of \ac{SM}-only pseudo-experiments, of all \nclasses event classes and \nrounds pseudo-experiment rounds, as presented in \fref{fig:phat_reference}. Note that the distribution features a spike at $\ptilde \approx 1$, which originates from the remaining discretization of \ptilde discussed in \fref{sec:min_yield}. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{reference_plot}
-    \caption{Reference distribution $g(\ptilde)$, serving as input to the analysis. In this instance, the \sumpT distribution has been analyzed, shown are all \ptilde values of exclusive event classes.}
+    \caption{Reference distribution $g(\ptilde)$, serving as input to the analysis. In this instance, the \sumpT distribution has been analyzed, shown are all \ptilde-values of exclusive event classes.}
     \label{fig:phat_reference}
 \end{figure}
 
 The statistical test outputs a scalar result \TSphat for each of the \nrounds rounds, where a larger value indicates a larger deviation from the reference distribution. The set of \nrounds test statistic values is stored.
-Given a single observed \ptilde distribution, one can analogously compute the test statistic \TSphatdata. The \phat value is then defined as
+Given a single observed \ptilde distribution, one can analogously compute the test statistic \TSphatdata and a $p$-value expressing to the significance of the observation:
 \begin{equation}
     \phat = \Pr(\TSphat > \TSphatdata | H_0),
 \end{equation}
@@ -210,13 +210,13 @@ Similarly, the type-II error rate can be identified, which denotes the probabili
 \begin{equation}
     \Pr(\phat > \alpha | H_1) = \Pr(\TSphat < \TSphatcrit | H_1) = \beta
 \end{equation}
-The quantity $1 - \beta$ is called \emph{test power}\cite{Cowan:StatisticsSearchesLHC} and in our case indicates the probability of correctly rejecting the \ac{SM} if the dataset under investigation contains new physics. The test power of a test therefore directly describes the sensitivity towards a particular new physics scenario.
+The quantity $1 - \beta$ is called \emph{test power}\cite{Cowan:StatisticsSearchesLHC} and in here indicates the probability of correctly rejecting the \ac{SM} if the dataset under investigation contains new physics. The test power of a test therefore directly describes the sensitivity towards a particular new physics scenario.
 
 The test power can be calculated from simulations of new physics, such as the combined signal and background pseudo-experiments as described in \fref{sec:signal_study}. The test power does not only depend on the chosen test statistic and signal model, but also on $\alpha$. A larger value of $\alpha$ is less restrictive and will correctly accept the alternative hypothesis more often, at the cost of incorrectly rejecting the \ac{SM}.
 
-The choice of $\alpha$ is subjective\cite{Cowan:StatisticalMethodsDiscovery}. Rather than following a strict convention, it is important to state which significance threshold has been used and, if the test statistic indicates that the null hypothesis should be discarded, to act accordingly. In the case of the \ac{MUSiC} analysis, finding a deviation from the \ac{SM} would certainly initiate a dedicated analysis at \ac{CMS}. Therefore, we can afford to set an aggressively high value of $\alpha = \SI{5}{\percent}$\footnote{For comparison, a discovery in particle physics is usually claimed at $\alpha \sim \num{e-7}$\cite{Cowan:StatisticsSearchesLHC}.}, and accepting the fact that in \SI{5}{\percent} of the cases, we would incorrectly reject the \ac{SM} and trigger a dedicated analysis.
+The choice of $\alpha$ is subjective\cite{Cowan:StatisticalMethodsDiscovery}. Rather than following a strict convention, it is important to state which significance threshold has been used and, if the test statistic indicates that the null hypothesis should be discarded, to act accordingly. In the case of the \ac{MUSiC} analysis, finding a deviation from the \ac{SM} would certainly initiate a dedicated analysis at \ac{CMS}. Therefore, in this case, an aggressively high value of $\alpha = \SI{5}{\percent}$\footnote{For comparison, a discovery in particle physics is usually claimed at $\alpha \sim \num{e-7}$\cite{Cowan:StatisticsSearchesLHC}.} can be used, accepting the fact that in \SI{5}{\percent} of the cases \ac{MUSiC} would incorrectly reject the \ac{SM} and initiate a dedicated analysis.
 
-So far, the choice of the test statistic \TSphat has not been specified. In the following, multiple options are discussed. The distribution of \ptilde values under investigation is denoted as $f(\ptilde)$, having $N_f = \nrounds$ values, the reference distribution is $g(\ptilde)$, with $N_g$ values. The cumulative distribution functions are $F(\ptilde)$ and $G(\ptilde)$ respectively. 
+So far, the choice of the test statistic \TSphat has not been specified. In the following, multiple options are discussed. The distribution of \ptilde-values under investigation is denoted as $f(\ptilde)$, having $N_f = \nrounds$ values, the reference distribution is $g(\ptilde)$, with $N_g$ values. The cumulative distribution functions are $F(\ptilde)$ and $G(\ptilde)$ respectively. 
 
 \begin{itemize}
     \item $\chi^2$-Test\cite{Cowan:Statisticaldataanalysis,Flannery:NumericalrecipesFORTRAN}: This test is used to compare two sets of values, binned into distributions. For each bin $i$, the difference between bin contents $g'_i$ for the reference and the sample bin content $f'_i$ is evaluated.
@@ -248,7 +248,7 @@ So far, the choice of the test statistic \TSphat has not been specified. In the 
 %        \TSphat = \frac{1}{12 \nrounds} + \sum_{i=1}^\nrounds \left[\frac{2i-1}{2\nrounds} - F(\ptilde_i)\right]^2
 %    \end{equation}
     
-    \item Anderson-Darling\cite{Stephens:EDFstatisticsgoodness,Darling:kolmogorovsmirnovcramer,Flannery:NumericalrecipesFORTRAN}: This test belongs to the group of quadratic EDF\footnote{EDF = empirical distribution function} statistics. This group consists of test statistics that integrate over the quadratic difference between the reference and sample cumulative functions:
+    \item Anderson-Darling\cite{Stephens:EDFstatisticsgoodness,Darling:kolmogorovsmirnovcramer,Flannery:NumericalrecipesFORTRAN}: This test belongs to the group of quadratic EDF (empirical distribution function) statistics. This group consists of test statistics that integrate over the quadratic difference between the reference and sample cumulative functions:
     \begin{equation}
         \TSphat = \nrounds \int_{-\infty}^{\infty}\left(F(x) - G(x)\right)^2 w(x)\, \dd F(x) 
     \end{equation}
@@ -257,9 +257,11 @@ So far, the choice of the test statistic \TSphat has not been specified. In the 
     
     For this thesis, the discrete two-sample version is used, which is described in \cite{Scholz:KsampleAnderson}.
     
-    \item Simple: \TSphat is the ratio of \ptilde values below a critical value, in this case \num{0.01}.
+    \item Simple: \TSphat is the ratio of \ptilde-values below a critical value, in this case \num{0.01}.
 \end{itemize}
 
 A thorough comparison of the afore-mentioned test statistics can be found in \cite{Stephens:EDFstatisticsgoodness}.
 
-Alternatively, the reference distribution can be replaced by a uniform distribution. This also simplifies the formulas of most test statistics. Additionally, this variant has the advantage of enabling the analyst to identify whether the \ac{SM}-only distribution agrees with our assumptions. However, as we will see in \fref{chap:sensitivity_studies}, the comparison to a uniform distribution can only be done with a higher minimum yield threshold of e.g. $\Nmc \geq \num{1.0}$, which reduces the number of event classes with $\ptilde \approx 1$ and therefore brings each distribution closer to a uniform distribution.
+Alternatively, the reference distribution can be replaced by a uniform distribution. This also simplifies the formulas of most test statistics. Additionally, this variant has the advantage of enabling the analyst to identify whether the \ac{SM}-only distribution agrees with the assumption of being uniformly distributed. However, as will be shown in \fref{chap:sensitivity_studies}, the comparison to a uniform distribution can only be done with a higher minimum yield threshold of e.g. $\Nmc \geq \num{1.0}$, which reduces the number of event classes with $\ptilde \approx 1$ and therefore brings each distribution closer to a uniform distribution.
+
+The \ac{MUSiC} analysis is not the only model-independent search for the \ac{LHC} striving at a global measure for sensitivity: A corresponding analysis performed by the \ac{ATLAS} collaboration\cite{ATLAS:ATLAS-CONF-2017-001} employs a statistical interpretation similar to the newly introduced "simple test". The approach is also to count the number of pseudo-experiments which yield a certain fraction of classes beyond a threshold $p$. However, instead of determining the fraction of classes \TSphatcrit from \ac{SM}-only simulations, \ac{ATLAS} uses $\TSphatcrit \sim \text{one class}$ (alternatively also two or three classes). The analysis then uses the $p$-threshold as a variable. For any given observed dataset, the $p$-threshold is determined at which one (or two or three) event class(es) pass.

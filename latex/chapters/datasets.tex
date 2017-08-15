@@ -4,7 +4,7 @@
 
 \chapter{Datasets}
 \section{Monte-Carlo Simulations}
-The \ac{MUSiC} analysis aims to search for deviations in a large number of final states and a wide kinematic phase space. Deviations are expected in any area under investigation and therefore there is no signal-free region that could be used for validation or fine tuning. Thus, we avoid data-driven methods as much as possible and rely on theoretical predictions in form of \acl{MC} simulations.
+The \ac{MUSiC} analysis aims to search for deviations in a large number of final states and a wide kinematic phase space. Deviations are expected in any area under investigation and therefore there is no signal-free region that could be used for validation or fine tuning. Thus, \ac{MUSiC} avoids data-driven methods as much as possible and rely on theoretical predictions in form of \acl{MC} simulations.
 
 The \acl{MC} simulation is performed on an event-by-event basis. Each event is generated in multiple steps\cite{Webber:PartonshowerMonte}: First, the sharing of proton momentum between partons is simulated. This is done sampling momenta from the empirically determined \emph{parton density functions}.
 Afterwards, the hard scattering process is simulated. Similarly as with the momentum distribution, different scenarios are possible, each with a probability corresponding to the predicted scattering probability. In the next step, parton showering and hadronization is applied: Since the required higher order terms of \ac{QCD} cannot be computed exactly, several parametrized models are used to simulate the formation of hadrons from quarks and gluons. In the last step, the detector response is simulated, also using parametrized interactions of the final state particles with detector components.
@@ -17,7 +17,7 @@ In addition to weight assigned by generators, each event is assigned a further w
 Additionally, events are reweighted to compensate for difference pileup simulation between expectation and data. 
 The expected event yield with certain properties can now be obtained by summing the weights of the desired events.
 
-Within this thesis, various luminosity scenarios are analyzed. We did not generate additional \ac{MC} events for each scenario, instead the events are scaled to the described luminosity with the method mentioned above. This allows for a direct comparison ignoring hardware changes made to the detector between the data taking periods in 2015 and 2016.
+Within this thesis, various luminosity scenarios are analyzed. The \ac{MC} events have not been regenerated for each scenario, instead the events are scaled to the described luminosity with the method mentioned above. This allows for a direct comparison ignoring hardware changes made to the detector between the data taking periods in 2015 and 2016.
 
 
 \subsection{Standard Model}
@@ -44,7 +44,7 @@ The signal study uses the same set of signal samples as the corresponding dedica
 \begin{itemize}
     \item For the \ac{QBH} model, the \acf{ADD} model with $n = 4$ extra dimensions is analyzed. The chosen mass points $M$ are \SI{1}{\TeV}, \SI{2}{\TeV}, \SI{3}{\TeV}, \SI{4}{\TeV} and \SI{5}{\TeV}. The events are simulated by the \genQBH\cite{Gingrich:MonteCarloevent} generator.
     
-    \item In the black hole study, we consider the case of a non-rotating black hole. The fundamental Planck mass is set to $M_\text{D} = \SI{4}{\TeV}$ with $n = 6$ extra dimensions. This choice corresponds to the benchmark result published in \cite{CMS:CMS-PAS-EXO-15-007}. The black hole mass is varied between \SI{6}{\TeV}, \SI{7}{\TeV}, \SI{8}{\TeV}, \SI{9}{\TeV}, \SI{10}{\TeV}. The \ac{MC} generator used for the model is \genBM\cite{Dai:BlackMaxblackhole}.
+    \item In the black hole study, the case of a non-rotating black hole is considered. The fundamental Planck mass is set to $M_{\text{Pl}(4+n)} = \SI{4}{\TeV}$ with $n = 6$ extra dimensions. This choice corresponds to the benchmark result published in \cite{CMS:CMS-PAS-EXO-15-007}. The black hole mass is varied between \SI{6}{\TeV}, \SI{7}{\TeV}, \SI{8}{\TeV}, \SI{9}{\TeV}, \SI{10}{\TeV}. The \ac{MC} generator used for the model is \genBM\cite{Dai:BlackMaxblackhole}.
     
     \item For the Seesaw-TypeIII samples, only the mass points $M_\Sigma = \SI{380}{\GeV}$ and $M_\Sigma = \SI{500}{\GeV}$  are tested. The samples are generated with \genAM\cite{Alwall:automatedcomputationtreea}.
     

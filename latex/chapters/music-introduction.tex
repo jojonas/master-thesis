@@ -7,7 +7,7 @@
 \section{Motivation}
 A collision at a center-of-mass energy of $\sqrt{s} = \SI{13}{\TeV}$ can create a large amount of different particles. Solely by combinatorics, it follows that a lot of different final states are accessible.
 
-Most dedicated searches tend to focus on one or a few final states that represent the signature of the theory under investigation. This leaves many final states not examined, either because they are not covered by any new physics model or because there is no analysis group currently working on a corresponding theory.
+Most dedicated searches tend to focus on one or a few final states that represent the signature of the theory under investigation. This leaves many final states not examined, either because they are not covered by any new physics model or because there is no analysis group currently working on the corresponding theory.
 
 One of the goals of the model unspecific search is to gain knowledge from these additional final states. Furthermore, the model unspecific search aims to obtain a global interpretation of the agreement between simulation and observed data across a broad range of final states.
 
@@ -25,13 +25,12 @@ A similar approach is also being pursued by the \ac{ATLAS} collaboration, which 
 In the following sections, the existing analysis will be outlined.
 
 The analysis starts out with reconstructed events of observed as well as \ac{MC} simulated data which have been centrally preprocessed by the \ac{CMS} collaboration.
-
 As first step, requirements on events and physics objects are applied, discarding unwanted events and extracting particles for the \ac{MUSiC} analysis (sections \ref{sec:event_selection} and \ref{sec:reconstruction}).
 
 Afterwards, each event is sorted into so-called \emph{event classes}, sets of events that share the same final state (\fref{sec:event_classes}).
 For each event class, a set of kinematic variables of each event is calculated and \emph{kinematic distributions} are aggregated (\fref{sec:kinematic_distributions}).
 
-Subsequently, an automated search algorithm finds the largest deviation between data and simulation within each kinematic distribution of each event class (\fref{sec:deviations_search}). Afterwards, the significance of each deviation is corrected for the look-elsewhere-effect using pseudo-experiments from \ac{SM}-only simulations (\fref{sec:global_significance}). 
+Subsequently, an automated search algorithm finds the largest deviation between data and simulation in each kinematic distribution of each event class (\fref{sec:deviations_search}). The significance of each deviation is corrected for the look-elsewhere-effect using pseudo-experiments from \ac{SM}-only simulations (\fref{sec:global_significance}). 
 
 Finally, the observed deviations are aggregated and the distribution of deviations is compared to the expected distribution given the \ac{SM}-only hypothesis as a measure for the global agreement between simulation and data (\fref{sec:ptilde_distribution}).
 
@@ -40,16 +39,16 @@ Finally, the observed deviations are aggregated and the distribution of deviatio
 
 As prerequisite for the following sections it is helpful to introduce the so-called transverse quantities \emph{transverse momentum} and \emph{transverse energy}. This section provides a motivation and definition for both.
 
-Interaction cross sections generally depend on the amount of momentum transferred, which can be measured by calculating the combined invariant mass of the decay products.
+Interaction cross sections generally depend on the amount of momentum transferred, which can be obtained by calculating the combined invariant mass of the decay products.
 In order to achieve this goal, one must know all four components of the momentum of all created particles. If the final state contains neutrinos, which are not detectable by the detector, this is not achievable.
 
 In other experiments like \ac{LEP}, one could use conservation of momentum and the known momentum of colliding particles to reconstruct the momentum transfer for processes involving one neutrino. At the \ac{LHC} this is impossible: The total longitudinal momentum of the proton is distributed unevenly between the constituent quarks and gluons and thus the momentum involved in a collision is only known up to statistical probability.
 
 A mitigation is to ignore the longitudinal component altogether. This approach is pursued by many analyses at \ac{CMS} by only regarding the kinematics in the transverse plane, orthogonally to the beam pipe. The projection of the kinematic \mbox{(three-)momentum} onto the transverse plane gives the transverse momentum \pTvec.
 
-There are other properties of the transverse momentum that make it an interesting quantity: It can be straightforwardly measured from the tracks since the magnetic field lines are approximately parallel to the beam direction and the Lorentz force only acts in the transverse plane. Additionally, the transverse momentum is not only invariant to the actual distribution of momenta within the proton, but also to Lorentz boosts along the $z$-axis. 
+There are other properties of the transverse momentum that make it an interesting quantity: It can be straightforwardly measured from the tracks since the magnetic field lines are approximately parallel to the beam direction and the Lorentz force only acts in the transverse plane. Additionally, the transverse momentum is not only invariant to the actual distribution of momenta in the proton, but also to Lorentz boosts along the $z$-axis. 
 
-Assuming $p_x$, $p_y$, $E$ and $m$ can be observed directly (e.g. via track curvature) or indirectly (e.g. via particle identification), we can define the transverse momentum and transverse energy as follows:
+Assuming $p_x$, $p_y$, $E$ and $m$ can be observed directly (e.g. via track curvature) or indirectly (e.g. via particle identification), one can define the transverse momentum and transverse energy as follows:
 \begin{align*}
 \pTvec &\defeq \left( p_x, p_y, 0 \right)^T  \\
 \pT &\defeq \abs{\pTvec} \\
@@ -59,13 +58,18 @@ E_\mathrm{T} &\defeq \abs{\vec{E}_\mathrm{T}}
 
 Note that in the approximation of massless ($m \approx 0$) particles: $\vec{p}_T = \vec{E}_T$. % $ = \vec{M}_T$.
 
+An additional quantity that is commonly defined in this context is \emph{missing transverse energy}, denoted by \METvec:
+\begin{align*}
+    \METvec &\defeq - \sum_i \vec{E}_{T,i} \\
+    \MET &\defeq \abs{\METvec}
+\end{align*}
+This quantity denotes the imbalance of transverse momentum. If all particles in the final state can be correctly reconstructed, the imbalance is $\MET = 0$. But there are several possible causes for this quantity to become non-zero: Incorrect measurements, such as noisy, dead or asymmetric modules, and non-detectable particles like neutrinos. If one or more neutrinos are produced during the interaction, one can observe only their combined four momentum as \METvec. The same applies to hypothetical new physics particles which do not interact with the detector, making \METvec an interesting quantity to work with.
 
 \section{Event Selection}
 \label{sec:event_selection}
 
 The following section will discuss how events are selected to be used for the \ac{MUSiC} analysis. 
-
-Since this thesis aims to be a general evaluation of the \ac{MUSiC} approach, we will not go deep into detail about the algorithms used, nor the exact parameter values. For the sensitivity studies in \fref{chap:sensitivity_studies}, however, specific values have to be chosen. If not explicitly stated otherwise, values of the 2015 analysis run are used and can be found in \cite{Roemer:ModelUnspecificSearch}.
+Since this thesis aims to be a general evaluation of the \ac{MUSiC} approach, it will not go deeply into detail about the algorithms used, nor the exact parameter values. For the sensitivity studies in \fref{chap:sensitivity_studies}, however, specific values have to be chosen. If not explicitly stated otherwise, values of the 2015 analysis run are used and can be found in \cite{Roemer:ModelUnspecificSearch}.
 
 \subsection{Triggers}
 \newcommand{\trigger}[1]{\texttt{\detokenize{#1}}}
@@ -75,9 +79,8 @@ The triggering decision is also simulated on \ac{MC} generated events: Using the
 Because multiple trigger configurations are running at the same time, the same event might end up in two separate trigger streams. Such duplicate events are removed in the analysis.
 An additional problem arises within the first few \si{\GeV} beyond the \pT threshold: In this so-called \emph{turn-on} region, disagreement between observed data and simulation has been found which is attributed to insufficiencies in the simulation. Because of this, an additional minimum \pT threshold close above the trigger threshold is applied.
 
-\Fref{tab:triggers} provides a reference of triggers used in the analysis. In comparison to the 2015 analysis, the \pT threshold of the single electron trigger has been raised from \SI{105}{\GeV} to \SI{115}{\GeV}. This choice ensures consistency between the 2015 and 2016 analysis for the study of the discovery potential.
-
 \begin{table}
+    \small
     \centering
     \begin{tabular}{l l l}
     \toprule
@@ -90,9 +93,12 @@ An additional problem arises within the first few \si{\GeV} beyond the \pT thres
     \trigger{HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ} & & \\    
     \bottomrule
     \end{tabular}
-    \caption{Triggers used in the \ac{MUSiC} analysis. Listed are the \ac{HLT} names. The second, fourth and fifth triggers require two particles, where the second minimal threshold lies much lower than the first. Additional identification requirements are applied as indicated by the name\cite{Roemer:ModelUnspecificSearch}. Note that the single electron trigger \pT threshold is higher than for the 2015 run.}
+    \caption{Triggers used in the \ac{MUSiC} analysis. Listed are the \ac{HLT} names. The second, fourth and fifth triggers require two particles, where the second minimal threshold lies much lower than the first. Additional identification requirements are applied as indicated by the name\cite{Roemer:ModelUnspecificSearch}. Note that the single electron trigger \pT threshold is higher than the one used in \cite{Roemer:ModelUnspecificSearch} to be comparable to the 2016 scenario.}
     \label{tab:triggers}
 \end{table}
+
+\Fref{tab:triggers} provides a reference of triggers used in the analysis. In comparison to the 2015 analysis, the \pT threshold of the single electron trigger has been raised from \SI{105}{\GeV} to \SI{115}{\GeV}. This choice ensures consistency between the 2015 and 2016 analysis for the study of the discovery potential.
+
 
 
 % CaloIdVT = Calo ID very tight
@@ -103,17 +109,17 @@ An additional problem arises within the first few \si{\GeV} beyond the \pT thres
 
 \subsection{Event Filters}
 Event filters are used to mask off events that contain observations of unwanted detector behavior rather than physics content from a collision.
-Undesirable experimental effects include defective modules, anomalous electronics noise, saturation of subsystems by calibration lasers or particles scattered on residual gas in the beam pipe. They sometimes mimic real particles and events and thus cause the trigger to store the event. In the offline analysis, these events are recognizable by a large momentum imbalance of the reconstructed particles, resulting in large values for \MET. Using a set of rules (so-called \MET-filters) established at \ac{CMS}, these events are excluded from the analysis. The list of applied filters can be found in \cite[appendix B]{Roemer:ModelUnspecificSearch}.
+Undesirable experimental effects include defective modules, anomalous electronics noise, saturation of subsystems by calibration lasers or particles scattered on residual gas in the beam pipe. They sometimes mimic real particles and events and thus cause the trigger to store the event. In the offline analysis, these events are recognizable by a large momentum imbalance of the reconstructed particles, resulting in large values for \MET. Using a set of rules (so-called \MET-filters) established at \ac{CMS}, these events are excluded from the analysis. The list of applied filters can be found in \cite{Roemer:ModelUnspecificSearch}.
 
 \section{Reconstruction and Selection of Objects}
 \label{sec:reconstruction}
 
-Now that a set of events to analyze has been established, we will focus on reconstruction selection of the particles within an event for our analysis. 
+Now that a set of events to analyze has been established, this section will focus on the reconstruction and selection of the particles from an event for the analysis. 
 
 In practice, the reconstruction is performed centrally by \ac{CMS} working groups. For each particle, several reconstructed candidates are stored, from which the analyst can select. 
 Besides selecting only the particles relevant for the analysis, one often chooses a \emph{working point} for particle identification criteria. The possible options are "tight", "medium" and "loose". Tight criteria are more strict, limiting the rate of misclassified particles at the cost of discarding some legitimate particles. On the other hand, loose criteria allow for more events, reducing the statistical uncertainty, with a higher probability of misclassification. As the name indicates, "medium" aims to provide a compromise between the two extremes.
 
-For certain final states, it has been found that the probability of events being misclassified differs between \ac{MC} simulation and observation. However, the scaling factor to correct this effect has not been determined in all final states regarded by \ac{MUSiC}. Thus, to evade deviations that are caused by different misclassification rates, our particle selection generally requires tight identification criteria, except for light jets, which are selected with loose criteria to ensure a complete event description.
+For certain final states, it has been found that the probability of events being misclassified differs between \ac{MC} simulation and observation. However, the scaling factor to correct this effect has not been determined in all final states regarded by \ac{MUSiC}. Thus, to evade deviations that are caused by different misclassification rates, the particle selection generally requires tight identification criteria, except for light jets, which are selected with loose criteria to ensure a complete event description.
 
 The following paragraphs aim to give a short overview over the reconstruction methods and object selection criteria used in the analysis. 
 
@@ -122,7 +128,7 @@ The following paragraphs aim to give a short overview over the reconstruction me
 
 The \ac{PF} algorithm can be divided into three steps: Fitting of tracks and clustering, linking of tracks and clusters, reconstruction of particles.
 
-In the first step, clusters of tracker cells that observed a current spike during the event are linked between the layers using a Kalman-filter, yielding reconstructed tracks. The same algorithm is also applied to the tracks of muons in the muon chambers. In the same step, clusters are found within the energy deposits of the calorimeters using a greedy clustering algorithm.
+In the first step, clusters of tracker cells that observed a current spike during the event are linked between the layers using a Kalman-filter, yielding reconstructed tracks. The same algorithm is also applied to the tracks of muons in the muon chambers. In the same step, clusters are found in the energy deposits of the calorimeters using a greedy clustering algorithm.
 
 In the second step, tracks and clusters from the first step are linked to each other. Tracks from the inner tracking system are extrapolated to find matching clusters in the calorimeters. 
 %Special care is taken for the signature of secondary electrons emitted by bremsstrahlung within the \ac{ECAL}. 
@@ -142,7 +148,7 @@ After the correction, a jet clustering algorithm arranges the remaining particle
 As output, one obtains a set of clusters, each containing multiple \ac{PF} objects. The combined four-vector of all particles within each cluster is calculated and assigned to the jet.
 
 Measurements have shown that the energy resolution of jets is worse in observed data than in the \ac{MC} simulation. As a mitigation, the transverse momenta of simulated jets are smeared with a \pT and $\eta$-dependent factor\cite{TWiki:JetResolution}.
-After the jet energy correction, the jets used within the \ac{MUSiC} analysis are selected using established jet-id criteria at the tight working point\cite{TWiki:JetID}. It ensures high data quality and low misclassification rates by requiring a minimum \pT threshold of \SI{50}{\GeV} and poses certain additional requirements on the composition of the jet.
+After the jet energy correction, the jets used in the \ac{MUSiC} analysis are selected using established jet-id criteria at the tight working point\cite{TWiki:JetID}. It ensures high data quality and low misclassification rates by requiring a minimum \pT threshold of \SI{50}{\GeV} and poses certain additional requirements on the composition of the jet.
 % min pT: \SI{50}{\GeV}.
 
 \subsection{Muons}
@@ -170,16 +176,10 @@ Therefore, photons are selected and identified in a similar matter. The \ac{MUSi
 In order to veto photons emitted as bremsstrahlung, photons with more than one signal in the tracker are discarded.
 
 \subsection{Missing Transverse Energy}
-\label{sec:met_definition}
+As mentioned earlier, neutrinos and possible new physics particles that do not leave a signature in the detector can be grasped via the momentum imbalance in the detector. This momentum imbalance is characterized in the missing transverse energy \METvec, which can be treated just like other physics objects in this section.
 
-Missing transverse energy, denoted by \MET, is a physics object characterizing momentum imbalance in the detector. The projected three-momentum is calculated from objects' corrected transverse energies as follows:
-\begin{equation}
-    \METvec \defeq - \sum_i \vec{E}_{T,i}
-\end{equation}
-Causes for missing transverse energy generally fall into one of two categories: Incorrect measurements, such as noisy, dead or asymmetric modules, and non-detectable particles. Neutrinos, for example, only interact very weakly and are therefore invisible for the detector. If one or more neutrinos are produced during the interaction, we can only observe their combined four momentum in terms of missing transverse energy. The same applies to hypothetical new physics particles which do not interact with the detector, making \MET an interesting physics object to work with.
-
-All corrections that change the \pT value of \ac{PF} candidates (e.g. jet energy corrections) are passed onto the \MET calculation to preserve a consistent event description. 
-Using similar arguments as for the other particles, only \MET with $\pT \geq \SI{100}{\GeV}$ is identified as object within the analysis.
+All corrections that change the \pT value of \ac{PF} candidates (e.g. jet energy corrections) are passed onto the \METvec calculation to preserve a consistent event description. 
+Using similar arguments as for the other particles, only \MET with $\pT \geq \SI{100}{\GeV}$ is identified as object in the analysis.
 
 \subsection{Possible Extensions}
 The existing analysis can be extended to identify more particle types by their decay products, called \emph{tagging}. Possible tagging choices are \Pqb-tagging, \Ptau-tagging or \PZ-tagging.
@@ -208,7 +208,7 @@ Inclusive event classes are denoted with the suffix "\eventclass{+ X}" in the na
 
 Jet inclusive event classes are denoted with the suffix "\eventclass{+ Njets}" in the event class name (e.g. \eventclass{2 \Pe + 1\Pmu + Njets}). Events contained in a jet inclusive event class may contain any number of jets in addition to the explicitly stated objects. This increases the number of events per class, as effects like initial or final state radiation are ignored, leading to reduced statistical uncertainties.
 
-In any case, the kinematic variables are only calculated from the objects explicitly stated in the class name, in our example two electrons and one muon.
+In any case, the kinematic variables are only calculated from the objects explicitly stated in the class name, in the example of two electrons and one muon.
 Event classes are dynamically generated based on the classified event content. In the next sections, the total number of generated event classes will be denoted with \nclasses.
 
 \section{Kinematic Variables and Distributions}
@@ -229,22 +229,19 @@ The invariant mass is, as mentioned before, very sensitive to resonances in the 
 \end{align}
 
 The third kinematic variable is missing transverse energy. 
-This variable is only calculated if the event class definition explicitly contains \METvec (above the threshold of \SI{100}{\GeV}) and describes the magnitude of the missing transverse momentum \METvec (as defined in \fref{sec:met_definition}):
-\begin{equation}
-    \MET \defeq \abs{\METvec} 
-\end{equation}
+This variable is only calculated if the event class definition explicitly contains \METvec (above the threshold of \SI{100}{\GeV}) and describes the magnitude of the missing transverse momentum, denoted by \MET (as defined in \fref{sec:transverse_quantities}).
 
 From each of the kinematic variables, \emph{kinematic distributions}, histograms of the corresponding calculated variable, are aggregated. The bin size of these histograms is not constant, but instead chosen to match the estimated detector resolution in the variable under investigation. However, the bins are guaranteed to be at least \SI{10}{\GeV} wide.
 
 \section{Systematic Uncertainties}
 When comparing observed data to simulation, \emph{systematic uncertainties} have to be considered. For various reasons, one will never be able to exactly predict how many events will pass the analysis. Possible causes include inaccuracies in the theoretical prediction, uncertainty on how a particle affects the detector and statistical uncertainty from performing a counting experiment on independent events. 
-Therefore, we are only able to estimate the observable event yield up to a certain interval. In this analysis, we assume that most of the uncertainties that arise can be modeled with a normal distribution and thus denote them with a mean value and a \SI{68}{\percent} confidence interval within $\pm 1 \sigma$ around the mean. The uncertainties are propagated onto the event yield of each kinematic bin and used in the subsequent automated search as well as the generation of pseudo-experiments.
+Therefore, it is only possible to estimate the observable event yield up to a certain interval. In this analysis, it is assumed that most of the arising uncertainties can be modeled with a normal distribution and thus they are denoted with a mean value and a \SI{68}{\percent} confidence interval within $\pm 1 \sigma$ around the mean. The uncertainties are propagated onto the event yield of each kinematic bin and used in the subsequent automated search as well as the generation of pseudo-experiments.
 
-There are multiple quantities involved in the calculation of the predicted number of events $N$. Here, we will categorize these effects into three groups:
+There are multiple quantities involved in the calculation of the predicted number of events $N$. Here, I will categorize these effects into three groups:
 \begin{equation}
 N = \underbrace{\sigma}_\text{theory} \cdot \underbrace{\mathcal{L}}_{\substack{\text{independent} \\ \text{measurements}}} \cdot \underbrace{A \cdot \epsilon}_{\substack{\text{experimental} \\ \text{response}}}  
 \end{equation}
-This categorization will be used in the following sections, where we will give an overview about the currently implemented systematic uncertainties. As with \fref{sec:reconstruction}, the concepts are only roughly motivated, more comprehensive information and actual parameter values can be found in \cite{Roemer:ModelUnspecificSearch}.
+This categorization will be used in the following sections, which will give an overview about the currently implemented systematic uncertainties. As with \fref{sec:reconstruction}, the concepts are only roughly motivated, more comprehensive information and actual parameter values can be found in \cite{Roemer:ModelUnspecificSearch}.
 
 \subsubsection{Theoretical Uncertainties}
 The dominating theoretical uncertainty stems from the perturbative calculation of the cross section. In quantum field theory, the interaction potential is expanded in discrete orders. The computation of higher order terms is analytically impossible and can often only be estimated up to an uncertainty. Therefore, the \emph{cross section uncertainty} is chosen depending on the highest calculated order for a given sample, and lies between \num{5} and \SI{50}{\percent} of the cross section.
@@ -256,18 +253,18 @@ The systematic uncertainty on the luminosity directly affects the expected numbe
 The current instantaneous luminosity is estimated by the activity in the pixel tracker. The measurement is complemented by a calibration from periodical precise van-der-Meer scans.
 This procedure is sufficiently accurate, as its uncertainty is estimated to be only \SI{2.7}{\percent}\cite{CMS:CMS-PAS-LUM-15-001}.
 
-The number of pile-up interactions within an event can be estimated from the total proton-proton cross section, combined with the instantaneous luminosity. The uncertainty of these independent measurements is propagated onto the number of pile-up collisions using a reweighting method to study the effect on the expected yield.
+The number of pile-up interactions in an event can be estimated from the total proton-proton cross section, combined with the instantaneous luminosity. The uncertainty of these independent measurements is propagated onto the number of pile-up collisions using a reweighting method to study the effect on the expected yield.
 
 \subsubsection{Event-Dependent Uncertainties}
 As discussed before, the energy of a reconstructed particle is estimated from the measured data of various detector components. The uncertainty on this mapping is called \emph{energy scale uncertainty} and is considered for all particles: jets, electrons, muons, photons and \MET. It is determined by studying differences between simulation and observed data of well-known physical processes. The uncertainty is then propagated onto the event by shifting the object momenta by $\pm \sigma(\pT)$ and repeating the classification. Note that the objects whose \pT values have been shifted may subsequently pass certain selection criteria and thus contribute to different bins or even different event classes than the original event.
 
 Similarly to the energy scale uncertainty, the simulated detector resolution is subject to uncertainty. This uncertainty is determined from independent observations, such as cosmic muons and \PZ-decays, and is also propagated by shifting object momenta. The energy resolution uncertainty is only significant for muons and jets, depends on $\eta$ and \pT and is \SI{3} to \SI{5}{\percent} of the objects' momentum.
 
-In addition to uncertainties on the measured momenta, we also consider uncertainties on the identification of particles. Two effects have to be taken into account: Particles may not be recognized with the correct type (\emph{identification efficiency}) or contributions that do not originate from particles might be incorrectly classified as particles (\emph{misidentification rate}). Ideally, the probability of these effects occurring would be the same in simulation as in observed data, therefore there are several techniques that aim to correct the \ac{MC} expectation.
+In addition to uncertainties on the measured momenta, the analysis also considers uncertainties on the identification of particles. Two effects have to be taken into account: Particles may not be recognized with the correct type (\emph{identification efficiency}) or contributions that do not originate from particles might be incorrectly classified as particles (\emph{misidentification rate}). Ideally, the probability of these effects occurring would be the same in simulation as in observed data, therefore there are several techniques that aim to correct the \ac{MC} expectation.
 
 To reproduce the identification probability of data in simulation, the expected yield is multiplied by so-called scale factors. The uncertainties of these scale factors are propagated by shifting the scale factors and observing the effects on the event yield.
 
-The treatment of incorrectly identified objects is more difficult: For each identified particle, there is a nonzero chance that it may not actually correspond to the reconstructed particle type. To account for differences of this behavior between observation and prediction, we study incorrectly classified objects in the simulation. If an event contains one or more incorrectly classified objects, an uncertainty of \num{1} event is assigned to the corresponding bin (for electrons, muons and photons)\cite{Roemer:ModelUnspecificSearch}. 
+The treatment of incorrectly identified objects is more difficult: For each identified particle, there is a nonzero chance that it may not actually correspond to the reconstructed particle type. To account for differences of this behavior between observation and prediction, incorrectly classified objects are identified by matching simulated particles to reconstructed candidates. Subsequently, for each incorrectly classified object, an uncertainty of \num{1} event is assigned to the corresponding bin (for electrons, muons and photons)\cite{Roemer:ModelUnspecificSearch}. 
 For \Pqb-tagged jets, the mismatch of the misclassification rate between data and prediction has been studied in 2016 data and found to be up to \SI{30}{\percent}\cite[Fig. 73]{CMS:CMS-AN-2017-018}, so \num{0.3} events of uncertainty are assigned for each misclassified event. 
 
 The actual misclassification rates depend on the final state but are in the order of \SI{1}{\percent} for most event classes.
@@ -287,14 +284,14 @@ One can see that an increase in the number of simulated events directly decrease
 After each event has been classified, the kinematic distributions have been aggregated and the systematic uncertainties have been propagated onto the event yield follows the automated search for deviations. The search is performed on each distribution of each event class separately as follows:
 First, multiple connected bins are combined to a \emph{region}, according to the rules in  sections \ref{sec:search_space} and \ref{sec:region_veto}. Then, a test statistic \TS for each region is calculated (\fref{sec:test_statistic}). Of all possible connected bin combinations, the region with the lowest value of \TS, called \TSmin, is selected. This region will be called \acfi{RoI}. If two or more regions with the same value of \TSmin are found, the smallest one is classified as \ac{RoI}.
 
-Subsequently, a global \ptilde-value for the region is calculated. This \ptilde-value expresses the probability of finding a deviation with $\TS \leq \TSmin$ anywhere within the distribution purely by chance. Details on the procedure can be found in \fref{sec:global_significance}.
+Subsequently, a global \ptilde-value for the region is calculated. This \ptilde-value expresses the probability of finding a deviation with $\TS \leq \TSmin$ anywhere in the distribution purely by chance. Details on the procedure can be found in \fref{sec:global_significance}.
 
 \subsection{Search Space}
 \label{sec:search_space}
 
 The search is performed on so-called regions. A region is a set of adjacent bins and is represented by the combined number of expected and observed events as well as a combined uncertainty.
 
-As we do not expect new physics to appear resonantly in the \sumpT and \MET kinematic distributions, each region within these distributions must consist of at least \num{3} adjacent bins. Within the \Minv and \MT distribution, narrow resonant deviations are possible, thus the minimal number of bins in these distributions is set to \num{1}. In addition, we employ a veto on regions where the simulation is incomplete, which is described in the next section.
+As new physics phenomena are not expected to appear resonantly in the \sumpT and \MET kinematic distributions, each region in these distributions must consist of at least \num{3} adjacent bins. Within the \Minv and \MT distribution, narrow resonant deviations are possible, thus the minimal number of bins in these distributions is set to \num{1}. In addition, the \ac{MUSiC} analysis employs a veto on regions where the simulation is incomplete, which is described in the next section.
 
 The combined number of events and the combined uncertainty for each region is calculated as
 \begin{align}
@@ -306,16 +303,16 @@ where $\rho_{i,j}$ is the correlation coefficient for the uncertainty $\sigma$ b
 
 Some uncertainties, such as the statistical uncertainty on the simulated number of events, are completely uncorrelated between the bins. The correlation coefficient thus is $\rho_{i,j} = 0$ and the total uncertainty is the quadratic sum of the bin uncertainties.
 
-Other uncertainties are correlated between bins. An example for this is the uncertainty on the luminosity measurement, which affects all bins of all distributions the same way. We treat any uncertainty that is assumed to be correlated to some extend as fully correlated ($\rho_{i,j} = 1$) and calculate the combined uncertainty as linear sum. This method possibly overestimates the total uncertainty, in case the correlation coefficient is somewhere between 0 and 1, leading to a lower sensitivity.
+Other uncertainties are correlated between bins. An example for this is the uncertainty on the luminosity measurement, which affects all bins of all distributions the same way. Any uncertainty that is assumed to be correlated to some extend is treated as fully correlated ($\rho_{i,j} = 1$) and the combined uncertainty is calculated as linear sum. This method possibly overestimates the total uncertainty, in case the correlation coefficient is somewhere between 0 and 1, leading to a lower sensitivity.
 
 \subsection{Region Veto}
 \label{sec:region_veto}
 Although the analysis aims to cover as much phase space as possible by combining large amounts of \ac{MC} events, there are regions where the \ac{MC} description is incomplete. 
-Because the null-hypothesis (the \acl{SM}) is not correctly represented in some areas, we must not probe for new physics in these regions, i.e. any statistical inference from these regions would be invalid.
+Because the null-hypothesis (the \acl{SM}) is not correctly represented in some areas, one must not probe for new physics in these regions, i.e. any statistical inference from these regions would be invalid.
 
-Therefore, several rules have been identified and implemented in order to skip calculation of \TS values for incorrectly modeled regions. These rules may only depend on the \ac{SM} values, not on the observed data per region. In addition, note that any region is usually embedded in a larger region with a higher confidence in simulation. 
+Therefore, several rules have been identified and implemented in order to skip calculation of \TS values for incorrectly modeled regions. These rules may only depend on the \ac{SM} values, not on the observed data per region. In addition, note that any region is usually embedded in a larger region with a higher confidence in simulation. If this is not the case, i.e. the largest region, which is the integral of the entire distribution, is vetoed, the event class is excluded from the analysis. A similar criterion will be introduced in \fref{sec:min_yield}.
 
-Some of the rules do not only depend on the region itself, but also on a \emph{neighborhood}. The neighborhood is defined as combination of adjacent bins below and above the region boundaries, \num{4} in each direction. In the neighborhood, we define a set of \emph{dominant neighborhood processes} as the set of processes with the largest contributions, which in total make up more than \SI{95}{\percent} of the total yield in the neighborhood.
+Some of the rules do not only depend on the region itself, but also on a \emph{neighborhood}. The neighborhood is defined as combination of adjacent bins below and above the region boundaries, \num{4} in each direction. In the neighborhood, a set of \emph{dominant neighborhood processes} is defined as the set of processes with the largest contributions, which in total make up more than \SI{95}{\percent} of the total yield in the neighborhood.
 
 The following rules are tested; if any of them matches, the region is vetoed, no \TS value is calculated and thus not considered for \ac{RoI}.
 
@@ -337,18 +334,18 @@ In these regions the original assumption, having enough events for a regression 
 For each region, a test statistic is calculated. Its goal is to express "extremity" of a deviation based on the number of expected events \Nmc and their uncertainty \sigmamc, and the number of observed (or pseudo-observed) events \Ndata.
 
 The choice of such a measure is ambiguous: All test statistics have strengths and weaknesses and are more or less sensitive in various areas of their three-dimensional input domain.
-For the \ac{MUSiC} analysis, especially for the subsequent calculation of \ptilde, it is desirable to use a test statistic based on a null-hypothesis for which we can reliably generate pseudo-experiments. 
+For the \ac{MUSiC} analysis, especially for the subsequent calculation of \ptilde, it is desirable to use a test statistic based on a null-hypothesis for which pseudo-experiments can be reliably generated. 
 
-Ideally, the test statistic would express a local $p$-value directly, in order to be comparable to other \ac{CMS} results. However, as shown in the following section, only the ordering of \TS values is relevant within the \ptilde calculation and thus any test statistic $\TS(p)$ that is monotonous in $p$ will suffice.
+Ideally, the test statistic would express a local $p$-value directly, in order to be comparable to other \ac{CMS} results. However, as shown in the following section, only the ordering of \TS-values is relevant for the \ptilde calculation and thus any test statistic $\TS(p)$ that is monotonous in $p$ will suffice.
 
-In the following, we want to motivate the test statistic as used in the analysis.
+The following sections motivate the test statistic as used in the analysis.
 
 The first (reasonable) assumption in the derivation is that the probability of observing a certain number of events given an exactly known prediction \Ntrue follows a Poisson distribution:
 \begin{equation}
     \Pr(\Ndata | \Ntrue) = \frac{{\Ntrue}^\Ndata}{\Ndata!} e^{-\Ntrue}
 \end{equation}
 
-In context of a $p$-value which expresses the probability of obtaining a deviation equally or more extreme than the observed one just by chance, we have to sum over all "more extreme" cases. In case of an excess ($\Ndata \geq \Ntrue$), this is 
+In context of a $p$-value which expresses the probability of obtaining a deviation equally or more extreme than the observed one just by chance, one has to sum over all "more extreme" cases. In case of an excess ($\Ndata \geq \Ntrue$), this is 
 \begin{equation}
     p(\Ndata | \Ntrue) = \sum_{n = \Ndata}^{\infty} \frac{{\Ntrue}^n}{n!} e^{-\Ntrue}
     \label{eq:p_value_excess}
@@ -359,13 +356,13 @@ For a deficit, the sum is finite and corresponds to:
     \label{eq:p_value_deficit}
 \end{equation}
 
-In reality, \Ntrue can never be known with perfect precision. Instead, our knowledge can be expressed by a probability density $\rho(x | \Nmc, \sigmamc)$ which is then folded into the $p$ value:
+In reality, \Ntrue can never be known with perfect precision. Instead, the expectation can be expressed by a probability density $\rho(x | \Nmc, \sigmamc)$ which is then folded into the $p$ value:
 \begin{equation}
     p(\Ndata | \Nmc, \sigmamc) = \int_{-\infty}^\infty p(\Ndata | x) \cdot \rho(x | \Nmc, \sigmamc) \, \dd x
 \end{equation}
 Here, one can imagine that $x$ takes the role of all possible \Ntrue values and $\rho$ assigns different weights to contributions from equations \ref{eq:p_value_excess} and \ref{eq:p_value_deficit}.
 
-In the case of \ac{MUSiC}, we apply the smearing procedure after deciding whether a region contains an excess or a deficit, which allows us to move the piecewise definition out of the integral:
+In the case of \ac{MUSiC} the smearing procedure is applied after deciding whether a region contains an excess or a deficit, which allows one to move the piecewise definition out of the integral:
 \begin{equation}
     p(\Ndata | \Nmc, \sigmamc) = \begin{cases} \displaystyle
         \int_{-\infty}^\infty \rho(x | \Nmc, \sigmamc) \mathmakebox[30pt][c]{\displaystyle \sum_{n = 0}^{\Ndata}} \frac{x^n}{n!} e^{-x} \dd x & \Ndata < \Nmc \\
@@ -374,7 +371,7 @@ In the case of \ac{MUSiC}, we apply the smearing procedure after deciding whethe
     \label{eq:music_ts}
 \end{equation}
 
-This is turn also implies that we treat contributions of the integral where e.g. $\Nmc < \Ndata < x$, as if they belong to an excess and thus sum up from \Ndata to infinity. This conservative choice of procedure is not expected to have a high impact to the results because it is also corrected during the calculation of \ptilde.
+This is turn also implies that contributions of the integral where e.g. $\Nmc < \Ndata < x$ are treated as if they belong to an excess and thus sum up from \Ndata to infinity. This conservative choice of procedure is not expected to have a high impact to the results because it is also corrected during the calculation of \ptilde.
 
 The choice of the prior $\rho(x | \Nmc, \sigmamc)$ is not unambiguous. For previous \ac{MUSiC} publications and the signal study in this thesis, a truncated Gaussian prior is used:
 
@@ -388,7 +385,7 @@ However, it has been under discussion in earlier theses\cite{Schmitz:ModelUnspec
     \rho_{LN}(x | \Nmc, \sigmamc) = \frac{\Theta(x)}{\sqrt{2\pi}\abs{x}\ln(1 + \frac{\sigmamc}{\Nmc})} \exp(-\frac{1}{2}\left(\frac{\ln(x/\Nmc)}{\ln(1 + \frac{\sigmamc}{\Nmc})}\right)^2)
 \end{equation}
 
-The log-normal prior represents the multiplicative nature of uncertainties and features a larger coverage range, but has disadvantages concerning the generation of pseudo-experiments. In \fref{sec:lognormal_pvalue}, the alternative of a log-normal prior will be discussed in further detail.
+The log-normal prior represents the multiplicative nature of uncertainties and features a larger coverage range, but has disadvantages concerning the generation of pseudo-experiments. In \fref{sec:lognormal_pvalue}, the alternative of a log-normal prior will be discussed in further detail. For a rough derivation of this formula, see \fref{app:lognormal_derivation}.
 
 The $p$-value in \fref{eq:music_ts} in combination with the Gaussian prior will be denoted as $\TS(\Ndata, \Nmc, \sigmamc) = p(\Ndata | \Nmc, \sigmamc)$ in this thesis. \Fref{sec:coverage} will discuss to what extends the aforementioned assumptions match the definition of a $p$-value. Furthermore, whenever comparisons to the log-normal prior are drawn, it will be denoted with \TSprime.
 
@@ -404,23 +401,23 @@ The $p$-value in \fref{eq:music_ts} in combination with the Gaussian prior will 
 \subsection{Consideration of the Look-Elsewhere-Effect}
 \label{sec:global_significance}
 
-So far, we have only considered an estimator for the local magnitude of a deviation. In order to quantify and compare it, it has to be put in context: As the number of regions $n$ grows, the probability of finding a deviation with a significance of $\alpha$ increases, roughly $p \sim 1 - (1 - \alpha)^n$. The analysis accounts for this so-called \emph{look-elsewhere effect} by calculating a corrected post-trial $p$-value called \ptilde.
+So far, only the local magnitude of a deviation has been estimated. In order to quantify and compare it, it has to be put in context: As the number of regions $n$ grows, the probability of finding a deviation with a significance of $\alpha$ increases, roughly $p \sim 1 - (1 - \alpha)^n$. The analysis accounts for this so-called \emph{look-elsewhere effect} by calculating a corrected post-trial $p$-value called \ptilde.
 It expresses the probability of finding a deviation equally large or larger than the observed one somewhere in the distribution, solely by chance.
 
 The simplest way of adapting the local magnitude would be to apply an analytical correction factor to it. A suitable correction factor could be estimated using combinatorics if the possible values of the local $p$-value were uncorrelated. This method is also called \emph{Bonferroni correction}\cite{Abdi:BonferroniSidakcorrections}. 
-In our case, a purely analytically calculation is not possible because the connected bin regions overlap and thus the local significances are correlated.
+In the case of the automated search, a purely analytically calculation is not possible because the connected bin regions overlap and thus the local significances are correlated.
 
-Instead, we use a simulation-based approach:
-We simulate possible experimental outcomes based on the \acl{SM}, and refer to each simulation round as \emph{pseudo-experiment}.
-During each pseudo-experiment, we randomly draw a substitute observed distribution from the expected number of events.
+Instead a simulation-based approach is used:
+Possible experimental outcomes are simulated based on the \acl{SM}, and refer to each simulation round as \emph{pseudo-experiment}.
+During each pseudo-experiment, a substitute observed distribution is randomly drawn from the expected number of events.
 The entire automated search is repeated on each generated distribution and its result $\TSpseudomin$ is stored. 
 
-Finally, the global \ptilde-value is calculated by determining the rate of pseudo-experiments where a more significant deviation has been found: $\TSpseudomin < \TSdatamin$. Thus, the \ptilde value automatically fulfills the definition of a $p$-value ("probability to find a deviation equally large or larger as the observed one by chance, given the null hypothesis") if the pseudo-experiment generation corresponds to the null hypothesis.
+Finally, the global \ptilde-value is calculated by determining the rate of pseudo-experiments where a more significant deviation has been found: $\TSpseudomin < \TSdatamin$. Thus, the \ptilde-value automatically fulfills the definition of a $p$-value ("probability to find a deviation equally large or larger as the observed one by chance, given the null hypothesis") if the pseudo-experiment generation corresponds to the null hypothesis.
 For this thesis, the number of pseudo-experiments has been chosen to be $\nrounds = \num{10000}$, therefore the minimal meaningful result is $\ptilde = \frac{1}{10000} = \num{1e-4}$, which corresponds to a two-sided $Z$-score of $\num{3.7} \sigma$ (see \fref{app:z_score}).
 
 \Fref{fig:pseudo_experiment} illustrates the procedure for generating a pseudo-experiment. The pseudo-experiment generation is performed separately for each bin of the distribution. First, a possible true value \Ntrue is generated from the known \ac{SM} mean and systematic uncertainties, then the counting experiment is simulated by drawing from a Poisson distribution $\mathcal{P}$.
 
-In order to simulate reality as close as possible, within each pseudo experiment, every uncertainty assumes a certain value, fully correlated between all event classes and bins. This is done by drawing a "bias" $x_i$ from a standard normal distribution $\mathcal{N}$ and subsequently multiplying it with the magnitude of each uncertainty of each bin $\sigma_i$ to determine its effect on the event yield:
+In order to simulate reality as close as possible, during each pseudo-experiment, every uncertainty assumes a certain value, fully correlated between all event classes and bins. This is done by drawing a "bias" $x_i$ from a standard normal distribution $\mathcal{N}$ and subsequently multiplying it with the magnitude of each uncertainty of each bin $\sigma_i$ to determine its effect on the event yield:
 
 \begin{align}
     \Ndata' &\sim \mathcal{P}(\lambda=\Ntrue') \\
@@ -428,74 +425,83 @@ In order to simulate reality as close as possible, within each pseudo experiment
     x_i &\sim \mathcal{N}(\mu=0, \sigma=1)
 \end{align}
 
-
-\begin{algorithm}
-    \SetKwData{Nobs}{n}
-    \SetKwData{Nexp}{N}
-    \SetKwData{corr}{corr}
-    \SetKwData{stat}{stat}
-    \SetKwData{x}{x}
-    
-    \SetKw{KwIn}{in}
-    
-    \SetKwInOut{Input}{input}
-    \SetKwInOut{Output}{output}
-    
-    \Input{$\Nexp_{i=1..n} \gets $ number of expected events in each bin $i$}
-    \Input{$\corr_{i=1..n,j=0..c} \gets $ correlated uncertainty $j$ in each bin $i$}
-    \Input{$\stat_{i=1..n} \gets $ statistical uncertainty in each bin $i$}
-    
-    \Output{$\Nobs_{i=1..n}$ pseudo-data event yield in bin $i$}
-    
-    \BlankLine
-    
-    \tcp{Once for all distributions: choose systematic uncertainty bias}
-    \ForEach{correlated uncertainty $j$ \KwIn distribution}{
-        $\x_j \gets \text{RandNormal}(\mu = 0, \sigma = 1)$\;
-    }
-    
-    \BlankLine
-    \ForEach{bin $i$ \KwIn distribution}{
-        \tcp{Start with the expected yield:}
-        $\Nobs_i \gets \Nexp_i$\;
+\begin{figure}
+    \begin{algorithm}[H]
+        \SetKwData{Nobs}{n}
+        \SetKwData{Nexp}{N}
+        \SetKwData{corr}{corr}
+        \SetKwData{stat}{stat}
+        \SetKwData{x}{x}
         
-        \tcp{Simulate correlated uncertainties using the pre-chosen bias and individual magnitude:}
-        \ForEach{correlated uncertainty $j$ \KwIn bin $i$}{
-            $\Nobs_i \gets \Nobs_i + \x_j \cdot \corr_{i,j}$\;
+        %\SetKw{KwIn}{in}
+        
+        %\SetKwInOut{Input}{input}
+        %\SetKwInOut{Output}{output}
+        
+        \KwIn{$\Nexp_{i=1..n}$: number of expected events in each bin $i$}
+        \KwIn{$\corr_{i=1..n,j=0..m}$: correlated uncertainty $j$ in each bin $i$}
+        \KwIn{$\stat_{i=1..n}$: statistical uncertainty in each bin $i$}
+        
+        \KwOut{$\Nobs_{i=1..n}$: pseudo-data event yield in bin $i$}
+        
+        \BlankLine
+        
+        \tcp{Once for all distributions: choose systematic uncertainty bias}
+        \ForEach{correlated uncertainty $j$ in distribution}{
+            $\x_j \gets \text{RandNormal}(\mu = 0, \sigma = 1)$\;
         }
         
-        \tcp{Simulate (uncorrelated) statistical uncertainty by drawing a number from a normal distribution:}
-        $\Nobs_i \gets \Nobs_i + \text{RandNormal}(\mu = 0, \sigma=\stat_{i})$\;
-        
-        \tcp{Simulate independent counting experiment:}
-        $\Nobs_i \gets \text{RandPoisson}(\Nobs_i)$\;
-    }
+        \BlankLine
+        \ForEach{bin $i$ in distribution}{
+            \tcp{Start with the expected yield}
+            $\Nobs_i \gets \Nexp_i$\;
+            
+            \BlankLine    
+            
+            \tcp{Simulate correlated uncertainties using the pre-chosen bias multiplied by an individual magnitude}
+            \ForEach{correlated uncertainty $j$ in bin $i$}{
+                $\Nobs_i \gets \Nobs_i + \x_j \cdot \corr_{i,j}$\;
+            }
+            
+            \BlankLine
+            
+            \tcp{Simulate (uncorrelated) statistical uncertainty by drawing a number from a normal distribution}
+            $\Nobs_i \gets \text{RandNormal}(\mu = \Nobs_i, \sigma=\stat_{i})$\;
+            
+            \BlankLine
+            
+            \tcp{Simulate independent counting experiment}
+            $\Nobs_i \gets \text{RandPoisson}(\Nobs_i)$\;
+        }
+    \end{algorithm}
     \caption{Pseudo-event generation algorithm. The algorithm takes absolute values for uncertainties and number of events as input and sequentially stacks pseudo-true values for uncertainties on top of the expected yield. Finally, a random number is drawn from a Poisson distribution, simulating the physical process of a counting experiment.}
     \label{fig:pseudo_experiment}
-\end{algorithm}
+\end{figure}
 
 \subsection{Minimum Yield}
 \label{sec:min_yield}
 For further statistical inference it is important to note that any non-zero event yield in a certain final state will cause the creation of an event class corresponding to that final state. Therefore, by pure combinatorics, the number of event classes grows as more simulated events are added to the analysis. 
-These almost empty event classes cause problems during the pseudo-experiment procedure: As the event yield is very low, the pseudo-data generation will generate $\Ndata = \num{0}$ in most cases and $\Ndata = \num{1}$ in very few cases. The \num{0}-case will be insignificant and the few \num{1}-cases will yield a very significant \TSpseudo and \ptilde value. Because of this discretization, the \ptilde value will not be uniformly distributed, which is our assumption for the following statistical inference. For this reason, event classes with a total integrated yield of $\Nmc < \num{0.1}$ are excluded from statistical inference, but are checked by hand if they contain observed data events.
+These almost empty event classes cause problems during the pseudo-experiment procedure: As the event yield is very low, the pseudo-data generation will generate $\Ndata = \num{0}$ in most cases and $\Ndata = \num{1}$ in very few cases. The \num{0}-case will be insignificant and the few \num{1}-cases will yield a very significant \TSpseudo and \ptilde-value. Because of this discretization, the \ptilde-value will not be uniformly distributed, which is one fundamental assumption for the following statistical inference. For this reason, event classes with a total integrated yield of $\Nmc < \num{0.1}$ are excluded from statistical inference, but are checked by hand if they contain observed data events. 
+
+A similar choice is also applied in a model-independent search in \ac{LHC} data by the \ac{ATLAS} collaboration\cite{ATLAS:ATLAS-CONF-2014-006,ATLAS:ATLAS-CONF-2017-001}.
 
 \subsection{Distribution of \ptilde-Values}
 \label{sec:ptilde_distribution}
-Similarly to the look-elsewhere effect within a single distribution, the probability of finding a significant deviation in any distribution increases as we search within multiple event classes.
+Similarly to the look-elsewhere effect in a single distribution, the probability of finding a significant deviation in any distribution increases as the search is extended to multiple event classes.
 
-Since \ptilde fulfills the definition of a $p$-value, the probability of observing an event class with a \ptilde-value of $P$ in the absence of new physics is $P$, thus \ptilde-values should be uniformly distributed. Note, that this also implies that, in the absence of correlations, among \nclasses event classes we expect our most significant class to have a \ptilde-value of $\frac{1}{\nclasses+1}$ (see \fref{app:minimal_pvalues}), e.g. $\ptilde = \num{0.002}, Z = \num{2.9}$ with \num{500} event classes.
+Since \ptilde fulfills the definition of a $p$-value, the probability of observing an event class with a \ptilde-value of $P$ in the absence of new physics is $P$, thus \ptilde-values should be uniformly distributed. Note, that this also implies that, in the absence of correlations, among \nclasses event classes one expects the most significant class to have a \ptilde-value of $\frac{1}{\nclasses+1}$ (see \fref{app:minimal_pvalues}), e.g. $\ptilde = \num{0.002}, Z = \num{2.9}$ with \num{500} event classes.
 
-This presumption is subsequently used to set \ptilde values into context. For this purpose, we can reuse \TSpseudomin values of all pseudo-experiments: In the correction step, we calculated one \TSpseudomin value for each pseudo-experiment round in each event class. Now, for each event class, each pseudo-experiment result can be corrected using all other $\nrounds - 1$ pseudo-experiments from the same event class. This procedure is applied to all \nclasses event classes, yielding $\nclasses \cdot \nrounds$ \ptilde values. Then, a histogram of all \ptilde values belonging to one pseudo-round are aggregated (\nclasses values). All \nrounds histograms are combined to calculate the mean, median, \SI{68}{\percent} and \SI{95}{\percent} intervals on each bin content of the \ptilde distribution. Similarly, the distribution of \ptilde-values of all event classes from observed data is calculated. Up to this thesis, both distributions are only qualitatively compared (by eye). In \fref{sec:global_pvalue}, a quantitative solution to this approach will be discussed.
+This presumption is subsequently used to set \ptilde-values into context. For this purpose, the \TSpseudomin values of all pseudo-experiments can be reused: In the correction step, one \TSpseudomin value for each pseudo-experiment round in each event class was calculated. Now, for each event class, each pseudo-experiment result can be corrected using all other $\nrounds - 1$ pseudo-experiments from the same event class. This procedure is applied to all \nclasses event classes, yielding $\nclasses \cdot \nrounds$ \ptilde-values. Then, a histogram of all \ptilde-values belonging to one pseudo-round are aggregated (\nclasses values). All \nrounds histograms are combined to calculate the mean, median, \SI{68}{\percent} and \SI{95}{\percent} intervals on each bin content of the \ptilde distribution. Similarly, the distribution of \ptilde-values of all event classes from observed data is calculated. Up to this thesis, both distributions are only qualitatively compared (by eye). In \fref{sec:global_pvalue}, a quantitative solution to this approach will be discussed.
 
 \section{Signal Study}
 \label{sec:signal_study}
 
 The goal of the signal study is to investigate how signatures of new physics propagate to the result of the analysis. For this purpose, simulated events of new physics processes are classified into event classes and merged with the classification results from the \acl{SM}. Experimental uncertainties between the \ac{SM} classification results and the signal results are assumed to be fully correlated and accordingly combined. However, no uncertainty on the signal cross section is assumed, because the signal study investigates one specific cross section scenario.
 
-Subsequently, pseudo-experiments are generated from the combined signal and background and compared to the \ac{SM} simulation by the automated search for deviations, using the pseudo-experiments instead of observed data. Subsequently, the resulting \TSmin values are corrected for the look-elsewhere effect using a precomputed set of \ac{SM} \TS values, resulting one distribution of \ptilde values for each signal pseudo-experiment round.
+Subsequently, pseudo-experiments are generated from the combined signal and background and compared to the \ac{SM} simulation by the automated search for deviations, using the pseudo-experiments instead of observed data. Subsequently, the resulting \TSmin values are corrected for the look-elsewhere effect using a precomputed set of \ac{SM} \TS values, resulting one distribution of \ptilde-values for each signal pseudo-experiment round.
  
 The interpretation of the \ptilde-distributions is performed qualitatively, analogous to the interpretation of real observed data. If the resulting \ptilde-values are not distributed uniformly anymore and there is a deviation from \ac{SM}-only simulation or the uniform distribution, it is interpreted as sensitivity of the \ac{MUSiC} analysis towards that specific model.
-Because the qualitative inference is very vague, we will discuss an alternative in \fref{sec:global_pvalue}, where multiple pseudo-experiment rounds are used to calculate the quantified discovery potential towards the model under investigation.
+Because the qualitative inference is very vague, I will discuss an alternative in \fref{sec:global_pvalue}, where multiple pseudo-experiment rounds are used to calculate the quantified discovery potential towards the model under investigation.
 
 \section{Implementation}
 
@@ -503,12 +509,12 @@ Because the qualitative inference is very vague, we will discuss an alternative 
 
 The analysis combines various tools from different authors (\ac{CMS}, local institute collaboration, open source), which are used on a heterogeneous computing environment (\ac{WLCG}, local computing cluster, local computer). From raw data to statistical inference there are many intermediate states which have to be managed. Doing this manually does not only require manpower, but is also more prone to human error, such as confusing files or missing steps. Therefore, several levels of automation and validation are critical for a rapid development of the analysis.
 
-In the following sections, we will illustrate the practical steps required to reproduce the analysis and point out various starting points for automation. In addition, this section intends to be a reference about the exact software packages and versions used for the signal study.
+The following sections illustrate the practical steps required to reproduce the analysis and point out various starting points for automation. In addition, this section intends to be a reference about the exact software packages and versions used for the signal study.
 
 Events triggered by the detector are stored on the \ac{WLCG}. They are centrally reconstructed by \ac{CMS} and stored on the grid in the \textsc{MiniAOD} format\cite{Petrucciani:MiniAODNew}, accessible only to \ac{CMS} members. In the first step, these events are preprocessed by the Aachen Institute IIIA working group and stored by sample on the local Tier-2 storage element in the \emph{Pxl I/O} file format\cite{Bretz:DevelopmentEnvironmentVisual}, which has also been developed in Aachen. The programs used for preprocessing make use of a software framework for \ac{CMS} analyses, called \textsc{CMSSW}. Preprocessing of 2015 \ac{SM} and signal samples was performed with \textsc{CMSSW} version 7.6.3. In addition to the Pxl I/O files, a working-group wide shared database is used for meta-information about samples (such as cross sections and correction factors).
 
 The further analysis is performed with version 8.0.26 of the \textsc{CMSSW} framework, which includes \textsc{ROOT} version 6.06/01\cite{Brun:ROOTobjectoriented}, \Cpp with \textsc{GCC} 5.3.0 and \textsc{Python} 2.7.11\cite{Oliphant:PythonScientificComputing}.
-The \ac{MUSiC} analysis starts with the classification of events on the local computing element. The classification is implemented as plugin within the \textsc{PxlAnalyzer}, a framework written in \Cpp collaboratively by the Aachen Institute IIIA working group. The \textsc{PxlAnalyzer} reads Pxl I/O files from the previous step, classifies the event and stores the resulting event classes in the \textsc{ROOT} file format. Subsequently, event samples that have been classified separately are merged together. The entire process is managed by the \textsc{Luigi} framework \cite{Spotify:Luigi}(version 2.4.0), which allows automated execution of dependent task such as classification and sample merging.
+The \ac{MUSiC} analysis starts with the classification of events on the local computing element. The classification is implemented as plugin in the \textsc{PxlAnalyzer}, a framework written in \Cpp collaboratively by the Aachen Institute IIIA working group. The \textsc{PxlAnalyzer} reads Pxl I/O files from the previous step, classifies the event and stores the resulting event classes in the \textsc{ROOT} file format. Subsequently, event samples that have been classified separately are merged together. The entire process is managed by the \textsc{Luigi} framework \cite{Spotify:Luigi}(version 2.4.0), which allows automated execution of dependent task such as classification and sample merging.
 
 As next step follows the automated search for deviations. The automated search is implemented in \textsc{Python} as well as \Cpp. A custom script converts the classified \textsc{ROOT} files into JSON files, configuring the automated search. It also distributes the workload into multiple \emph{jobs} which are executed in parallel on the local computing cluster. Each job then operates on one or more JSON files, searching for deviations between simulation and data or optionally generating and evaluating pseudo-experiments.
 After retrieval from the computing grid, its output is parsed into a local \textsc{SQLite} database for statistical analysis.
@@ -520,7 +526,7 @@ The dependency of intermediate states, from the preprocessed ("skimmed") samples
 \subsection{Lookup-Table}
 During the automated search algorithm, most of the computation time is spent calculating \TS (see \fref{app:lut_performance}), which involves integration and summation over a large number of terms.
 
-To decrease the amount of time spent in this step, we implemented a three dimensional \acfi{LUT}, as suggested by T. Hebbeker (personal communication, 2015). The table consists of \TS values for the most frequently used input parameters, such that the expensive runtime computation is replaced by retrieving a precomputed value from a static block of memory.
+To decrease the amount of time spent in this step, I implemented a three dimensional \acfi{LUT}, as suggested by T. Hebbeker (personal communication, 2015). The table consists of \TS values for the most frequently used input parameters, such that the expensive runtime computation is replaced by retrieving a precomputed value from a static block of memory.
 
 The \ac{LUT} is generated as a separate file during compilation and is about \SI{80}{\mega\byte} in size.
 
@@ -551,14 +557,14 @@ In the dimension of the expected number of events, the \ac{LUT} is more densely 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{lut/lut_points}
-    \caption{Illustration of the point-density for various areas within the \ac{LUT}. Only the exact \TS values for the values indicated by the black dots are stored, interpolation is done in-between. The "grid region" is defined with equidistant spacing of exact \Ndata and \Nmc points. The "linear region" is equidistant in \Ndata, but two-sided exponential in \Nmc. In the "exponential region", the spacing between exact \Ndata points also grows exponentially.}
+    \caption{Illustration of the point-density for various areas in the \ac{LUT}. Only the exact \TS values for the values indicated by the black dots are stored, interpolation is done in-between. The "grid region" is defined with equidistant spacing of exact \Ndata and \Nmc points. The "linear region" is equidistant in \Ndata, but two-sided exponential in \Nmc. In the "exponential region", the spacing between exact \Ndata points also grows exponentially.}
     \label{fig:lut_points}
 \end{figure}
 
 \subsubsection{Validation}
-The \ac{LUT} can be easily validated by comparing \TS values from the complete calculation with \TS values obtained from the \ac{LUT} algorithm. Because the input domain for both algorithms is three-dimensional, we restrict ourselves to analyzing one-dimensional slices of the input domain and discuss its generality afterwards. The parameter values have been chosen to ensure the relative deviation $\frac{\abs{\TS_\text{LUT}-\TS}}{\TS}$ between the algorithms is less than \SI{1}{\percent}.
+The \ac{LUT} can be easily validated by comparing \TS values from the complete calculation with \TS values obtained from the \ac{LUT} algorithm. Because the input domain for both algorithms is three-dimensional, the validation is performed on one-dimensional slices of the input domain and discuss its generality afterwards. The parameter values have been chosen to ensure the relative deviation $\frac{\abs{\TS_\text{LUT}-\TS}}{\TS}$ between the algorithms is less than \SI{1}{\percent}.
 
-First, we vary the relative uncertainty while keeping \Ndata and \Nmc fixed. The results are shown in  \fref{fig:lut_reldiff_reluncert}. On the left hand side, \Ndata is fixed to \num{0}, while $\Nmc = \num{1}$. One can see that over the entire range of covered relative uncertainty (from \SI{0}{\percent} to \SI{130}{\percent}), the relative deviation between \ac{LUT} and full calculation is below \SI{0.1}{\percent}. 
+First, the relative uncertainty is varied while keeping \Ndata and \Nmc fixed. The results are shown in  \fref{fig:lut_reldiff_reluncert}. On the left hand side, \Ndata is fixed to \num{0}, while $\Nmc = \num{1}$. One can see that over the entire range of covered relative uncertainty (from \SI{0}{\percent} to \SI{130}{\percent}), the relative deviation between \ac{LUT} and full calculation is below \SI{0.1}{\percent}. 
 
 Similarly, \fref{fig:lut_reldiff_mc} shows results from varying \Nmc over a fixed value of \Ndata and relative uncertainty. The dashed black line indicates the requirement of \SI{1}{\percent}. 
 
@@ -578,7 +584,7 @@ Within the validated regions, the \ac{LUT} has only shown small deviations from 
 
 Performance measurements (see \fref{app:lut_performance}) indicate that the time spent on calculating \TS values, which was previously the dominating computational expense, has been reduced by a factor of $\approx \num{8}$. However, additional expenses arise, such as transferring the file to worker nodes and subsequently reading the file from the hard drive. The total gain will thus be less.
 
-Overall, the \ac{LUT} contributes great value to the automated search, as a reduction in computing time allows us to increase the number of pseudo-experiments, enhancing the resolution of \ptilde values. In future developments of the analysis, we would suggest further optimization of the \ac{LUT} parameters, as they have only been roughly chosen to match the given requirements.
+Overall, the \ac{LUT} contributes great value to the automated search, as a reduction in computing time allows the analyst to increase the number of pseudo-experiments, enhancing the resolution of \ptilde-values. In future developments of the analysis, I would suggest further optimization of the \ac{LUT} parameters, as they have only been roughly chosen to match the given requirements.
 
 \begin{figure}
     \centering

@@ -70,23 +70,23 @@ Finally, the filter efficiency indicates that the samples have already undergone
 
 The probability of observing a $p$-value of $p$ (or more extreme) is $p$, thus the distribution of $p$-values is uniform.
 
-We now want to derive the distribution of minimal $p$-values, depending on the sample size $N$: 
+I now want to derive the distribution of minimal $p$-values, depending on the sample size $N$: 
 Taking $N$ $p$-values, the probability that the smallest one has the value $p_\text{min}$ can be calculated by requiring that the other $N-1$ $p$-values are in the range $p=[0, p_\text{min})$:
 \begin{equation}
     \Pr(p_\text{min} = p) = C \cdot \left(1-p\right)^{N-1}
 \end{equation}
 The proportionality factor $C$ can be calculated from normalization: $C = N$.
 
-The entire probability density for minimal $p$-values os therefore:
+The entire probability density for minimal $p$-values as therefore:
 \begin{equation}
     \Pr(p_\text{min} = p) = N \cdot \left(1-p\right)^{N-1}
 \end{equation}
 
-We can verify this derivation by taking pseudo-experiments: We draw $N$ numbers from a uniform distribution $\mathcal{U}([0, 1])$ and store the minimal value. This is repeated \num{10000} times and the empirical distribution function is compared to the predicted distribution. This is shown in figure \ref{fig:minimal_pvalues}.
+This derivation can be verified using pseudo-experiments: In each pseudo-experiment, $N$ numbers are drawn from a uniform distribution $\mathcal{U}([0, 1])$ and the minimal value is stored. This is repeated \num{10000} times and the empirical distribution function is compared to the predicted distribution. This is shown in figure \ref{fig:minimal_pvalues}.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{minimal_pvalues}
-    \caption{Minimal $p$-values from \num{100000} pseudo experiments using $N = \num{100}$.}
+    \caption{Minimal $p$-values from \num{100000} pseudo-experiments using $N = \num{100}$.}
     \label{fig:minimal_pvalues}
 \end{figure}
 
@@ -99,10 +99,10 @@ One additional study on the probability density is to calculate the expected min
 \section{Derivation of the Log-Normal $p$-value}
 \label{app:lognormal_derivation}
 
-The total number of events is thus scaled by an unknown factor $X$, which is a random variable that emerges as product of multiple other random variables $x_i$.
-In the following section, we will derive how $X$ is distributed.
+Through the systematic uncertainties, the total number of events is scaled by an unknown factor $X$, which is a random variable that emerges as product of multiple other random variables $x_i$.
+In the following section illustrates a derivation on how $X$ is distributed.
 
-We begin with rewriting the product in terms of a sum within an exponential distribution:
+First, the product can be rewritten in terms of a sum within an exponential distribution:
 \begin{equation}
     X = \prod_i x_i = \prod_i \exp(\ln(x_i)) = \exp(\sum_i \ln(x_i))
 \end{equation}
@@ -110,11 +110,11 @@ $\ln(x_i)$ is a random variable, and the central limit theorem implies that the 
 \begin{equation}
     Y \defeq \sum_i \ln(x_i) \Rightarrow X = \exp(Y) \text{ and } f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma} \exp(-\frac{1}{2}\left(\frac{y-\mu}{\sigma}\right)^2)
 \end{equation}
-After defining $Y$ as the normally distributed variable with the probability density $f_Y(y)$, we introduce a new unknown probability density function $g_X(x)$:
+After defining $Y$ as the normally distributed variable with the probability density $f_Y(y)$, one introduces a new unknown probability density function $g_X(x)$:
 \begin{equation}
     f_Y(y) \: \dd y \eqdef g_X(x) \: \dd x 
 \end{equation}
-Finally, we can insert all definitions, calculate the derivative and write the distribution function dependent of $x$:
+Finally, one can insert all definitions, calculate the derivative and write the distribution function dependent of $x$:
 \begin{align}
     g_X(x) &= f_Y(y) \: \dv{y}{x} \\
     &= f_Y(\ln{x}) \: \dv{\ln{x}}{x} \\
@@ -123,14 +123,16 @@ Finally, we can insert all definitions, calculate the derivative and write the d
 \end{align}
 The result is known as \emph{log-normal distribution} and is the probability density function of a product of random variables.
 
-By performing two substitutions, we obtain a parametrization with a more meaningful interpretation:
+By performing two substitutions, a parametrization with a more meaningful interpretation is obtained:
 \begin{equation}
-    \sigma \rightarrow \ln{k} = \ln(1 + \sigma/\mu) \text{ and } \mu \rightarrow \ln{x_0}
+    \sigma \rightarrow \ln{k} = \ln(1 + \sigma/x_0) \text{ and } \mu \rightarrow \ln{x_0}
     \label{eq:log_normal_substitution}
 \end{equation}
 \begin{equation}
     g_X(x) = \frac{1}{\sqrt{2\pi}\abs{x}\ln{k}} \exp(-\frac{1}{2}\left(\frac{\ln(x/x_0)}{\ln{k}}\right)^2)
 \end{equation}
+
+Here, $x_0$ is the expected value of $x$ and $k = 1 + \sigma/\mu$ is the relative uncertainty on $x_0$.
 
 \newpage
 \section{$Z$-score and $p$-value}
@@ -327,7 +329,7 @@ The test is performed twice, on \num{10} (\fref{tab:lut_performance_10}) and \nu
 
 A probability distribution parameterized by $\mu$ and $\sigma$ will in general not assign the same $p$-value to the value $x$ as the same distribution would do if it were parametrized by $x$ and $\sigma$ for the value $\mu$. This quite obvious fact becomes important during coverage testing: The pseudo-experiments generate a value \Nmc from a distribution usually parametrized by \Ntrue, but then in the following a distribution around \Nmc is used in the evaluation of the significance.
 
-In this section, we want to regard the special cases of a normal probability distribution and a log-normal distribution and derive a formula for adapting the distribution width parameter $\sigma$ such that the $p$-value to include \Ntrue in a (log-)normal distribution parametrized around \Nmc will remain the same as for \Nmc parametrized by \Ntrue. However, some of the ideas mentioned here can be adapted to other distributions too. 
+In this section, I want to regard the special cases of a normal probability distribution and a log-normal distribution and derive a formula for adapting the distribution width parameter $\sigma$ such that the $p$-value to include \Ntrue in a (log-)normal distribution parametrized around \Nmc will remain the same as for \Nmc parametrized by \Ntrue. However, some of the ideas mentioned here can be adapted to other distributions too. 
 
 We start by rephrasing the problem as an equation:
 \begin{equation}
@@ -348,17 +350,17 @@ Now, let $g(x | \Ntrue, \sigma)$ be the distribution from which the pseudo-exper
     \Pr(x \leq \Nmc | \Ntrue, \sigma) = \int_0^{\Nmc} g(x | \Ntrue, \sigma) \dd{x} = G(\Nmc | \Ntrue, \sigma) - G(0 | \Ntrue, \sigma)
 \end{equation}
 
-On the right hand side, we have the distribution used for calculating the $p$-value:
+The right hand side consists of the distribution used for calculating the $p$-value:
 \begin{equation}
     \Pr(x \geq \Ntrue | \Nmc, \sigma) = \int_\Ntrue^\infty g(x | \Nmc, \sigma') \dd{x} = G(\infty | \Nmc, \sigma') - G(\Ntrue | \Nmc, \sigma')
 \end{equation}
-Since $G$ is a cumulative distribution function, we can substitute $G(0) = 0$ and $G(\infty) = 1$ and set both sides equal:
+Since $G$ is a cumulative distribution function, one can substitute $G(0) = 0$ and $G(\infty) = 1$ and set both sides equal:
 \begin{equation}
     G(\Nmc | \Ntrue, \sigma) = 1 - G(\Ntrue | \Nmc, \sigma')
 \end{equation}
 The width adaption can now be specified by solving this equation for $\sigma'(\Ntrue, \Nmc, \sigma)$.
 
-For this purpose, we first derive a general solution for $\Phi(x)$, which is the cumulative distribution function of a standard normal distribution $\mathcal N(\mu=0, \sigma=1)$:
+For this purpose, first a general solution for $\Phi(x)$, which is the cumulative distribution function of a standard normal distribution $\mathcal N(\mu=0, \sigma=1)$, is derived:
 
 \begin{align}
     \Phi(x) &= 1 - \Phi(x') \\
@@ -370,7 +372,7 @@ For this purpose, we first derive a general solution for $\Phi(x)$, which is the
     &= -x
 \end{align}
 
-Here, we have used that $\Phi$ can be expressed in terms of the error function, which in turn can be further expressed by an integral.
+Here, it has been used that $\Phi$ can be expressed in terms of the error function, which in turn can be further expressed by an integral.
 \begin{align}
     \Phi(x) &= \frac{1}{2} \left(1+\erf\left(\frac{x}{\sqrt{2}}\right)\right) \\
     \Phi^{-1}(x) &= \sqrt{2}\,\erf^{-1}(2x - 1) \\
@@ -386,7 +388,7 @@ A general normal distribution $\mathcal N(\mu, \sigma)$ has the following cumula
     G(\mu | \mu', \sigma') = \Phi\left(\frac{\mu - \Nmc}{\sigma'}\right)
 \end{equation}
 
-We can now use the expression for $\Phi$ derived earlier to solve our initial equation:
+One can now use the expression for $\Phi$ derived earlier to solve the initial equation:
 \begin{align}
     \Phi\left(\frac{\Nmc - \Ntrue}{\sigma}\right) &= 1 - \Phi\left(\frac{\Ntrue - \Nmc}{\sigma'}\right) \\
     \Rightarrow \frac{\Nmc - \Ntrue}{\sigma} &= - \frac{\Ntrue - \Nmc}{\sigma'} \\
@@ -414,7 +416,7 @@ Overall, one can conclude that the distributions used for pseudo-experiment gene
     \centering
     \includegraphics[width=0.8\textwidth]{coverage/coverage_excess_normal_schmitz}
     \includegraphics[width=0.8\textwidth]{schmitz_coverage}
-    \caption{Comparison of our results (top) with \cite{Schmitz:ModelUnspecificSearch} (bottom). The test settings as well as plotting options have been chosen to match. From visual inspection one can deduce that the results are very similar, which allows us to directly compare results from our implementation with the earlier thesis.}
+    \caption{Comparison of my results (top) with \cite{Schmitz:ModelUnspecificSearch} (bottom). The test settings as well as plotting options have been chosen to match. From visual inspection I deduce that the results are very similar and therefore conclude that I can directly compare results from my implementation with the earlier thesis.}
     \label{fig:coverage_schmitz}
 \end{figure}
 
